@@ -31,6 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- LR20141207: Because we are 'filling in' a predefined form, the pull model of XSLT processing is more appropriate. -->
                         <xsl:for-each select="//fpml:trade">
                             <tr>
                                 <td><xsl:value-of select=".//fpml:exchangedCurrency1/fpml:payerPartyReference/@href"/></td>

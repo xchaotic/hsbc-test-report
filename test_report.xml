@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:fpml="http://www.fpml.org/2007/FpML-4-4">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>A simple positions report</title>
+   </head>
+   <body>
+      <table>
+         <caption>FX Positions report</caption>
+         <thead>
+            <tr>
+               <th>Payer</th>
+               <th>Receiver</th>
+               <th>amount</th>
+               <th>rate</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>fund</td>
+               <td>dealer</td>
+               <td>10000000 GBP</td>
+               <td>1.47</td>
+            </tr>
+         </tbody>
+      </table>
+   </body>
+</html>
