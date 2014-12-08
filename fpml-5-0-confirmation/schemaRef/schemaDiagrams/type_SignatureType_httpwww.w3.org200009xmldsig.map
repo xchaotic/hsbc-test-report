@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_SignatureType_httpwww.w3.org200009xmldsig'>
+ <area
+  shape='rect'
+  alt='element_SignedInfo'
+  coords='245,0,377,26'
+  href='xmldsig-core-schema.xsd.html_element_SignedInfo.html#element_SignedInfo'/>
+
+ <area
+  shape='rect'
+  alt='element_SignatureValue'
+  coords='245,36,402,62'
+  href='xmldsig-core-schema.xsd.html_element_SignatureValue.html#element_SignatureValue'/>
+
+ <area
+  shape='rect'
+  alt='element_KeyInfo'
+  coords='245,72,358,114'
+  href='xmldsig-core-schema.xsd.html_element_KeyInfo.html#element_KeyInfo'/>
+
+ <area
+  shape='rect'
+  alt='element_Object'
+  coords='245,124,353,166'
+  href='xmldsig-core-schema.xsd.html_element_Object.html#element_Object'/>
+
+</map>

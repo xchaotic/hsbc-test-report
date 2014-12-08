@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_commodityOption_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_commodityForward'
+  coords='259,530,440,592'
+  href='fpml-com-5-0.xsd.html_element_commodityForward.html#element_commodityForward'/>
+
+ <area
+  shape='rect'
+  alt='element_commoditySwap'
+  coords='259,674,426,736'
+  href='fpml-com-5-0.xsd.html_element_commoditySwap.html#element_commoditySwap'/>
+
+</map>

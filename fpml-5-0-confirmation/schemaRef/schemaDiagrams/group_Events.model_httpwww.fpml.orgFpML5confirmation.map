@@ -1,0 +1,38 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='group_Events.model_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_Trade'
+  coords='227,36,311,62'
+  href='fpml-doc-5-0.xsd.html_type_Trade.html#type_Trade'/>
+
+ <area
+  shape='rect'
+  alt='type_TradeAmendmentContent'
+  coords='227,72,350,98'
+  href='fpml-business-events-5-0.xsd.html_type_TradeAmendmentContent.html#type_TradeAmendmentContent'/>
+
+ <area
+  shape='rect'
+  alt='type_TradeNotionalChange'
+  coords='227,108,331,134'
+  href='fpml-business-events-5-0.xsd.html_type_TradeNotionalChange.html#type_TradeNotionalChange'/>
+
+ <area
+  shape='rect'
+  alt='type_TradeNotionalChange'
+  coords='227,144,345,170'
+  href='fpml-business-events-5-0.xsd.html_type_TradeNotionalChange.html#type_TradeNotionalChange'/>
+
+ <area
+  shape='rect'
+  alt='type_TradeNovationContent'
+  coords='227,180,329,206'
+  href='fpml-business-events-5-0.xsd.html_type_TradeNovationContent.html#type_TradeNovationContent'/>
+
+ <area
+  shape='rect'
+  alt='element_additionalEvent'
+  coords='227,216,367,242'
+  href='fpml-business-events-5-0.xsd.html_element_additionalEvent.html#element_additionalEvent'/>
+
+</map>

@@ -1,0 +1,302 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>Functions - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Functions
+      </h1>
+      <div>
+         		
+         <p> This is the shared functions part of the validation rule set accompanying the FpML 5.0 Recommendation. </p>
+         		
+         <p> This section introduces functions as a mechanism to define repeatable tests that are applied independent of a context. Functions
+            take node-element types as parameters and return a typed result.
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#functions">Functions</a><ul>
+               <li><a href="#ContractIdentifier-equal">ContractIdentifier-equal</a></li>
+               <li><a href="#fpml:deep-equal">fpml:deep-equal</a></li>
+               <li><a href="#different-frequencies">different-frequencies</a></li>
+               <li><a href="#iff">iff</a></li>
+               <li><a href="#is-unique">is-unique</a></li>
+               <li><a href="#regular-period">regular-period</a></li>
+               <li><a href="#same-currency">same-currency</a></li>
+               <li><a href="#same-currency-scheme">same-currency-scheme</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="functions">Functions</h2><a name="ContractIdentifier-equal"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">ContractIdentifier-equal</span><div style="margin-top:0.5em">
+            			The result is true where any <span class="element">$contractId1//element(*, ContractId)</span> correlates to any <span class="element">$contractId2//element(*, ContractId)</span>. The comparison function for correlation is fpml:deep-equal().
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$contractId1, $contractId2</span>
+                  					
+                  		(fpml:ContractIdentifier)
+                  	
+                  				(min=2, max=2)
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: The result is true where any <span class="element">$contractId1//element(*, ContractId)</span> correlates to any <span class="element">$contractId2//element(*, ContractId)</span></li>
+            </ul> 
+            		
+         </div>
+      </div><a name="fpml:deep-equal"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">fpml:deep-equal</span><div style="margin-top:0.5em">
+            			The fpml:deep-equal function returns true if the <span class="element">$parameter1</span> and <span class="element">$parameter2</span> sequences contain the same values, in the same order. Only elements in a current FpML namespace are considered. Atomic values
+            are compared based on their typed values, using the eq operator. If two atomic values cannot be compared (e.g. because one
+            is a number, and the other is a string), the function returns false rather than raise an error. Informally, two nodes are
+            deep-equal if they have all the same attributes and have children (in the same order) who are themselves deep-equal.
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$parameter1, $parameter2</span>
+                  					
+                  		(item())
+                  	
+                  				(max=*)
+               </li>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$collation</span>
+                  					
+                  		(xs:string)
+                  	
+                  				(max=1)
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: The fpml:deep-equal function returns true if the <span class="element">$parameter1</span> and <span class="element">$parameter2</span> sequences contain the same values, in the same order
+               </li>
+            </ul> 
+            		
+         </div>
+      </div><a name="different-frequencies"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">different-frequencies</span><div style="margin-top:0.5em">
+            			All frequencies within the context of this rule must be different. 
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$frequency</span>
+                  					
+                  		(fpml:Interval)
+                  	
+                  				(min=2, max=*)
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: All <span class="element">$frequency</span> must not be the same
+               </li>
+            </ul> 
+            		
+         </div>
+      </div><a name="iff"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">iff</span><div style="margin-top:0.5em">
+            			Return the logical "if and only if" of two xs:boolean operands. This is defined as (operand1 implies operand2) and (operand2
+            implies operand1). In simple terms, either both are true or neither is true.
+            			
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$p</span>
+                  					
+                  		(xsd:boolean)
+                  	
+                  				
+               </li>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$q</span>
+                  					
+                  		(xsd:boolean)
+                  	
+                  				
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: <span class="element">$p</span> = <span class="element">$q</span></li>
+            </ul> 
+            		
+         </div>
+      </div><a name="is-unique"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">is-unique</span><div style="margin-top:0.5em">
+            			Returns whether the list of atomic types contains any duplicates. If there are no duplicates then result is true.
+            			
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$arg</span>
+                  					
+                  		(xsd:anyAtomicType*)
+                  	
+                  				
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: count(distinct-values(<span class="element">$arg</span>)) eq count(<span class="element">$arg</span>)
+               </li>
+            </ul> 
+            		
+         </div>
+      </div><a name="regular-period"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">regular-period</span><div style="margin-top:0.5em">
+            			The regular period of a set of calculation period dates is the period between a start date and an end date. If <span class="element">firstRegularPeriodStartDate</span> exists, then the start date is <span class="element">firstRegularPeriodStartDate</span>, else the start date is <span class="element">effectiveDate/unadjustedDate</span>. If <span class="element">lastRegularPeriodEndDate</span> exists, then the end date is <span class="element">lastRegularPeriodEndDate</span>, else the end date is <span class="element">terminationDate/unadjustedDate</span>.
+            			
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$cpd</span>
+                  					
+                  		(element(*, CalculationPeriodDates))
+                  	
+                  				
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: element(period)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: <span class="element">startDate</span> has the value of (if exists(<span class="element">$cpd/firstRegularPeriodStartDate</span>) then <span class="element">$cpd/firstRegularPeriodStartDate</span> else <span class="element">$cpd/effectiveDate/unadjustedDate</span>). <span class="element">endDate</span> has the value of (if (exists(<span class="element">$cpd/lastRegularPeriodEndDate</span>)) then data(<span class="element">$cpd/lastRegularPeriodEndDate</span>) else data(<span class="element">$cpd/terminationDate/unadjustedDate</span>))
+               </li>
+            </ul> 
+            		
+         </div>
+      </div><a name="same-currency"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">same-currency</span><div style="margin-top:0.5em">
+            			All instances of <span class="element">currency</span> values within the context of this rule must be identical. 
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$money</span>
+                  					
+                  		(fpml:Money)
+                  	
+                  				(min=2, max=*)
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: All (<span class="element">$money/currency</span> and <span class="element">$money/currency/@currencyScheme</span>) must be the same
+               </li>
+            </ul> 
+            		
+         </div>
+      </div><a name="same-currency-scheme"></a><div class="termdef"><span class="emph">Function: </span><span class="termname">same-currency-scheme</span><div style="margin-top:0.5em">
+            			All instances of <span class="element">currencyScheme</span> URI values within the context of this rule must be identical. 
+            			
+            <ul>
+               				
+               <li>
+                  			parameter: 
+                  					<span class="element">$currency</span>
+                  					
+                  		(fpml:Currency)
+                  	
+                  				(min=2, max=*)
+               </li>
+               			
+            </ul>
+            			
+            <ul>
+               <li>
+                  			result: true/false (xsd:boolean)
+               </li>
+            </ul>
+            			
+            <ul>
+               <li>
+                  			test: All (<span class="element">$currency/@currencyScheme</span>) must be the same
+               </li>
+            </ul> 
+            		
+         </div>
+      </div>
+   </body>
+</html>

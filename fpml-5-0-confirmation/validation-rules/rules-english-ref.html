@@ -1,0 +1,359 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>REF rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for ID / IDREF References 
+      </h1>
+      <div>
+         		
+         <p> This section details ID / IDREF relationship constraints (based on the eCore references at the Schema) accompanying the FpML
+            5.0 Recommendation. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#rules">Rules</a></li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">AssetReference</span> (complex type): <a href="#ref-1">ref-1</a> 
+         </li>
+         <li><span class="element">FixedRateReference</span> (complex type): <a href="#ref-2">ref-2</a> 
+         </li>
+         <li><span class="element">ProtectionTermsReference</span> (complex type): <a href="#ref-3">ref-3</a> 
+         </li>
+         <li><span class="element">SettlementTermsReference</span> (complex type): <a href="#ref-4">ref-4</a> 
+         </li>
+         <li><span class="element">InterestCalculationReference</span> (complex type): <a href="#ref-6">ref-6</a> 
+         </li>
+         <li><span class="element">InterestLegCalculationPeriodDatesReference</span> (complex type): <a href="#ref-7">ref-7</a> 
+         </li>
+         <li><span class="element">CalculationPeriodDatesReference</span> (complex type): <a href="#ref-8">ref-8</a> 
+         </li>
+         <li><span class="element">InterestRateStreamReference</span> (complex type): <a href="#ref-9">ref-9</a> 
+         </li>
+         <li><span class="element">PaymentCalculationPeriod</span> (complex type): <a href="#ref-10">ref-10</a> 
+         </li>
+         <li><span class="element">PaymentDatesReference</span> (complex type): <a href="#ref-11">ref-11</a> 
+         </li>
+         <li><span class="element">ResetDatesReference</span> (complex type): <a href="#ref-12">ref-12</a> 
+         </li>
+         <li><span class="element">CreditEventsReference</span> (complex type): <a href="#ref-13">ref-13</a> 
+         </li>
+         <li><span class="element">AccountReference</span> (complex type): <a href="#ref-25">ref-25</a> 
+         </li>
+         <li><span class="element">BusinessCentersReference</span> (complex type): <a href="#ref-26">ref-26</a> 
+         </li>
+         <li><span class="element">BusinessDayAdjustmentsReference</span> (complex type): <a href="#ref-27">ref-27</a> 
+         </li>
+         <li><span class="element">LegalEntityReference</span> (complex type): <a href="#ref-28">ref-28</a> 
+         </li>
+         <li><span class="element">PartyReference</span> (complex type): <a href="#ref-29">ref-29</a> 
+         </li>
+         <li><span class="element">Payment</span> (complex type): <a href="#ref-30">ref-30</a> 
+         </li>
+         <li><span class="element">ProductReference</span> (complex type): <a href="#ref-32">ref-32</a> 
+         </li>
+         <li><span class="element">RateReference</span> (complex type): <a href="#ref-33">ref-33</a> 
+         </li>
+         <li><span class="element">ScheduleReference</span> (complex type): <a href="#ref-34">ref-34</a> 
+         </li>
+         <li><span class="element">SpreadScheduleReference</span> (complex type): <a href="#ref-35">ref-35</a> 
+         </li>
+         <li><span class="element">MandatoryEarlyTermination (complex type) /cashSettlement/cashSettlementValuationDate/dateRelativeTo</span>: <a href="#ref-38">ref-38</a> 
+         </li>
+         <li><a href="#d0e3depr">Deprecated rules</a></li>
+         <li><a href="#d0e3rmvd">Removed rules</a></li>
+      </ul>
+      <div id="ref-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: AssetReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">Asset</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: AssetReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">Asset</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-1-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-2</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FixedRateReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">FixedRate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FixedRateReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">FixedRate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-2-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-3</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ProtectionTermsReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">ProtectionTerms</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ProtectionTermsReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">ProtectionTerms</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-3-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SettlementTermsReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">SettlementTerms</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SettlementTermsReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">SettlementTerms</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-4-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-7</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestLegCalculationPeriodDatesReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">InterestLegCalculationPeriodDates</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestLegCalculationPeriodDatesReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">InterestLegCalculationPeriodDates</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-7-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDatesReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">CalculationPeriodDates</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDatesReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">CalculationPeriodDates</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-8-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStreamReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">InterestRateStream</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStreamReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">InterestRateStream</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-9-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PaymentCalculationPeriod (complex type)<br> If the <span class="element">@href</span> attribute exists, the <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">PricingStructure</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PaymentCalculationPeriod<br><div style="background-color:#d0d0d0">[exists(@href)] </div>
+            <div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">PricingStructure</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ref-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-11</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PaymentDatesReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">PaymentDates</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PaymentDatesReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">PaymentDates</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-11-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ResetDatesReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">ResetDates</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ResetDatesReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">ResetDates</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-12-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-13" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-13</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditEventsReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">CreditEvents</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditEventsReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">CreditEvents</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-13-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: AccountReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">Account</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: AccountReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">Account</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-25-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-26</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BusinessCentersReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">BusinessCenters</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BusinessCentersReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">BusinessCenters</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-26-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BusinessDayAdjustmentsReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">BusinessDayAdjustments</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BusinessDayAdjustmentsReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">BusinessDayAdjustments</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-27-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-28</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: LegalEntityReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">LegalEntity</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: LegalEntityReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">LegalEntity</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-28-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-29" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-29</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PartyReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">Party</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PartyReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">Party</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-29-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-30" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-30</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Payment (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">PricingStructure</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Payment<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">PricingStructure</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ref-32" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-32</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ProductReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">Product</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ProductReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">Product</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ref-33" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-33</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: RateReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">Rate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: RateReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">Rate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-33-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-34" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-34</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ScheduleReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">Schedule</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ScheduleReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">Schedule</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-34-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-35" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-35</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SpreadScheduleReference (complex type)<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">SpreadSchedule</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SpreadScheduleReference<br><div style="background-color:#d0d0d0;padding:5px">id(<span class="element">$context/@href</span>) instance of element(*, <span class="element">SpreadSchedule</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-35-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ref-38" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-38</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: MandatoryEarlyTermination (complex type) /cashSettlement/cashSettlementValuationDate/dateRelativeTo<br> The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element <span class="element">mandatoryEarlyTerminationDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: MandatoryEarlyTermination (complex type) /cashSettlement/cashSettlementValuationDate/dateRelativeTo<br><div style="background-color:#d0d0d0;padding:5px">name(id(<span class="element">@href</span>)) eq xs:string("<span class="element">mandatoryEarlyTerminationDate</span>")
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ref-38-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <h4 id="d0e3depr">Deprecated rules</h4>
+      <h4 id="d0e3rmvd">Removed rules</h4>
+      <div id="ref-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-5</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: FirstPeriodStartDate
+            			Description: The <span class="element">@href</span> attribute is equal to the <span class="element">../../party/@id</span> attribute.
+            			Rationale for removal: the rule has been replaced by the business process rule number 2 (bp-2).
+            		
+         </div>
+      </div>
+      <div id="ref-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-6</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: InterestCalculationReference
+            			Description: The <span class="element">@href</span> attribute = the <span class="element">@id</span> attribute of an element of type <span class="element">InterestCalculation</span>. 
+            			Rationale for removal: The type doesn't exist anymore.
+            		
+         </div>
+      </div>
+      <div id="ref-39" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ref-39</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: BusinessCentersReference
+            			Description: The <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of an element of type <span class="element">BusinessCenters</span>.
+            			Rationale for removal: the rule is a duplicate of ref-26.
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>

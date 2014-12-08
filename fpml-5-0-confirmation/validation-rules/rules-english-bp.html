@@ -1,0 +1,66 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>BP rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Business Process Messages
+      </h1>
+      <div>
+         		
+         <p> This is the Business Process part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory section
+            in the validation section of the specifications contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. The cut down test cases
+            are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#rules">Rules</a></li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">TradeNovationContent</span> (complex type): <a href="#bp-2">bp-2</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="bp-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">bp-2</span> (Mandatory)
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: TradeNovationContent<br><div style="background-color:#d0d0d0;padding:5px">If the <span class="element">firstPeriodStartDate</span> is present, the <span class="element">firstPeriodStartDate/@href</span> attribute = the <span class="element">party/@id</span> attribute.
+            </div>
+         </div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <div id="bp-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">bp-1</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			The <span class="element">@href</span> attribute must match the <span class="element">../../party/@id</span> attribute
+            			Rationale for removal: the rule has been replaced by the reference rule number 5 (ref-5).
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>

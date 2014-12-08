@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='group_BondChoice.model_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_bond'
+  coords='342,72,446,134'
+  href='fpml-asset-5-0.xsd.html_element_bond.html#element_bond'/>
+
+ <area
+  shape='rect'
+  alt='element_convertibleBond'
+  coords='402,180,566,242'
+  href='fpml-asset-5-0.xsd.html_element_convertibleBond.html#element_convertibleBond'/>
+
+</map>

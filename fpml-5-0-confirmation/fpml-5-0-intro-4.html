@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s4">4 VALIDATION ARCHITECTURE</a>
+            </h2>
+         </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+         <div>
+            <h3>
+               <a id="s4.1">4.1 Validation Rules</a>
+            </h3>
+		
+            <p> This section defines the business validation rules architecture that was established by the Validation Working Group. It contains introductory and background information about the purpose of validation, a guide to how to make use of the documents published by the Validation Working Group, and serves as a reference point for implementers. </p>
+		
+            <p> The main documents produced by the Validation Working Group is the set of validation rules, expressed in English:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Equity Derivative Rules: <a class="web" href="validation-rules/rules-english-eqd.html">Business constraints for EQD definitions.</a>
+               </li>
+			
+               <li>Interest Rate Derivative Rules: <a class="web" href="validation-rules/rules-english-ird.html">Business constraints for IRD definitions.</a>
+               </li>
+			
+               <li>Credit Derivatives Rules: <a class="web" href="validation-rules/rules-english-cd.html">Business constraints for CD definitions.</a>
+               </li>
+		
+			
+			
+			
+			
+               <li>Business Process Rules: <a class="web" href="validation-rules/rules-english-bp.html">Business constraints for Business Process messages.</a>
+               </li>
+			
+               <li>Messaging Rules: <a class="web" href="validation-rules/rules-english-msg.html">Business constraints for Messaging.</a>
+               </li>
+			
+               <li>Shared Elements Rules: <a class="web" href="validation-rules/rules-english-shared.html">Supplementary business constraints in addition to the specific assets.</a>
+               </li>
+			
+               <li>ID / IDREF Rules: <a class="web" href="validation-rules/rules-english-ref.html">Business constraints for ID / IDREF relationships.</a>
+               </li>
+			
+		
+            </ul>
+		
+            <p/>
+		
+            <p> The validation rules follow the principles and guidelines defined in the <a class="web" href="#s4.6">Validation Rule Specifications</a> section.</p>
+		
+            <p> Previous versions of the validation rules, expressed in English:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Validation Rules 4.1 - July 19, 2004: <a class="web" href="http://www.fpml.org/spec/2004/FpML-4-1/validation/" target="_blank" title="Link opens in new window.">http://www.fpml.org/spec/2004/FpML-4-1/validation/</a>
+               </li>
+			
+               <li>Validation Rules 4.0 - April 2, 2004: <a class="web" href="http://www.fpml.org/2003/FpML-4-0/validation/" target="_blank" title="Link opens in new window.">http://www.fpml.org/2003/FpML-4-0/validation/</a>
+               </li>
+			
+		
+            </ul>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.2">4.2 Reference Implementations</a>
+               </h3>
+            </div>
+		
+            <p> The Validation Working Group's charter includes a mandate to formalize the validation rules from their plain English representation to a suitable implementation language. The purpose of this decision was to disambiguate the English language representation, to serve as a point of reference for implementers looking for clarification, and to validate the test cases produced by the working group. Reference implementations play an important part in providing quality guarantees to the working group and it is hope that their publication will be useful to implementers. </p>
+		
+		
+		
+		
+		
+            <p> The reference implementations are <b>non-normative</b> and should not be considered publications of the Validation Working Group. Instead, they are contributions provided by members of the working group or other implementers. </p>
+		
+            <p> Although the working group does not have the means to provide official certification, it expects implementers to demonstrate that they produce the correct results - valid or invalid - for the normative test cases of each implemented rule. There is no requirement to implement all rules, but reference implementations will state clearly which rules are implemented by publishing a list of rule identifiers. </p>
+	
+            <div>
+               <h4>
+                  <a id="s4.2.1">4.2.1 Java and C#</a>
+               </h4>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Provider</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <!--a href="images/validation/handcoded.png"-->
+                           <img src="images/validation/handcoded.png" alt="images/validation/handcoded.png" class="image"/>
+                        <!--/a-->
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implementation Language</b>
+					
+                     </td>
+					
+                     <td>Java and C#</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implemented Rules</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <i>All published FpML rules (plus adjustments for FpML 1.0, 2.0 and 3.0); Additional rules for datatypes (in DTD documents FpML 1.0, 2.0 and 3.0); Additonal rules for schemes (all FpML releases)</i>
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Browse</b>
+					
+                     </td>
+					
+                     <td> N/A </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Further Information</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <a class="web" href="http://www.handcoded.com" target="_blank" title="Link opens in new window.">http://www.handcoded.com</a>
+					
+                     </td>
+				
+                  </tr>
+			
+               </table>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.2.2">4.2.2 Java/XPath</a>
+               </h4>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Provider</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <!--a href="images/validation/prgs.jpg"-->
+                           <img src="images/validation/prgs.jpg" alt="images/validation/prgs.jpg" class="image"/>
+                        <!--/a-->
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implementation Language</b>
+					
+                     </td>
+					
+                     <td>Xpath/Java</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implemented Rules</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <i>All versions, All rules</i>
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Browse</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <a class="web" href="http://www.iona.com/products/artix/standards_libraries.htm" target="_blank" title="Link opens in new window.">FpML Reference Implementation</a>
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Further Information</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <a class="web" href="http://www.iona.com/products/artix/standards_libraries.htm" target="_blank" title="Link opens in new window.">http://www.iona.com/products/artix/standards_libraries.htm</a>
+					
+                     </td>
+				
+                  </tr>
+			
+               </table>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.2.3">4.2.3 CLiX</a>
+               </h4>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Provider</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <!--a href="images/validation/ma.jpg"-->
+                           <img src="images/validation/ma.jpg" alt="images/validation/ma.jpg" class="image"/>
+                        <!--/a-->
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implementation Language</b>
+					
+                     </td>
+					
+                     <td>CLiX / Java</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implemented Rules</b>
+					
+                     </td>
+					
+                     <td>
+                        <a class="web" href="http://www.fpml.org/2003/FpML-4-0/validation/2004-04-02/" target="_blank" title="Link opens in new window."> http://www.fpml.org/2003/FpML-4-0/validation/2004-04-02</a>:
+						<i>All rules</i>
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Browse</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <a class="web" href="http://www.messageautomation.com" target="_blank" title="Link opens in new window.">FpML Reference Implementation</a>
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Further Information</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <a class="web" href="http://www.messageautomation.com" target="_blank" title="Link opens in new window.">http://www.messageautomation.com</a>
+					
+                     </td>
+				
+                  </tr>
+			
+               </table>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.2.4">4.2.4 XQuery</a>
+               </h4>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Provider</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <!--a href="images/validation/fpml-logo-small.gif"-->
+                           <img src="images/validation/fpml-logo-small.gif" alt="images/validation/fpml-logo-small.gif" class="image"/>
+                        <!--/a-->
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implementation Language</b>
+					
+                     </td>
+					
+                     <td>XQuery</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Implemented Rules</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <i>All rules, version 4.5+</i>
+					
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Browse</b>
+					
+                     </td>
+					
+                     <td>
+						N/A
+					</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+						
+                        <b>Further Information</b>
+					
+                     </td>
+					
+                     <td>
+						
+                        <a class="web" href="validation-rules/xquery/readme.html" target="_blank" title="Link opens in new window.">FpML Reference Implementation</a>
+					
+                     </td>
+				
+                  </tr>
+			
+               </table>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.3">4.3 Test Cases</a>
+               </h3>
+            </div>
+		
+            <p> The Validation Working Group also publishes a set of test cases with each rule set release (available above). For each rule, a number of valid examples and a number of invalid counter-examples are given. The test cases for a release will have been validated both manually and against at least one reference implementation to check that they are correct. The test cases have the following properties: </p>
+		
+            <ul class="bulleted">
+			
+               <li>All test cases are valid against the schema</li>
+			
+               <li>Every valid test case is valid against all rules (business valid), but is guaranteed to carry the information that the particular rule it is designed to test against makes use of.</li>
+			
+               <li>Every invalid test case for a rule is guaranteed to violate the rule, but <i>may in addition violate other rules</i>.</li>
+			
+               <li>Each invalid test case must state which instance of the context is invalid. For example an invalid document with more than one matching context must state which contexts are invalid, and the other contexts must be valid.</li>
+			
+               <li>There is no guarantee of completeness. The test cases are designed for disambiguation and test the most common violations, they are not an exhaustive set of boundary cases.</li>
+		
+            </ul>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.4">4.4 Target Audience</a>
+               </h3>
+            </div>
+		
+            <p> This document should be useful to: </p>
+		
+            <ul class="bulleted">
+			
+               <li>
+				
+                  <i>Architects</i> that need to consider the impact of semantic validation on the overall workflow or processing pipeline. <i>Relevant section:</i> Validation Architecture Concepts</li>
+			
+               <li>
+				
+                  <i>Implementers</i> of FpML that need to understand how to make use of the validation rules in implementations. <i>Relevant section:</i> Validation Rules and Reference Implementations</li>
+			
+               <li>
+				
+                  <i>Analysts</i> or other interested parties who wish to use the validation rules to further their understanding of FpML. <i>Relevant section:</i> Background</li>
+		
+            </ul>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.5">4.5 Background</a>
+               </h3>
+            </div>
+		
+            <p> FpML has been designed as a very rich language, with a large amount of optionality in its element and attribute definitions. This richness, which arises from the complexity of the information that FpML is designed to carry, has made it easier for implementers to fit FpML into existing architectures, and has facilitated the reuse of common element types across different asset classes. </p>
+		
+            <p> Partly due to this flexibility, and partly due to the rich structure of FpML, it is unrealistic to assume that a schema-validated FpML document is necessarily correct in a business sense. The Validation Working Group was established early in 2003 to consider the implications of this problem and breaks down the correctness of an FpML document into three parts: </p>
+		
+            <ul class="bulleted">
+			
+               <li>
+				
+                  <i>Well-formed XML</i>: The document meets the basic XML well-formedness constraints defined by W3C. </li>
+			
+               <li>
+				
+                  <i>Schema Compliance</i>: The document is valid against the Schema that the document references.</li>
+			
+               <li>
+				
+                  <i>Business Rules Compliance</i>: The document is valid against the validation rules published by the Validation Working Group. </li>
+		
+            </ul>
+		
+            <p> It is useful to consider some simple example to illustrate the different levels of validity. The following is a fragment of a well-formed FpML document, but violates the schema due to an invalid start date:</p>
+		
+            <pre>
+
+&lt;calculationPeriodDates&gt;
+
+  &lt;effectiveDate&gt;
+
+    &lt;unadjustedDate&gt;xxxx-xx-xx&lt;/unadjustedDate&gt;
+
+    ..
+
+  &lt;/effectiveDate&gt;
+
+  &lt;terminationDate&gt;
+
+    &lt;unadjustedDate&gt;2004-02-29&lt;/unadjustedDate&gt;
+
+    ..
+
+  &lt;/terminationDate&gt;
+
+  ..
+
+&lt;/calculationPeriodDates&gt;</pre>
+		
+            <p> The following version of the fragment is syntactically valid, because the contents of the effective date now match the schema definition of a valid date. </p>
+		
+            <pre>
+
+&lt;calculationPeriodDates&gt;
+
+  &lt;effectiveDate&gt;
+
+    &lt;unadjustedDate&gt;2004-08-29&lt;/unadjustedDate&gt;
+
+    ..
+
+  &lt;/effectiveDate&gt;
+
+  &lt;terminationDate&gt;
+
+    &lt;unadjustedDate&gt;2004-02-29&lt;/unadjustedDate&gt;
+
+    ..
+
+  &lt;/terminationDate&gt;
+
+  ..
+
+&lt;/calculationPeriodDates&gt;</pre>
+		
+            <p> The fragment of FpML inserted above is however not <i>semantically valid</i>, because the effective date of the trade precedes the termination date. As a consequence, the trade is not meaningful and in fact violates one of the validation rules for IRD interest rate streams. Many other types of constraints will not be validated by the schema, which is designed to designate structure, not semantics: </p>
+		
+            <ul class="bulleted">
+			
+               <li>Constraints between the <i>contents</i> of multiple elements, like as in example given above</li>
+			
+               <li>Relationships between elements in distant parts of the document</li>
+			
+               <li>Complex data type operations that require processing, for example checking cash flows against the parametric representation</li>
+			
+               <li>Reference data validity, or other checks against external documents or databases</li>
+		
+            </ul>
+		
+            <p> The validation working group has considered these problems and their implications, and has attempted to address a number of questions. How do we extract the knowledge about what constitutes a correct trade from business experts? What, if any, guarantees will we give that our work is complete? What is the normative status of the validation rules? How can parties override or tailor the rule set? What infrastructure support is necessary in the FpML architecture to enable rule-based checking? What support is necessary in the new messaging framework? The answers to these questions are addressed in the remainder of this section. </p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.6">4.6 Rule Specifications</a>
+               </h3>
+            </div>
+		
+            <p>This section defines the guiding principles and requirements for how rules should be defined and written. The Validation Working Group’s desire is to define a set of guidelines, which when followed produce a set of rules which conforms to an agreed standard of layout and content, with the intention that the rules are coherent, complete and well-defined; and therefore usable by practitioners.</p>
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s4.6.1">4.6.1 General Principles and Guidelines</a>
+               </h4>
+			
+               <p>Validation rules should be written in a stylized plain English which is both precise and complete, but not necessarily formal:</p>
+			
+               <ul class="bulleted"> 
+				
+                  <li>The target audience is business analysts and programmers familiar with OTC derivatives</li>
+				
+                  <li>The rule definitions must be precise</li>
+				
+                  <li>Rules must be written in the terms of an infoset. At present the only suitable infoset is XDM *</li>
+				
+                  <li>For each context of a rule, the rule must evaluate to a single XML schema Boolean value +</li>
+				
+                  <li>The definition of each English term should correspond to an XPath 2 expression. NB all other terms or tests must be defined using terms already defined or existing XPath 2 expressions (cf. <a class="web" href="http://www.w3.org/TR/xpath20/" target="_blank" title="Link opens in new window.">http://www.w3.org/TR/xpath20</a>). Any reference to XPath is to XPath 2.</li>
+			
+               </ul>
+			
+               <p>
+                  <b>*</b> XML infoset does not contain schema information; PVSI contains gaps and impossible scenarios when used for rules, and therefore is unsuitable; this is why the W3C created the XDM infoset. NB model groups do not appear in XDM and therefore cannot be defined in the rule (they are also context free)</p>
+			
+               <p>
+                  <b>+</b> other cases would result in ambiguity, e.g. an optional Boolean value or more than one Boolean value (multiplicity)</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.6.2">4.6.2 Mathematical Notation</a>
+               </h4>
+			
+               <p>There is a list of approved mathematical symbols which must be used, in the formal description, instead of their natural language equivalents. This list contains the commonly understood mathematical symbols. Only the symbols on the approved list may be used in the formal description. Their advantage is their terseness and readability compared to natural language.</p>
+			
+               <p>To avoid confusion with XPath definitions, each symbol must be separated for other words with a space. Otherwise for example the division symbol and the XPath symbol would be confusable.</p> 
+			
+               <p>The approved mathematical symbols are:</p>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+                        <b>eq</b>
+                     </td>
+					
+                     <td>equality (XPath value comparison operator)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>ne</b>
+                     </td>
+					
+                     <td>inequality (XPath value comparison operator)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>lt and gt</b>
+                     </td>
+					
+                     <td>is less/greater than (XPath value comparison operator)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>le and ge</b>
+                     </td>
+					
+                     <td>is less/greater than or equal (XPath value comparison operator)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>+</b>
+                     </td>
+					
+                     <td>addition (plus)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>-</b>
+                     </td>
+					
+                     <td>substraction (minus)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>*</b>
+                     </td>
+					
+                     <td>multiplication</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>/</b>
+                     </td>
+					
+                     <td>division</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>()</b>
+                     </td>
+					
+                     <td>precedence grouping</td>
+				
+                  </tr>
+			
+               </table>
+			
+               <p>XPath value comparison operators (eq, ne, lt, le, gt, ge) are defined in the <a class="web" href="http://www.w3.org/TR/xpath20/#doc-xpath-ValueComp" target="_blank" title="Link opens in new window.">XPath specification</a>.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.6.3">4.6.3 Rule Definition and Layout</a>
+               </h4>
+			
+               <p>To ensure consistency and improve readability rules should be defined using the following syntax (the notation is expressed using EBNF):</p>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+                        <b>Rule</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>RuleIdExpr Contexts RuleDef Tests</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>RuleIdExpr</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>RuleId “(” “Mandatory” | “Warning” “)”</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>RuleId</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>ProductType “-” Digits</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>ProductType</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>One of the product type or shared</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Digits</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>[0-9]+</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Contexts</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>Context (“,” Context)*</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Context</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>“Context:” TypeName (ContextConds)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>ContextConds</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>ContextCond (ContextCond)*</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>ContextCond</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>“[”ConditionExpr | ValCondition “]”</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>ConditionExpr</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>Precise definition of the rule expressed in English using defined terms</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>ValCondition</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>Reference to a global validation condition (ref) expressed in English</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>TypeName</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>XML Schema Type Name (complex type)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>RuleDefEnglish</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>English definition of the rule expressed in natural language. This description may include business reasons or examples.</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>RuleDefFormal</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>Formal definition of the rule expressed in XPath and defined terms</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Tests</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>“Test Cases:” Valid (Valid)* Invalid (Invalid)*</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Valid</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>“[“ DocLink “]”</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Invalid</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>“[“ DocLink “]”</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>DocLink</b>
+                     </td>
+					
+                     <td>::=</td>
+					
+                     <td>Link to a test case document</td>
+				
+                  </tr>
+			
+               </table>
+
+		
+			
+               <ul class="bulleted"> 
+				
+                  <li>rule identifier must be unique and as appropriate the product type they apply to should prefix any numbering scheme (e.g. eqd-5 for rule 5 of Equity Derivatives)</li>
+				
+                  <li>a Context evaluates from the document node to a resulting set of element nodes, the rule should then be applied separately to each member of the set</li>
+				
+                  <li>a Context is qualified by an appropriate namespace unless it is in the default namespace (NB a section should define all applicable namespaces)</li>
+				
+                  <li>context conditions qualify a context and therefore should appear after the context (this is important in the case of multiple contexts where different context conditions may apply)</li>
+				
+                  <li>the current context is not carried through into a function. The function has no context other than its parameters</li>
+				
+                  <li>a suitable set of valid and invalid test cases, which exercise the rule, will also need to be developed. NB each invalid test case must invalidate a single rule (and not any other rule)</li>
+				
+                  <li>when a new rule is defined it should not invalidate any existing test cases</li>
+				
+                  <li>there should be no redundant rules, e.g. A&gt;B, B&gt;C would make a rule of the form A&gt;C redundant</li>
+				
+                  <li>any term that is defined in XPath then that meaning is used for the term in the RuleDef. Any other term must be defined as a function</li>
+				
+                  <li>literal values must be given a datatype. For example, the string "ISDA1999" refers to a value of xs:string</li>
+			
+               </ul>
+			
+               <p>Rule layout:</p>
+			
+               <p>
+				
+                  <a href="images/validation/rulelayout.jpg">
+                     <img src="images/validation/rulelayout.jpg" alt="images/validation/rulelayout.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>An example rule:</p>
+			
+               <p>
+				
+                  <a href="images/validation/samplerule.JPG">
+                     <img src="images/validation/samplerule.JPG" alt="images/validation/samplerule.JPG" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>The above definition describes rule 3 for credit derivatives. The context is type <i>Trade</i>, which is a complex type. The precondition ISDA1999 must evaluate to true, the condition that node-element <i>documentation/contractualSupplement</i> (as expressed using XPath 2) should exist. The rule body specifies that the node-element type must not begin with string <i>“ISDA2003Credit”</i> (finally links to applicable valid and invalid test case documents.)</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.6.4">4.6.4 Defining New Terms as Functions</a>
+               </h4>
+			
+               <p>In the previous sections, the notion of expressing rules using stylized English was introduced; and the concomitant concept that a term should have the same meaning as the equivalent XPath expression. This section introduces functions as a mechanism to define repeatable tests that are applied independent of a context. Functions take node-element types as parameters and return a typed result.</p>
+			
+               <p>Consider a test requiring that all currencies must be the same and that this applies for several different contexts. With reference to the schema it’s possible to identify that currency is applicable to all Money types and therefore define a function which accepts as a parameter a set of Money nodes:</p>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+                        <b>Function Name</b>
+                     </td>
+					
+                     <td>same-currency</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Description</b>
+                     </td>
+					
+                     <td>the set of money elements must all contain the same currency</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Parameter 1</b>
+                     </td>
+					
+                     <td>$money (fpml:Money) (min=2, max=*)</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Result Type</b>
+                     </td>
+					
+                     <td>xs:boolean</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>
+                        <b>Test</b>
+                     </td>
+					
+                     <td>Every $money/currency must be the same and every $money/currency/@currencyScheme must be the same</td>
+				
+                  </tr>
+			
+               </table>
+			
+               <p>This creates a new term <i>same-currency</i> which can be used as part of the definition of any validation rule.</p>
+			
+               <p>NB The function does not inherit the context of where it is called from.</p>
+			
+               <p>Each parameter name is prefixed with "$" to distinguish it from an XPath. Otherwise "money" might be either the parameter "$money" or the XPath "./money".</p>
+			
+               <p>Each parameter has a minimum and maximum cardinality. This is given in the style of XML Schema. The cardinality must always be present. If the cardinality is not indicated, by default, the parameter must be provided once.</p>
+			
+               <p>Each function must have a single result type.</p>
+			
+               <p>There can be any number of parameters to a function.</p>
+			
+		
+               <div>
+                  <h5>
+                     <a id="s4.6.4.1">4.6.4.1 How to use functions?</a>
+                  </h5>
+				
+                  <p>Once a new term (e.g., <i>same-currency</i>) is defined, it can be used as part of the definition of any validation rule (including conditions).</p>
+				
+                  <p>A reference to a new term must also include required parameters (within parenthesis and comma-delimited) as specified in the function definition. For example,</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>same-currency((equityPremium/paymentAmount , notional))</li>
+					
+                     <li>[exists(physicalSettlementTerms)]      <i>(example of Xpath function exists() used within a condition)</i>
+                     </li>
+				
+                  </ul>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.6.5">4.6.5 Formatting</a>
+               </h4>
+			
+               <p>Components of the validation rules may be differenciated by  formatting as shown in the following table.</p>
+			
+               <table class="table">
+				
+                  <tr>
+					
+                     <td>
+                        <b>Component</b>
+                     </td>
+					
+                     <td>
+                        <b>Formatting</b>
+                     </td>
+					
+                     <td>
+                        <b>Example</b>
+                     </td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>values</td>
+					
+                     <td>Courier New, 12pt, bold, black font</td>
+					
+                     <td>100, ISDA2003Credit</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>xpath expressions and elements</td>
+					
+                     <td>Courier New, small 9pt, blue font</td>
+					
+                     <td>creditDefaultSwap/generalTerms/effectiveDate</td>
+				
+                  </tr>
+				
+                  <tr>
+					
+                     <td>functions</td>
+					
+                     <td>Times, 10pt, black font</td>
+					
+                     <td>exists(argument)</td>
+				
+                  </tr>
+			
+               </table>
+			
+               <p>Formatting is defined in stylesheet <i>rules.css</i>.</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.7">4.7 Technical Guidelines</a>
+               </h3>
+            </div>
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s4.7.1">4.7.1 Implementations</a>
+               </h4>
+			
+               <p>For the purposes of precision, extensibility, and robustness to change the structure of the Validation Rules is profiled. The rules of the profile are:</p>
+			
+               <ul class="bulleted"> 
+				
+                  <li>The <i>context</i> for a validation rule <i>must</i> always be a <i>type</i>. However, an <i>element</i> can be used for a <i>context</i> if there is no suitable <i>type</i>, because the <i>context</i> is a model group. If the <i>context</i> isn't a model group, then an <i>element</i> cannot be used."</li>
+				
+                  <li>The <i>paths</i> from the context should be <i>node names</i> rather than types wherever posssible. For example "equityAmericanExercise" is preferred to "element(*, EquityAmericanExercise)".</li>
+				
+                  <li>The <i>context</i> of the rule <i>must</i> be defined such that incorporates everything referred to in a rule. The rule <i>must not</i> use the <i>ancestor</i> or <i>parent</i> axis, or use them in cojunction with any other axis. For example "../../tradeHeader" is precluded.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.7.2">4.7.2 Evaluation of Dates</a>
+               </h4>
+			
+               <p>The evaluation of dates in the validation rules is not trivial. The optionality of including time offsets in date datatypes makes comparisons between dates more difficult since sometimes the result is indeterminate as any ISO8601 date is +/- 18 hours of timezone, and +/- 24 hours of day.</p>
+			
+               <p>The Validation Working Group recommends the use of the <a class="web" href="http://www.w3.org/TR/xpath20/" target="_blank" title="Link opens in new window.">XPath 2.0</a> date/time comparison rules which defines a definitive true / false value even for indeterminate calculations.</p>
+			
+               <p>The Validation Working Group recommends that time offsets appear on all date/time values used in FpML documents.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s4.7.3">4.7.3 Contains</a>
+               </h4>
+			
+               <p>Many validation rules defined in FpML use the term 'contains'. FpML uses the definition of XPath 2's 'contains' (fn:contains) <a class="web" href="http://www.w3.org/TR/xpath-functions/#func-contains" target="_blank" title="Link opens in new window.">http://www.w3.org/TR/xpath-functions/#func-contains</a>. This is significant for alphabets with accents, diaresis, etc.</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.8">4.8 Revision and Publication Process</a>
+               </h3>
+            </div>
+		
+            <p> Since the Validation Working Group was established after most product working groups, it still has a lot of work to complete before the rules span the whole product range, and indeed are reasonably complete for any particular product type. The latest set of validation rules is thus likely to change more frequently than the specification, and the process of rule publication has been decoupled from the specification. </p>
+		
+            <p> The validation working group undergoes the following process in preparing its releases: </p>
+		
+            <ul class="bulleted">
+			
+               <li>Comments from previous publications are reviewed and logged as issues. </li>
+			
+               <li>The working group collaborates with selected experts from product working group to establish an initial set of rules, expressed in plain English. </li>
+			
+               <li>The rules are reviewed and extended, by performing a structured walk-through of the schema for the product type. </li>
+			
+               <li>The chairman of the Validation Working Group calls a freeze on the rule sets when a substantial set of new rules is available, or critical issues need to be urgently resolved. </li>
+			
+               <li>Test cases are written for each rule and ambiguities in the language addressed. This process usually leads to the elimination of some rules, and discovery of additional ones. </li>
+			
+               <li>The test cases <i>must</i> be validated by at least one reference implementation, and further ambiguities eliminated. </li>
+		
+            </ul>
+		
+            <p> At the end of this process, a new URI is allocated for the revised rule set, and the rule set is announced and published as the new normative rule set on the FpML web site. We expect to publish the process to take on average three months for the foreseeable future. </p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s4.9">4.9 Normativity and its Implications</a>
+               </h3>
+            </div>
+		
+            <p>The rule sets and test cases are the <b>normative</b> content published by the Validation Working Group. The reference implementations, see below, are informative and not part of the normative process. This normative characteristic has the implication that applications that construct FpML documents have to be designed so that their output meets the full set of validation constraints. </p>
+		
+            <p>Applications that receive FpML for processing may want to check the validation rules to ensure that the data they are receiving represent a valid FpML document. Processing applications are <b>not obliged</b> to reject invalid messages. Instead, the implications of rule normativity are that the receiver gains the right to reject invalid messages. In other words, the sender has to either be prepared for rejection, or the rule set has to be tailored.</p>
+		
+            <p>The validation working group is concerned that there may be legal implications due to this definition in situations where trades are executed between counter-parties. While we believe that the definition given above, providing a right for the receiver to reject trades and placing the burden on the sender, is the least controversial, we would like to obtain additional feedback on this issue before the publication of the final recommendation.</p>
+	
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('3',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('4',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('5',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

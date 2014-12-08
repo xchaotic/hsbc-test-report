@@ -1,0 +1,20 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='logical_element_SignedInfo_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_CanonicalizationMethod'
+  coords='311,53,536,113'
+  href='fpml-msg-5-0.xsd.html_element_CanonicalizationMethod.html#element_CanonicalizationMethod'/>
+
+ <area
+  shape='rect'
+  alt='element_SignatureMethod'
+  coords='311,123,536,183'
+  href='fpml-msg-5-0.xsd.html_element_SignatureMethod.html#element_SignatureMethod'/>
+
+ <area
+  shape='rect'
+  alt='element_Reference'
+  coords='311,193,536,269'
+  href='fpml-msg-5-0.xsd.html_element_Reference.html#element_Reference'/>
+
+</map>

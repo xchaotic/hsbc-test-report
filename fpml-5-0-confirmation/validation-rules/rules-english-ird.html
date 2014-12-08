@@ -1,0 +1,846 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>IRD rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Interest Rate Derivatives (IRD)
+      </h1>
+      <div>
+         		
+         <p> This is the Interest Rate Derivatives part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory
+            section in the draft contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. These test cases have
+            been analysed using Systemwire's xlinkit rule engine to highlight relevant document portions accessed by a rule. The cut down
+            test cases are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#definitions">Definitions</a><ul>
+               <li><a href="#frequencyequiv">frequency equivalence</a></li>
+               <li><a href="#unadjcalcperioddates">unadjusted calculation period dates</a></li>
+               <li><a href="#scheduleimplied">the schedule implied by</a></li>
+            </ul>
+         </li>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#conditions">Conditions</a><ul></ul>
+         </li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+         <li>
+            
+            					Rules with comments
+            
+            					
+            <ul>
+               <li><a href="#ird-10">ird-10</a></li>
+               <li><a href="#ird-50">ird-50</a></li>
+               <li><a href="#ird-51">ird-51</a></li>
+               <li><a href="#ird-52">ird-52</a></li>
+               <li><a href="#ird-53">ird-53</a></li>
+               <li><a href="#ird-54">ird-54</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p> 
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         		
+         <p>namespace functx = http://www.functx.com</p>
+         	
+      </p>
+      <h2 id="definitions">Definitions</h2><a name="frequencyequiv"></a><div class="termdef"><span class="emph">Term: </span><span class="termname">frequency equivalence</span><div style="margin-top:0.5em"> A frequency is specified as a tuple of <span class="element">period</span>, which is an integer, and <span class="element">periodMultiplier</span>, which is one of "<span class="value">D</span>", "<span class="value">M</span>", "<span class="value">Y</span>", "<span class="value">W</span>" or "<span class="value">T</span>", standing for day, month, year, week and term. Between any pair of frequencies, the following is the complete list of equivalences
+            where the period multipliers differ: 
+            <ul>
+               				
+               <li>12M=1Y</li>
+               				
+               <li>7D=1W</li>
+               		
+            </ul><a href="rules-functions.html#iff" target="_blank">iff</a>(<span class="element">period</span> elements are equal, If the period multipliers of a pair of frequencies are equivalent then they are equal). For the purpose
+            of calculating multiples of periods, the following additional rule holds: 
+            <ul>
+               				
+               <li>Any frequency gt 0 is a multiple of 1D</li>
+               				
+               <li>1T is a positive integer multiple (ge 1) of any frequency</li>
+               			
+            </ul>
+            		
+         </div>
+      </div><a name="unadjcalcperioddates"></a><div class="termdef"><span class="emph">Term: </span><span class="termname">unadjusted calculation period dates</span><div style="margin-top:0.5em"> This applies in the context of an <span class="element">InterestRateStream</span>. For the purpose of validation, the unadjusted calculation period dates are determined as follows: 
+            <ul>
+               				
+               <li>
+                  					<span class="element">cashflows</span> element not present: the unadjusted calculation period dates are calculated by stepping through the <a href="rules-functions.html#regular-period" target="_blank">regular-period</a>() at the frequency specified in <span class="element">calculationPeriodDates/calculationPeriodFrequency</span>. The first date is the start date of the <a href="rules-functions.html#regular-period" target="_blank">regular-period</a>() and the last date is the end date of the <a href="rules-functions.html#regular-period" target="_blank">regular-period</a>(). 
+               </li>
+               				
+               <li>
+                  					<span class="element">cashflows</span> element exists and <span class="element">cashflowsMatchParameters</span> is <span class="value">true</span>: the unadjusted calculation period dates are calculated from the <a href="rules-functions.html#regular-period" target="_blank">regular-period</a>() as in the previous case. 
+               </li>
+               				
+               <li>
+                  					<span class="element">cashflows</span> element exists and <span class="element">cashflowsMatchParameters</span> is <span class="value">false</span>: rules that relate elements to unadjusted calculation period dates <span class="emph">do not apply</span>. Instead, the cash flows must be validated internally. 
+               </li>
+               			
+            </ul>
+            		
+         </div>
+      </div><a name="scheduleimplied"></a><div class="termdef"><span class="emph">Term: </span><span class="termname">the schedule implied by</span><div style="margin-top:0.5em">The schedule defined by the effective- and termination-Date, together with the "RegularPeriod" dates which may appear optionally
+            in the presence of stubs, and the calculation period frequency.
+         </div>
+      </div>
+      <h2 id="conditions">Conditions</h2>
+      <p>The Validation Conditions only apply when specific rules reference them. The following conditions are always to be executed
+         relative to the root of the FpML document being validated. The context of the rule is NOT carried through to the condition.
+      </p><a name="isFloating"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">isFloating</span><div style="margin-top:0.5em">
+            			
+            		(context: InterestRateStream)
+            	 <span class="element">resetDates</span> exists.
+         </div>
+      </div><a name="hasInitialStub"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">hasInitialStub</span><div style="margin-top:0.5em">
+            			
+            		(context: InterestRateStream)
+            	 <span class="element">paymentDates/firstPaymentDate</span> exists. 
+         </div>
+      </div>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#iff" target="_blank">iff</a></li>
+         <li><a href="rules-functions.html#regular-period" target="_blank">regular-period</a></li>
+         <li><a href="rules-functions.html#different-frequencies" target="_blank">different-frequencies</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">InterestRateStream</span> (complex type): <a href="#ird-1">ird-1</a> <a href="#ird-2">ird-2</a> <a href="#ird-3">ird-3</a> <a href="#ird-4">ird-4</a> <a href="#ird-5">ird-5</a> <a href="#ird-6">ird-6</a> <a href="#ird-7">ird-7</a> <a href="#ird-8">ird-8</a> <a href="#ird-9">ird-9</a> <a href="#ird-50">ird-50</a> <a href="#ird-51">ird-51</a> <a href="#ird-52">ird-52</a> <a href="#ird-53">ird-53</a> <a href="#ird-54">ird-54</a> <a href="#ird-59">ird-59</a> 
+         </li>
+         <li><span class="element">CalculationPeriodDates</span> (complex type): <a href="#ird-10">ird-10</a> <a href="#ird-11">ird-11</a> <a href="#ird-12">ird-12</a> <a href="#ird-14">ird-14</a> <a href="#ird-16">ird-16</a> <a href="#ird-17">ird-17</a> <a href="#ird-18">ird-18</a> <a href="#ird-20">ird-20</a> <a href="#ird-21">ird-21</a> <a href="#ird-22">ird-22</a> 
+         </li>
+         <li><span class="element">StubCalculationPeriodAmount</span> (complex type): <a href="#ird-23">ird-23</a> <a href="#ird-24">ird-24</a> 
+         </li>
+         <li><span class="element">Schedule</span> (complex type): <a href="#ird-25">ird-25</a> 
+         </li>
+         <li><span class="element">MandatoryEarlyTermination</span> (complex type): <a href="#ird-27">ird-27</a> 
+         </li>
+         <li><span class="element">Calculation</span> (complex type): <a href="#ird-29">ird-29</a> 
+         </li>
+         <li><span class="element">CalculationPeriod</span> (complex type): <a href="#ird-30">ird-30</a> <a href="#ird-31">ird-31</a> 
+         </li>
+         <li><span class="element">Fra</span> (complex type): <a href="#ird-33">ird-33</a> 
+         </li>
+         <li><span class="element">PaymentCalculationPeriod</span> (complex type): <a href="#ird-34">ird-34</a> 
+         </li>
+         <li><span class="element">PaymentDates</span> (complex type): <a href="#ird-35">ird-35</a> <a href="#ird-36">ird-36</a> 
+         </li>
+         <li><span class="element">EarlyTerminationEvent</span> (complex type): <a href="#ird-39">ird-39</a> <a href="#ird-40">ird-40</a> <a href="#ird-41">ird-41</a> 
+         </li>
+         <li><span class="element">ExtensionEvent</span> (complex type): <a href="#ird-42">ird-42</a> 
+         </li>
+         <li><span class="element">FxLinkedNotionalAmount</span> (complex type): <a href="#ird-43">ird-43</a> 
+         </li>
+         <li><span class="element">MandatoryEarlyTerminationAdjustedDates</span> (complex type): <a href="#ird-44">ird-44</a> 
+         </li>
+         <li><span class="element">OptionalEarlyTermination</span> (complex type): <a href="#ird-46">ird-46</a> <a href="#ird-47">ird-47</a> 
+         </li>
+         <li><span class="element">Swaption</span> (complex type): <a href="#ird-48">ird-48</a> 
+         </li>
+         <li><span class="element">ResetFrequency</span> (complex type): <a href="#ird-49">ird-49</a> 
+         </li>
+         <li><span class="element">CalculationPeriodFrequency</span> (complex type): <a href="#ird-57">ird-57</a> <a href="#ird-58">ird-58</a> <a href="#ird-60">ird-60</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="ird-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br><span class="element">resetDates</span> must exist if and only if a <span class="element">floatingRateCalculation</span> or <span class="element">inflationRateCalculation</span> exists in the <span class="element">calculationPeriodAmount/calculation</span> element
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0;padding:5px"><a href="rules-functions.html#iff" target="_blank">iff</a>(exists(<span class="element">resetDates</span>), exists(<span class="element">calculationPeriodAmount/calculation/floatingRateCalculation</span>) or exists(<span class="element">calculationPeriodAmount/calculation/inflationRateCalculation</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-1-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-1-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-1-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-1-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-2</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>
+            			<span class="element">paymentDates/paymentFrequency</span> is equal to an integer multiple (could be 1) of <span class="element">calculationPeriodDates/calculationPeriodFrequency</span>. See also: <a href="#frequencyequiv">frequency equivalence</a></div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-2-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-2-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-3</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>
+            			<span class="element">paymentDates/firstPaymentDate</span> is equal to one of the <a href="#unadjcalcperioddates">unadjusted calculation period dates</a></div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-3-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-3-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-3-03.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>
+            			<span class="element">paymentDates/lastRegularPaymentDate</span> is equal to one of the <a href="#unadjcalcperioddates">unadjusted calculation period dates</a></div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-4-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-4-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-4-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-4-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-5</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The frequency in <span class="element">calculationPeriodDates/calculationPeriodFrequency</span> must be an integer multiple of the frequency in <span class="element">resetDates/resetFrequency</span>. See also: <a href="#frequencyequiv">frequency equivalence</a></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0">[(<span class="element">cashflows/cashflowsMatchParameters</span> eq <span class="value">true</span>) or (not(exists(<span class="element">cashflows</span>)))] [exists(<span class="element">resetDates</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">The frequency in <span class="element">calculationPeriodDates/calculationPeriodFrequency</span> must be an integer multiple of the frequency in <span class="element">resetDates/resetFrequency</span>. See also: <a href="#frequencyequiv">frequency equivalence</a></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-5-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-5-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-6</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>If <span class="element">paymentDates/firstPaymentDate</span> exists, and if <span class="element">calculationPeriodDates/effectiveDate</span> exists, then <span class="element">paymentDates/firstPaymentDate</span> must be after <span class="element">calculationPeriodDates/effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0">[exists(<span class="element">paymentDates/firstPaymentDate</span>)] [exists(<span class="element">calculationPeriodDates/effectiveDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">paymentDates/firstPaymentDate</span> gt <span class="element">calculationPeriodDates/effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-6-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-7</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The existence of <span class="element">compoundingMethod</span> is required when the frequencies differ, and prohibited when they are the same
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">calculationPeriodAmount/calculation/compoundingMethod</span>) eq <a href="rules-functions.html#different-frequencies" target="_blank">different-frequencies</a>((<span class="element">paymentDates/paymentFrequency</span>, <span class="element">calculationPeriodDates/calculationPeriodFrequency</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-7-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-7-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream<br>
+            			The <span class="element">@href</span> attribute of <span class="element">payerPartyReference</span> must not be equal to the <span class="element">@href</span> attribute of <span class="element">receiverPartyReference</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">payerPartyReference/@href</span> ne <span class="element">receiverPartyReference/@href</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-8-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>If <span class="element">calculationPeriodAmount/calculation/compoundingMethod</span> exists, then <span class="element">resetDates</span> must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0">[exists(<span class="element">calculationPeriodAmount/calculation/compoundingMethod</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">resetDates</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-9-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>The first day is the day of the month from <span class="element">firstRegularPeriodStartDate</span> if it exists, otherwise from <span class="element">effectiveDate/unadjustedDate</span>. The second day is the lesser of the <span class="element">rollConvention</span>, and the <span class="element">firstRegularPeriodStartDate</span> if it exist or the <span class="element">effectiveDate/unadjustedDate</span> if it doesn't. The first day must equal the second day. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[<span class="element">calculationPeriodFrequency/rollConvention</span> is a number] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">dayFromDate((<span class="element">firstRegularPeriodStartDate</span>, <span class="element">effectiveDate/unadjustedDate</span>)[1]) = min(<span class="element">calculationPeriodFrequency/rollConvention</span>, dayFromDate(functx:last-day-of-month((<span class="element">firstRegularPeriodStartDate</span>, <span class="element">effectiveDate/unadjustedDate</span>)[1]))) 
+            </div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Reference: http://www.xqueryfunctions.com/xq/functx_last-day-of-month.html
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-10-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-10-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-10-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-10-05.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-11</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br> If <span class="element">lastRegularPeriodEndDate</span> exists, then the end date is <span class="element">lastRegularPeriodEndDate</span>, else the end date is <span class="element">terminationDate/unadjustedDate</span>. If <span class="element">calculationPeriodFrequency/rollConvention</span> is less than or equal to the last day of the month in the end date, then the day of the end date must match it, else the
+            day of the end date must be the last day of the month of that date.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[<span class="element">calculationPeriodFrequency/rollConvention</span> is a number] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">dayFromDate((<span class="element">lastRegularPeriodEndDate</span>, <span class="element">terminationDate/unadjustedDate</span>)[1]) = min(<span class="element">calculationPeriodFrequency/rollConvention</span>, dayFromDate(functx:last-day-of-month((<span class="element">lastRegularPeriodEndDate</span>, <span class="element">effectiveDate/unadjustedDate</span>)[1])))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-11-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-11-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-11-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-11-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-11-05.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>The frequency specified in <span class="element">calculationPeriodFrequency</span> must divide the <a href="#regularperiod"></a> precisely. This means that by stepping through the period from the start date at the specified frequency, it must be possible
+            to reach the end date.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-12-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-12-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-12-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-12-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-12-05.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-12-06.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-14" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-14</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">effectiveDate</span> exists and If <span class="element">terminationDate</span> exists, then <span class="element">terminationDate/unadjustedDate</span> must be after <span class="element">effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">effectiveDate</span>)] [exists(<span class="element">terminationDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">terminationDate/unadjustedDate</span> gt <span class="element">effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-14-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-14-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-16" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-16</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">firstRegularPeriodStartDate</span> exists within any element of type <span class="element">CalculationPeriodDates</span>, then <span class="element">terminationDate/unadjustedDate</span> must be after <span class="element">firstRegularPeriodStartDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(//element(*, <span class="element">CalculationPeriodDates</span>)/<span class="element">firstRegularPeriodStartDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">terminationDate/unadjustedDate</span> gt <span class="element">firstRegularPeriodStartDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-16-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-16-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-17" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-17</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">lastRegularPeriodEndDate</span> exists, then <span class="element">terminationDate/unadjustedDate</span> must be after <span class="element">lastRegularPeriodEndDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">lastRegularPeriodEndDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">terminationDate/unadjustedDate</span> gt <span class="element">lastRegularPeriodEndDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-17-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-18" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-18</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">firstRegularPeriodStartDate</span> exists, and if <span class="element">lastRegularPeriodEndDate</span> exists, then <span class="element">lastRegularPeriodEndDate</span> must be after <span class="element">firstRegularPeriodStartDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstRegularPeriodStartDate</span>)] [exists(<span class="element">lastRegularPeriodEndDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">lastRegularPeriodEndDate</span> gt <span class="element">firstRegularPeriodStartDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-18-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-18-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-20" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-20</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">lastRegularPeriodEndDate</span> exists, then <span class="element">lastRegularPeriodEndDate</span> must be after <span class="element">effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">lastRegularPeriodEndDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">lastRegularPeriodEndDate</span> gt <span class="element">effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-20-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-21" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-21</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">firstPeriodStartDate</span> exists, then <span class="element">firstPeriodStartDate/unadjustedDate</span> must be before <span class="element">effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstPeriodStartDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">firstPeriodStartDate/unadjustedDate</span> lt <span class="element">effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-21-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-21-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-22" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-22</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodDates (complex type)<br>If <span class="element">firstPeriodStartDate</span> exists, and if <span class="element">firstRegularPeriodStartDate</span> exists, then <span class="element">firstPeriodStartDate/unadjustedDate</span> must be before <span class="element">firstRegularPeriodStartDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstPeriodStartDate</span>)] [exists(<span class="element">firstRegularPeriodStartDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">firstPeriodStartDate/unadjustedDate</span> lt <span class="element">firstRegularPeriodStartDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-22-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-22-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-23" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-23</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: StubCalculationPeriodAmount (complex type)<br>if <span class="element">stubCalculationPeriodAmount/initialStub</span> exists, the <span class="element">calculationPeriodDates</span> element referenced by the <span class="element">@href</span> attribute of <span class="element">stubCalculationPeriodAmount/calculationPeriodDatesReference</span> contains <span class="element">firstRegularPeriodStartDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: StubCalculationPeriodAmount<br><div style="background-color:#d0d0d0">[exists(<span class="element">stubCalculationPeriodAmount/initialStub</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(id(<span class="element">stubCalculationPeriodAmount/calculationPeriodDatesReference/@href</span>)/<span class="element">firstRegularPeriodStartDate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-23-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-24" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-24</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: StubCalculationPeriodAmount (complex type)<br><span class="element">finalStub</span> exists if and only if the <span class="element">calculationPeriodDates</span> element referenced by <span class="element">calculationPeriodDates/@href</span> contains a <span class="element">lastRegularPeriodEndDate</span> element
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: StubCalculationPeriodAmount<br><div style="background-color:#d0d0d0;padding:5px"><a href="rules-functions.html#iff" target="_blank">iff</a>(exists(<span class="element">finalStub</span>), exists(id(<span class="element">calculationPeriodDates/@href</span>)/<span class="element">lastRegularPeriodEndDate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-24-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Schedule (complex type)<br>If <span class="element">step</span> does not exist, then <span class="element">initialValue</span> must not be equal to <span class="value">0</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Schedule<br><div style="background-color:#d0d0d0">[not(exists(<span class="element">step</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">initialValue</span> ne <span class="value">0</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-25-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: MandatoryEarlyTermination (complex type)<br><span class="element">cashSettlement/cashSettlementPaymentDate</span> must not exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: MandatoryEarlyTermination<br><div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">cashSettlement/cashSettlementPaymentDate</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-27-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-29" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-29</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Calculation (complex type)<br>If <span class="element">compoundingMethod</span> exists, then <span class="element">fixedRateSchedule</span> must not exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Calculation<br><div style="background-color:#d0d0d0">[exists(<span class="element">compoundingMethod</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">fixedRateSchedule</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-29-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-30" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-30</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriod (complex type)<br><span class="element">unadjustedStartDate</span> exists or <span class="element">adjustedStartDate</span> exists
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriod<br><div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">unadjustedStartDate</span>) or exists(<span class="element">adjustedStartDate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-30-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-31" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-31</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriod (complex type)<br><span class="element">unadjustedEndDate</span> exists or <span class="element">adjustedEndDate</span> exists
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriod<br><div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">unadjustedEndDate</span>) or exists(<span class="element">adjustedEndDate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-31-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-33" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-33</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Fra (complex type)<br>
+            			<span class="element">adjustedTerminationDate</span> must be after <span class="element">adjustedEffectiveDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Fra<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">adjustedTerminationDate</span> gt <span class="element">adjustedEffectiveDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-33-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-34" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-34</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PaymentCalculationPeriod (complex type)<br>Either <span class="element">unadjustedPaymentDate</span> or <span class="element">adjustedPaymentDate</span> must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PaymentCalculationPeriod<br><div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">unadjustedPaymentDate</span>) or exists(<span class="element">adjustedPaymentDate</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-34-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-35" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-35</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PaymentDates (complex type)<br>If <span class="element">firstPaymentDate</span> exists, and if <span class="element">lastRegularPaymentDate</span> exists, then <span class="element">firstPaymentDate</span> must be before <span class="element">lastRegularPaymentDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PaymentDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstPaymentDate</span>)] [exists(<span class="element">lastRegularPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">firstPaymentDate</span> lt <span class="element">lastRegularPaymentDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-35-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-35-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-36" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-36</span> (Mandatory)
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PaymentDates<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstPaymentDate</span>)] [exists(<span class="element">lastRegularPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> The period defined by the dates <span class="element">firstPaymentDate</span> and <span class="element">lastRegularPaymentDate</span> must be an integer multiple of <span class="element">paymentFrequency</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-36-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-39" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-39</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EarlyTerminationEvent (complex type)<br>
+            			<span class="element">adjustedExerciseDate</span> must be before or equal to <span class="element">adjustedEarlyTerminationDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EarlyTerminationEvent<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">adjustedExerciseDate</span> le <span class="element">adjustedEarlyTerminationDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-39-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-40" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-40</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EarlyTerminationEvent (complex type)<br>
+            			<span class="element">adjustedExerciseDate</span> must be before or equal to <span class="element">adjustedCashSettlementValuationDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EarlyTerminationEvent<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">adjustedExerciseDate</span> le <span class="element">adjustedCashSettlementValuationDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-40-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-41" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-41</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EarlyTerminationEvent (complex type)<br>
+            			<span class="element">adjustedCashSettlementValuationDate</span> must be before or equal to <span class="element">adjustedCashSettlementPaymentDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EarlyTerminationEvent<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">adjustedCashSettlementValuationDate</span> le <span class="element">adjustedCashSettlementPaymentDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-41-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-42" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-42</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExtensionEvent (complex type)<br>
+            			<span class="element">adjustedExerciseDate</span> must be before <span class="element">adjustedExtendedTerminationDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExtensionEvent<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">adjustedExerciseDate</span> lt <span class="element">adjustedExtendedTerminationDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-42-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-42-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-43" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-43</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxLinkedNotionalAmount (complex type)<br>At least one element must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxLinkedNotionalAmount<br><div style="background-color:#d0d0d0;padding:5px">count(<span class="element">//*</span>) ge <span class="value">1</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-43-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-44" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-44</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: MandatoryEarlyTerminationAdjustedDates (complex type)<br>
+            			<span class="element">adjustedEarlyTerminationDate</span> must be before or equal to <span class="element">adjustedCashSettlementValuationDate</span> must be before or the same as <span class="element">adjustedCashSettlementPaymentDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: MandatoryEarlyTerminationAdjustedDates<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">adjustedEarlyTerminationDate</span> le <span class="element">adjustedCashSettlementValuationDate</span> le <span class="element">adjustedCashSettlementPaymentDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-44-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-44-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-44-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-44-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-44-05.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-46" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-46</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: OptionalEarlyTermination (complex type)<br> The <span class="element">cashSettlement/cashSettlementValuationDate/dateRelativeTo/@href</span> attribute is equal to the <span class="element">cashSettlement/cashSettlementPaymentDate/@id</span> attribute
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: OptionalEarlyTermination<br><div style="background-color:#d0d0d0">[exists(<span class="element">cashSettlement/cashSettlementValuationDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlement/cashSettlementValuationDate/dateRelativeTo/@href</span> eq <span class="element">cashSettlement/cashSettlementPaymentDate/@id</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-46-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-47" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-47</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: OptionalEarlyTermination (complex type)<br> The <span class="element">cashSettlement/cashSettlementPaymentDate/relativeDate/dateRelativeTo/@href</span> attribute is equal to the <span class="element">americanExercise/@id</span>, <span class="element">bermudaExercise/@id</span> or <span class="element">europeanExercise/@id</span>, whichever one exists
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: OptionalEarlyTermination<br><div style="background-color:#d0d0d0">[exists(<span class="element">cashSettlement/cashSettlementPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlement/cashSettlementPaymentDate/relativeDate/dateRelativeTo/@href</span> eq (<span class="element">americanExercise/@id</span>, <span class="element">bermudaExercise/@id</span>, <span class="element">europeanExercise/@id</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-47-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-48" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-48</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Swaption (complex type)<br> The <span class="element">cashSettlement/cashSettlementPaymentDate/relativeDate/dateRelativeTo/@href</span> attribute is equal to the <span class="element">@id</span> attribute of <span class="element">americanExercise</span>, <span class="element">bermudaExercise</span> or <span class="element">europeanExercise</span>, whichever one exists
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Swaption<br><div style="background-color:#d0d0d0">[exists(<span class="element">cashSettlement/cashSettlementPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlement/cashSettlementPaymentDate/relativeDate/dateRelativeTo/@href</span> eq (<span class="element">americanExercise/@id</span>, <span class="element">bermudaExercise/@id</span>, <span class="element">europeanExercise/@id</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-48-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-49" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-49</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ResetFrequency (complex type)<br><span class="element">weeklyRollConvention</span> should exist if and only if the period is "<span class="value">W</span>"
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ResetFrequency<br><div style="background-color:#d0d0d0;padding:5px"><a href="rules-functions.html#iff" target="_blank">iff</a>(exist <span class="element">weeklyRollConvention</span>, period eq "<span class="value">W</span>")
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-49-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-49-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-50" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-50</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The dates in <span class="element">calculationPeriodAmount/calculation/notionalSchedule/notionalStepSchedule/step/stepDate</span> must be <a href="#unadjcalcperioddates">unadjusted calculation period dates</a> in <a href="#scheduleimplied">the schedule implied by</a> <span class="element">calculationPeriodDates</span>.
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>The rule states that stepDates must be unadjusted period dates in calculationPeriodDates - but the only explicit dates in
+            calculationPeriodDates are the effective- and termination-Date, together with the "RegularPeriod" dates which may appear optionally
+            in the presence of stubs. These dates, in conjunction with the calculation period frequency, imply a schedule of unadjusted
+            period dates; it is this implied schedule which the values of notionalStepSchedule//stepDate must match.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-50-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-50-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-50-03.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-51" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-51</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The dates in <span class="element">calculationPeriodAmount/calculation/notionalSchedule/fixedRateSchedule/step/stepDate</span> must be <a href="#unadjcalcperioddates">unadjusted calculation period dates</a> in <a href="#scheduleimplied">the schedule implied by</a> <span class="element">calculationPeriodDates</span>.
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>The rule states that stepDates must be unadjusted period dates in calculationPeriodDates - but the only explicit dates in
+            calculationPeriodDates are the effective- and termination-Date, together with the "RegularPeriod" dates which may appear optionally
+            in the presence of stubs. These dates, in conjunction with the calculation period frequency, imply a schedule of unadjusted
+            period dates; it is this implied schedule which the values of fixedRateSchedule//stepDate must match.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-51-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-51-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-51-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-51-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-52" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-52</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The dates in <span class="element">calculationPeriodAmount/calculation/floatingRateCalculation/capRateSchedule/step/stepDate</span> must be <a href="#unadjcalcperioddates">unadjusted calculation period dates</a> in <a href="#scheduleimplied">the schedule implied by</a> <span class="element">calculationPeriodDates</span>.
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>The rule states that stepDates must be unadjusted period dates in calculationPeriodDates - but the only explicit dates in
+            calculationPeriodDates are the effective- and termination-Date, together with the "RegularPeriod" dates which may appear optionally
+            in the presence of stubs. These dates, in conjunction with the calculation period frequency, imply a schedule of unadjusted
+            period dates; it is this implied schedule which the values of capRateSchedule//stepDate must match.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-52-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-52-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-52-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-52-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-53" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-53</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The dates in <span class="element">calculationPeriodAmount/calculation/floatingRateCalculation/floorRateSchedule/step/stepDate</span> must be <a href="#unadjcalcperioddates">unadjusted calculation period dates</a> in <a href="#scheduleimplied">the schedule implied by</a> <span class="element">calculationPeriodDates</span>.
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>The rule states that stepDates must be unadjusted period dates in calculationPeriodDates - but the only explicit dates in
+            calculationPeriodDates are the effective- and termination-Date, together with the "RegularPeriod" dates which may appear optionally
+            in the presence of stubs. These dates, in conjunction with the calculation period frequency, imply a schedule of unadjusted
+            period dates; it is this implied schedule which the values of floorRateSchedule//stepDate must match.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-53-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-53-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-53-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-53-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-54" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-54</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>The dates in <span class="element">calculationPeriodAmount/knownAmountSchedule/step/stepDate</span> must be <a href="#unadjcalcperioddates">unadjusted calculation period dates</a> in <a href="#scheduleimplied">the schedule implied by</a> <span class="element">calculationPeriodDates</span></div>
+         <div class="comment"><span class="emph">Comment: </span>The rule states that stepDates must be unadjusted period dates in calculationPeriodDates - but the only explicit dates in
+            calculationPeriodDates are the effective- and termination-Date, together with the "RegularPeriod" dates which may appear optionally
+            in the presence of stubs. These dates, in conjunction with the calculation period frequency, imply a schedule of unadjusted
+            period dates; it is this implied schedule which the values of knownAmountSchedule//stepDate must match.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-54-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-54-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-54-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-ird-54-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-57" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-57</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodFrequency (complex type)<br>When the <span class="element">period</span> is "M" or "Y," the <span class="element">rollConvention</span> cannot be a week day, "NONE" or "SFE"
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodFrequency<br><div style="background-color:#d0d0d0">[period eq ("<span class="value">M</span>", "<span class="value">Y</span>")] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(<span class="element">rollConvention</span> = <span class="value">("NONE", "SFE", "MON", "TUE", "WED", "THU", "FRI", "SAT","SUN")</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-57-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-58" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-58</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodFrequency (complex type)<br>When the <span class="element">period</span> is "W", the <span class="element">rollConvention</span> must be a week day, "SFE" or "NONE"
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodFrequency<br><div style="background-color:#d0d0d0">[ period eq "<span class="value">W</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">rollConvention</span> = <span class="value">("NONE", "SFE", "MON", "TUE", "WED", "THU", "FRI", "SAT","SUN")</span></div>
+         </div>
+      </div>
+      <div id="ird-59" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-59</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRateStream (complex type)<br>If <span class="element">resetDates</span> exists, in <span class="element">resetDates/calculationPeriodDatesReference</span>, the <span class="element">@href</span> attribute is equal to the <span class="element">@id</span> attribute of <span class="element">calculationPeriodDates</span> in the same <span class="element">swapStream</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRateStream<br><div style="background-color:#d0d0d0">[exists(<span class="element">resetDates</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">id(<span class="element">resetDates/calculationPeriodDatesReference/@href</span>) is <span class="element">calculationPeriodDates</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-ird-59-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="ird-60" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-60</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationPeriodFrequency (complex type)<br>When the <span class="element">period</span> is "T", the <span class="element">rollConvention</span> must be "NONE"
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationPeriodFrequency<br><div style="background-color:#d0d0d0">[ period ="<span class="value">T</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">rollConvention</span> eq <span class="value">"NONE"</span></div>
+         </div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <div id="ird-15" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-15</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: CalculationPeriodDates; condition: exists(<span class="element">firstPeriodStartDate</span>)
+            			Description:<span class="element">terminationDate/unadjustedDate</span> gt <span class="element">firstPeriodStartDate/unadjustedDate</span>
+            			Rationale for removal: ird-14 and ird-21 make ird-15 redundant
+            		
+         </div>
+      </div>
+      <div id="ird-19" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-19</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: CalculationPeriodDates; conditions: exists(<span class="element">firstPeriodStartDate</span>), exists(<span class="element">lastRegularPeriodEndDate</span>)
+            			Description: <span class="element">lastRegularPeriodEndDate</span> gt <span class="element">firstPeriodStartDate/unadjustedDate</span>
+            			Rationale for removal: ird-20 and ird-21 make ird-19 redundant
+            		
+         </div>
+      </div>
+      <div id="ird-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-26</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: BusinessCentersReference; Description: The <span class="element">@href</span> attribute must match the <span class="element">@id</span> attribute of a <span class="element">businessCenters</span> element somewhere within the document.
+            			Rationale for removal: the rule has been replaced by the reference rule number 39 (ref-39)
+            		
+         </div>
+      </div>
+      <div id="ird-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-28</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: MandatoryEarlyTermination; Description: If <span class="element">cashSettlement/cashSettlementValuationDate</span> exists, the <span class="element">cashSettlement/cashSettlementValuationDate/dateRelativeTo/@href</span> attribute is equal to the <span class="element">mandatoryEarlyTerminationDate/@id</span> attribute.
+            			Rationale for removal: the rule has been replaced by the reference rule number 38 (ref-38)
+            		
+         </div>
+      </div>
+      <div id="ird-32" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-32</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Discounting; Description: If <span class="element">discountRate</span> is absent then <span class="element">discountRateDayCountFraction</span> must also be absent.
+            			Rationale for removal: the rule has been replaced by a schema constraint.
+            		
+         </div>
+      </div>
+      <div id="ird-38" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-38</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: StubCalculationPeriodAmount; Description: Either <span class="element">initialStub</span> or <span class="element">finalStub</span> must exist.
+            			Rationale for removal: the rule has been replaced by a schema constraint.
+            		
+         </div>
+      </div>
+      <div id="ird-55" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-55</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: InterestRateStream
+            			Description: The <span class="element">paymentDates/calculationPeriodDatesReference/@href</span> attribute is equal to the <span class="element">calculationPeriodDates/@id</span> attribute.
+            			Rationale for removal: the rule is an uneeded subset of reference rule number 8 (ref-8) 
+            		
+         </div>
+      </div>
+      <div id="ird-56" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ird-56</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: InterestRateStream;
+            			Condition: [exists(<span class="element">paymentDates/resetDatesReference</span>)] [exists(<span class="element">resetDates</span>)]; 
+            			Description: The <span class="element">paymentDates/resetDatesReference/@href</span> attribute is equal to the <span class="element">resetDates/@id</span>.
+            			Rationale for removal: the rule is an uneeded subset of reference rule number 12 (ref-12) 
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>

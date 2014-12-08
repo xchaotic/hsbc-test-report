@@ -1,0 +1,44 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_varianceSwap_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_varianceOptionTransactionSupplement'
+  coords='240,350,530,412'
+  href='fpml-variance-swaps-5-0.xsd.html_element_varianceOptionTransactionSupplement.html#element_varianceOptionTransactionSupplement'/>
+
+ <area
+  shape='rect'
+  alt='element_varianceSwapTransactionSupplement'
+  coords='240,494,525,556'
+  href='fpml-variance-swaps-5-0.xsd.html_element_varianceSwapTransactionSupplement.html#element_varianceSwapTransactionSupplement'/>
+
+ <area
+  shape='rect'
+  alt='element_brokerEquityOption'
+  coords='240,566,420,628'
+  href='fpml-eqd-5-0.xsd.html_element_brokerEquityOption.html#element_brokerEquityOption'/>
+
+ <area
+  shape='rect'
+  alt='element_equityForward'
+  coords='240,638,393,700'
+  href='fpml-eqd-5-0.xsd.html_element_equityForward.html#element_equityForward'/>
+
+ <area
+  shape='rect'
+  alt='element_equityOption'
+  coords='240,710,384,772'
+  href='fpml-eqd-5-0.xsd.html_element_equityOption.html#element_equityOption'/>
+
+ <area
+  shape='rect'
+  alt='element_equityOptionTransactionSupplement'
+  coords='240,782,516,844'
+  href='fpml-eqd-5-0.xsd.html_element_equityOptionTransactionSupplement.html#element_equityOptionTransactionSupplement'/>
+
+ <area
+  shape='rect'
+  alt='element_returnSwap'
+  coords='240,854,379,916'
+  href='fpml-eq-shared-5-0.xsd.html_element_returnSwap.html#element_returnSwap'/>
+
+</map>

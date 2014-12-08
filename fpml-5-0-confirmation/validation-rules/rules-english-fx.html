@@ -1,0 +1,690 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>FX rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for FX Derivatives
+      </h1>
+      <div>
+         		
+         <p> This is the FX part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory section in the
+            validation section of the specifications contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. The cut down test cases
+            are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#definitions">Definitions</a><ul>
+               <li><a href="#calculatedscheduledates">calculated schedule dates</a></li>
+            </ul>
+         </li>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="definitions">Definitions</h2><a name="calculatedscheduledates"></a><div class="termdef"><span class="emph">Term: </span><span class="termname">calculated schedule dates</span><div style="margin-top:0.5em"> Correctly evaluating rule fx-12 requires generation of a schedule of observation dates based on the observation start date,
+            the observation end date, a calculation period frequency, a date roll convention, and a business day calendar for business
+            center where fixing occurs. The calculation should proceed as follows: 
+            <ul>
+               				
+               <li>generatedDates := [null];</li>
+               				
+               <li>unadjustedDate := observationStartDate;</li>
+               				
+               <li>while unadjustedDate le observationEndDate do 
+                  <ul>
+                     						
+                     <li>begin 
+                        <ul>
+                           								
+                           <li>adjustedDate := dateRoll (unadjustedDate,dateRollConvention,businessDayCalendar);</li>
+                           								
+                           <li>if adjustedDate [doesn't belong at] generatedDates then 
+                              <ul>
+                                 										
+                                 <li>generatedDates := generatedDate [union] adjustedDate;</li>
+                                 									
+                              </ul>
+                              								
+                           </li>
+                           								
+                           <li>unadjustedDate := unadjustedDate + calculationPeriodFrequency;</li>
+                           							
+                        </ul>
+                        						
+                     </li>
+                     						
+                     <li>end;</li>
+                     					
+                  </ul>
+                  				
+               </li>
+               				
+               <li>return (generatedDates);</li>
+               			
+            </ul> The algorithm assumes that implementations can add a time period (e.g. 1D, 1W, 2M, 6M, 1Y, etc.) to dates and understands
+            how perform standard financial date rolls (e.g. following, modified preceding, etc.) against a business day calendar. Implementations
+            must be capable of working with dates that MAY contain time zone offset information. 
+         </div>
+      </div>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">ExchangeRate</span> (complex type): <a href="#fx-1">fx-1</a> <a href="#fx-2">fx-2</a> <a href="#fx-3">fx-3</a> <a href="#fx-4">fx-4</a> <a href="#fx-5">fx-5</a> <a href="#fx-6">fx-6</a> 
+         </li>
+         <li><span class="element">FxAmericanTrigger</span> (complex type): <a href="#fx-7">fx-7</a> <a href="#fx-8">fx-8</a> 
+         </li>
+         <li><span class="element">FxAverageRateObservationSchedule</span> (complex type): <a href="#fx-9">fx-9</a> <a href="#fx-10">fx-10</a> 
+         </li>
+         <li><span class="element">FxAverageRateOption</span> (complex type): <a href="#fx-11">fx-11</a> <a href="#fx-12">fx-12</a> <a href="#fx-13">fx-13</a> <a href="#fx-42">fx-42</a> <a href="#fx-43">fx-43</a> <a href="#fx-44">fx-44</a> 
+         </li>
+         <li><span class="element">FxBarrier</span> (complex type): <a href="#fx-14">fx-14</a> <a href="#fx-41">fx-41</a> 
+         </li>
+         <li><span class="element">FxBarrierOption</span> (complex type): <a href="#fx-15">fx-15</a> 
+         </li>
+         <li><span class="element">FxDigitalOption</span> (complex type): <a href="#fx-16">fx-16</a> <a href="#fx-45">fx-45</a> 
+         </li>
+         <li><span class="element">FxEuropeanTrigger</span> (complex type): <a href="#fx-17">fx-17</a> 
+         </li>
+         <li><span class="element">FxLeg</span> (complex type): <a href="#fx-18">fx-18</a> <a href="#fx-19">fx-19</a> <a href="#fx-20">fx-20</a> <a href="#fx-21">fx-21</a> 
+         </li>
+         <li><span class="element">FxOptionLeg</span> (complex type): <a href="#fx-22">fx-22</a> <a href="#fx-23">fx-23</a> 
+         </li>
+         <li><span class="element">FxStrikePrice</span> (complex type): <a href="#fx-24">fx-24</a> 
+         </li>
+         <li><span class="element">FxSwap</span> (complex type): <a href="#fx-25">fx-25</a> <a href="#fx-26">fx-26</a> 
+         </li>
+         <li><span class="element">QuotedCurrencyPair</span> (complex type): <a href="#fx-27">fx-27</a> 
+         </li>
+         <li><span class="element">SideRate</span> (complex type): <a href="#fx-28">fx-28</a> <a href="#fx-29">fx-29</a> <a href="#fx-30">fx-30</a> 
+         </li>
+         <li><span class="element">SideRates</span> (complex type): <a href="#fx-31">fx-31</a> <a href="#fx-46">fx-46</a> <a href="#fx-47">fx-47</a> 
+         </li>
+         <li><span class="element">TermDeposit</span> (complex type): <a href="#fx-32">fx-32</a> <a href="#fx-33">fx-33</a> <a href="#fx-34">fx-34</a> <a href="#fx-35">fx-35</a> 
+         </li>
+         <li><span class="element">Trade</span> (complex type): <a href="#fx-36">fx-36</a> <a href="#fx-37">fx-37</a> <a href="#fx-38">fx-38</a> <a href="#fx-39">fx-39</a> <a href="#fx-40">fx-40</a> 
+         </li>
+         <li><span class="element">Contract</span> (complex type): <a href="#fx-36b">fx-36b</a> <a href="#fx-37b">fx-37b</a> <a href="#fx-38b">fx-38b</a> <a href="#fx-39b">fx-39b</a> <a href="#fx-40b">fx-40b</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="fx-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExchangeRate (complex type)<br> <span class="element">rate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExchangeRate<br><div style="background-color:#d0d0d0;padding:5px"> <span class="element">rate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-2</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExchangeRate (complex type)<br>If <span class="element">forwardPoints</span> exists, then <span class="element">spotRate</span> must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExchangeRate<br><div style="background-color:#d0d0d0">[exists(<span class="element">forwardPoints</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">spotRate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-3</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExchangeRate (complex type)<br>If <span class="element">spotRate</span> exists, and if <span class="element">forwardPoints</span> exists, then <span class="element">rate</span> is equal to the sum of <span class="element">spotRate</span> and <span class="element">forwardPoints</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExchangeRate<br><div style="background-color:#d0d0d0">[exists(<span class="element">spotRate</span>)] [exists(<span class="element">forwardPoints</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">rate</span> eq <span class="element">spotRate</span> + <span class="element">forwardPoints</span></div>
+         </div>
+      </div>
+      <div id="fx-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExchangeRate (complex type)<br>If <span class="element">sideRates/baseCurrency</span>, <span class="element">quotedCurrencyPair/currency1</span> and <span class="element">quotedCurrencyPair/currency2</span> have the same <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">sideRates/baseCurrency</span> is not equal to the values of both <span class="element">quotedCurrencyPair/currency1</span> and <span class="element">quotedCurrencyPair/currency2</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExchangeRate<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">sideRates/baseCurrency</span>,<span class="element">quotedCurrencyPair/currency1</span>,<span class="element">quotedCurrencyPair/currency2</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">sideRates/baseCurrency</span> ne the values of both <span class="element">quotedCurrencyPair/currency1</span> and <span class="element">quotedCurrencyPair/currency2</span></div>
+         </div>
+      </div>
+      <div id="fx-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-5</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExchangeRate (complex type)<br>If <span class="element">sideRates/currency1SideRate/currency</span> and <span class="element">quotedCurrencyPair/currency1</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">sideRates/currency1SideRate/currency</span> must be equal to <span class="element">quotedCurrencyPair/currency1</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExchangeRate<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">sideRates/currency1SideRate/currency</span>,<span class="element">quotedCurrencyPair/currency1</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">sideRates/currency1SideRate/currency</span> eq <span class="element">quotedCurrencyPair/currency1</span></div>
+         </div>
+      </div>
+      <div id="fx-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-6</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ExchangeRate (complex type)<br>If <span class="element">sideRates/currency2SideRate/currency</span> and <span class="element">quotedCurrencyPair/currency2</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">sideRates/currency2SideRate/currency</span> must be equal to <span class="element">quotedCurrencyPair/currency2</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ExchangeRate<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">sideRates/currency2SideRate/currency</span>,<span class="element">quotedCurrencyPair/currency2</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">sideRates/currency2SideRate/currency</span> eq <span class="element">quotedCurrencyPair/currency2</span></div>
+         </div>
+      </div>
+      <div id="fx-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-7</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAmericanTrigger (complex type)<br><span class="element">triggerRate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAmericanTrigger<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">triggerRate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAmericanTrigger (complex type)<br>If <span class="element">observationStartDate</span> exists, and if <span class="element">observationEndDate</span> exists, then <span class="element">observationStartDate</span> must be before <span class="element">observationEndDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAmericanTrigger<br><div style="background-color:#d0d0d0">[exists(<span class="element">observationStartDate</span>)] [exists(<span class="element">observationEndDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">observationStartDate</span> le <span class="element">observationEndDate</span></div>
+         </div>
+      </div>
+      <div id="fx-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateObservationSchedule (complex type)<br>If <span class="element">observationStartDate</span> exists, and if <span class="element">observationEndDate</span> exists, then <span class="element">observationStartDate</span> must be before <span class="element">observationEndDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAverageRateObservationSchedule<br><div style="background-color:#d0d0d0">[exists(<span class="element">observationStartDate</span>)] [exists(<span class="element">observationEndDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">observationStartDate</span> le <span class="element">observationEndDate</span></div>
+         </div>
+      </div>
+      <div id="fx-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateObservationSchedule (complex type)<br>The observation period defined by <span class="element">observationStartDate</span> and <span class="element">observationEndDate</span> should be an integer multiple of the <span class="element">calculationPeriodFrequency</span></div>
+      </div>
+      <div id="fx-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-11</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateOption (complex type)<br>The value of each <span class="element">observedRates/observationDate</span> must be unique
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAverageRateOption<br><div style="background-color:#d0d0d0;padding:5px">count(distinct-values(<span class="element">observedRates/observationDate</span>)) eq count(<span class="element">observedRates/observationDate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateOption (complex type)<br>If <span class="element">averageRateObservationSchedule</span> exists, then the values of <span class="element">observedRates/observationDate</span> should match the <a href="#calculatedscheduledates">calculated schedule dates</a> derived from parameters defined within the <span class="element">averageRateObservationSchedule</span> element and the business day calendar implied by <span class="element">fixingTime/businessCenter</span></div>
+      </div>
+      <div id="fx-13" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-13</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateOption (complex type)<br>If <span class="element">averageRateObservationDate</span> exists, then each <span class="element">observedRates/observationDate</span> must match one of the dates defined by <span class="element">averageRateObservationDate/observationDate</span></div>
+      </div>
+      <div id="fx-14" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-14</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxBarrier (complex type)<br>If <span class="element">observationStartDate</span> exists, and if <span class="element">observationEndDate</span> exists, then <span class="element">observationStartDate</span> must be before <span class="element">observationEndDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxBarrier<br><div style="background-color:#d0d0d0">[exists(<span class="element">observationStartDate</span>)] [exists(<span class="element">observationEndDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">observationStartDate</span> le <span class="element">observationEndDate</span></div>
+         </div>
+      </div>
+      <div id="fx-15" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-15</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxBarrierOption (complex type)<br>If <span class="element">spotRate</span> exists, then <span class="element">spotRate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxBarrierOption<br><div style="background-color:#d0d0d0">[exists(<span class="element">spotRate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">spotRate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-16" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-16</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxDigitalOption (complex type)<br>If <span class="element">spotRate</span> exists, then <span class="element">spotRate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxDigitalOption<br><div style="background-color:#d0d0d0">[exists(<span class="element">spotRate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">spotRate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-17" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-17</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxEuropeanTrigger (complex type)<br><span class="element">triggerRate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxEuropeanTrigger<br><div style="background-color:#d0d0d0;padding:5px"> <span class="element">triggerRate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-18" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-18</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxLeg (complex type)<br> <span class="element">exchangedCurrency1/payerPartyReference/@href</span> must be equal to <span class="element">exchangedCurrency2/receiverPartyReference/@href</span> and <span class="element">exchangedCurrency1/receiverPartyReference/@href</span> must be equal to <span class="element">exchangedCurrency2/payerPartyReference/@href</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxLeg<br><div style="background-color:#d0d0d0;padding:5px">(<span class="element">exchangedCurrency1/payerPartyReference/@href</span> eq <span class="element">exchangedCurrency2/receiverPartyReference/@href</span>) and (<span class="element">exchangedCurrency1/receiverPartyReference/@href</span> eq <span class="element">exchangedCurrency2/payerPartyReference/@href</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-19" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-19</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxLeg (complex type)<br>If <span class="element">exchangedCurrency1/paymentAmount</span> and <span class="element">exchangedCurrency2/paymentAmount</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">exchangedCurrency1/paymentAmount/currency</span> must not be equal to <span class="element">exchangedCurrency2/paymentAmount/currency</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxLeg<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">exchangedCurrency1/paymentAmount</span>,<span class="element">exchangedCurrency2/paymentAmount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">exchangedCurrency1/paymentAmount/currency</span> ne <span class="element">exchangedCurrency2/paymentAmount/currency</span></div>
+         </div>
+      </div>
+      <div id="fx-20" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-20</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxLeg (complex type)<br>If <span class="element">currency1ValueDate</span> exists, then <span class="element">currency1ValueDate</span> must not be equal to <span class="element">currency2ValueDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxLeg<br><div style="background-color:#d0d0d0">[exists(<span class="element">currency1ValueDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">currency1ValueDate</span> ne <span class="element">currency2ValueDate</span></div>
+         </div>
+      </div>
+      <div id="fx-21" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-21</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxLeg (complex type)<br>If <span class="element">nonDeliverableForward</span> exists, then <span class="element">exchangeRate/forwardPoints</span> must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxLeg<br><div style="background-color:#d0d0d0">[exists(<span class="element">nonDeliverableForward</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">exchangeRate/forwardPoints</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-22" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-22</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxOptionLeg (complex type)<br>If <span class="element">fxOptionPremium</span> exists, then <span class="element">buyerPartyReference/@href</span> must be equal to <span class="element">fxOptionPremium/payerPartyReference/@href</span> and <span class="element">sellerPartyReference/@href</span> must be equal to <span class="element">fxOptionPremium/receiverPartyReference/@href</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxOptionLeg<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxOptionPremium</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">(<span class="element">buyerPartyReference/@href</span> eq <span class="element">fxOptionPremium/payerPartyReference/@href</span>) and (<span class="element">sellerPartyReference/@href</span> eq <span class="element">fxOptionPremium/receiverPartyReference/@href</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-23" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-23</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxOptionLeg (complex type)<br>If <span class="element">putCurrencyAmount</span> and <span class="element">callCurrencyAmount</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">putCurrencyAmount/currency</span> must not be equal to <span class="element">callCurrencyAmount/currency</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxOptionLeg<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">putCurrencyAmount</span>,<span class="element">callCurrencyAmount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">putCurrencyAmount/currency</span> ne <span class="element">callCurrencyAmount/currency</span></div>
+         </div>
+      </div>
+      <div id="fx-24" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-24</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxStrikePrice (complex type)<br><span class="element">rate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxStrikePrice<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">rate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxSwap (complex type)<br>Two or more <span class="element">fxSingleLeg</span> elements must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxSwap<br><div style="background-color:#d0d0d0;padding:5px">count(<span class="element">fxSingleLeg</span>) ge <span class="value">2</span></div>
+         </div>
+      </div>
+      <div id="fx-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-26</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxSwap (complex type)<br>If there are two <span class="element">fxSingleLeg</span>, and if there are two <span class="element">fxSingleLeg\valueDate</span>, then the <span class="element">fxSingleLeg\valueDate</span> for each one of the legs must be different
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxSwap<br><div style="background-color:#d0d0d0">[count(<span class="element">fxSingleLeg</span>)=<span class="value">2</span>] [count(<span class="element">fxSingleLeg\valueDate</span>)=<span class="value">2</span>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">fxSingleLeg[1]/valueDate</span> ne <span class="element">fxSingleLeg[2]/valueDate</span></div>
+         </div>
+      </div>
+      <div id="fx-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: QuotedCurrencyPair (complex type)<br>If <span class="element">currency1</span> and <span class="element">currency2</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">currency1</span> must not be equal to <span class="element">currency2</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: QuotedCurrencyPair<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">currency1</span>,<span class="element">currency2</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">currency1</span> ne <span class="element">currency2</span></div>
+         </div>
+      </div>
+      <div id="fx-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-28</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SideRate (complex type)<br><span class="element">rate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SideRate<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">rate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-29" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-29</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SideRate (complex type)<br>If <span class="element">forwardPoints</span> exists, then <span class="element">spotRate</span> must exist
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SideRate<br><div style="background-color:#d0d0d0">[exists(<span class="element">forwardPoints</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">spotRate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-30" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-30</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SideRate (complex type)<br>If <span class="element">spotRate</span> exists, and if <span class="element">forwardPoints</span> exists, then <span class="element">rate</span> must be equal to the sum of <span class="element">spotRate</span> and <span class="element">forwardPoints</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SideRate<br><div style="background-color:#d0d0d0">[exists(<span class="element">spotRate</span>)] [exists(<span class="element">forwardPoints</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">rate</span> eq <span class="element">spotRate</span> + <span class="element">forwardPoints</span></div>
+         </div>
+      </div>
+      <div id="fx-31" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-31</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SideRates (complex type)<br>If <span class="element">baseCurrency</span>, <span class="element">currency1SideRate/currency</span>, <span class="element">currency2SideRate/currency</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">baseCurrency</span> must not be equal to <span class="element">currency1SideRate/currency</span>, and <span class="element">baseCurrency</span> must not be equal to <span class="element">currency2SideRate/currency</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SideRates<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">baseCurrency</span>,<span class="element">currency1SideRate/currency</span>,<span class="element">currency2SideRate/currency</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> (<span class="element">baseCurrency</span> ne <span class="element">currency1SideRate/currency</span>) and (<span class="element">baseCurrency</span> ne <span class="element">currency2SideRate/currency</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-32" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-32</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: TermDeposit (complex type)<br>The <span class="element">@href</span> attribute of <span class="element">initialPayerReference</span> must not be equal to the <span class="element">@href</span> attribute of <span class="element">initialReceiverReference</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: TermDeposit<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">initialPayerReference/@href</span> ne <span class="element">initialReceiverReference/@href</span> 
+            </div>
+         </div>
+      </div>
+      <div id="fx-33" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-33</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: TermDeposit (complex type)<br><span class="element">maturityDate</span> must be after <span class="element">startDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: TermDeposit<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">maturityDate</span> gt <span class="element">startDate</span></div>
+         </div>
+      </div>
+      <div id="fx-34" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-34</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: TermDeposit (complex type)<br> <span class="element">principal/amount</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: TermDeposit<br><div style="background-color:#d0d0d0;padding:5px"> <span class="element">principal/amount</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-35" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-35</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: TermDeposit (complex type)<br> <span class="element">fixedRate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: TermDeposit<br><div style="background-color:#d0d0d0;padding:5px"> <span class="element">fixedRate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-36" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-36</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">fxAverageRateOption</span> exists, then <span class="element">fxAverageRateOption/expiryDateTime/expiryDate</span> must be after <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxAverageRateOption</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">fxAverageRateOption/expiryDateTime/expiryDate</span> gt <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+      </div>
+      <div id="fx-36b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-36b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Contract (complex type)<br>If <span class="element">fxAverageRateOption</span> exists, then <span class="element">fxAverageRateOption/expiryDateTime/expiryDate</span> must be after <span class="element">header/contractDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Contract<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxAverageRateOption</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">fxAverageRateOption/expiryDateTime/expiryDate</span> gt <span class="element">header/contractDate</span></div>
+         </div>
+      </div>
+      <div id="fx-37" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-37</span> (Mandatory)
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxBarrierOption</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">If <span class="element">fxBarrierOption</span> exists, then <span class="element">fxBarrierOption/expiryDateTime/expiryDate</span> must be after <span class="element">tradeHeader/tradeDate</span><span class="element">fxBarrierOption/expiryDateTime/expiryDate</span> gt <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+      </div>
+      <div id="fx-37b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-37b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Contract (complex type)<br>If <span class="element">fxBarrierOption</span> exists, then <span class="element">fxBarrierOption/expiryDateTime/expiryDate</span> must be after <span class="element">header/contractDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Contract<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxBarrierOption</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">fxBarrierOption/expiryDateTime/expiryDate</span> gt <span class="element">header/contractDate</span></div>
+         </div>
+      </div>
+      <div id="fx-38" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-38</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">fxDigitalOption</span> exists, then <span class="element">fxDigitalOption/expiryDateTime/expiryDate</span> must be after <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxDigitalOption</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">fxDigitalOption/expiryDateTime/expiryDate</span> gt <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+      </div>
+      <div id="fx-38b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-38b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Contract (complex type)<br>If <span class="element">fxDigitalOption</span> exists, then <span class="element">fxDigitalOption/expiryDateTime/expiryDate</span> must be after <span class="element">header/contractDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Contract<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxDigitalOption</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">fxDigitalOption/expiryDateTime/expiryDate</span> gt <span class="element">header/contractDate</span></div>
+         </div>
+      </div>
+      <div id="fx-39" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-39</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">fxSingleLeg</span> exists, then the value of <span class="element">fxSingleLeg/valueDate</span> or the value of both <span class="element">fxSingleLeg/currency1ValueDate</span> and <span class="element">fxSingleLeg/currency2ValueDate</span> must be after <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxSingleLeg</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">(<span class="element">fxSingleLeg/valueDate</span> gt <span class="element">tradeHeader/tradeDate</span>) or ((<span class="element">fxSingleLeg/currency1ValueDate</span>, <span class="element">fxSingleLeg/currency2ValueDate</span>) gt <span class="element">tradeHeader/tradeDate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-39b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-39b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Contract (complex type)<br>If <span class="element">fxSingleLeg</span> exists, then the value of <span class="element">fxSingleLeg/valueDate</span> or the value of both <span class="element">fxSingleLeg/currency1ValueDate</span> and <span class="element">fxSingleLeg/currency2ValueDate</span> must be after <span class="element">header/contractDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Contract<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxSingleLeg</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">fxSingleLeg/valueDate</span> gt <span class="element">header/contractDate</span>) or ((<span class="element">fxSingleLeg/currency1ValueDate</span>, <span class="element">fxSingleLeg/currency2ValueDate</span>) gt <span class="element">header/contractDate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-40" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-40</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>The value of all <span class="element">fxSwap/fxSingleLeg/valueDate</span>, <span class="element">fxswap/fxSingleLeg/currency1ValueDate</span> and <span class="element">fxSwap/fxSingleLeg/currency2ValueDate</span> instances must be after <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0;padding:5px">for all <span class="element">$vd</span> in <span class="element">fxSwap/fxSingleLeg/(valueDate|currency1ValueDate|currency2ValueDate)</span> satisfies <span class="element">$vd</span> gt <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+      </div>
+      <div id="fx-40b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-40b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Contract (complex type)<br>The value of all <span class="element">fxSwap/fxSingleLeg/valueDate</span>, <span class="element">fxswap/fxSingleLeg/currency1ValueDate</span> and <span class="element">fxSwap/fxSingleLeg/currency2ValueDate</span> instances must be after <span class="element">header/contractDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Contract<br><div style="background-color:#d0d0d0;padding:5px">for all <span class="element">$vd</span> in <span class="element">fxSwap/fxSingleLeg/(valueDate|currency1ValueDate|currency2ValueDate)</span> satisfies <span class="element">$vd</span> gt <span class="element">header/contractDate</span></div>
+         </div>
+      </div>
+      <div id="fx-41" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-41</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxBarrier (complex type)<br><span class="element">triggerRate</span> must be positive
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxBarrier<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">triggerRate</span> gt <span class="value">0</span></div>
+         </div>
+      </div>
+      <div id="fx-42" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-42</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateOption (complex type)<br>The value of each <span class="element">averageRateObservationDate/observationDate</span> must be unique
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAverageRateOption<br><div style="background-color:#d0d0d0;padding:5px">count(distinct-values(<span class="element">averageRateObservationDate/observationDate</span>)) eq count(<span class="element">averageRateObservationDate/observationDate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-43" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-43</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateOption (complex type)<br>If <span class="element">putCurrencyAmount</span> and <span class="element">callCurrencyAmount</span> have the <a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>, then <span class="element">putCurrencyAmount/currency</span> must not be equal to <span class="element">callCurrencyAmount/currency</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAverageRateOption<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency-scheme" target="_blank">same-currency-scheme</a>((<span class="element">putCurrencyAmount</span>,<span class="element">callCurrencyAmount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">putCurrencyAmount/currency</span> ne <span class="element">callCurrencyAmount/currency</span></div>
+         </div>
+      </div>
+      <div id="fx-44" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-44</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxAverageRateOption (complex type)<br>If <span class="element">fxOptionPremium</span> exists, then <span class="element">buyerPartyReference/@href</span> must be equal to <span class="element">fxOptionPremium/payerPartyReference/@href</span> and <span class="element">sellerPartyReference/@href</span> must be equal to <span class="element">fxOptionPremium/receiverPartyReference/@href</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxAverageRateOption<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxOptionPremium</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">(<span class="element">buyerPartyReference/@href</span> eq <span class="element">fxOptionPremium/payerPartyReference/@href</span>) and (<span class="element">sellerPartyReference/@href</span> eq <span class="element">fxOptionPremium/receiverPartyReference/@href</span>)
+            </div>
+         </div>
+      </div>
+      <div id="fx-45" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-45</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FxDigitalOption (complex type)<br>If <span class="element">fxOptionPremium</span> exists, then <span class="element">buyerPartyReference/@href</span> must be equal to <span class="element">fxOptionPremium/payerPartyReference/@href</span>, and <span class="element">sellerPartyReference/@href</span> must be equal to <span class="element">fxOptionPremium/receiverPartyReference/@href</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FxDigitalOption<br><div style="background-color:#d0d0d0">[exists(<span class="element">fxOptionPremium</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">buyerPartyReference/@href</span> eq <span class="element">fxOptionPremium/payerPartyReference/@href</span> and <span class="element">sellerPartyReference/@href</span> eq <span class="element">fxOptionPremium/receiverPartyReference/@href</span></div>
+         </div>
+      </div>
+      <div id="fx-46" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-46</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SideRates (complex type)<br><span class="element">currency1SideRate/sideRateBasis</span> is equal to either "BaseCurrencyPerCurrency1" or "Currency1PerBaseCurrency".
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SideRates<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">currency1SideRate/sideRateBasis</span> = ("<span class="value">BaseCurrencyPerCurrency1</span>" , "<span class="value">Currency1PerBaseCurrency</span>")
+            </div>
+         </div>
+      </div>
+      <div id="fx-47" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">fx-47</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: SideRates (complex type)<br><span class="element">currency2SideRate/sideRateBasis</span> is equal to either "BaseCurrencyPerCurrency2" or "Currency2PerBaseCurrency".
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: SideRates<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">currency2SideRate/sideRateBasis</span> = ("<span class="value">BaseCurrencyPerCurrency2</span>" , "<span class="value">Currency2PerBaseCurrency</span>")
+            </div>
+         </div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <hr>
+   </body>
+</html>

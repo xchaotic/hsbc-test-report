@@ -1,0 +1,2847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s6">6 CREDIT DERIVATIVE PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+         <div>
+            <h3>
+               <a id="s6.1">6.1 Introduction</a>
+            </h3>
+		
+            <p>This section provides an in-depth review of the product architecture of FpML 5.0 Credit Derivatives. The products covered by FpML 5.0 Credit Derivatives are the single name credit default swap, the credit default swap index, the credit default swap basket, the credit default swap on a mortgage, and the credit default swap on a loan.</p>
+		
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s6.1.1">6.1.1 credit default swap</a>
+               </h4>
+			
+               <p>In order to define the scope of the credit default swap work FpML adopted the definition used in the <b>ISDA Year End 2001 Flash Survey</b>:</p>
+			
+               <p>"In a credit default swap one counterparty (the protection seller) agrees to compensate another counterparty (the protection buyer) if a specified company or Sovereign (the reference entity) experiences a credit event, indicating it is or may be unable to service its debts. The protection seller is paid a fee and/or premium, expressed as an annualized percent of the notional in basis points, regularly over the life of the transaction."</p>
+			
+               <p>The FpML 5.0 Credit Derivatives Product Architecture draws heavily on the <b>2003 ISDA Credit Derivatives Definitions </b>(hereafter referred to as the "2003 Definitions"). Wherever feasible the terminology and practice of the ISDA definitions has been adopted to ensure consistency between traditional and FpML contract representations. Appendix A lists the elements in FpML 5.0 Credit Derivatives that differ in name from their corresponding terms in the 2003 Definitions. In FpML 5.0 it is possible to represent credit default swap trades done under either the 1999 or the 2003 definitions.</p>
+			
+               <p>The FpML 5.0 Credit Derivatives Subschema supports both a full confirmation and a transaction supplement (i.e. economics of the trade) representation of the credit default swap. The transaction supplement representation is a subset of the elements contained in the full confirmation representation. This flexible approach makes FpML 5.0 Credit Derivatives usable in all stages of the credit default swap trade lifecycle.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.1.2">6.1.2 credit default swap index</a>
+               </h4>
+			
+               <p>Product support for the credit default swap index was added to FpML in version 4.1. The FpML representation for this product is closely based on the credit default swap work that first appeared in FpML 4.0. In fact, the index trade itself is described using the creditDefaultSwap element. Only a transaction supplement representation of a credit default swap index is supported.</p>
+			
+               <p>Support for tranches on credit default swap indices was added in version 4.2.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.1.3">6.1.3 credit default swap basket</a>
+               </h4>
+			
+               <p>Product support for the credit default swap basket was added to FpML in version 4.2. The FpML representation for this product is based on the existing creditDefaultSwap product element and it includes the support for tranches.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.1.4">6.1.4 mortgage credit default swap</a>
+               </h4>
+			
+               <p>Product support for the credit default swap on a mortgage was added to FpML in version 4.3. The support includes the representation of a mortgage underlyer and the addition of additional structures within the creditDefaultSwap product representation.</p>
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s6.1.4.1">6.1.4.1 Main differences between Mortgage and Corporate CDS</a>
+                  </h5>
+				
+                  <table class="table">
+					
+                     <tr>
+						
+                        <td>
+							
+                           <b>Underlying product</b>
+						
+                        </td>
+						
+                        <td>
+							
+                           <b>Mortgage</b>
+						
+                        </td>
+						
+                        <td>
+							
+                           <b>Corporate</b>
+						
+                        </td>
+					
+                     </tr>
+					
+                     <tr>
+						
+                        <td>
+							
+                           <i>Traded on</i>
+						
+                        </td>
+						
+                        <td>Reference obligation</td>
+						
+                        <td>Reference entity</td>
+					
+                     </tr>
+					
+                     <tr>
+						
+                        <td>
+							
+                           <i>Credit Events</i>
+						
+                        </td>
+						
+                        <td>Failure to pay principal; Write down – occurs when the reference obligation is written down (realized losses usually); Distressed ratings downgrade; Maturity extension; Failure to Pay Interest</td>
+						
+                        <td>Bankruptcy; Failure to pay; Restructuring; Sovereign failure to pay, in case of emerging market underlyers</td>
+					
+                     </tr>
+					
+                     <tr>
+						
+                        <td>
+							
+                           <i>Interest Shortfall</i>
+						
+                        </td>
+						
+                        <td>Interest does not have to be fully paid, and can be reimbursed at a later time</td>
+						
+                        <td>Not applicable</td>
+					
+                     </tr>
+					
+                     <tr>
+						
+                        <td>
+							
+                           <i>Factors</i>
+						
+                        </td>
+						
+                        <td>Bonds factor down, as mortgages are paid down</td>
+						
+                        <td>No factor issues</td>
+					
+                     </tr>
+					
+                     <tr>
+						
+                        <td>
+							
+                           <i>Payment frequency</i>
+						
+                        </td>
+						
+                        <td>Monthly</td>
+						
+                        <td>Quarterly</td>
+					
+                     </tr>
+					
+                     <tr>
+						
+                        <td>
+							
+                           <i>Maturity</i>
+						
+                        </td>
+						
+                        <td>Generally 30 year bonds. The CDS trade terminates with the maturity of the underlyer</td>
+						
+                        <td>Five or ten years are most common. CDS trades terminate with the maturity of the underlyer or a credit event</td>
+					
+                     </tr>
+				
+                  </table>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s6.1.4.2">6.1.4.2 The Pay-As-You-Go model</a>
+                  </h5>
+				
+                  <p>While single name corporate CDS are terminated once a credit event occurs, mortgage CDS persist. </p>
+				
+                  <p>A failure to pay principal or interest by some underlying mortgagors results in a shortfall, which is then compensated by the protection seller, in accordance to the contract terms. If those mortgagors reimburse those defaults at a later point, this will result into a corresponding ‘additional fixed payment amount’ that will be returned by the production buyer. </p>
+				
+                  <p>Those ‘floating rate payment events’ and ‘additional fixed payments’ can exist without occurrence of a credit event. A typical case would be when a failure to pay interests is not eligible as a credit event (but specified as an eligible floating rate payment event).</p>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/pay-as-you-go.jpg">
+                        <img src="images/credit-derivatives/pay-as-you-go.jpg" alt="images/credit-derivatives/pay-as-you-go.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.1.5">6.1.5 loan credit default swap</a>
+               </h4>
+			
+               <p>Product support for the credit default swap on a loan was added to FpML in version 4.3. The support includes the representation of a loan underlyer and the addition of additional structures within the creditDefaultSwap product representation.</p>
+			
+               <p>The Loan CDS approach is tackled through two extensions to the reference information:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>the securedList element as an optional last child of Reference Information, which means that the reference obligation is not required if Secured List is present and true; this follows the normal naming convention in FpML for elements relating to ISDA Applicable or Non Applicable Legal Terms.</li>
+				
+                  <li>the loan underlyer to the list of available products as part of the Reference Obligation.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.1.6">6.1.6 credit default swap option</a>
+               </h4>
+			
+               <p>Product support for credit default swap option was added to FpML in version 4.3. The support is based on the creation of a new creditDefaultSwapOption product. As part of this work, some option structures have been generalized to be reused across multiple types of options.</p>
+			
+               <p>The credit default swap underlyer is supported by referencing the existing creditDefaultSwap product element within the new creditDefaultSwapOption product.</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.2">6.2 creditDefaultSwap</a>
+               </h3>
+            </div>
+		
+            <p>Like all other derivative products supported by FpML, the type used to represent the credit default swap, the credit default swap index, and the credit default swap basket, CreditDefaultSwap, is defined as an extension of the Product type and the corresponding creditDefaultSwap element belongs to the product substitution group. The creditDefaultSwap element appears in Figure 1.</p>
+		
+            <p>
+			
+               <a href="images/credit-derivatives/creditDefaultSwap.jpg">
+                  <img src="images/credit-derivatives/creditDefaultSwap.jpg" alt="images/credit-derivatives/creditDefaultSwap.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 1: creditDefaultSwap element</p>
+		
+            <p>The structure of the creditDefaultSwap element corresponds to the structure of the Confirmation that appears in Exhibit A of the 2003 Definitions (hereafter referred to as the "2003 Confirmation"). The six sections that comprise the 2003 Confirmation and their corresponding FpML elements appear in Figure 2.</p>
+		
+            <table class="table">
+			
+			
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>2003 Confirmation</b>
+					
+                     </p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>FpML creditDefaultSwap Element</b>
+					
+                     </p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>General Terms</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p> generalTerms</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Fixed Rate Payments</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p> feeLeg</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Floating Payment</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p> protectionTerms</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Settlement Terms</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p> physicalSettlementTerms or cashSettlementTerms </p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Notice and Account Details</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>N/A</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Offices</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>N/A</p>
+				
+                  </td>
+			
+               </tr>
+		
+            </table>
+		
+            <p>Figure 2: Sections of the 2003 Confirmation and their corresponding FpML creditDefaultSwap elements.</p>
+		
+            <p>Additional points to note:</p>
+		
+            <ul class="bulleted">
+			
+               <li> The id attribute and the productType and productId elements are inherited from the product type. They are not credit derivatives specific. Each product supported by FpML contains these elements.</li>
+			
+               <li> Although <i>Settlement Terms</i> are specified on a full confirmation, they are not necessarily required for a transaction supplement or other activities in the trade lifecycle. Therefore, the equivalent element (physicalSettlementTerms or cashSettlementTerms) is optional in FpML 5.0.</li>
+			
+               <li> The <i>Notice and Account Details</i> and <i>Offices</i> sections of the confirmation do not have a direct analog in the FpML 5.0 definition of the credit default swap. In FpML, the party elements that appear under the FpML root element serve the purpose these sections do in the traditional confirm.</li>
+		
+            </ul>
+		
+            <p>The remainder of this document reviews each child element of the creditDefaultSwap.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.3">6.3 generalTerms</a>
+               </h3>
+            </div>
+		
+            <p>The generalTerms element, which appears in Figure 3, represents the information specified in the <i>General Terms</i> section of the 2003 Confirmation.</p>
+		
+            <p>
+			
+               <a href="images/credit-derivatives/generalTerms.jpg">
+                  <img src="images/credit-derivatives/generalTerms.jpg" alt="images/credit-derivatives/generalTerms.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 3: generalTerms Element</p>
+		
+            <p>The effectiveDate element represents the <i>Effective Date </i>term. In order to optionally allow the explicit specification of a particular business day convention per the 2003 Definitions this element is of type AdjustableDate2. The effectiveDate is optional for the transaction supplement representation of some credit default swap indices.</p>
+		
+            <p>The scheduledTerminationDate element represents the <i>Scheduled Termination Date </i>term. This element can be specified as either an adjustable date or a relative date. For confirmation purposes a specific date will always be specified. Again, the AdjustableDate2 type allows the parties to explicitly specify a particular business day convention per the 2003 Definitions. The Interval type (e.g. 5 Y for a five year deal) is included because this way of expressing a scheduled termination date is quite commonly used in historical price databases. The scheduled termination date is optional for the transaction supplement representation of some credit default swap indices. The effectiveDate and scheduledTerminationDate should always be included for a credit default swap.</p>
+		
+            <p>The sellerPartyReference element represents the protection seller. This party is referred to as the <i>Floating Rate Payer</i> in the 2003 Definitions. Similarly, the buyerPartyReference element represents the protection buyer and is referred to as the <i>Fixed Rate Payer</i> in the 2003 Definitions. These elements reference the party elements underneath the FpML root element.</p>
+		
+            <p>The optional elements dateAdjustments.businessCenters and dateAdjustments.businessDayConvention are used to represent the terms <i>Business Day</i> and <i>Business Day Convention</i> respectively.</p>
+		
+            <p>The referenceInformation element is used in the representation of a credit default swap. The indexReferenceInformation element is used in the representation of a credit default swap index. The basketReferenceInformation element is used in the representation of a credit default swap basket.</p>
+		
+            <p>The full expansion of the referenceInformation element appears in figure 4. Two of its child elements, referenceEntity and referenceObligation, are used to represent the <i>Reference Entity </i>and <i>Reference Obligation(s) </i>terms respectively. </p>
+		
+            <p>The referenceEntity element is of type LegalEntity and is required. The LegalEntity type requires an entityName and/or an entityId to be provided. Both the entityName and the entityId are represented using schemes, which allow the source (e.g. reference database) of the information to be recorded.</p>
+		
+		
+            <p>The optional allGuarantees and referencePrice are used to represent the terms <i>All Guarantees</i> and <i>Reference Price</i> respectively. </p>
+		
+		
+		
+		
+            <p>Several terms that appear in the <i>General Terms</i> section of the 2003 Confirmation do not appear in the generalTerms element because elements to represent these terms already existed in the FpML trade element. The terms that belong to this category appear in Figure 6 along with their corresponding FpML element.</p>
+		
+            <p/>
+		
+            <table class="table">
+			
+			
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b> ISDA Confirmation Term</b>
+					
+                     </p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>FpML Element</b>
+					
+                     </p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p> Trade Date</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p> trade.tradeHeader.tradeDate</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Calculation Agent</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>trade.calculationAgent.calculationAgentPartyReference</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>Calculation Agent City</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>trade.calculationAgentBusinessCenter</p>
+				
+                  </td>
+			
+               </tr>
+		
+            </table>
+		
+            <p>Figure 6 General Terms that do not appear in creditDefaultSwap.generalTerms element.</p>
+	
+            <div>
+               <h4>
+                  <a id="s6.3.1">6.3.1 referenceObligation</a>
+               </h4>
+			
+               <p>A referenceObligation element has either a bond, a convertibleBond, a mortgage, or loan as one of its child elements. The bond, convertibleBond, mortgage, and loan elements are shared FpML elements. In other words, they were not created specifically to support credit derivatives and are also used in other asset classes. </p>
+			
+			
+			
+			
+               <p>To represent the <i>Primary Obligor </i>term a referenceObligation element may optionally have either a primaryObligor or a primaryObligationReference element. If the <i>Primary Obligor </i>is the <i>Reference Entity</i>, then primaryObligorReference should be used. Its href attribute will contain the id attribute of the referenceEntity. Otherwise, the primaryObligor element, which is of type LegalEntity, should be used.</p>
+			
+               <p>Similarly, to represent the <i>Guarantor </i>term a referenceObligation element may optionally have either a guarantor or a primaryObligationReference element. If the <i>Guarantor </i>is the <i>Reference Entity</i>, then guarantorReference should be used. Its href attribute will contain the id attribute of the referenceEntity. Otherwise, the guarantor element, which is of type LegalEntity, should be used.</p>
+		
+               <div>
+                  <h5>
+                     <a id="s6.3.1.1">6.3.1.1 bond and convertibleBond</a>
+                  </h5>
+				
+                  <p>For a credit default swap, bond or convertibleBond is used to specify a <i>Reference Obligation's CUSIP/ISIN</i>, <i>Maturity </i> and <i>Coupon</i> values. The instrumentId element is used to specify <i>CUSIP/ISIN</i>. The mandatory instrumentIdScheme is used to specify whether the id provided is a CUSIP or an ISIN. Since multiple occurrences of instrumentId are allowed, the schema supports the specification of both the obligation's CUSIP and ISIN, if they both exist. The couponRate and maturity elements are used to represent the <i>Coupon</i> and <i>Maturity</i> terms respectively.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s6.3.1.2">6.3.1.2 mortgage</a>
+                  </h5>
+				
+                  <p>A mortgage underlyer was added to the underlying classes that are part of the ReferenceObligation structure in order to support cds on mortgage. This Mortgage type uses most of the structures present at other underlying assets.</p>
+				
+                  <p>
+					
+                     <a href="images/main/mortgage.jpg">
+                        <img src="images/main/mortgage.jpg" alt="images/main/mortgage.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The extensions specific to the mortgage structure are the following:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>The originalPrincipalAmount element, which schema definition is 'The initial issued amount of the mortgage obligation'.</li>
+					
+                     <li>The pool, which specifies the underlying mortgage pool through an initialFactor and a currentFactor elements. An optional versionHistory group provides the ability to indicate the version of the pool. In the ISDA long form definition, this initialFactor is used as an input for specifying the 'Applicable Percentage' that is used throughout the life the trade for representing the effect of the mortgage factor updates.</li>
+					
+                     <li>The sector, defined in the schema as 'The sector classification of mortgage obligations'. This element is specified as a normalized string that optionally refers to the mortgageSectorScheme. This scheme contains the mortgage typology currently in use by the marketplace: ABS, CDO, CMBS and RMBS.</li>
+					
+                     <li>The tranche specifies the mortgage obligation tranche that is subject to the derivative transaction. There can only be one tranche. No scheme is associated with the tranche, as there is no current classification or normalization of those mortgage tranches.</li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s6.3.1.3">6.3.1.3 loan</a>
+                  </h5>
+				
+                  <p>A loan underlyer was added to the list of available product classes as part of the Reference Obligation. This Loan type extends Underlying Asset structure.</p>
+				
+                  <p>
+					
+                     <a href="images/main/loan.jpg">
+                        <img src="images/main/loan.jpg" alt="images/main/loan.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The extensions specific to the loan structure are the following:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>The borrowerName or borrowerPartyReference on Loan CDS is meant to be used in the event that there is no Bloomberg Id or the Secured List isn't applicable, and has been modeled in the same way as the insurerName or insurerPartyReference on Mortgage CDS.</li>
+					
+                     <li>The lien specifies the seniority level of the lien..</li>
+					
+                     <li>The facilityType describes the type of the loan facility and is specified through the facility-type-1-0.xml scheme file. Defined values are “BridgeLoan”, “LetterOfCredit”, “RevolvingLoan”, “SwinglineFunding”, “TermLoan” and “TradeClaim”.</li>
+					
+                     <li>The maturity is the maturity date of the loan.</li>
+					
+                     <li>The creditAgreementDate is the closing date (the date where the agreement has been signed) for the loans in the credit agreement. Funding of the facilities occurs on (or sometimes a little after) the Credit Agreement date. This underlyer attribute is used to help identify which of the company's outstanding loans are being referenced by knowing to which credit agreement it belongs. ISDA Standards Terms Supplement term: Date of Original Credit Agreement.</li>
+					
+                     <li>While the tranche element is present for both the mortgage and loan extensions, its usage is different across those 2 underlyers: </li>
+					
+                     <ul class="bulleted">
+						
+                        <li>In the mortgage case, the instrument Id is used to indicate the Bloomberg reference number of the mortgage, while the tranche element is used to qualify the specific tranche that is subject to the derivative transaction.</li>
+						
+                        <li>With the loan, the Bloomberg number qualifies both the loan and the tranche. As a result, the instrument Id is used to specify the loan’s Cusip, while the tranche is used to specify the Bloomberg number. Consequently, a transcheIdScheme is being associated to the tranche element.</li>
+					
+                     </ul>
+				
+                  </ul>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.3.2">6.3.2 referenceInformation</a>
+               </h4>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/referenceInformation.jpg">
+                     <img src="images/credit-derivatives/referenceInformation.jpg" alt="images/credit-derivatives/referenceInformation.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 4: referenceInformation element</p>
+			
+               <p>Although the structure of referenceInformation appears to be somewhat complex, the specification of Reference Entity and Reference Obligation information in FpML documents is quite simple, straightforward and flexible. An example bears this out:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Reference Entity: Bundesrepublic Deutschland</li>
+				
+                  <li>Primary Obligor: Reference Entity</li>
+				
+                  <li>Guarantor: None</li>
+				
+                  <li>Coupon Rate: 5%</li>
+				
+                  <li>Date Maturity: 2012-7-4</li>
+				
+                  <li>ISIN/Cusip: DE0001135200</li>
+				
+                  <li>Reference Price: 100%</li>
+			
+               </ul>
+			
+               <p>In order to support the full credit default swap trade lifecycle, the schema allows this information to be expressed in various degrees of detail:</p>
+			
+               <p>Example 1 - Reference Entity only:</p>
+			
+               <pre>
+&lt;referenceInformation&gt;
+  &lt;referenceEntity&gt;
+    &lt;entityName&gt;Bundesrepublic Deutschland&lt;/entityName&gt;
+  &lt;/referenceEntity&gt;
+  &lt;noReferenceObligation/&gt;  
+&lt;/referenceInformation&gt;
+                </pre>
+			
+               <p>Example 2 - Reference Entity and ISIN of the Reference Obligation with optional scheme attributes:</p>
+			
+               <pre>
+&lt;referenceInformation&gt;
+  &lt;referenceEntity&gt;
+    &lt;entityName&gt;Bundesrepublic Deutschland&lt;/entityName&gt;
+    &lt;/referenceEntity&gt;
+  &lt;referenceObligation&gt;
+    &lt;bond&gt;
+      &lt;instrumentId instrumentIdScheme =
+"http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0"&gt;DE0001135200&lt;/instrumentId&gt;
+    &lt;/bond&gt;
+  &lt;/referenceObligation&gt;
+&lt;/referenceInformation&gt;
+                </pre>
+			
+               <p>Example 3 - Full Representation of Reference Entity and Reference Obligation terms:</p>
+			
+               <pre>
+&lt;referenceInformation&gt;
+   &lt;referenceEntity id ="DBR"&gt;
+	&lt;entityName&gt;Bundesrepublic Deutschland&lt;/entityName&gt;
+  &lt;/referenceEntity&gt;
+  &lt;referenceObligation&gt;
+    &lt;bond&gt;
+      &lt;instrumentId 
+        instrumentIdScheme =
+"http://www.fpml.org/spec/2002/instrument-id-ISIN-1-0"&gt;DE0001135200&lt;/instrumentId&gt;
+      &lt;couponRate&gt;.05&lt;/couponRate&gt;
+      &lt;maturity&gt;2012-07-04&lt;/maturity&gt;
+    &lt;/bond&gt;
+    &lt;primaryObligorReference href =
+"DBR"/&gt;
+  &lt;/referenceObligation&gt;
+  &lt;referencePrice&gt;1&lt;/referencePrice&gt;
+&lt;/referenceInformation&gt;
+		</pre>
+			
+               <p>The <b>referencePolicy</b> element is applicable to the transactions on mortgage-backed security, which can make use of a reference policy. Presence of the element indicates that the reference policy is applicable; absence implies that it is not.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.3.3">6.3.3 indexReferenceInformation</a>
+               </h4>
+			
+               <p>The indexReferenceInformation element appears in the Figure 5. This element is used to identify the index referenced by a credit default swap index trade. </p>
+			
+               <p>The indexReferenceInformation element is structurally very similar to the referenceEntity element. The indexReferenceInformation element identifies a collection of (Reference Entity, Reference Obligation) pairs issued by an index sponsor (e.g. iBoxx, TRAC-X). The referenceEntity element, on the other hand, identifies a specific Reference Entity.</p>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/indexReferenceInformation.jpg">
+                     <img src="images/credit-derivatives/indexReferenceInformation.jpg" alt="images/credit-derivatives/indexReferenceInformation.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 5: indexReferenceInformation element</p>
+			
+               <p>The identification is accomplished by a combination of the indexId and the indexName elements. There are optional elements to explicitly define the index series number, the version number of the index series annex, the annex publication date and the source of the relevant annex (the elements indexSeries, indexAnnexVersion, indexAnnexDate and indexAnnexSource respectively) (for a given series, multiple versions of the “annex” may be published over time). The indexSeries and indexAnnexVersion elements are of integer type, the indexAnnexDate element is of date type and the indexAnnexSource element is of complex type IndexAnnexSource (which is of base type string).</p>
+			
+               <p>The indexAnnexSource element corresponds to the field ‘Source of Relevant Annex’ that appears in the Dow Jones CDX form of Transaction Supplement and it is proposed an FpML-defined Scheme is defined with initial possible values of “Publisher” and “Master Confirmation”. These values have the meanings ascribed to them in the Dow Jones CDX General Terms Confirmation (A value of “Publisher” implies the relevant annex for a transaction is the list for the relevant index with the relevant annex date published by Mark-it Partners).</p>
+			
+               <p>See the Mark-it Partners website (<a class="web" href="http://www.mark-it.com" target="_blank" title="Link opens in new window.">http://www.mark-it.com</a>) for examples of published annexes for the CDX and iTraxx index families.</p>
+			
+               <p>An additional optional repeating element excludedReferenceEntity is also proposed to support the iTraxx and CDX forms of Transaction Supplement which allow for specific reference entities in the index to be excluded by making reference to them in the Transaction Supplement. This element uses the existing LegalEntity type.</p>
+			
+               <p>Identifying a credit default swap index with indexReferenceInformation is quite straightforward. Like referenceInformation, it allows for this information to be expressed in various degrees of detail.</p>
+			
+               <p>Some illustrative example FpML snippets including the optional elements follow:</p>
+			
+               <pre>
+&lt;generalTerms&gt;
+  ...
+  &lt;indexReferenceInformation&gt;
+    &lt;indexName&gt;Dow Jones CDX.NA.IG.3 Version 1&lt;/indexName&gt;
+    &lt;indexId indexIdScheme="http://www.fpml.org/spec/2003/instrument-id-RED-pair-1-0"&gt;123456789&lt;/indexId&gt;
+    &lt;indexSeries&gt;3&lt;/indexSeries&gt;
+    &lt;indexAnnexVersion&gt;1&lt;/indexAnnexVersion&gt;
+    &lt;indexAnnexDate&gt;2004-09-20&lt;/indexAnnexDate&gt;
+    &lt;indexAnnexSource&gt;Publisher&lt;/indexAnnexSource&gt;
+  &lt;/indexReferenceInformation&gt;
+  ...
+&lt;/generalTerms&gt;
+
+
+&lt;generalTerms&gt;
+  ...
+  &lt;indexReferenceInformation&gt;
+    &lt;indexName&gt;Dow Jones iTraxx Europe Series 2 Version 1&lt;/indexName&gt;
+    &lt;indexId indexIdScheme="http://www.fpml.org/spec/2003/instrument-id-RED-pair-1-0"&gt;123456789&lt;/indexId&gt;
+    &lt;indexSeries&gt;2&lt;/indexSeries&gt;
+    &lt;indexAnnexVersion&gt;1&lt;/indexAnnexVersion&gt;
+    &lt;indexAnnexDate&gt;2004-09-17&lt;/indexAnnexDate&gt;
+    &lt;excludedReferenceEntity&gt;
+      &lt;entityName&gt;Acme Inc.&lt;/entityName&gt;
+      &lt;entityId entityIdScheme="http://www.fpml.org/spec/2003/entity-id-RED-1-0"&gt;123456&lt;/entityId&gt;
+    &lt;/excludedReferenceEntity&gt;
+  &lt;/indexReferenceInformation&gt;
+  ...
+&lt;/generalTerms&gt;
+				</pre>
+			
+			
+			
+               <pre>	
+&lt;generalTerms&gt;
+  ...
+  &lt;indexReferenceInformation&gt;
+	&lt;indexName&gt;Dow Jones iTraxx Europe Consumers Series 2 Version 1&lt;/indexName&gt;
+	&lt;indexSeries&gt;2&lt;/indexSeries&gt;
+	&lt;indexAnnexVersion&gt;1&lt;/indexAnnexVersion&gt;
+	&lt;tranche&gt;
+		&lt;attachmentPoint&gt;0.03&lt;/attachmentPoint&gt;
+		&lt;exhaustionPoint&gt;0.07&lt;/exhaustionPoint&gt;
+	&lt;/tranche&gt;
+	&lt;settledEntityMatrix&gt;
+		&lt;matrixSource&gt;NotApplicable&lt;/matrixSource&gt;
+	&lt;/settledEntityMatrix&gt;
+  &lt;/indexReferenceInformation&gt;
+  ...
+&lt;/generalTerms&gt;			
+			</pre>
+		
+               <div>
+                  <h5>
+                     <a id="s6.3.3.1">6.3.3.1 Index Tranche</a>
+                  </h5>
+				
+                  <p>The optional tranche element allows the specification of index tranches. The structure requires an attachment point and an exhaustion point and optionally the applicability of the legal term Incurred Recovery.</p>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/tranche.jpg">
+                        <img src="images/credit-derivatives/tranche.jpg" alt="images/credit-derivatives/tranche.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s6.3.3.2">6.3.3.2 Settled Entity Matrix </a>
+                  </h5>
+				
+                  <p>The Dow Jones CDX Tranche Transactions Standard Terms Supplement requires the "Source of Relevant Settled Entity Matrix" field on a Confirmation. The optional settledEntityMatrix element supports it. It contains a required matrixSource element and an optional publicationDate element.</p>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.3.4">6.3.4 basketReferenceInformation</a>
+               </h4>
+			
+               <p>The basketReferenceInformation element appears in the figure below. This element is used to define the composition of the basket by a credit default swap basket.</p>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/basketReferenceInformation.jpg">
+                     <img src="images/credit-derivatives/basketReferenceInformation.jpg" alt="images/credit-derivatives/basketReferenceInformation.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>The identification of the basket using basketId and/or basketName is optional since each component of the basket must be specified using the referencePoolItem element.</p>
+			
+               <p>The constituentWeight (weight of each component of the basket) is optional since if the element is not present, it means that flat weight is assumed.</p>
+			
+			
+               <p>Some illustrative example FpML snippets follow:</p>
+			
+               <pre>
+&lt;generalTerms&gt;
+  ...
+  &lt;basketReferenceInformation&gt;
+   &lt;referencePool&gt;
+     &lt;referencePoolItem&gt;
+	&lt;referencePair&gt;
+		&lt;referenceEntity id="agriumEntity"&gt;
+			&lt;entityName&gt;Agrium Inc.&lt;/entityName&gt;
+			&lt;entityId entityIdScheme="http://www.fpml.org/spec/2003/entity-id-RED-1-0"&gt;
+008HA7&lt;/entityId&gt;
+		&lt;/referenceEntity&gt;
+		&lt;referenceObligation&gt;
+			&lt;bond&gt;
+				&lt;instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/
+instrument-id-CUSIP-1-0"&gt;008916AB4&lt;/instrumentId&gt;
+				&lt;couponRate&gt;0.077&lt;/couponRate&gt;
+				&lt;maturity&gt;2017-02-01&lt;/maturity&gt;
+			&lt;/bond&gt;
+			&lt;primaryObligorReference href="agriumEntity"/&gt;
+		&lt;/referenceObligation&gt;
+		&lt;entityType&gt;NorthAmericanInvestmentGrade&lt;/entityType&gt;
+	&lt;/referencePair&gt;
+   &lt;/referencePoolItem&gt;
+   &lt;referencePoolItem&gt;
+	&lt;referencePair&gt;
+		&lt;referenceEntity id="tenetEntity"&gt;
+			&lt;entityName&gt;Tenet Healthcare Corporation&lt;/entityName&gt;
+			&lt;entityId entityIdScheme="http://www.fpml.org/spec/2003/entity-id-RED-1-0"&gt;
+8G836J&lt;/entityId&gt;
+		&lt;/referenceEntity&gt;
+		&lt;referenceObligation&gt;
+			&lt;bond&gt;
+				&lt;instrumentId instrumentIdScheme="http://www.fpml.org/spec/2002/
+instrument-id-CUSIP-1-0"&gt;88033GAT7&lt;/instrumentId&gt;
+				&lt;couponRate&gt;0.06&lt;/couponRate&gt;
+				&lt;maturity&gt;2011-12-01&lt;/maturity&gt;
+			&lt;/bond&gt;
+			&lt;primaryObligorReference href="tenetEntity"/&gt;
+		&lt;/referenceObligation&gt;
+		&lt;entityType&gt;NorthAmericanInvestmentGrade&lt;/entityType&gt;
+	&lt;/referencePair&gt;
+     &lt;/referencePoolItem&gt;
+   &lt;/referencePool&gt;
+   &lt;nthToDefault&gt;1&lt;/nthToDefault&gt;
+  &lt;/basketReferenceInformation&gt;
+  ...
+&lt;/generalTerms&gt;
+		</pre>
+		
+               <div>
+                  <h5>
+                     <a id="s6.3.4.1">6.3.4.1 Basket Tranche and Nth to Default </a>
+                  </h5>
+				
+                  <p>The ability to specify either Nth and Mth to default or tranche details on baskets has been included within basketReferenceInformation.</p>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/tranchebasket.jpg">
+                        <img src="images/credit-derivatives/tranchebasket.jpg" alt="images/credit-derivatives/tranchebasket.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The tranche element is available to specify an attachment and exhaustion point as well as the legal applicability of Incurred Recovery. The Nth and Mth to Default sequence is available to express trades in which there is a triggered reference obligation to payout. The tranche and nthToDefault are features are both optional structures.</p>
+			
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.4">6.4 feeLeg</a>
+               </h3>
+            </div>
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s6.4.1">6.4.1 Credit default swap</a>
+               </h4>
+			
+               <p>The feeLeg element represents the information specified in the <i>Fixed Payments</i> section of the 2003 Confirmation. In other words, this is where the payment stream from <i>Fixed Rate Payer</i> to the <i>Floating Rate Payer</i> is specified. This element reuses types and elements from FpML 5.0 Interest Rate Derivatives.</p>
+			
+               <p>The feeLeg allows representation of the following types of payment schedules for a credit default swap using a combination of the singlePayment and periodicPayment elements:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Fixed Amount, Regular Schedule</li>
+				
+                  <li>Fixed Rate, Regular Schedule</li>
+				
+                  <li>Fixed Rate, Month-End Rolls</li>
+				
+                  <li>Fixed Rate, Initial (Short) Stub</li>
+				
+                  <li>Fixed Rate, Initial (Long) Stub</li>
+				
+                  <li>Fixed Rate, Final (Short) Stub</li>
+				
+                  <li>Fixed Rate, Final (Long) Stub</li>
+				
+                  <li>Fixed Amount, Single Payment</li>
+				
+                  <li>Upfront Fee and Fixed Rate, Regular Schedule </li>
+				
+                  <li>Irregular Payment Schedule </li>
+			
+               </ul>
+			
+               <p>In addition, it's important to note that the use of initialPayment allows the representation of the situation when the seller of protection pays a fee to the buyer as an upfront payment. An example of this scenario is the payment in exchange for an agreed modification of the first period start date.</p>
+			
+               <p> An optional cashflow representation is also permitted. The feeLeg element appears in Figure 7.</p>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/feeLeg.jpg">
+                     <img src="images/credit-derivatives/feeLeg.jpg" alt="images/credit-derivatives/feeLeg.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 7: feeLeg element</p>
+			
+               <p>This structure allows specification of a single payment (zero or more) or a periodic series of payments. Therefore, it allows representation of a single upfront payment, a single upfront payment combined with a schedule of regular payments or a schedule of totally irregular payment dates and amounts. Note that payments specified in the singlePayment and periodicPayment elements are always assumed to be payments made by the Fixed Rate Payer (protection buyer) to the Floating Rate Payer (protection seller).</p>
+			
+               <p>When a ‘New Transaction’ arises following a Novation it is market practice for a CDS that the initial Calculation Period with respect to the New Transaction shall commence on and include the (a) the Fixed Rate Payer Period End Date of the ‘Old Transaction’ that immediately precedes the Novation Date; or (b) in the event the Novation Date occurs during the initial Calculation Period of the Old Transaction, the Effective Date (see 2004 ISDA Novation Definitions at <a class="web" href="http://www.isda.org/publications/pdf/2004-Novation-Definitions.pdf" target="_blank" title="Link opens in new window.">http://www.isda.org/publications/pdf/2004-Novation-Definitions.pdf</a> for further background, specifically Section 1.20).</p>
+			
+               <p>firstPeriodStartDate supports a CDS FpML representation for a New Transaction arising from a Novation to be useful as a standalone document (without needing reference to the Old Transaction). It allows specification of the initial Calculation Period Start Date where it is not equal to the trade’s Effective Date. </p>
+			
+               <p>The periodicPayment.rollConvention element is used to address the ambiguities that can otherwise occur with regard to the actual payment dates, particularly when considering month-end rolls and any initial stub. The rollConvention element typically takes a value of 1-30 or EOM. It represents the actual unadjusted day in the month on which payments would occur.</p>
+			
+               <p>As in FpML 5.0 Interest Rate Derivatives, the periodicPayment.firstPaymentDate element is only needed when the first period is irregular, i.e. there is a short or long initial stub. For a regular set of payment periods knowing the Effective Date, Scheduled Termination Date, payment frequency and roll convention is sufficient to define the schedule.</p>
+			
+               <p>In keeping with the 2003 Definitions either a Fixed Rate Calculation or known Fixed Amount may be specified. The optional periodicPayment.fixedAmountCalculation.dayCountFraction element should be omitted in the case of a Transaction Supplement. Similarly, the optional periodicPayment.fixedAmountCalculation.calculationAmount element provides support for the full confirmation but should be omitted in the case of a Transaction Supplement.</p>
+			
+               <p> The addition of the adjustedPaymentDate element within singlePayment and adjustedPaymentDates component in periodicPayment allows the optional inclusion of a 'cashflows' like structure consistent with what was done in FpML 5.0 Interest Rate Derivatives. Note these structures are intended more for internal application integration use rather than external communication, i.e. Wouldn't be applicable for confirmations.</p>
+			
+               <p> Here are some example fee schedules:</p>
+			
+               <p> Example 1 - Fixed Rate - Regular Schedule:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 1 November, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Rate: .85%</li>
+				
+                  <li>Payment Frequency: Quarterly</li>
+				
+                  <li>Day Count Fraction: ACT/360 </li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+	    &lt;calculationAmount&gt;
+		    &lt;currency&gt;USD&lt;/currency&gt;
+		    &lt;amount&gt;5000000&lt;/amount&gt;
+	    &lt;/calculationAmount&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+      &lt;dayCountFraction dayCountFractionScheme="http://www.fpml.org/spec/2004/
+day-count-fraction-1-0"&gt;ACT/360&lt;/dayCountFraction&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p>or in a Transaction Supplement</p>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 2 - Fixed Amount - Regular Schedule:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 1 November, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007 </li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Amount: USD 10,625</li>
+				
+                  <li>Payment Frequency: Quarterly</li>
+				
+                  <li>Day Count Fraction: ACT/360 </li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;10625.00&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 3 - Fixed Rate - Month-End Rolls:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 30 September, 2002</li>
+				
+                  <li>Scheduled Termination Date: 30 September, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Rate: .85%</li>
+				
+                  <li>Payment Frequency: Quarterly on each December 31, March 31, June 30 and September 30</li>
+				
+                  <li>Day Count Fraction: ACT/360</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;EOM&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;calculationAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;5000000&lt;/amount&gt;
+      &lt;/calculationAmount&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+      &lt;dayCountFraction dayCountFractionScheme="http://www.fpml.org/spec/2004/
+day-count-fraction-1-0"&gt;ACT/360&lt;/dayCountFraction&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> or in a Transaction Supplement</p>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;EOM&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 4 - Fixed Rate - Initial (Short) Stub:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 30 September, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Rate: .85%</li>
+				
+                  <li>Payment Frequency: 1 November 2002 and each February 1, May 1, August 1 and November 1</li>
+				
+                  <li>Day Count Fraction: ACT/360</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;firstPaymentDate&gt;2002-11-01&lt;/firstPaymentDate&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p/>
+			
+               <p> Example 5 - Fixed Rate - Initial (Long) Stub:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 30 September, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Rate: .85%</li>
+				
+                  <li>Payment Frequency: 1 February 2003 and each May 1, August 1, November 1 and February 1</li>
+				
+                  <li>Day Count Fraction: ACT/360</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+ &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;firstPaymentDate&gt;2003-02-01&lt;/firstPaymentDate&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 6 - Fixed Amount - Single Payment:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 1 November, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Amount: USD 100,000</li>
+				
+                  <li>Payment Date: 2 November 2002</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2002-11-02&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;100000.00&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/singlePayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 7 - Upfront Fee combined with Fixed Rate Regular Schedule</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 1 November, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Upfront Payment Amount: USD 100,000</li>
+				
+                  <li>Upfront Payment Date: 2 November 2002</li>
+				
+                  <li>Fixed Rate: .85%</li>
+				
+                  <li>Payment Frequency: Quarterly</li>
+				
+                  <li>Day Count Fraction: ACT/360</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2002-11-02&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;100000.00&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/singlePayment&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 8 - Irregular Payment Schedule</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 1 November, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2007</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Amount of USD 100,000 on 2 November 2002 and USD 50,000 on 2 December 2002 .</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2002-11-02&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;100000.00&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/singlePayment&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2002-12-02&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;50000.00&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/singlePayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 9 - Fixed Rate - Final (Short) Stub:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 18 February, 2003</li>
+				
+                  <li>Scheduled Termination Date: 20 March, 2008</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Rate: .9%</li>
+				
+                  <li>Payment Frequency: 20 March 2003 and each June 20, September 20 and March 20.</li>
+				
+                  <li>Day Count Fraction: ACT/360</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;lastRegularPaymentDate&gt;2003-03-20&lt;/lastRegularPaymentDate&gt;
+    &lt;rollConvention&gt;20&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;fixedRate&gt;0.009&lt;/fixedRate&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p> Example 10 - Fixed Rate - Regular Schedule (Including Optional Cashflows):</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 1 November, 2002</li>
+				
+                  <li>Scheduled Termination Date: 1 November, 2003</li>
+				
+                  <li>Notional Amount: USD 5,000,000</li>
+				
+                  <li>Fixed Rate: .85%</li>
+				
+                  <li>Payment Frequency: Quarterly</li>
+				
+                  <li>Day Count Fraction: ACT/360</li>
+			
+               </ul>
+			
+               <p> Note that the adjustedPaymentDate element values have not been adjusted for any applicable business days.</p>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;calculationAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;5000000&lt;/amount&gt;
+      &lt;/calculationAmount&gt;
+      &lt;fixedRate&gt;0.0085&lt;/fixedRate&gt;
+      &lt;dayCountFraction dayCountFractionScheme="http://www.fpml.org/spec/2004/
+day-count-fraction-1-0"&gt;ACT/360&lt;/dayCountFraction&gt;
+    &lt;/fixedAmountCalculation&gt;
+    &lt;adjustedPaymentDates&gt;
+      &lt;adjustedPaymentDate&gt;2003-02-01&lt;/adjustedPaymentDate&gt;
+      &lt;fixedAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;10625.00&lt;/amount&gt;
+      &lt;/fixedAmount&gt;
+    &lt;/adjustedPaymentDates&gt;
+    &lt;adjustedPaymentDates&gt;
+      &lt;adjustedPaymentDate&gt;2003-05-01&lt;/adjustedPaymentDate&gt;
+      &lt;fixedAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;10625.00&lt;/amount&gt;
+      &lt;/fixedAmount&gt;
+    &lt;/adjustedPaymentDates&gt;
+    &lt;adjustedPaymentDates&gt;
+      &lt;adjustedPaymentDate&gt;2003-08-01&lt;/adjustedPaymentDate&gt;
+      &lt;fixedAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;10625.00&lt;/amount&gt;
+      &lt;/fixedAmount&gt;
+    &lt;/adjustedPaymentDates&gt;
+    &lt;adjustedPaymentDates&gt;
+      &lt;adjustedPaymentDate&gt;2003-11-01&lt;/adjustedPaymentDate&gt;
+      &lt;fixedAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;10625.00&lt;/amount&gt;
+      &lt;/fixedAmount&gt;
+    &lt;/adjustedPaymentDates&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+                        </pre>
+			
+               <p>Example 11 - firstPeriodStartDate - Novations Support</p>
+			
+               <p>Suppose the following Old Transaction is Novated with the following information:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 9 June, 2004</li>
+				
+                  <li>Scheduled Termination Date: 20 June, 2009</li>
+				
+                  <li>First Fixed Rate Payer Payment Date: 20 September, 2004</li>
+				
+                  <li>Novation Trade Date: 21 September, 2004</li>
+				
+                  <li>Novation Date: 22 September, 2004</li>
+			
+               </ul>
+			
+               <p>Old Transaction FpML (abbreviated) representation:</p>
+			
+               <pre>
+&lt;creditDefaultSwap&gt;
+  &lt;generalTerms&gt;
+    &lt;effectiveDate&gt;
+      &lt;unadjustedDate&gt;2004-06-09&lt;/unadjustedDate&gt;
+      &lt;dateAdjustments&gt;
+        &lt;businessDayConvention&gt;NONE&lt;/businessDayConvention&gt;
+      &lt;/dateAdjustments&gt;
+    &lt;/effectiveDate&gt;
+    &lt;scheduledTerminationDate&gt;
+      &lt;adjustableDate&gt;
+        &lt;unadjustedDate&gt;2009-06-20&lt;/unadjustedDate&gt;
+        &lt;dateAdjustments&gt;
+          &lt;businessDayConvention&gt;NONE&lt;/businessDayConvention&gt;
+        &lt;/dateAdjustments&gt;
+      &lt;/adjustableDate&gt;
+    &lt;/scheduledTerminationDate&gt;
+    ...
+  &lt;/generalTerms&gt;
+  &lt;feeLeg&gt;
+    &lt;periodicPayment&gt;
+      &lt;paymentFrequency&gt;
+        &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+        &lt;period&gt;M&lt;/period&gt;
+      &lt;/paymentFrequency&gt;
+      &lt;firstPaymentDate&gt;2004-09-20&lt;/firstPaymentDate&gt;
+      &lt;rollConvention&gt;20&lt;/rollConvention&gt;
+      &lt;fixedAmountCalculation&gt;
+        &lt;calculationAmount&gt;
+          &lt;currency&gt;EUR&lt;/currency&gt;
+          &lt;amount&gt;5000000.0&lt;/amount&gt;
+        &lt;/calculationAmount&gt;
+        &lt;fixedRate&gt;0.0125&lt;/fixedRate&gt;
+        &lt;dayCountFraction dayCountFractionScheme="http://www.fpml.org/spec/2004/
+day-count-fraction-1-0"&gt;ACT/360&lt;/dayCountFraction&gt;
+      &lt;/fixedAmountCalculation&gt;
+    &lt;/periodicPayment&gt;
+  &lt;/feeLeg&gt;
+  ...
+&lt;/creditDefaultSwap&gt;
+                        </pre>
+			
+               <p>For the New Transaction the FpML representation would show:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective Date: 22 September, 2004 (the Novation Date)</li>
+				
+                  <li>Scheduled Termination Date: 20 June, 2009</li>
+				
+                  <li>First Fixed Rate Payer Payment Date: 20 December, 2004</li>
+				
+                  <li>Initial Calculation Period Start Date (element firstPeriodStartDate): 20 September, 2004</li>
+			
+               </ul>
+			
+               <p>New Transaction FpML (abbreviated) representation:</p>
+			
+               <pre>
+&lt;creditDefaultSwap&gt;
+  &lt;generalTerms&gt;
+    &lt;effectiveDate&gt;
+      &lt;unadjustedDate&gt;2004-09-22&lt;/unadjustedDate&gt;
+      &lt;dateAdjustments&gt;
+        &lt;businessDayConvention&gt;NONE&lt;/businessDayConvention&gt;
+      &lt;/dateAdjustments&gt;
+    &lt;/effectiveDate&gt;
+    &lt;scheduledTerminationDate&gt;
+      &lt;adjustableDate&gt;
+        &lt;unadjustedDate&gt;2009-06-20&lt;/unadjustedDate&gt;
+        &lt;dateAdjustments&gt;
+          &lt;businessDayConvention&gt;NONE&lt;/businessDayConvention&gt;
+        &lt;/dateAdjustments&gt;
+      &lt;/adjustableDate&gt;
+    &lt;/scheduledTerminationDate&gt;
+    ...
+  &lt;/generalTerms&gt;
+  &lt;feeLeg&gt;
+    &lt;periodicPayment&gt;
+      &lt;paymentFrequency&gt;
+        &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+        &lt;period&gt;M&lt;/period&gt;
+      &lt;/paymentFrequency&gt;
+      &lt;firstPeriodStartDate&gt;2004-09-20&lt;/firstPeriodStartDate&gt;
+      &lt;firstPaymentDate&gt;2004-12-20&lt;/firstPaymentDate&gt;
+      &lt;rollConvention&gt;20&lt;/rollConvention&gt;
+      &lt;fixedAmountCalculation&gt;
+        &lt;calculationAmount&gt;
+          &lt;currency&gt;EUR&lt;/currency&gt;
+          &lt;amount&gt;5000000.0&lt;/amount&gt;
+        &lt;/calculationAmount&gt;
+        &lt;fixedRate&gt;0.0125&lt;/fixedRate&gt;
+        &lt;dayCountFraction dayCountFractionScheme="http://www.fpml.org/spec/2004/
+day-count-fraction-1-0"&gt;ACT/360&lt;/dayCountFraction&gt;
+      &lt;/fixedAmountCalculation&gt;
+    &lt;/periodicPayment&gt;
+  &lt;/feeLeg&gt;
+  ...
+&lt;/creditDefaultSwap&gt;
+                      </pre>
+			
+               <p>Example 12 - Periodic payments - stepping notional</p>
+			
+               <p>A credit default swap pays 100bp every 3 months. The notional starts at 5M but steps down twice throughout the life of the deal (only the relevant portions of FpML are shown):</p>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;periodicPayment&gt;
+    &lt;paymentFrequency&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/paymentFrequency&gt;
+    &lt;rollConvention&gt;1&lt;/rollConvention&gt;
+    &lt;fixedAmountCalculation&gt;
+      &lt;calculationAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;5000000&lt;/amount&gt;
+        &lt;step&gt;
+          &lt;stepDate&gt;2002-03-01&lt;/stepDate&gt;
+          &lt;stepValue&gt;4000000&lt;/stepValue&gt;
+        &lt;/step&gt;
+        &lt;step&gt;
+          &lt;stepDate&gt;2002-09-01&lt;/stepDate&gt;
+          &lt;stepValue&gt;3000000&lt;/stepValue&gt;
+        &lt;/step&gt;
+      &lt;/calculationAmount&gt;
+      &lt;fixedRate&gt;0.010&lt;/fixedRate&gt;
+      &lt;dayCountFraction&gt;ACT/360&lt;/dayCountFraction&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+&lt;protectionTerms&gt;
+  &lt;calculationAmount&gt;
+    &lt;currency&gt;USD&lt;/currency&gt;
+    &lt;amount&gt;5000000&lt;/amount&gt;
+    &lt;step&gt;
+      &lt;stepDate&gt;2002-03-01&lt;/stepDate&gt;
+      &lt;stepValue&gt;4000000&lt;/stepValue&gt;
+    &lt;/step&gt;
+    &lt;step&gt;
+      &lt;stepDate&gt;2002-09-01&lt;/stepDate&gt;
+      &lt;stepValue&gt;3000000&lt;/stepValue&gt;
+    &lt;/step&gt;
+  &lt;/calculationAmount&gt;
+  &lt;creditEvents&gt;
+    &lt;defaultRequirement&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;10000000&lt;/amount&gt;
+    &lt;/defaultRequirement&gt;
+	...
+				</pre>
+			
+               <p>Example 13 - Irregular Payments, stepping notional</p>
+			
+               <p>In this example, payments are made at irregular intervals (note that there is no June payment). Also the amount of each payment is determined based on notional that change over time:</p>
+			
+               <pre>
+&lt;feeLeg&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2001-12-01&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;230.50&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/singlePayment&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2002-03-01&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;219.20&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+  &lt;/singlePayment&gt;
+  &lt;singlePayment&gt;
+    &lt;adjustablePaymentDate&gt;2002-9-01&lt;/adjustablePaymentDate&gt;
+    &lt;fixedAmount&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;500.00&lt;/amount&gt;
+    &lt;/fixedAmount&gt;
+&lt;/singlePayment&gt;
+  &lt;periodicPayment&gt;
+     &lt;fixedAmountCalculation&gt;
+      &lt;calculationAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;5000000&lt;/amount&gt;
+        &lt;step&gt;
+          &lt;stepDate&gt;2002-03-01&lt;/stepDate&gt;
+          &lt;stepValue&gt;4000000&lt;/stepValue&gt;
+        &lt;/step&gt;
+        &lt;step&gt;
+          &lt;stepDate&gt;2002-09-01&lt;/stepDate&gt;
+          &lt;stepValue&gt;3000000&lt;/stepValue&gt;
+        &lt;/step&gt;
+      &lt;/calculationAmount&gt;
+      &lt;fixedRate&gt;0.010&lt;/fixedRate&gt;
+      &lt;dayCountFraction&gt;ACT/360&lt;/dayCountFraction&gt;
+    &lt;/fixedAmountCalculation&gt;
+  &lt;/periodicPayment&gt;
+&lt;/feeLeg&gt;
+&lt;protectionTerms&gt;
+  &lt;calculationAmount&gt;
+    &lt;currency&gt;USD&lt;/currency&gt;
+    &lt;amount&gt;5000000&lt;/amount&gt;
+    &lt;step&gt;
+      &lt;stepDate&gt;2002-03-01&lt;/stepDate&gt;
+      &lt;stepValue&gt;4000000&lt;/stepValue&gt;
+    &lt;/step&gt;
+    &lt;step&gt;
+      &lt;stepDate&gt;2002-09-01&lt;/stepDate&gt;
+      &lt;stepValue&gt;3000000&lt;/stepValue&gt;
+    &lt;/step&gt;
+  &lt;/calculationAmount&gt;
+	...
+				</pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.4.2">6.4.2 Credit default swap index</a>
+               </h4>
+			
+               <p>The payment information that appears in the transaction supplement representation of a credit default swap index trade is expressed in FpML by using the initialPayment and periodicPayment/fixedAmountCalculation elements.</p>
+			
+               <p>Trades on credit default swap indices generally have an upfront payment associated with them. Unlike upfront payments on credit default swap trades, the initial payment can be from either protection buyer to protection seller or from protection seller to protection buyer. To address this requirement, an additional optional element called initialPayment has been added to feeLeg in FpML 4.1. This element is intended to be used solely in the representation of a credit default swap index trade.</p>
+			
+               <p>The structure of initialPayment can be seen in figure 6. The major difference between initialPayment and singlePayment is that initialPayment allows the specification of which party is making the payment (payerPartyReference) and which is receiving it (receiverPartyReference).</p>
+			
+               <p>Unlike a credit default swap trade, a credit index trade has two fixed rates associated with it:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <i>Fixed Rate</i>: Credit spread (“premium”) set at the time the index series is issued. Payments from the protection buyer to the protection seller are based on this value. It’s roughly analogous to the coupon on a fixed rate bond.</li>
+				
+                  <li>
+					
+                     <i>Market Fixed Rate</i>: Credit spread (“fair value”) of the index at a particular time. Varies over the life of the index depending on market conditions. This is the price quoted by the trading desks. It’s roughly analogous to the yield on a fixed rate bond.</li>
+			
+               </ul>
+			
+               <p>The present value of the difference between these two fixed rates is one of the two inputs to the calculation of the initial (e.g. upfront) payment. The other component is accrued interest.</p>
+			
+               <p>Here is an example of the payment information associated with a trade and how that information appears in FpML:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Initial Payment: EUR 10,000</li>
+				
+                  <li>Initial Payment Payer: XYZ Bank</li>
+				
+                  <li>Fixed Rate: .70%</li>
+				
+                  <li>Market Fixed Rate: .40%</li>
+			
+               </ul>
+			
+               <pre>
+&lt;feeLeg&gt; 
+        &lt;initialPayment&gt; 
+                &lt;payerPartyReference href="partyA"/&gt; 
+                &lt;receiverPartyReference href="partyB"/&gt; 
+                &lt;paymentAmount&gt; 
+                        &lt;currency&gt;EUR&lt;/currency&gt; 
+                        &lt;amount&gt;10000&lt;/amount&gt;                 
+                &lt;/paymentAmount&gt;             
+        &lt;/initialPayment&gt; 
+        &lt;periodicPayment&gt; 
+                &lt;fixedAmountCalculation&gt; 
+                        &lt;fixedRate&gt;0.0070&lt;/fixedRate&gt; 
+                &lt;/fixedAmountCalculation&gt; 
+        &lt;/periodicPayment&gt; 
+        &lt;marketFixedRate&gt;0.0040&lt;/marketFixedRate&gt;   
+&lt;/feeLeg&gt; 
+                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.4.3">6.4.3 Mortgage derivatives</a>
+               </h4>
+			
+               <p>The paymentDelay has been added as a boolean element as part of the feeLeg construct to support the ISDA definition associated with the fixed amount:</p>
+			
+               <table class="table">
+				
+				
+				
+                  <tr>
+					
+                     <td>Fixed Amount:</td>
+					
+                     <td>[Fixed Amount definition for underlying with no payment delay]/[Fixed Amount definition for underlying with payment delay]</td>
+				
+                  </tr>
+			
+               </table>
+			
+               <p>Parties should make a selection that is appropriate in view of the interest basis of the Reference Obligation as set out in the Underlying Instruments. The former version may be preferred if the Reference Obligation does not have a payment delay, and the latter if it is a security with a payment delay.</p>
+			
+               <p>The schema definition states: “Applicable to CDS on MBS to specify whether payment delays are applicable to the fixed Amount. RMBS typically have a payment delay of 5 days between the coupon date of the reference obligation and the payment date of the synthetic swap. CMBS do not, on the other hand, with both payment dates being on the 25th of each month.”</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.5">6.5 protectionTerms</a>
+               </h3>
+            </div>
+		
+            <p>The protectionTerms element, which appears in Figure 8, represents the information specified in the <i>FloatingPayment</i> section of the 2003 Confirmation. This is where the credit events and obligations that are applicable to the credit default swap trade are specified.</p>
+		
+            <p>
+			
+               <a href="images/credit-derivatives/protectionTerms.jpg">
+                  <img src="images/credit-derivatives/protectionTerms.jpg" alt="images/credit-derivatives/protectionTerms.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 8: protectionTerms element</p>
+		
+            <p>The only required child element of protectionTerms is calculationAmount. It represents the term <i>Floating Rate Payer Calculation Amount </i>in the 2003 Definitions.</p>
+		
+            <p>In order to indicate that a particular Credit Event is applicable in an FpML credit default swap trade, an element whose name is the <i>Credit Event</i> it represents appears as a child of the creditEvents element. If a particular <i>Credit Event</i> has no attributes of its own (e.g. Bankruptcy), it appears as an element with its value set to true. On the other hand, if it does have attributes (e.g. Failure to Pay - Grace Period, Payment Requirement) then those attributes appear as child elements of the <i>Credit Event</i> with the "applicable" element's value set to true. If in an element doesn't appear it means that it's not applicable or its applicability is defined within the master confirmation. In general, the value set to false will be specified only in case the default in the master confirmation needs to be overridden.</p>
+		
+            <p>In the following example, these credit events are applicable:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Bankruptcy</li>
+			
+               <li>Failure to Pay with Grace Period Extension not applicable and Payment Requirement of USD 1,000,000.</li>
+			
+               <li>Restructuring (R)</li>
+			
+               <li>Default Requirement of USD 10,000,000.</li>
+		
+            </ul>
+		
+            <p>And these conditions to credit event notice settlement apply:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Both the Buyer and Seller are notifying parties.</li>
+			
+               <li>Notice of Publicly Available Information is a Condition to Payment - defaults apply for Public Source(s) and Specified Number.</li>
+		
+            </ul>
+		
+            <pre>
+&lt;creditEvents&gt;
+  &lt;bankruptcy&gt;true&lt;/bankruptcy&gt;
+  &lt;failureToPay&gt;
+    &lt;paymentRequirement&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;1000000&lt;/amount&gt;
+    &lt;/paymentRequirement&gt;
+  &lt;/failureToPay&gt;
+  &lt;restructuring&gt;
+     &lt;applicable&gt;true&lt;/applicable&gt;
+    &lt;restructuringType restructuringScheme =
+      "http://www.fpml.org/spec/2003/restructuring-1-0"&gt;R&lt;/restructuringType&gt;
+  &lt;/restructuring&gt;
+  &lt;creditEventNotice&gt;
+    &lt;notifyingParty&gt;
+      &lt;buyerPartyReference href = "abc"/&gt;
+      &lt;sellerPartyReference href = "def"/&gt;
+    &lt;/notifyingParty&gt;
+    &lt;publiclyAvailableInformation&gt;
+      &lt;standardPublicSources&gt; true&lt;/standardPublicSources&gt;
+      &lt;specifiedNumber&gt;2&lt;/specifiedNumber&gt;
+    &lt;/publiclyAvailableInformation&gt;
+  &lt;/creditEventNotice&gt;
+&lt;/creditEvents&gt;
+                </pre>
+		
+            <p>Please note the following regarding the representation of the <i>Restructuring </i>credit event:</p>
+		
+            <ul class="bulleted">
+			
+               <li>If the <i>Restructuring </i>credit event is not applicable, no restructuring element should appear in the creditEvents element.</li>
+			
+               <li>If <i>Restructuring</i> as defined in the 2003 Definitions is applicable and a full confirmation is being represented, then the restructuring element should appear and the restructuringType element contains one of the three restructuring codes (see below).</li>
+			
+               <li>If <i>Restructuring</i> as defined in the 2003 Definitions is applicable and a transaction supplement is being represented, then only the restructuring element should appear (the actual restructuring type will be defined in the relevant master confirmation associated with the transaction supplement).</li>
+			
+               <li>If the 1999 Definitions are used and a transaction supplement is being represented, the actual restructuring type needs to be explicitly specified in the XML instance using the restructuringType element (same as one would do for a long form) since the 1999 master agreements are silent on the actual restructuring type.</li>
+			
+		
+            </ul>
+		
+            <p>The legal restructuring codes are:</p>
+		
+            <ul class="bulleted">
+			
+               <li>
+				
+                  <b>ModR</b>: If <i> Restructuring Maturity Limitation and Fully Transferable Obligation</i> (Section 2.32 of the 2003 Definitions) applies.</li>
+			
+               <li>
+				
+                  <b>ModModR</b>: If <i> Modified Restructuring Maturity Limitation and Conditionally Transferable Obligation</i> (Section 2.33 of the 2003 Definitions) applies. </li>
+			
+               <li>
+				
+                  <b>R</b>: If neither <i>Restructuring Maturity Limitation and</i>
+				
+                  <i> Fully Transferable Obligation</i> or <i>Modified Restructuring Maturity</i>
+				
+                  <i>Limitation and Conditionally Transferable Obligation</i> are applicable.</li>
+		
+            </ul>
+		
+		
+            <p>The optional obligations element has a category child element that represents the <i>Obligation Category </i>term. The ObligationCategory type is an enumeration that consists of values representing the following categories:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Payment</li>
+			
+               <li>Borrowed Money</li>
+			
+               <li>Reference Obligations Only</li>
+			
+               <li>Bond</li>
+			
+               <li>Loan</li>
+			
+               <li>Bond or Loan</li>
+		
+            </ul>
+		
+            <p/>
+		
+            <p>ISDA published in September 2004 additional provisions for U.S. Municipal Entity as Reference Entity (see <a class="web" href="http://www.isda.org/publications/pdf/additionalprovisions.pdf" target="_blank" title="Link opens in new window.">http://www.isda.org/publications/pdf/additionalprovisions.pdf</a>) and the associated form of confirmation (see <a class="web" href="http://www.isda.org/publications/docs/municdsconfirmation.doc" target="_blank" title="Link opens in new window.">http://www.isda.org/publications/docs/municdsconfirmation.doc</a>) introduced three additional terms which could be selected as Obligation Characteristics and Deliverable Obligation Characteristics. These were:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Full Faith and Credit Obligation Liability</li>
+			
+               <li>General Fund Obligation Liability</li>
+			
+               <li>Revenue Obligation Liability</li>
+		
+            </ul>
+		
+            <p>The confirmation implied only one can be selected at a time.</p>
+		
+            <p>These three elements were added as boolean elements within an optional choice group to the corresponding Obligations and DeliverableObligations complex types.</p>
+		
+            <p>
+			
+               <i>Obligation Characteristics</i> are defined in a manner similar to credit events. In other words, each <i>Obligation Characteristic</i> has its own element. The applicability of the characteristic is indicated by the appearance of its corresponding obligationCharactersitic element. </p>
+		
+            <p/>
+	
+            <div>
+               <h4>
+                  <a id="s6.5.1">6.5.1 Mortgage derivatives</a>
+               </h4>
+			
+               <p>Five credit event elements have been added as part of the CreditEvents container in order to support cds on derivatives: failureToPayPrincipal, failureToPayInterest, distressedRatingsDowngrade, maturityExtension and writedown. </p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+                     <b>failureToPayInterest</b> and <b>failureToPayPrincipal</b> have been positioned as eligible credit events besides the pre-existing failureToPay element. The idea is that those new elements are distincts from this latter one, as they qualify the failure to pay in a manner that is explicit as part of the ISDA definitions. As such, there is no ambiguity. An alternative approach that consisted in qualifying this pre-existing failureToPay element was considered, but rejected because of its perceived level of indirection vis-à-vis the ISDA definitions.</li>
+				
+                  <li>
+                     <b>distressedRatingsDowngrade</b>, <b>maturityExtension</b> and <b>writedown</b>: these three additional credit events have similarly been specified as boolean elements. Presence of the element as part of the instance document will then suffice to qualify any of those as an applicable credit event.</li>
+			
+               </ul>
+			
+               <p>Mortgage CDS introduce the concept of floating amount events, which is not applicable to corporate CDS contracts.</p>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/floatingAmountEvents.jpg">
+                     <img src="images/credit-derivatives/floatingAmountEvents.jpg" alt="images/credit-derivatives/floatingAmountEvents.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <ul class="bulleted">
+				
+                  <li>Specifies the eligible floating rate payment events through the following elements which are contained within the FloatingAmountEvents complex type: <ul class="bulleted">
+						
+                        <li>principalShortfall;</li>
+						
+                        <li>interestShortfall;</li>
+						
+                        <li>writedown.</li>
+					
+                     </ul>
+				
+                  </li>
+				
+                  <li>The provisions that might be applicable in case the interest short fall applies (non-optional <b>floatingAmountProvision</b> extension).</li>
+				
+                  <li>The events that can constitute to additional fixed payments (non-optional <b>additionalFixedPayment</b> extension): <ul class="bulleted">
+						
+                        <li>interestShortfallReimbursement;</li>
+						
+                        <li>principalShortfallReimbursement;</li>
+						
+                        <li>The writedownReimbursement.</li>
+					
+                     </ul>
+				
+                  </li>
+			
+               </ul>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.6">6.6 physicalSettlementTerms and cashSettlementTerms</a>
+               </h3>
+            </div>
+		
+            <p>If settlement terms are specified in an FpML 5.0 credit default swap, then the settlement method of <i>Physical Settlement </i>or <i>Cash Settlement </i>is specified by the presence of either the physicalSettlementTerms or the cashSettlementTerms element respectively.</p>
+		
+            <p>The physicalSettlementTerms element, which appears in Figure 8, represents the information specified in the <i>Settlement Terms- Terms Relating to Physical Settlement </i>section of the 2003 Confirmation. </p>
+		
+            <p>The physicalSettlementPeriod contains one of three elements to represent the following conditions:</p>
+		
+            <ul class="bulleted">
+			
+               <li>businessDaysNotSpecified: Section 8.5/8.6 of the 1999/2003 CD Definitions applicable.</li>
+			
+               <li>businessDays: Explicit number of business days.</li>
+			
+               <li>maximumBusinessDays: Section 8.5/8.6 of the 1999/2003 CD Definitions capped at a specific number of business days, e.g. 10 days.</li>
+		
+            </ul>
+		
+            <p/>
+		
+            <p>The optional deliverableObligations element is defined in a manner similar to the obligations element. The <i>Deliverable Obligation Category</i> is specified with the category element, which is of type ObligationCategory. Similar to an <i>Obligation Characteristic</i>, the applicability of a <i>Deliverable Obligation Characteristic</i> is indicated by the appearance of its corresponding element. It also bears mentioning that the applicability of <i>Partial Cash Settlement</i>appears as child element of the corresponding <i>Deliverable Obligation Characteristic</i> element.</p>
+		
+            <p>
+			
+               <a href="images/credit-derivatives/physicalSettlementTerms.jpg">
+                  <img src="images/credit-derivatives/physicalSettlementTerms.jpg" alt="images/credit-derivatives/physicalSettlementTerms.jpg" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 9: physicalSettlementTerms element</p>
+		
+            <p>The cashSettlementTerms element, which appears in Figure 10, represents the information specified in the <i>Settlement Terms- Terms Relating to Cash Settlement </i>section of the 2003 Confirmation. The mapping between this element and its corresponding section of the confirm is very straightforward. </p>
+		
+            <p>
+			
+               <a href="images/credit-derivatives/cashSettlementTerms.jpg">
+                  <img src="images/credit-derivatives/cashSettlementTerms.jpg" alt="images/credit-derivatives/cashSettlementTerms.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 10: cashSettlementTerms element</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.7">6.7 creditDefaultSwapOption</a>
+               </h3>
+            </div>
+		
+            <p>The creditDefaultSwapOption element defines the CDS option product in FpML.</p>
+		
+            <p>The strike can be defined as spread, price or as the fixed rate. </p>
+		
+            <p>
+			
+               <a href="images/credit-derivatives/creditDefaultSwapOption.jpg">
+                  <img src="images/credit-derivatives/creditDefaultSwapOption.jpg" alt="images/credit-derivatives/creditDefaultSwapOption.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+	
+            <div>
+               <h4>
+                  <a id="s6.7.1">6.7.1 Option Components</a>
+               </h4>
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s6.7.1.1">6.7.1.1 OptionBase</a>
+                  </h5>
+				
+                  <p>
+					
+                     <a href="images/bond-options/OptionBase.jpg">
+                        <img src="images/bond-options/OptionBase.jpg" alt="images/bond-options/OptionBase.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The OptionBase type defines the schema structure associated with optionType: The type of option transaction. From a usage standpoint, put/call is the default option type, while payer/receiver indicator is used for options index credit default swaps as well as the swaptions. Straddle is used for the case of straddle strategy, which combines a call and a put with the same strike. The optionType is to be used if the underlyer does not carry any mention of the resulting trade direction as well as in the case of a straddle. The forward entry will be deprecated as part of the 5.0 version and the integration of the equity option into this schema.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s6.7.1.2">6.7.1.2 OptionBaseExtended</a>
+                  </h5>
+				
+                  <p>Incorporates features that are not underlyer-specific and cannot be integrated as part of the OptionBase because of backward compatibility reasons with the eqd schema.</p>
+				
+                  <p>
+					
+                     <a href="images/bond-options/OptionBaseExtended.jpg">
+                        <img src="images/bond-options/OptionBaseExtended.jpg" alt="images/bond-options/OptionBaseExtended.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s6.7.1.2.1">6.7.1.2.1 Premium</a>
+                     </h5>
+					
+                     <p>The premium construct has a similar approach to the swaption (i.e. premium based upon a premium construct), but introduces a simplified payment that does not incorporate the settlement features. In order to make this construct forward applicable to the equity options, this new SimplePayment is then extended to incorporate some premium-specific concepts that currently exist as part of the eqd schema.</p>
+					
+                     <p>
+						
+                        <a href="images/bond-options/premium.jpg">
+                           <img src="images/bond-options/premium.jpg" alt="images/bond-options/premium.jpg" class="image"/>
+                        </a>
+					
+                     </p>
+				
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.8">6.8 Credit Event Notice</a>
+               </h3>
+            </div>
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s6.8.1">6.8.1 Background</a>
+               </h4>
+			
+               <p>The 2003 ISDA Credit Derivatives Definitions define "Credit Event Notice" as an irrevocable notice from a Notifying Party to the other party that describes a Credit Event that occurred.</p>
+			
+               <p>A Credit Event Notice must contain a description in reasonable detail of the facts relevant to the determination that a Credit Event has occurred.</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <a class="web" href="confirmations/cd-ExhibitB2003CDDefinitions.pdf" target="_blank" title="Link opens in new window.">EXHIBIT B to 2003 Credit Derivatives Definitions (pdf file)</a>
+				
+                  </li>
+			
+               </ul>
+			
+               <p>FpML 5.0 supports Credit Event Notices. Credit Event Notice is implemented in FpML as static document (DataDocument) and notification message ( both described below).</p>
+			
+               <p>The existence of a static document representation (DataDocument) was a result of two main requirements defined by the Credit Derivatives Working Group:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>It makes the relationship to the corresponding ISDA legal framework more understandable.</li>
+				
+                  <li>Other messaging standards allow an FpML document as payload.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s6.8.2">6.8.2 Implementation</a>
+               </h4>
+			
+               <ul class="bulleted">
+				
+                  <li>The representation as static document required the introduction of a new "event" element in the DataDocument. As mentioned before, Credit Event Notice is also modeled in the messaging framework as notification message.</li>
+				
+                  <li>The static document approach constrains the current DataDocument structure, introducing an "xsd:choice" element. The reason for that was to avoid permutations between the existing elements.</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/main/DataDocument.jpg">
+                     <img src="images/main/DataDocument.jpg" alt="images/main/DataDocument.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <pre>
+&lt;xsd:complexType name="DataDocument"&gt;
+        &lt;xsd:annotation&gt;
+            &lt;xsd:documentation xml:lang="en"&gt;A type defining a content model that is backwards
+                compatible with older FpML releases and which can be used to contain sets of data
+                without expressing any processing intention.&lt;/xsd:documentation&gt;
+        &lt;/xsd:annotation&gt;
+        &lt;xsd:complexContent&gt;
+            &lt;xsd:extension base="Document"&gt;
+                &lt;xsd:sequence&gt;
+                    &lt;xsd:group ref="Validation.model"/&gt;
+                    &lt;xsd:choice&gt;
+                        &lt;xsd:sequence&gt;
+                            &lt;xsd:element name="trade" type="Trade"  minOccurs=”0” maxOccurs="unbounded"&gt;
+                                &lt;xsd:annotation&gt;
+                                    &lt;xsd:documentation xml:lang="en"&gt;The root element in an FpML
+                                        trade document.&lt;/xsd:documentation&gt;
+                                &lt;/xsd:annotation&gt;
+                            &lt;/xsd:element&gt;
+                            &lt;xsd:element name="portfolio" type="Portfolio" minOccurs="0" maxOccurs="unbounded"&gt;
+                                &lt;xsd:annotation&gt;
+                                    &lt;xsd:documentation xml:lang="en"&gt;An arbitrary grouping of trade
+                                        references (and possibly other portfolios).&lt;/xsd:documentation&gt;
+                                &lt;/xsd:annotation&gt;
+                            &lt;/xsd:element&gt;
+                        &lt;/xsd:sequence&gt;
+                        &lt;xsd:sequence&gt;
+                            &lt;xsd:element ref="event" maxOccurs="unbounded"&gt;
+                                &lt;xsd:annotation&gt;
+                                    &lt;xsd:documentation xml:lang="en"&gt;A business event.&lt;/xsd:documentation&gt;
+                                &lt;/xsd:annotation&gt;
+                            &lt;/xsd:element&gt;
+                        &lt;/xsd:sequence&gt;
+                    &lt;/xsd:choice&gt;
+                    &lt;xsd:element name="party" type="Party" minOccurs="0" maxOccurs="unbounded"&gt;
+                        &lt;xsd:annotation&gt;
+              			&lt;xsd:documentation xml:lang="en"&gt;A legal entity or a subdivision of a legal entity.&lt;/xsd:documentation&gt;
+              			&lt;xsd:documentation xml:lang="en"&gt;Parties can perform multiple roles in a trade lifecycle. For example, 
+				the principal parties obligated to make payments from time to time during the term of the trade, but may 
+				include other parties involved in, or incidental to, the trade, such as parties acting in the role of novation 
+				transferor/transferee, broker, calculation agent, etc. In FpML roles are defined in multiple places within 
+				a document.&lt;/xsd:documentation&gt;
+                        &lt;/xsd:annotation&gt;
+                    &lt;/xsd:element&gt;
+                &lt;/xsd:sequence&gt;
+            &lt;/xsd:extension&gt;
+        &lt;/xsd:complexContent&gt;
+    &lt;/xsd:complexType&gt;
+                </pre>
+			
+               <ul class="bulleted">
+				
+                  <li>The “event” element is a substitution group for "creditEventNotice". This means that "creditEventNotice will appear in the instance document, not "event".</li>
+				
+                  <li>The "creditEventNotification" message is an extension of a "NotificationMessage". It adds a single element called "creditEventNotice" with type "CreditEventNoticeDocument" to the notification message content.</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/CreditEventNotification.jpg">
+                     <img src="images/credit-derivatives/CreditEventNotification.jpg" alt="images/credit-derivatives/CreditEventNotification.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <ul class="bulleted">
+				
+                  <li>Why "CreditEventNoticeDocument" type? Because the "CreditEventNotice" type was already defined in the Credit Derivatives subschema (This type is used to represent the Credit Event Notice information specified on a full confirmation. It is used to specify things like the notifying party and number of public sources. There was a name collision so the group decided to define "CreditEventNoticeDocument" as type containing the business document model. </li>
+				
+                  <li>"creditEventNoticeDocument" is an extension of "Event" type. "Event" type is a container of events. It only contains "eventId" (an optional element to provide a unique id for each event). The idea is that this container will group other event structures.</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/main/event.jpg">
+                     <img src="images/main/event.jpg" alt="images/main/event.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>The "creditEventNotice" element defines the content model for Credit Event Notice:</p>
+			
+               <p>
+				
+                  <a href="images/credit-derivatives/creditEventNotice.jpg">
+                     <img src="images/credit-derivatives/creditEventNotice.jpg" alt="images/credit-derivatives/creditEventNotice.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s6.8.2.1">6.8.2.1 Description of some of the elements</a>
+                  </h5>
+				
+                  <p>
+					
+                     <b>eventId</b> - An event reference identifier allocated by a party. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list.</p>
+				
+                  <p>
+					
+                     <a href="images/main/eventId.jpg">
+                        <img src="images/main/eventId.jpg" alt="images/main/eventId.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>
+					
+                     <b>affectedTransactions</b> - Trades affected by this event.</p>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/AffectedTransactions.jpg">
+                        <img src="images/credit-derivatives/AffectedTransactions.jpg" alt="images/credit-derivatives/AffectedTransactions.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The rationale for introducing a container for trade identifiers is because an individual trade can be referenced by 2 different partyTradeIdentifier elements - each allocated by a different party. So Bank A may know the trade as 123 and also know that their counterparty Bank B knows it as 567 and they'd wish to include both identifiers in the credit event notice but need to make it clear that 123 and 567 refer to the same trade.</p>
+				
+                  <p>
+					
+                     <b>referenceEntity:</b>
+				
+                  </p>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/referenceEntity.jpg">
+                        <img src="images/credit-derivatives/referenceEntity.jpg" alt="images/credit-derivatives/referenceEntity.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>
+					
+                     <b>creditEvent</b> - Modeled as a substitution group in order to facilitate its extension. Each one of the possible values (bankruptcy, failureToPay, obligationDefault, obligationAcceleration, repudiationMoratorium, and restructuring) has its own complex type which extends the CreditEvent type. It has exactly the same behavior as an xsd:choice but it’s more extensible.</p>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/creditEvent.jpg">
+                        <img src="images/credit-derivatives/creditEvent.jpg" alt="images/credit-derivatives/creditEvent.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>
+					
+                     <b>publiclyAvailableInformation</b> - Modeled to describe the resource that contains the media representation of the business event. For example, can describe a file or a URL that represents the resource. This is the description of the different elements describing the resource:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>resourceId (mandatory): The unique identifier of the resource within the event.</li>
+					
+                     <li>language (optional): Indicates the language of the resource, described using the ISO 639-2/T Code.</li>
+					
+                     <li>sizeInBytes (optional): Indicates the size of the resource in bytes. Could be used by the end user to estimate the download time and storage needs.</li>
+					
+                     <li>length (optional): Indicates the length of the product. For example, if the product were a PDF file, the length would be in pages.</li>
+					
+                     <li>mimeType (mandatory): Indicates the type of media used to store the content. mimeType is used to determine the software product(s) that can read the content. MIME Types are described in RFC 2046.</li>
+					
+                     <li>name (optional): The name of the resource.</li>
+					
+                     <li>comments (optional): Any additional comments that are deemed necessary. For example, which software version is required to open the document? Or, how does this resource relate to the others for this event?</li>
+					
+                     <li>url (optional): Indicates the URL at which the resource can be found.</li>
+				
+                  </ul>
+				
+                  <p>
+					
+                     <a href="images/credit-derivatives/publiclyAvailableInformation.jpg">
+                        <img src="images/credit-derivatives/publiclyAvailableInformation.jpg" alt="images/credit-derivatives/publiclyAvailableInformation.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s6.8.2.2">6.8.2.2 Examples</a>
+                  </h5>
+				
+                  <p>This is an example of Credit Event Notice document: <a class="web" href="confirmations/cd-example-credit-event-notice.pdf" target="_blank" title="Link opens in new window.">Credit Event Notice Sample (pdf file)</a>
+				
+                  </p>
+				
+                  <p>The following two FpML instance documents are based on this example:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <a class="web" href="xml/credit-derivatives/cdcen-ex01-credit-event-notice-message.xml" target="_blank" title="Link opens in new window.">Credit Event Notice as notification message (xml file)</a>
+					
+                     </li>
+					
+                     <li>
+						
+                        <a class="web" href="xml/credit-derivatives/cdcen-ex01-credit-event-notice-document.xml" target="_blank" title="Link opens in new window.">Credit Event Notice as static document (xml file)</a>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s6.9">6.9 Appendix A: Naming differences between FpML 5.0 Credit Derivatives Subschema and 2003 ISDA Credit Derivatives Definitions</a>
+               </h3>
+            </div>
+		
+            <p>There are several places in the FpML 5.0 Credit Derivatives Subschema where the element names diverge from the names used for terms in the 2003 Definitions. These names are listed in the table that appear in Figure 11.</p>
+		
+            <table class="table">
+			
+			
+			
+			
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>FpML Element Name</b>
+					
+                     </p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>2003 Definitions</b>
+					
+                     </p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>Existing FpML</b>
+						
+                        <b>Element</b>
+					
+                     </p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>
+						
+                        <b>Clarity</b>
+					
+                     </p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>sellerPartyReference</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Floating Rate Payer</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>buyerPartyReference</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Fixed Rate Payer</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>dateAdjustments</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Business Day, Business Day Convention</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td/>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>obligationId</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>CUSIP/ISIN</p>
+				
+                  </td>
+				
+                  <td/>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>feeLeg</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Fixed Payments</p>
+				
+                  </td>
+				
+                  <td/>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>protectionTerms</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Floating Payment</p>
+				
+                  </td>
+				
+                  <td/>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>calculationAmount</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Fixed Rate Payer Calculation Amount, Floating Rate Payer Calculation Amount</p>
+				
+                  </td>
+				
+                  <td/>
+				
+                  <td>
+					
+                     <p> X</p>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>valuationDate</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Valuation Date</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>valuationTime</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Valuation Time</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>accruedInterest</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Quotations</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>excluded</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Excluded Obligations</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>excluded</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Excluded Deliverable Obligations</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>category</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Obligation Category</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>category</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Deliverable Obligation Category</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+			
+               <tr>
+				
+                  <td>
+					
+                     <p>calculationAgentPartyReference</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>Calculation Agent</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p>X</p>
+				
+                  </td>
+				
+                  <td>
+					
+                     <p/>
+				
+                  </td>
+			
+               </tr>
+		
+            </table>
+		
+            <p>Figure 11: Naming differences between FpML 5.0 and the 2003 definitions (incomplete).</p>
+		
+            <p>The table also indicates the reason why the FpML name diverges from the name used in the 2003 definitions. There are only two reasons for diverging:</p>
+		
+            <p/>
+		
+            <ul class="bulleted">
+			
+               <li> An appropriate FpML element already existed, but this element did not have the same name as the corresponding term in the 2003 Definitions.</li>
+			
+               <li> WG members thought a different name would provide greater clarity to FpML users. </li>
+		
+            </ul>
+	
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('5',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('6',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('7',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

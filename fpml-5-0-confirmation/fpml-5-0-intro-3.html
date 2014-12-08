@@ -1,0 +1,2057 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s3">3 BUSINESS PROCESS ARCHITECTURE</a>
+            </h2>
+         </div>
+	
+	
+	
+	
+
+
+
+	
+
+         <div>
+            <h3>
+               <a id="s3.1">3.1 Introduction</a>
+            </h3>
+		
+            <p>The FpML 4.0 Schema was the first release of the specification to place a messaging framework around the product descriptions to describe the context and use to which the information is expected to be put. This section describes a small set of complex types and elements that comprise a simple message framework that is used as the basis for defining business messages and processes suitable for use in a communications process.</p>
+		
+            <p>These definitions introduce a new set of ideas that previously could not be used in FpML because of its reliance on DTDs as the formal specification of the grammar. The following sections describe the reasoning behind the features used in the framework as well as a description of several business processes.</p>
+		
+	
+            <div>
+               <h4>
+                  <a id="s3.1.1">3.1.1 Why Business Messaging?</a>
+               </h4>
+			
+               <p>Increased efficiency in financial markets can only be achieved through greater automation of transaction processing and use of electronic messaging (e.g. the exchange of information directly between computer systems with as little human interaction as possible). In order to achieve this all the parties involved in such communications must agree on four things, namely:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>Representation</p>
+					
+                     <p>There must be a common representation of a transaction, product or other reference data item that is accepted by all the parties.</p>
+					
+                     <p>The core FpML grammar defines a standard vocabulary for derivative based transactions and products that can form the basis of a messaging standard. As new messaging applications are considered the scope of the core grammar will need to expand to encompass the additional types of data referenced in these messages.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Semantics</p>
+					
+                     <p>All the parties must have the same interpretation of the information expressed by the representation.</p>
+					
+                     <p>The work of the validation working group provides a set of rules to ensure that a product definition conforms to the market definition for that product. The FpML rule set will expand and evolve over time as new financial products and message types are added to the grammar.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Business Process</p>
+					
+                     <p>All the parties must follow the same business processes and respond appropriately to any communication they receive.</p>
+					
+                     <p>To support the consistency across different business processes and views, the Messaging Task Force defined a new messaging framework that extended the core grammar. This section describes some business processes and shows how they could be implemented as message exchanges. This section describes some business processes and shows how they could be implemented as message exchanges.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Transport</p>
+					
+                     <p>The parties must agree on the communications transport used to interconnect their businesses.</p>
+					
+                     <p>FpML does not endorse any particular messaging transport for communication. The choice of transport is left to the implementer although in practice we expect only a few to be found suitable.</p>
+				
+                  </li>
+			
+               </ul>
+			
+               <p>Disagreement over the first three of these features will mean that FpML users will potentially have to implement, maintain and support different software systems for each FpML aware service or application that they use. Supporting multiple communications transports is typically not that difficult although it does incur additional operations costs.</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s3.2">3.2 The Messaging Framework</a>
+               </h3>
+            </div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s3.2.1">3.2.1 Introduction</a>
+               </h4>
+			
+               <p>FpML 5 introduces a new messaging framework to address limitations in the version 4 framework.</p>
+			
+               <p>This new framework does the following:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>it consistently implements a set of general principles to make it easier to use the messages to implement real business processes</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>it adjusts the representation of parties, accounts, and roles to clarify the purpose of messages and the roles of the parties within a message.</p>
+				
+                  </li>
+			
+               </ul>
+			
+               <p>The following section describes the new messaging framework.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.2">3.2.2 Issues in FpML 4 Messaging Framework</a>
+               </h4>
+			
+               <p>Following are some of the issues in the FpML messaging framework that the version 5 framework seeks to correct:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>Incomplete message set – in many cases not all messages required to implement a business process are defined in the FpML 4 message set. In particular, many requests lack acknowledgements, exception responses, correction capabilities, and in some cases normal responses. Many generic business processes (such as confirmation) have different levels of completeness depending on the specific event that is being covered.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Inconsistent message correlation – different implementations use different features of the FpML 4 framework to link successive messages together, making them incompatible.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Unclear processes – it is not always clear how the version 4 messages are to be combined together to fully implement a business process. For example, which message should be used to acknowledge or respond to a request isn’t always defined. While this could in theory be addressed through documentation, because the message set is incomplete, this is difficult to do.</p>
+				
+                  </li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.3">3.2.3 Design Assumptions</a>
+               </h4>
+			
+               <p>In order to create the messages and business processes described in this document some design assumptions had to be made, principally:</p>
+			
+			
+			
+			
+			
+			
+			
+			
+
+			
+               <p>Implementers attempting to construct software based on these protocols using a non queuing transport (e.g. WebServices, DCOM, CORBA) will need to implement a reliable message layer to encapsulate the current message sequences (e.g. a get/put message interface using sequence numbers to detect lost or duplicated messages and positive/negative acknowledgments). The W3C site contains links to proposals for such extensions for use with WebServices.</p>
+			
+		
+               <div>
+                  <h5>
+                     <a id="s3.2.3.1">3.2.3.1 Highly Assured Transport</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Throughout this document we have assumed that message exchanges will be carried by a passing of messages over a highly assured transport, such is provided by a messaging queuing system. This form of transport is commonly used today in the finance industry (e.g. AMQP, Apache QPid, FIX engines, MQSeries, MSMQ, RabbitMQ, SwiftNet Interact 'Store and Forward', etc.).</p>
+						
+                        <p>One important consequence of this decision is that error cases related to non-delivery do not have to be considered (e.g. once accepted a guaranteed messaging queuing system WILL ALWAYS deliver a message) although the 'freshness' of the message may need to be considered (e.g. has the message been stuck in a queue waiting to be delivered for a long period of time). Similarly message queuing system can normally eliminate duplicate messages so these are not considered either.</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.2">3.2.3.2 No Preservation of Message Sequence</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>There is no requirement for message sequence to be preserved over the message transport. Message sequence must not be expected to be repeatable nor predictable.</p>
+						
+                        <p>In practise enterprise message buses cannot be expected to halt the enterprise to preserve sequence. Hence this is not a requirement of FpML.</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.3">3.2.3.3 Long-Running Processes</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Some of the business processes are 'long-running' in that once initiated they may remain active for a considerable time before completing (e.g. a request to confirm a trade may take many hours as it is dependent on the time of arrival of the matching trade). During this time the process may generate periodic notifications to the originator of the request and/or other parties. Such notifications will appear in the message stream set to a participant intermixed between other response messages.</p>
+						
+                        <p>An implication of such 'long-running' transactions is that the 'service provider' will contain a complex 'state'. The service should make suitable provisions to persistently record its state so that in the event of a software or hardware failure it can recover transparently without its clients having to resend any information.</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.4">3.2.3.4 Observable Completion</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Principle: All requests should result in an "observable completion", that is a clear (observable by the requester) response.</p>
+					
+                     </li>
+					
+                     <li>
+						
+                        <p>Implementation: For each request or notification message there should be at least one defined acknowledgement message. In the case where the response to the request might be delayed pending additional information, the recipient of the request should acknowledge the request. [Should we set a guideline here? E.g. acknowledge if resulting action is likely not to occur within 10 seconds?]</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.5">3.2.3.5 Consistent Message Correlation</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Principle: There should be a single, well-defined way to link successive messages (such as corrections or retractions of requests or notifications). This should not rely on message or transport level information, but rather use business-level information.</p>
+					
+                     </li>
+					
+                     <li>
+						
+                        <p>Implementation: Add an explicit correlation identifier, defined as business object identifier, and a sequence number to link successive messages.</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.6">3.2.3.6 Consistent Error Reporting</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Principle: There should be a standard way of reporting error or exception status for each type of request.</p>
+					
+                     </li>
+					
+                     <li>
+						
+                        <p>Implementation: Ensure that there is an exception message for each message workflow.</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.7">3.2.3.7 Consistent correction and retraction mechanism</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Principle: There should be a consistent way to correct messages containing an error, and to retract (withdraw, cancel) messages when the information is no longer valid or the action is no longer required.</p>
+					
+                     </li>
+					
+                     <li>
+						
+                        <p>Implementation: Correctable messages will contain an "isCorrection" indicator to indicate whether the message corrects a previous message. Retractable messages should have a corresponding message ending with "Retracted".</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.8">3.2.3.8 Consistent Processes Across Trades and Post-trade Events</a>
+                  </h5>
+				
+                  <ul class="bulleted">
+					
+                     <li>
+						
+                        <p>Principle: Business processes should work consistently across trading events and post-trade events where possible, so the same messages should be available for each type of event.</p>
+					
+                     </li>
+					
+                     <li>
+						
+                        <p>Implementation: Most messages will be designed to be able to handle multiple types of events, such as new trades and post-trade events. This allows consistent coverage of a number of post-trade events with a number of business processes.</p>
+					
+                     </li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.3.9">3.2.3.9 Transport Characteristics</a>
+                  </h5>
+				
+				
+				
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.2.3.9.1">3.2.3.9.1 Purpose</a>
+                     </h5>
+					
+                     <p>The definition of the FpML business processes assumes the use of reliable messaging, meaning high predictability. Generally, increasing reliability increases latency. The assumption of reliable messaging is provided to make it easier to design standard business processes and messages. If the transport characteristics were not defined, the business process definition would be ambiguous.</p>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.2.3.9.2">3.2.3.9.2 Layers</a>
+                     </h5>
+					
+                     <p>The protocol that is used for exchanging FpML messages is defined in being in three main layers:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>The Business Layer is the higher layer and deals with FpML documents. The exchange of FpML documents is fully described in the message choreography and the structure of the FpML documents is fully described by the schemata and the related validation rules. The Business Layer is equivalent to adding a Layer 9 to the OSI model.</li>
+						
+                        <li>The Message Transport Layer is the lower layer and deals with transport messages. The implementation of this layer is outside the scope of FpML since it varies. The Transport Characteristics apply to the Message Transport Layer. This layer is equivalent to adding a Layer 8 to the OSI model.</li>
+						
+                        <li>The layer immediately beneath the FpML Protocol is the Messaging Application Layer. FpML allows any Messaging Application that supports the requirements of the Transport Characteristics defined below. The Messaging Application Layer is Layer 7 of the OSI model.</li>
+						
+                        <li>
+							
+                           <a href="images/messaging/TransportLayers.jpg">
+                              <img src="images/messaging/TransportLayers.jpg" alt="images/messaging/TransportLayers.jpg" class="image"/>
+                           </a>
+						
+                        </li>
+					
+                     </ul>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.2.3.9.3">3.2.3.9.3 Reliable Mode</a>
+                     </h5>
+					
+                     <p>Specifically, the transport characteristics that FpML assumes in order to implement most of its business process definition are defined by:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>The delivery of a message is highly assured so the receiving messaging endpoint receives the message at least once.</li>
+						
+                        <li>A sending messaging endpoint must not block the sending or receipt of other messages while waiting for a response to the sent message.</li>
+						
+                        <li>The same applies to the receiving messaging endpoint. It must not block the receipt or processing of other messages while processing the current message.</li>
+						
+                        <li>Messages may arrive in any order at the receiving messaging endpoints. However the message must be delivered before the maximum duration of time permitted.</li>
+						
+                        <li>For each FpML document sent, sixty seconds is the maximum duration of time in within which all its preceding FpML documents must be sent.</li>
+						
+                        <li>Messages are addressed to nought to many receiving messaging endpoints. </li>
+						
+                        <li>The maximum duration of time within which a message must be delivered is sixty seconds. </li>
+						
+                        <li>Only valid FpML documents are delivered; invalid FpML documents are rejected to the sending messaging endpoint.</li>
+						
+                        <li>The messaging transport system must ensure that the FpML document is well-formed, W3C Schema valid, validated against the constraints defined in the validation rules, and validated against the message choreography. It is important to note that the messaging transport system is a role that can be played by either endpoint in a peer to peer setup, or by one or more third party systems. In addition, multiple messaging transport systems can be chained together into a single messaging transport system.</li>
+						
+                        <li>The messaging transport system must ensure that the message is kept available until it is received by the messaging endpoint or until it is expired because it was delivered later than the maximum duration of delivery time. So, it can be queued on the messaging transport system within the maximum delivery time duration, but it can be queued at the destination indefinitely.</li>
+						
+                        <li>The maximum size of a message is 100,000kb (100Mb). Any message exceeding this size must be treated as an invalid message.</li>
+						
+                        <li>Clocks must maintain a maximum (inclusive) variance from UTC less than the Maximum Clock Variation for the supported Message Transport Mode. The maximum clock variation for this mode is ten seconds.</li>
+					
+                     </ul>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.2.3.9.4">3.2.3.9.4 Bulk Transfer Mode</a>
+                     </h5>
+					
+                     <p>In some processes such as Portfolio Reconciliation or Position Report, FpML assumes the following transport characteristics:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>The delivery of a message is highly assured so the receiving messaging endpoint receives the message at least once.</li>
+						
+                        <li>A sending messaging endpoint must not block the sending or receipt of other messages while waiting for a response to the sent message.</li>
+						
+                        <li>The same applies to the receiving messaging endpoint. It must not block the receipt or processing of other messages while processing the current message.</li>
+						
+                        <li>Messages may arrive in any order at the receiving messaging endpoints. However the message must be delivered before the maximum duration of time permitted.</li>
+						
+                        <li>Messages are addressed to nought to many receiving messaging endpoints. </li>
+						
+                        <li>The maximum duration of time within which a message must be delivered is ten minutes (600 seconds). </li>
+						
+                        <li>Only valid FpML documents are delivered; invalid FpML documents are rejected to the sending messaging endpoint.</li>
+						
+                        <li>The messaging transport system must ensure that the FpML document is well-formed, W3C Schema valid, validated against the constraints defined in the validation rules, and validated against the message choreography. It is important to note that the messaging transport system is a role that can be played by either endpoint in a peer to peer setup, or by one or more third party systems. In addition, multiple messaging transport systems can be chained together into a single messaging transport system.</li>
+						
+                        <li>The messaging transport system must ensure that the message is kept available until it is received by the messaging endpoint or until it is expired because it was delivered later than the maximum duration of delivery time. So, it can be queued on the messaging transport system within the maximum delivery time duration, but it can be queued at the destination indefinitely.</li>
+						
+                        <li>The maximum size of a message is 100,000kb (100Mb). Any message exceeding this size must be treated as an invalid message</li>
+						
+                        <li>Clocks must maintain a maximum (inclusive) variance from UTC less than the Maximum Clock Variation for the supported Message Transport Mode. The maximum clock variation for this mode is five minutes.</li>
+					
+                     </ul>
+				
+                  </div>
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.4">3.2.4 Transport Independence</a>
+               </h4>
+			
+               <p>In general, four layers of specification are contained in a XML Standard. A multi-layer approach allows implementers to choose the most appropriate technology for a given situation. It allows development and modifications within one layer without affecting or requiring changes to the others..</p>
+			
+               <p>From the top down, the four layers are:</p>
+			
+               <a href="images/messaging/FpMLStack.jpg">
+                  <img src="images/messaging/FpMLStack.jpg" alt="images/messaging/FpMLStack.jpg" class="image"/>
+               </a>
+			
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s3.2.4.1">3.2.4.1 Business Process</a>
+                  </h5>
+				
+                  <p>This layer specifies the way in which any business process is defined, such that is understood and executable by people and applications. A business process can be defined as a set of interrelated tasks linked to an activity that spans functional boundaries. Business processes have starting points and ending points, and they are repeatable. Examples of business processes in the derivatives domain are the affirmation process, the confirmation process, and the matching process.</p>
+				
+                  <p>The FpML Specification models business processes in UML sequence diagrams.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.4.2">3.2.4.2 Document</a>
+                  </h5>
+				
+                  <p>This layer corresponds to the FpML document definitions. It provides a set of abstractions specific to financial derivatives but also a set of elements which are not context specific (such as “Party” and “Price”). </p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.4.3">3.2.4.3 Messaging</a>
+                  </h5>
+				
+                  <p>The Messaging layer addresses the need to record session and communication settings for message transport in order to enable coordination between parties in a business transaction. </p>
+				
+                  <p>The FpML Schema explicitly models ‘delivery’ related information as part of the message itself. Some transports (i.e. SOAP, ebXML, etc.) allow such information to be placed in the ‘envelope’ that surrounds the message during delivery.</p>
+				
+                  <p>Including a standard header within FpML messages increases consistency by providing a single format for delivering information regardless of the physical transport, ensures that it will be persisted if the message is archived, and allows more flexible use of features such as digital signatures.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.4.4">3.2.4.4 Transport</a>
+                  </h5>
+				
+                  <p>The Transport Layer provides a point to point connection so that one server can send messages to another server and they will arrive uncorrupted and in the correct order.</p>
+				
+                  <p>The FpML Message Architecture defines a message structure that is independent of the underlying transport protocol, such as SMTP, File Transfer Protocol (FTP), Standardized Messaging Middleware, HTTP, etc.</p>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.5">3.2.5 Identification of Purpose</a>
+               </h4>
+			
+               <p>The receiver of a message needs to be able to determine the function that the message is invoking. In XML there are three different techniques that can be used for indicating the purpose of a message.</p>
+			
+               <p>The FpML 5.0 message framework is based on element naming (option 2 - By Element Name). Below is a short explanation of the three techniques:</p>
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s3.2.5.1">3.2.5.1 By Namespace (not used by FpML)</a>
+                  </h5>
+				
+                  <p>The receiver can look at the namespace from which the element definitions have been drawn and determine from it the function requested.</p>
+				
+                  <pre>&lt;?xml version="1.0"?&gt;
+
+&lt;FpML version="4-0"
+ xmlns="http://www.fpml.org/2002/FpML-4-0-TradeConfirmationRequest"&gt;
+  &lt;header&gt;
+    ... Message header
+  &lt;/header&gt;
+  ... Business data
+&lt;/FpML&gt;</pre>
+				
+                  <p>Using namespaces it would be possible to create a highly extensible framework for FpML but it could lead to documents having to have every FpML element prefixed with a suitable namespace abbreviation although it may be possible to mitigate this by having the 'core' sub-schemas use no namespaces in their definition and take on the namespace of the one they are including into.</p>
+				
+                  <p>There may be further issues with related XML standards such as XPath as the namespace of the same included elements may not be consistent between documents.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.5.2">3.2.5.2 By Element Name (used by FpML 5.x)</a>
+                  </h5>
+				
+                  <p>The receiver can look at the name associated with an element within the message (the root and one of the first level children) to determine the function requested.</p>
+				
+                  <pre>&lt;?xml version="1.0"?&gt;
+&lt;requestConfirmation fpmlVersion="5-0" xmlns="http://www.fpml.org/FpML-5/confirmation"&gt;
+  &lt;header&gt;
+    ... Message header
+  &lt;/header&gt;
+  &lt;trade&gt;
+    ... Business data
+  &lt;/trade&gt;
+  ...
+&lt;/requestConfirmation&gt;</pre>
+				
+                  <p>In this model the root element is a global element of a type derived from the base FpML Document type, typically a message type.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.5.3">3.2.5.3 By Element Type (used by FpML 4.x)</a>
+                  </h5>
+				
+                  <p>The receiver can look at the type associated with an element within the message (e.g. the root or a child).</p>
+				
+                  <pre>&lt;?xml version="1.0"?&gt;
+&lt;FpML version="4-0" xmlns="http://www.fpml.org/2002/FpML-4-0" xsi:type="TradeConfirmationRequest"&gt;
+  &lt;header&gt;
+    ... Message header
+  &lt;/header&gt;
+  ... Business data
+&lt;/FpML&gt;</pre>
+				
+                  <p>An XML schema based instance may use type substitution to replace the content model of any element with another providing that the replacement is derived from the original. Given a framework that provides the appropriate extension points any number of new types can be derived within the name or different namespaces as necessary.</p>
+				
+                  <p>In addition through inheritance the message types can be associated with an appropriate message header content model.</p>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.6">3.2.6 General Pattern of Messages</a>
+               </h4>
+			
+               <p>Messages are divided into a series of business processes. For example, consent negotiation (getting permission to do something) is a business process. For each business process, in general the following messages will be available:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>process request or notification message – to initiate the process. (In some cases the process may be initiated by a notification message rather than a request message).</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>process acknowledgment message – to acknowledge that the request or notification was received.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>process exception message – to report that a request or notification cannot be processed.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>process request/notification retracted message – to withdraw the original request or notification.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>possibly, process-specific response messages</p>
+				
+                  </li>
+			
+               </ul>
+			
+               <p>In some cases, some of these messages may be intentionally omitted, but in these cases the rationale for omitting the messages will be provided. For example, acknowledgement messages may be omitted where it is expected that all responses will be immediate, and retraction messages may be omitted if there is no need to allow requests to be withdrawn, because the original request would be fulfilled before the retraction could be sent.</p>
+			
+               <p>For the consent negotiation process, for example, the messages include:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>requestConsent – initiating request</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>consentAcknowledgement - acknowledgement</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>consentException - exception</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>requestConsentRetracted – retraction of the request</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>consentGranted - response</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>consentRefused – response</p>
+				
+                  </li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.7">3.2.7 Naming Conventions</a>
+               </h4>
+			
+               <p>Messages follow this naming convention:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>requestXxx</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>xxxAcknowledgement</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>xxxException</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>requestXxxRetracted</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>xxx[Status] or xxx[Response]</p>
+				
+                  </li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.8">3.2.8 Acknowledgements</a>
+               </h4>
+			
+               <p>Providing each request with a more immediate and guaranteed response allows a more synchronous style of design, such as this:</p>
+			
+               <p>
+				
+                  <a href="images/messaging/acknowledgements.png">
+                     <img src="images/messaging/acknowledgements.png" alt="images/messaging/acknowledgements.png" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Here the requestor waits for the response before terminating its execution. This would allows easier specification of timeouts related to request processing although as we shall see later has implications for gathering the results of long running processes, such as matching.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.9">3.2.9 Message correlation</a>
+               </h4>
+			
+               <p>The initiator of a business process should allocate a unique correlation identifier for each process instance it begins and any subsequent message related to the same process should contain the same identifier. A qualified scheme based value ensures that participants cannot accidentally re-use an identifier previous generated by another firm.</p>
+			
+               <p>
+				
+                  <a href="images/messaging/CorrelationId.png">
+                     <img src="images/messaging/CorrelationId.png" alt="images/messaging/CorrelationId.png" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>For example, when used within a trade execution advice it might appear as follows:</p>
+			
+               <pre> 
+                                                ...
+&lt;tradeExecutionAdvice&gt;
+  &lt;messageHeader&gt;
+    
+  &lt;/messageHeader&gt;
+  &lt;isCorrection&gt;false&lt;/isCorrection&gt;
+  &lt;correlationId correlationIdScheme="http…"&gt;BQ/1234 &lt;/correlationnId&gt;
+  &lt;sequenceNumber&gt;657&lt;/sequenceNumber&gt;
+  &lt;onBehalfOf&gt;
+    &lt;partReference href="PARTYA"/&gt;
+  &lt;/onBehalfOf&gt;
+  &lt;execution&gt;
+    &lt;trade&gt;
+      … Lots more here
+    &lt;/trade&gt;
+  &lt;/execution&gt;
+  &lt;party id="PARTYA"&gt;…&lt;/party&gt;
+  &lt;party id="PARTYB"&gt;…&lt;/party&gt;
+&lt;/tradeExecutionAdvice&gt;
+                                      
+                                                ...    
+                                                </pre>
+			
+               <p>Any response or follow up to this message should contain the same 'correlationId' definition. This regime allows us to make some other messaging clarifications, namely: </p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>Every message will have a unique message identifier.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>The ‘inReplyTo’ element of a response message (or exception) correlates with the ‘messageId’ of the associated request.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>The conversationId has been removed.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Retransmission of a message for technical reasons (e.g. the last transmission of the request was not acknowledged or rejected) does not change the message identifier.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Replication of a message for business reasons (e.g. sending data that has been previously acknowledged) generates a new message identifier.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>The response to a retransmitted request message should be identical to the original request. (1)</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>At the start of a long running process the initiating participant must create a unique one-time identifier for each process instance and distribute it to the other messaging party.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Every subsequent message sent by the requestor must contain the process identifier.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>Messages may contain reference to other business process instances providing their role is clear and unambiguous (e.g. an order MAY reference a previous quotation).</p>
+				
+                  </li>
+			
+               </ul>
+			
+               <p>
+                  <b>(1)</b> This allows the transport to respond to retransmissions by sending a copy of the earlier cached response, no business process is necessary. This is a standard technique in ONC RPC and WebServices.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.10">3.2.10 Message sequencing</a>
+               </h4>
+			
+               <p>In a long running operation it is important to process all of the messages in the correct order. Each message’s ‘messageId’ is element is guaranteed to contain a unique value but the order of messages cannot be inferred by comparing two such identifiers.</p>
+			
+               <p>The characteristics required by FpML’s transport characteristics states that two messages sent simultaneously, or within a short time of each other, may arrive in any order. Since message order cannot be determined from the message identifiers some other information needs to be added to them message to provide this.</p>
+			
+               <p>In the SWIFT CUG implementation of the contract notification messages the trade version is used to derive the ordering. Whilst this is a workable solution for the CUG it does not solve the problem generally and some messages must artificially increase the contract version number to maintain order even though no change has actually occurred to the underlying contract.</p>
+			
+               <p>The simplest solution is to define a type for sequence numbers and use it within messages to provide an orderable value.</p>
+			
+               <p>
+				
+                  <a href="images/messaging/sequenceNumber.png">
+                     <img src="images/messaging/sequenceNumber.png" alt="images/messaging/sequenceNumber.png" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>It is important to note that although sequence numbers should be consistently increasing in value they do not have to form a gapless sequence. (2)</p>
+			
+               <p>When combined with the unordered delivery transport characteristics a message processing application can be presented with a series of messages in a jumbled order.</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <p>An optimistic message processor should attempt to process the messages in the order they are delivered and unwind actions (or raise exceptions) when conflict is detected.</p>
+				
+                  </li>
+				
+                  <li>
+					
+                     <p>A pessimistic message processor should record the messages but delay their processing for a short period. This provides a time window during which any earlier messages received out of order can be re-sequenced before processing begins.</p>
+				
+                  </li>
+			
+               </ul>
+			
+               <p>It is also important to note that sequence numbers must be qualified with respect to the message sender and the responding part may need to produce messages containing them. For example in the matching processes the messages containing the result should reference the same ‘correlationId’ used in the original request but should use a ‘sequenceNumber’ provided by the matcher rather than the requester.</p>
+			
+               <p>For example the series of messages for a trade confirmation (including a correction) followed by the resulting match might be identified as follows:</p>
+			
+               <p>
+				
+                  <a href="images/messaging/CorrelationId_table.png">
+                     <img src="images/messaging/CorrelationId_table.png" alt="images/messaging/CorrelationId_table.png" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>
+                  <b>(2)</b> There may be messages within the same business process sent to other participants or internal changes to the business object that affect the sequence number.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.11">3.2.11 Multi-Event Workflows</a>
+               </h4>
+			
+               <p>In FpML 5 most workflows are designed to work consistently for a number of events, including new trades and post-trade events such as novations, amendments, and terminations. In addition, the process model is designed to be extensible by allowing implementations to substitute in their own events into the FpML messaging framework.</p>
+			
+               <p>
+				
+                  <a href="images/messaging/requestConsent.png">
+                     <img src="images/messaging/requestConsent.png" alt="images/messaging/requestConsent.png" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.2.12">3.2.12 Other topics</a>
+               </h4>
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s3.2.12.1">3.2.12.1 onBehalfOf</a>
+                  </h5>
+				
+                  <p>The FpML neutral view principle when combined with some of the notifications for post-trade processes and a common third party such as a custodian results in situations where the third party can not easily tell which side of the trade he is supposed to be processing.</p>
+				
+                  <p>For example, parties A and B negotiate a trade and then send a contract execution notification to their common custodian C. The custodian may be able to figure out which side of the trade to process by means of the message sender’s identity but as a single sender identity might be used by several legally separate trading divisions within the same company group determining the correct party might require extensive organisational reference data. This approach would also fail for internal book-to-book deals where both sides would originate from the same sender.</p>
+				
+                  <p>What is needed is an explicit indication of the party for whom the trade should be processed included in every message. In the case of book-to-book trades this information should use account references to further qualify the party. For example:</p>
+				
+                  <pre> 
+&lt;someRequest&gt;
+  &lt;header&gt;
+    … Basic message details
+  &lt;/header&gt;
+  …
+  &lt;onBehalfOf&gt;
+    &lt;partyReference href="JPM"/&gt;
+    &lt;accountReference href="PORTFOLIO1"/&gt;
+  &lt;/onBehalfOf&gt;
+  … Request specification here
+&lt;/someRequest&gt;
+</pre>
+				
+                  <p>
+					
+                     <a href="images/messaging/OnBehalfOf.png">
+                        <img src="images/messaging/OnBehalfOf.png" alt="images/messaging/OnBehalfOf.png" class="image"/>
+                     </a>
+				
+                  </p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.12.2">3.2.12.2 party roles</a>
+                  </h5>
+				
+                  <p>The 4.x tradeSide structure has been replaced by a simpler implementation adding a new relatedParty element. The role element within the relatedParty defines the list of roles as code list. This allows to customize the roles easier than using the tradeSide structure.</p>
+				
+                  <p>
+					
+                     <a href="images/messaging/PartyTradeInformation.png">
+                        <img src="images/messaging/PartyTradeInformation.png" alt="images/messaging/PartyTradeInformation.png" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <pre> 
+&lt;someRequest&gt;
+...
+	&lt;partyTradeInformation&gt;
+            &lt;partyReference href="party3"/&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party4"/&gt;
+               &lt;role&gt;orderer&lt;/role&gt;
+            &lt;/relatedParty&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party4"/&gt;
+               &lt;role&gt;introducer&lt;/role&gt;
+            &lt;/relatedParty&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party3"/&gt;
+               &lt;role&gt;executor&lt;/role&gt;
+            &lt;/relatedParty&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party4"/&gt;
+               &lt;role&gt;confirmer&lt;/role&gt;
+            &lt;/relatedParty&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party6"/&gt;
+               &lt;role&gt;creditor&lt;/role&gt;
+            &lt;/relatedParty&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party5"/&gt;
+               &lt;role&gt;settler&lt;/role&gt;
+            &lt;/relatedParty&gt;
+            &lt;relatedParty&gt;
+               &lt;partyReference href="party6"/&gt;
+               &lt;role&gt;accountant&lt;/role&gt;
+            &lt;/relatedParty&gt;
+	&lt;/partyTradeInformation&gt;
+...
+&lt;/someRequest&gt;
+</pre>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.2.12.3">3.2.12.3 separation of party and account</a>
+                  </h5>
+				
+                  <p>Currently accounts are specified within a party definition and the relationship between the two objects depends on the elements present. To simplify the structure and make the relationships clearer the account structure should be moved outside of Party and given a mandatory reference to its beneficiary and an optional reference to its servicer (this is the reverse of the 4.x accounts model).</p>
+				
+                  <p>
+					
+                     <a href="images/messaging/PartyAccount_model.png">
+                        <img src="images/messaging/PartyAccount_model.png" alt="images/messaging/PartyAccount_model.png" class="image"/>
+                     </a>
+				
+                  </p>
+			
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s3.3">3.3 Business Processes</a>
+               </h3>
+            </div>
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s3.3.1">3.3.1 FpML 5 Business Processes</a>
+               </h4>
+			
+			
+               <p>Before looking at the current message processes and their associated messages it is worth looking at the overall sequence of business processes for trades.</p>
+			
+               <p>The first thing to note is that there are two sets of processes; the first set manages the transaction itself during its ‘cradle to grave’ life cycle while the second are repeatable management tasks that may occur several times over the life time of the transaction.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.3.2">3.3.2 Transaction life cycle</a>
+               </h4>
+			
+               <p>Looking at the states in the life cycle part of the process model there the first thing to note is that there are multiple routes to the creation of trade.</p>
+			
+               <a href="images/messaging/TransactionLifeCycle.png">
+                  <img src="images/messaging/TransactionLifeCycle.png" alt="images/messaging/TransactionLifeCycle.png" class="image"/>
+               </a>
+			
+               <p>The original model for FpML (and not actually supported in the specification) is the traditional model of direct inter-dealer negotiation (e.g. by phone, over SwapsWire, etc.) followed by an affirmation of the resulting transaction.</p>
+			
+               <p>Alternatively trades could be created using a more market based approach in which quotes and orders are communicated through an exchange in which more than one market maker may be offering prices for the same quote or order. The terminology of quote, indications of interest, orders and execution is more closely coupled with this market approach.</p>
+			
+               <p>In the direct negotiation approach the identities of the participants of fully disclosed and this allows pre-agreed exploitation of other party’s credit rating to obtain better prices (within agreed limits). In the market approach pre-order interactions may be anonymous to guarantee best prices are obtained for all market participants.</p>
+			
+               <p>Messages related to trade negotiation and affirmation need to be capable of recording that these additional parties are being used but in later trade processing stages such ‘give-up’ trades are decomposed in a set of related back-to-back trades.</p>
+			
+               <a href="images/messaging/TransactionLifeCycle2.png">
+                  <img src="images/messaging/TransactionLifeCycle2.png" alt="images/messaging/TransactionLifeCycle2.png" class="image"/>
+               </a>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.3.3">3.3.3 Generic (Multi-Event) Flows</a>
+               </h4>
+			
+               <p>All the processes described in this section are applied to the following events:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>trade</li>
+				
+                  <li>novation</li>
+				
+                  <li>increase</li>
+				
+                  <li>termination</li>
+				
+                  <li>amendment</li>
+			
+               </ul>
+			
+               <a href="images/messaging/Events_model.png">
+                  <img src="images/messaging/Events_model.png" alt="images/messaging/Events_model.png" class="image"/>
+               </a>
+			
+               <p>All events use the same messages to support the processes. The additionalEvent element is an extension point to customize FpML and add additional events.</p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s3.3.3.1">3.3.3.1 Execution Notification Flow</a>
+                  </h5>
+				
+				
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.1.1">3.3.3.1.1 Execution Notification</a>
+                     </h5>
+					
+                     <p>An execution should correlate with the order from which it is derived.</p>
+					
+                     <a href="images/messaging/TradeExecutionNotification.png">
+                        <img src="images/messaging/TradeExecutionNotification.png" alt="images/messaging/TradeExecutionNotification.png" class="image"/>
+                     </a>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.1.2">3.3.3.1.2 Execution Notification Correction</a>
+                     </h5>
+					
+                     <p>The execution notification may contain mistakes. The ExecutionNotification type allows corrections (provided it is still possible to do so), by sending a corrected execution notification correlated to a prior notification with "isCorrection" element set to "true".</p>
+					
+                     <a href="images/messaging/TradeExecutionNotificationCorrection.png">
+                        <img src="images/messaging/TradeExecutionNotificationCorrection.png" alt="images/messaging/TradeExecutionNotificationCorrection.png" class="image"/>
+                     </a>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.1.3">3.3.3.1.3 Execution Retraction</a>
+                     </h5>
+					
+                     <p>The execution can be retracted (provided it is still possible to do so) by correlating execution retracted message to the execution notification.</p>
+					
+                     <a href="images/messaging/TradeExecutionRetraction.png">
+                        <img src="images/messaging/TradeExecutionRetraction.png" alt="images/messaging/TradeExecutionRetraction.png" class="image"/>
+                     </a>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.3.2">3.3.3.2 Execution Advice Flow</a>
+                  </h5>
+				
+                  <p>The successful execution of a trade or post-trade event (novation, termination, etc.) may need to be distributed to other parties involved in the trade processing and settlement such as custodians. The execution notification messages should be used for communication between investment managers and custodians. They replace the 4.x Contract Notification messages. </p>
+				
+				
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.2.1">3.3.3.2.1 Execution Advice </a>
+                     </h5>
+					
+                     <p>Sending the execution advice message should create a unique notification identifier for future correlation.</p>
+					
+                     <a href="images/messaging/TradeExecutionAdvice.png">
+                        <img src="images/messaging/TradeExecutionAdvice.png" alt="images/messaging/TradeExecutionAdvice.png" class="image"/>
+                     </a>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.2.2">3.3.3.2.2 Execution Advice Correction</a>
+                     </h5>
+					
+                     <p>The trade execution advice may contain mistakes which can be corrected (provided it is still possible to do so) by sending the correct trade execution advice message correlated to a prior execution advice message with "isCorrection" element set to "true".</p>
+					
+                     <a href="images/messaging/TradeExecutionAdviceCorrection.png">
+                        <img src="images/messaging/TradeExecutionAdviceCorrection.png" alt="images/messaging/TradeExecutionAdviceCorrection.png" class="image"/>
+                     </a>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.2.3">3.3.3.2.3 Execution Advice Retraction</a>
+                     </h5>
+					
+                     <p>The execution may have been sent in error so it can be retracted by sending execution advice retracted message.</p>
+					
+                     <a href="images/messaging/TradeExecutionAdviceRetraction.png">
+                        <img src="images/messaging/TradeExecutionAdviceRetraction.png" alt="images/messaging/TradeExecutionAdviceRetraction.png" class="image"/>
+                     </a>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.3.3">3.3.3.3 Trade Change Advice Flow</a>
+                  </h5>
+				
+                  <p>The trade change advice message describes an external event that is NOT negotiated between the contract parties but affects the economic terms of the contract (e.g. a credit event on a CDS Index constituent entity) and needs to be distributed to other parties involved. </p>
+				
+				
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.3.1">3.3.3.3.1 Trade Change Advice</a>
+                     </h5>
+					
+                     <p>A trade change advice message provides the recipient with the terms for economic changes in the indicated contract resulting from a market event (e.g. index factor information when credit events occur on index constituents).</p>
+					
+                     <a href="images/messaging/TradeChangeAdvice.png">
+                        <img src="images/messaging/TradeChangeAdvice.png" alt="images/messaging/TradeChangeAdvice.png" class="image"/>
+                     </a>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.3.2">3.3.3.3.2 Trade Change Advice Correction</a>
+                     </h5>
+					
+                     <p>The trade change advice may contain mistakes which can be corrected by sending the correct trade change advice message correlated to a prior trade change advice message with "isCorrection" element set to "true". </p>
+					
+                     <p>The trade change advice message should not be used to correct a prior trade execution advice message. </p>
+					
+                     <a href="images/messaging/TradeChangeAdviceCorrection.png">
+                        <img src="images/messaging/TradeChangeAdviceCorrection.png" alt="images/messaging/TradeChangeAdviceCorrection.png" class="image"/>
+                     </a>
+				
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.3.3">3.3.3.3.3 Trade Change Advice Retraction</a>
+                     </h5>
+					
+                     <p>Trade change advice retracted message defines the structure for a message retracting a prior change advice.</p>
+					
+                     <a href="images/messaging/TradeChangeAdviceRetraction.png">
+                        <img src="images/messaging/TradeChangeAdviceRetraction.png" alt="images/messaging/TradeChangeAdviceRetraction.png" class="image"/>
+                     </a>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.3.4">3.3.3.4 Consent Negotiation Flow</a>
+                  </h5>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.4.1">3.3.3.4.1 Trade Novation</a>
+                     </h5>
+					
+                     <p>The 4.x model for trade novation was based on having all the participants communicate directly with each other. This is overly complex and should be changed in favor of a centralized service provider model.</p>
+					
+                     <p>The first stage in a novation is consent gathering. The idea is to get all the participants to agree that a novation can be performed prior to actually attempting it. This was to address an issue raised by an ISDA Ops committee.</p>
+					
+                     <a href="images/messaging/TradeNovation_Transferor.png">
+                        <img src="images/messaging/TradeNovation_Transferor.png" alt="images/messaging/TradeNovation_Transferor.png" class="image"/>
+                     </a>
+					
+                     <p>From the point of view of the transferor the consent process executes as follows:</p>
+					
+                     <a href="images/messaging/TradeNovation_Transferor_ConsentProcess.png">
+                        <img src="images/messaging/TradeNovation_Transferor_ConsentProcess.png" alt="images/messaging/TradeNovation_Transferor_ConsentProcess.png" class="image"/>
+                     </a>
+					
+                     <p>The transferor sends the request to the novation coordinator who sends it on to the other participants.</p>
+					
+                     <a href="images/messaging/TradeNovation_Transferor_RequestConsent.png">
+                        <img src="images/messaging/TradeNovation_Transferor_RequestConsent.png" alt="images/messaging/TradeNovation_Transferor_RequestConsent.png" class="image"/>
+                     </a>
+					
+                     <p>When responses have been received from the other participants the collective decision can be reported to the transferor.</p>
+					
+                     <a href="images/messaging/TradeNovation_Transferor_ConsentGranted.png">
+                        <img src="images/messaging/TradeNovation_Transferor_ConsentGranted.png" alt="images/messaging/TradeNovation_Transferor_ConsentGranted.png" class="image"/>
+                     </a>
+					
+                     <a href="images/messaging/TradeNovation_Transferor_ConsentRefused.png">
+                        <img src="images/messaging/TradeNovation_Transferor_ConsentRefused.png" alt="images/messaging/TradeNovation_Transferor_ConsentRefused.png" class="image"/>
+                     </a>
+					
+                     <p>The process for the transferee and remaining parties is similar. First they must decide whether to accept the novation or not.</p>
+					
+                     <a href="images/messaging/TradeNovation_Transferee_ConsentProcess.png">
+                        <img src="images/messaging/TradeNovation_Transferee_ConsentProcess.png" alt="images/messaging/TradeNovation_Transferee_ConsentProcess.png" class="image"/>
+                     </a>
+					
+                     <a href="images/messaging/TradeNovation_Transferee_RequestConsent.png">
+                        <img src="images/messaging/TradeNovation_Transferee_RequestConsent.png" alt="images/messaging/TradeNovation_Transferee_RequestConsent.png" class="image"/>
+                     </a>
+					
+                     <p>As the decision process may take time the initial request should be followed by a subsequent round of response messaging.</p>
+					
+                     <a href="images/messaging/TradeNovation_Transferee_ConsentGranted.png">
+                        <img src="images/messaging/TradeNovation_Transferee_ConsentGranted.png" alt="images/messaging/TradeNovation_Transferee_ConsentGranted.png" class="image"/>
+                     </a>
+					
+                     <a href="images/messaging/TradeNovation_Transferee_ConsentRefused.png">
+                        <img src="images/messaging/TradeNovation_Transferee_ConsentRefused.png" alt="images/messaging/TradeNovation_Transferee_ConsentRefused.png" class="image"/>
+                     </a>
+					
+                     <p>There are no cancellation messages associated with the consent gathering process, but the process is benign and creates no financial commitments. </p>
+					
+                     <p>To keep all participants synchronized, request consent messages can be corrected by requester, sending a corrected request consent message with "isCorrection" indicator set to "true", and a unique correlation identifier and a sequence number to link a prior message. </p>
+					
+                     <p>If the consent is no longer required, the requester can retract a request consent message. </p>
+					
+                     <a href="images/messaging/TradeNovation_Transferor_RequestConsentRetracted.png">
+                        <img src="images/messaging/TradeNovation_Transferor_RequestConsentRetracted.png" alt="images/messaging/TradeNovation_Transferor_RequestConsentRetracted.png" class="image"/>
+                     </a>
+					
+                     <a href="images/messaging/TradeNovation_NovationService_RequestConsentRetracted.png">
+                        <img src="images/messaging/TradeNovation_NovationService_RequestConsentRetracted.png" alt="images/messaging/TradeNovation_NovationService_RequestConsentRetracted.png" class="image"/>
+                     </a>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.3.5">3.3.3.5 Confirmation</a>
+                  </h5> 
+				
+                  <p>The standard confirmation process is supported by FpML. The following messages are used to support it:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>requestConfirmation</li>
+					
+                     <li>requestConfirmationRetracted</li>
+					
+                     <li>confirmationAcknowledgement</li>
+					
+                     <li>confirmationException</li>
+					
+                     <li>confirmationStatus</li>
+					
+                     <li>confirmationAgreed</li>
+					
+                     <li>confirmationDisputed</li>
+				
+                  </ul>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.5.1">3.3.3.5.1 Scenarios</a>
+                     </h5>
+					
+                     <p>The following scenarios are used to describe the message exchanges:</p>
+					
+					
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.5.1.1">3.3.3.5.1.1 Normal Operation</a>
+                        </h5>
+						
+                        <p>The successful confirmation process involves requesting the confirmation from the Confirmation Requester. The Confirmation Provider sends an acknowledgement message immediately.</p>
+						
+                        <p>The Confirmation Provider is then in charge of performing the matching process and sends back a confirmationStatus message with the status of the matching process: matched, mismatched, unmatched, or alleged. The Confirmation Provider sends then an acknowledgement message immediately.</p>
+						
+                        <p>If the Confirmation Requester is ok with the status, it sends a confirmationAgreed message and the Confirmation Provider sends back and acknowledgment to finish the process.</p>
+						
+                        <a href="images/messaging/confirmation-normal.jpg">
+                           <img src="images/messaging/confirmation-normal.jpg" alt="images/messaging/confirmation-normal.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.5.1.2">3.3.3.5.1.2 Exception</a>
+                        </h5>
+						
+                        <p>If there is a problem with the the confirmationRequest, the Confirmation Provider sends back a confirmationException message. The message includes the reason of the problem.</p>
+						
+                        <a href="images/messaging/confirmation-exception.jpg">
+                           <img src="images/messaging/confirmation-exception.jpg" alt="images/messaging/confirmation-exception.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.5.1.3">3.3.3.5.1.3 Correction Possible</a>
+                        </h5>
+						
+                        <p>The requestConfirmation may contain mistakes which can be corrected by sending the correct requestConfirmation message correlated to a prior requestConfirmation message with "isCorrection" element set to "true".</p>
+						
+                        <a href="images/messaging/confirmation-correction.jpg">
+                           <img src="images/messaging/confirmation-correction.jpg" alt="images/messaging/confirmation-correction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.5.1.4">3.3.3.5.1.4 Correction Not Possible</a>
+                        </h5>
+						
+                        <p>In some situations the message cannot be corrected and the Confirmation Provider sends back an exception message.</p>
+						
+                        <a href="images/messaging/confirmation-no-correction.jpg">
+                           <img src="images/messaging/confirmation-no-correction.jpg" alt="images/messaging/confirmation-no-correction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.5.1.5">3.3.3.5.1.5 Retraction Possible</a>
+                        </h5>
+						
+                        <p>The requestConfirmationRetracted message defines the structure for a message retracting a prior requestConfirmation.</p>
+						
+                        <a href="images/messaging/confirmation-retraction.jpg">
+                           <img src="images/messaging/confirmation-retraction.jpg" alt="images/messaging/confirmation-retraction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.5.1.6">3.3.3.5.1.6 Retraction Not Possible</a>
+                        </h5>
+						
+                        <p>In some situations the message cannot be retracted and the Confirmation Provider sends back an exception message.</p>
+						
+                        <a href="images/messaging/confirmation-no-retraction.jpg">
+                           <img src="images/messaging/confirmation-no-retraction.jpg" alt="images/messaging/confirmation-no-retraction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.3.6">3.3.3.6 Clearing</a>
+                  </h5>
+				
+                  <p>The standard clearing process is supported by FpML. The following messages are used to support it:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>requestClearing</li>
+					
+                     <li>requestClearingRetracted</li>
+					
+                     <li>clearingAcknowledgement</li>
+					
+                     <li>clearingException</li>
+					
+                     <li>clearingConfirmed</li>
+					
+                     <li>clearingRefused</li>
+				
+                  </ul>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.6.1">3.3.3.6.1 Scenarios</a>
+                     </h5>
+					
+                     <p>The following scenarios are used to describe the message exchanges:</p>
+					
+					
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.6.1.1">3.3.3.6.1.1 Normal Operation</a>
+                        </h5>
+						
+                        <p>The successful clearing process involves requesting the clearing from the Clearing Requester. The Clearing Provider sends an acknowledgement message immediately.</p>
+						
+                        <p>The Clearing Provider is then in charge of deciding whether the clearing is confirmed or refused.</p>
+						
+                        <p>If the clearing is confirmed, the Clearing Provider sends a clearingConfirmed message. On the other hand, if the clearing is refused, it sends a clearingRefused message.</p>
+						
+                        <a href="images/messaging/clearing-normal.jpg">
+                           <img src="images/messaging/clearing-normal.jpg" alt="images/messaging/clearing-normal.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.6.1.2">3.3.3.6.1.2 Exception</a>
+                        </h5>
+						
+                        <p>If there is a problem with the the clearingRequest, the Clearing Provider sends back a clearingException message. The message includes the reason of the problem.</p>
+						
+                        <a href="images/messaging/clearing-exception.jpg">
+                           <img src="images/messaging/clearing-exception.jpg" alt="images/messaging/clearing-exception.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.6.1.3">3.3.3.6.1.3 Correction Possible</a>
+                        </h5>
+						
+                        <p>The requestClearing may contain mistakes which can be corrected by sending the correct requestClearing message correlated to a prior requestClearing message with "isCorrection" element set to "true".</p>
+						
+                        <a href="images/messaging/clearing-correction.jpg">
+                           <img src="images/messaging/clearing-correction.jpg" alt="images/messaging/clearing-correction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.6.1.4">3.3.3.6.1.4 Correction Not Possible</a>
+                        </h5>
+						
+                        <p>In some situations the message cannot be corrected and the Clearing Provider sends back an exception message.</p>
+						
+                        <a href="images/messaging/clearing-no-correction.jpg">
+                           <img src="images/messaging/clearing-no-correction.jpg" alt="images/messaging/clearing-no-correction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.6.1.5">3.3.3.6.1.5 Retraction Possible</a>
+                        </h5>
+						
+                        <p>The requestClearingRetracted message defines the structure for a message retracting a prior requestClearing.</p>
+						
+                        <a href="images/messaging/clearing-retraction.jpg">
+                           <img src="images/messaging/clearing-retraction.jpg" alt="images/messaging/clearing-retraction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.6.1.6">3.3.3.6.1.6 Retraction Not Possible</a>
+                        </h5>
+						
+                        <p>In some situations the message cannot be retracted and the Clearing Provider sends back an exception message.</p>
+						
+                        <a href="images/messaging/clearing-no-retraction.jpg">
+                           <img src="images/messaging/clearing-no-retraction.jpg" alt="images/messaging/clearing-no-retraction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.3.7">3.3.3.7 Allocation</a>
+                  </h5>
+				
+                  <p>The standard allocation process is supported by FpML. The following messages are used to support it:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>requestAllocation</li>
+					
+                     <li>requestAllocationRetracted</li>
+					
+                     <li>allocationAcknowledgement</li>
+					
+                     <li>allocationException</li>
+					
+                     <li>allocationApproved</li>
+					
+                     <li>allocationRefused</li>
+				
+                  </ul>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.3.7.1">3.3.3.7.1 Scenarios</a>
+                     </h5>
+					
+                     <p>The following scenarios are used to describe the message exchanges:</p>
+					
+					
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.7.1.1">3.3.3.7.1.1 Normal Operation</a>
+                        </h5>
+						
+                        <p>The successful allocation process involves requesting the allocation from the Allocation Requester. The Allocation Provider sends an acknowledgement message immediately.</p>
+						
+                        <p>The Allocation Provider is then in charge of deciding whether the allocation is approved or refused.</p>
+						
+                        <p>If the allocation is approved, the Allocation Provider sends an allocationApproved message. On the other hand, if the allocation is refused, it sends and allocationRefused message.</p>
+						
+                        <a href="images/messaging/allocation-normal.jpg">
+                           <img src="images/messaging/allocation-normal.jpg" alt="images/messaging/allocation-normal.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.7.1.2">3.3.3.7.1.2 Exception</a>
+                        </h5>
+						
+                        <p>If there is a problem with the the allocationRequest, the Allocation Provider sends back an allocationException message. The message includes the reason of the problem.</p>
+						
+                        <a href="images/messaging/allocation-exception.jpg">
+                           <img src="images/messaging/allocation-exception.jpg" alt="images/messaging/allocation-exception.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.7.1.3">3.3.3.7.1.3 Correction Possible</a>
+                        </h5>
+						
+                        <p>The requestAllocation may contain mistakes which can be corrected by sending the correct requestAllocation message correlated to a prior requestAllocation message with "isCorrection" element set to "true".</p>
+						
+                        <a href="images/messaging/allocation-correction.jpg">
+                           <img src="images/messaging/allocation-correction.jpg" alt="images/messaging/allocation-correction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.7.1.4">3.3.3.7.1.4 Correction Not Possible</a>
+                        </h5>
+						
+                        <p>In some situations the message cannot be corrected and the Allocation Provider sends back an exception message.</p>
+						
+                        <a href="images/messaging/allocation-no-correction.jpg">
+                           <img src="images/messaging/allocation-no-correction.jpg" alt="images/messaging/allocation-no-correction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.7.1.5">3.3.3.7.1.5 Retraction Possible</a>
+                        </h5>
+						
+                        <p>The requestAllocationRetracted message defines the structure for a message retracting a prior requestAllocation.</p>
+						
+                        <a href="images/messaging/allocation-retraction.jpg">
+                           <img src="images/messaging/allocation-retraction.jpg" alt="images/messaging/allocation-retraction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.3.7.1.6">3.3.3.7.1.6 Retraction Not Possible</a>
+                        </h5>
+						
+                        <p>In some situations the message cannot be retracted and the Allocation Provider sends back an exception message.</p>
+						
+                        <a href="images/messaging/allocation-no-retraction.jpg">
+                           <img src="images/messaging/allocation-no-retraction.jpg" alt="images/messaging/allocation-no-retraction.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s3.3.4">3.3.4 Description of Business Events</a>
+               </h4>
+			
+			
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s3.3.4.1">3.3.4.1 Novation</a>
+                  </h5>
+				
+                  <p>A novation is a transaction in which a ‘transferor’ transfers to a ‘transferee’, with the consent of the ‘remaining party’, all of its rights and obligations under the contract in respect to the novated amount. The effect of the agreement is that for the ‘novated amount’ (i.e. all or part of the outstanding notional amount), the old transaction between the transferor and the remaining party is terminated, and a new transaction is executed between the remaining party and the transferee with economic terms identical to those of the old transaction.</p>
+				
+                  <p>A three-way novation is between a transferee, a transferor and a remaining party. The typical four-way novation is between a transferee, a transferor, a remaining party and a related second remaining party (where remaining party had the deal with the transferor, and the second remaining party is a related company to the remaining party who assumes the deal with the transferee).</p>
+				
+                  <p>
+					
+                     <a href="images/messaging/TradeNovationContent.png">
+                        <img src="images/messaging/TradeNovationContent.png" alt="images/messaging/TradeNovationContent.png" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The required ‘transferor’, ‘transferee’, and ‘remainingParty’ elements, with the optional ‘otherRemainingParty’ element, indicate the roles in the transaction by providing references to the ‘party’ elements.</p>
+				
+                  <p>The optional ‘otherRemainingParty’ element is not applicable in a three-way novation and should be omitted. In a four-way novation the party referenced is Transferee 2. Transferee 2 means a party which accepts by way of novation the rights, liabilities, duties and obligations of Transferor 2. ISDA 2004 Novation Term: Transferee 2 (four-way novation).</p>
+				
+                  <p>The ‘oldTransaction’ indicates the original trade between the transferor and the remaining party. This can alternately be represented by the ‘oldTransactionReference’. The ‘newTransaction’ indicates the new trade between the transferor and the remaining party (for a 3-way novation) or other remaining party (for a 4-way novation). This can alternately be represented by 'newTransactionReference'.</p>
+				
+                  <p>The ‘novationDate' is the date on which the rights, obligations etc. transfer between the parties. The 'novationTradeDate' is the date on which the parties agree that they will novate. If a 'novationTradeDate' is not specified, the 'novationTradeDate' will be deemed to be the 'novationDate'. The ‘novatedAmount’ (or ‘novatedNumberOfOptions’) by validation rule must be of the same currency and equal to or less than the appropriate notional amount in the product element within the ‘oldTransaction’ between the transferor and the remaining party.</p>
+				
+                  <p>The 'fullFirstCalculationPeriod’ is of type boolean. If its value is 'true', ‘fullFirstCalculationPeriod’ has the implicit value of “applicable” as detailed in the ISDA novation agreement. On the other hand, if its value is 'false', it has the implicit value of "inapplicable".</p>
+				
+                  <p>The 'firstPeriodStartDate' with respect to the Transferee and Remaining Party is included in the Novations message to be able to make sense of the “new transaction” without requiring reference back to the “old transaction”. The 'href' attribute references the relevant party that is making the payments </p>
+				
+                  <p>The 'nonReliance' element corresponds to the non-Reliance section in the 2004 ISDA Novation Definitions, section 2.1 (c) (i). The element appears in the instance document when non-Reliance is applicable</p>
+				
+                  <p>The 'creditDerivativesNotices' element should be specified if one or more of either a Credit Event Notice, Notice of Publicly Available Information, Notice of Physical Settlement or Notice of Intended Physical Settlement, as applicable, has been delivered by or to the Transferor or the Remaining Party. The type of notice or notices that have been delivered should be indicated by setting the relevant boolean element value(s) to true.</p>
+				
+                  <p>The absence of the 'creditDerivativesNotices' element means that no Credit Event Notice, Notice of Publicly Available Information, Notice of Physical Settlement or Notice of Intended Physical Settlement, as applicable, has been delivered by or to the Transferor or the Remaining Party.</p>
+				
+                  <p>If the receiving party agrees with the novation then they should respond with a ‘NovationConsentGranted’ message. The Transferor or the Transferee may include the details of a payment representing the market value of the transaction.</p>
+				
+                  <p>Since the Novation transaction itself is governed by one or more ISDA contractual definitions and supplements these are specified within the Novation structure with the following two elements: 'contractualDefinitions' and 'contractualSupplements'.</p>
+				
+                  <p>For example, for an IRS novation this will typically reference the 2004 ISDA Novation Definitions and the 2000 ISDA Definitions. For Credit Derivatives it references the 2004 ISDA Novation Definitions, the 2003 ISDA Credit Derivatives Definitions and the May Supplement. So for interest rate products, the following values might be specified:</p>
+				
+                  <pre>
+&lt;novation&gt;
+		...
+		&lt;contractualDefinitions&gt;ISDA2004Novation&lt;/contractualDefinitions&gt;
+		&lt;contractualDefinitions&gt;ISDA2000&lt;/contractualDefinitions&gt;
+		 ...
+&lt;/novation&gt;
+                                        </pre>
+				
+                  <p>And for credit derivatives, the following values might be specified:</p>
+				
+                  <pre>
+&lt;novation&gt;
+		...
+		&lt;contractualDefinitions&gt;ISDA2004Novation&lt;/contractualDefinitions&gt;
+		&lt;contractualDefinitions&gt;ISDA2003Credit&lt;/contractualDefinitions&gt;
+		&lt;contractualSupplement&gt;ISDA2003CreditMay2003&lt;/contractualSupplement&gt;
+		...
+&lt;/novation&gt;
+                                        </pre>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.4.2">3.3.4.2 Increase</a>
+                  </h5>
+				
+                  <p>The Increase representation in FpML is used for increasing the notional amount of a trade.</p>
+				
+                  <p>
+					
+                     <a href="images/messaging/Increase.png">
+                        <img src="images/messaging/Increase.png" alt="images/messaging/Increase.png" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The tradeIdentifier is used to reference the previously confirmed trade. The agreementDate is the date on which the parties enter into the increase transaction. The effectiveDate is the date on which the increase becomes effective.</p>
+				
+                  <p>A payment for the right of increase may occur.</p>
+				
+                  <p>Depending on the type of product, the amount of the increase is specified in the changeInNotionalAmount or changeInNumberOfOptions elements. Similarly, the outstanding amount of the trade after the increase is specified in the outstandingNotionalAmount or outstandingNumberOfOptions elements.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.4.3">3.3.4.3 Termination</a>
+                  </h5>
+				
+                  <p>The Termination representation in FpML is used for terminating partially or fully a trade. The same business content is used for both full and partial terminations.</p>
+				
+                  <p>
+					
+                     <a href="images/messaging/Termination.png">
+                        <img src="images/messaging/Termination.png" alt="images/messaging/Termination.png" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The tradeIdentifier is used to reference the previously confirmed trade. The agreementDate is the date on which the parties enter into the termination transaction. The effectiveDate is the date on which the termination becomes effective.</p>
+				
+                  <p>A payment for the right of termination may occur.</p>
+				
+                  <p>Depending on the type of product, the amount of the termination is specified in the changeInNotionalAmount or changeInNumberOfOptions elements. Similarly, the outstanding amount of the trade after the termination is specified in the outstandingNotionalAmount or outstandingNumberOfOptions elements. For a full termination, the outstanding amount will be set to 0.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.4.4">3.3.4.4 Amendment</a>
+                  </h5>
+				
+                  <p>The Amendment representation in FpML is used for amending the terms of a trade.</p>
+				
+                  <p>
+					
+                     <a href="images/messaging/Amendment.png">
+                        <img src="images/messaging/Amendment.png" alt="images/messaging/Amendment.png" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>The trade element is used to represent the details of the amended trade. (Note that the use of tradeIdentifier is insufficient for providing the amended trade details and is not allowed.) The agreementDate is the date on which the parties enter into the amendment transaction. The effectiveDate is the date on which the amendment becomes effective.</p>
+				
+                  <p>A payment for the right of amendment may occur.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s3.3.4.5">3.3.4.5 Allocation</a>
+                  </h5>
+				
+                  <p>Allocations are the division of a single market trade across two or more investors/funds.</p>
+				
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s3.3.4.5.1">3.3.4.5.1 Linking Mechanism</a>
+                     </h5>
+					
+                     <p>This section describes the way of representing allocations in FpML. This is done using the existing FpML trade structure in order to represent both, the block and the allocated trades.</p>
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s3.3.4.5.1.1">3.3.4.5.1.1 Design Assumptions</a>
+                        </h5>
+						
+                        <ul class="bulleted">
+							
+                           <li>To identify block and allocated trades inside the current FpML trade structure.</li>
+							
+                           <li>The allocated trades may be not known upfront so the solution covers two situations: <ul class="bulleted">
+								
+                                 <li>The system knows upfront the block and the allocated trades.</li>
+								
+                                 <li>The system knows the block trade but not the allocated trades.</li>
+							
+                              </ul>
+							
+                           </li>
+							
+                           <li>To allow for 2-way linkage, this means to: <ul class="bulleted">
+								
+                                 <li>Indicate the block trade and the id for the subsequent allocated trades.</li>
+								
+                                 <li>Indicate in an allocated trade the id for the original block trade.</li>
+							
+                              </ul>
+							
+                           </li>
+							
+                           <li>The tradeId element for any kind of trades (normal, block, allocated) should be kept at the same location as currently stands in the FpML trade structure. </li>
+						
+                        </ul>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.4.5.1.2">3.3.4.5.1.2 Implementation</a>
+                        </h5>
+						
+                        <p>The implementation uses the PartyTradeIdentifier type. Depending whether the trade is a block or an allocated trade, the allocationTradeId and the blockTradeId elements would be filled out.</p>
+						
+                        <p>
+							
+                           <a href="images/messaging/PartyTradeIdentifier.png">
+                              <img src="images/messaging/PartyTradeIdentifier.png" alt="images/messaging/PartyTradeIdentifier.png" class="image"/>
+                           </a>
+						
+                        </p>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.4.5.1.3">3.3.4.5.1.3 Examples</a>
+                        </h5>
+						
+                        <p>This is an analysis of the different situations:</p>
+						
+						
+						
+					
+                        <div>
+                           <h5>
+                              <a id="s3.3.4.5.1.3.1">3.3.4.5.1.3.1 Normal Trade</a>
+                           </h5>
+							
+                           <pre> 
+                                                        ...
+&lt;tradeHeader&gt;
+        &lt;partyTradeIdentifier&gt;
+                &lt;partyReference href=”BGI”/&gt;
+                &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC100&lt;/tradeId&gt;
+        &lt;/partyTradeIdentifier&gt;
+&lt;/tradeHeader&gt;                                                        
+                                                        ...    
+                                                        </pre>
+						
+                        </div>
+                        <div>
+                           <h5>
+                              <a id="s3.3.4.5.1.3.2">3.3.4.5.1.3.2 Normal trade that is subsequently split/allocated into two trades</a>
+                           </h5>
+							
+                           <p>It is allocated into two trades ABC101 and ABC102. The block trade includes links (allocationTradeId) to the allocated trades.</p>
+							
+                           <pre> 
+                                                        ...
+&lt;tradeHeader&gt;
+        &lt;partyTradeIdentifier&gt;
+                &lt;partyReference href=”BGI”/&gt;
+                &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC100&lt;/tradeId&gt;
+                &lt;allocationTradeId&gt;  
+                        &lt;partyReference href=”Fund1”/&gt;
+                        &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC101&lt;/tradeId&gt;
+                &lt;/allocationTradeId&gt;
+                &lt;allocationTradeId&gt;  
+                        &lt;partyReference href=”Fund2”/&gt;
+                        &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC102&lt;/tradeId&gt;
+                &lt;/allocationTradeId&gt;
+        &lt;/partyTradeIdentifier&gt;
+&lt;/tradeHeader&gt;                                                        
+                                                        ...    
+                                                        </pre>
+						
+                        </div>
+                        <div>
+                           <h5>
+                              <a id="s3.3.4.5.1.3.3">3.3.4.5.1.3.3 Each of the resulting allocated trades</a>
+                           </h5>
+							
+                           <p>Each of the resulting allocated trades is a separate FpML trade element. Each one of the trades is identified as allocated trade with the xsi:type="AllocationTradeIdentifier".</p>
+							
+                           <p>Allocated trade ABC101:</p>
+							
+                           <pre> 
+                                                        ...
+&lt;tradeHeader&gt;
+        &lt;partyTradeIdentifier&gt;
+                &lt;partyReference href=”Fund1”/&gt;
+                &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC101&lt;/tradeId&gt;
+                &lt;blockTradeId&gt;  
+                        &lt;partyReference href=”BGI”/&gt;
+                        &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC100&lt;/tradeId&gt;
+                &lt;/blockTradeId&gt;
+        &lt;/partyTradeIdentifier&gt;
+&lt;/tradeHeader&gt;
+                                                        ...    
+                                                        </pre>
+							
+                           <p>Allocated trade ABC102:</p>
+							
+                           <pre> 
+                                                        ...
+&lt;tradeHeader&gt;
+        &lt;partyTradeIdentifier&gt;
+                &lt;partyReference href=”Fund2”/&gt;
+                &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC102&lt;/tradeId&gt;
+                &lt;blockTradeId&gt;  
+                        &lt;partyReference href=”BGI”/&gt;
+                        &lt;tradeId tradeIdScheme=”http://abc.com”&gt;ABC100&lt;/tradeId&gt;
+                &lt;/blockTradeId&gt;
+        &lt;/partyTradeIdentifier&gt;
+&lt;/tradeHeader&gt;                                                        
+                                                        ...    
+                                                        </pre>
+						
+                        </div>
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s3.3.4.5.1.4">3.3.4.5.1.4 N-Level Allocations</a>
+                        </h5>
+						
+                        <p>The PartyTradeIdentifier type supports the representation of N-level allocations in FpML. This basically means the ability to allocate a block trade to multiple allocation trades, and then allocate these in turn to other allocation trades (and so on if desired).</p>
+						
+                        <p>The support of N-Level Allocations is done including the allocationTradeId element and the blockTradeId element at the same time.</p>
+						
+					
+                     </div>
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s3.3.4.5.2">3.3.4.5.2 Short Form Representation of Allocations</a>
+                     </h5>
+					
+                     <p>This section describes a representation of allocation trades with the following features:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>Supports a "short-form" allocation representation, in which the key block economics are stated once, and the allocation data is contained in a terse matrix.</li>
+						
+                        <li>Supports credit and collateral requirements, and approval management (per subaccount).</li>
+						
+                        <li>Supports fees that must be allocated ("block" fees) and fees that should not be allocated ("third party" fees).</li>
+					
+                     </ul>
+					
+                     <p>There are two basic design principles:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>The first principle is that models should always provide the option to correlate by identifier or by the entire trade but never a partial trade that requires matching.</li>
+						
+                        <li>The second principle is that the "short-form" representation of allocations should be possible in post-trade messages.</li>
+					
+                     </ul>
+					
+                     <p>The agreement of the Messaging Working Group was to place this "short-form" representation within the trade structure in order to use this form of representation across the different post-trade messages.</p>
+					
+                     <p>
+						
+                        <a href="images/messaging/trade-allocations.jpg">
+                           <img src="images/messaging/trade-allocations.jpg" alt="images/messaging/trade-allocations.jpg" class="image"/>
+                        </a>
+					
+                     </p>
+				
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('2',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('3',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('4',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

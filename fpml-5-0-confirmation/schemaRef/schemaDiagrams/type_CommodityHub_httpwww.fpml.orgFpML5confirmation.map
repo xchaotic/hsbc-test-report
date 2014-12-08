@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_CommodityHub_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='group_PartyAndAccountReferences.model'
+  coords='252,36,525,62'
+  href='fpml-shared-5-0.xsd.html_group_PartyAndAccountReferences.model.html#group_PartyAndAccountReferences.model'/>
+
+ <area
+  shape='rect'
+  alt='type_CommodityHubCode'
+  coords='252,72,359,98'
+  href='fpml-com-5-0.xsd.html_type_CommodityHubCode.html#type_CommodityHubCode'/>
+
+</map>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation, 07 July 2010 Errata</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <h1>FpML 5.0 Recommendation, 07 July 2010 Errata</h1>
+      <h2 class="tocHeader">Table Of Contents</h2>
+      <p class="toc">&nbsp;&nbsp;&nbsp;&nbsp;<b>1 <a href="#s1">About this document</a>
+         </b>
+         <br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>2 <a href="#s2">How this document is organized</a>
+         </b>
+         <br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>3 <a href="#s3">Issues</a>
+         </b>
+         <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>3.1 <a href="#s3.1">The TimeDimension type should specify both an absolute 'date' for tenor and a 'tenor'.</a>
+         </b>
+         <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>3.2 <a href="#s3.2">The relatedParty should not be present within Party in the Confirmation View</a>
+         </b>
+         <br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>4 <a href="#s4">Build Number</a>
+         </b>
+         <br/>
+      </p>
+      <div>
+         <div>
+            <h2>
+               <a id="s1">1 About this document</a>
+            </h2>
+         </div>
+		
+         <p>This document lists the known errata to the FpML 5.0 Recommendation, 07 July 2010.</p>
+	
+      </div>
+      <div>
+         <div>
+            <h2>
+               <a id="s2">2 How this document is organized</a>
+            </h2>
+         </div>
+		
+         <p>Each erratum entry below has the following information:</p>
+		
+         <ul class="bulleted">
+			
+            <li>A unique entry number.</li>
+			
+            <li>The date that it was added to the errata page.</li>
+			
+            <li>Whether the entry is considered an important error, a minor typographical error, a clarification, or a known problem with the document itself. </li>
+			
+            <li>The document version and section referred to.</li>
+			
+            <li>The location of the error.</li>
+			
+            <li>A description of the problem and correction if applicable.</li>
+			
+            <li>When the error is going to be fixed and whether it affects the build number.</li>
+		
+         </ul>
+		
+         <p>The document publishes the build number.</p>
+	
+      </div>
+      <div>
+         <div>
+            <h2>
+               <a id="s3">3 Issues</a>
+            </h2>
+         </div>
+		
+         <p>The following issues are known in the FpML 5.0 Recommendation, 07 July 2010:</p>
+		
+		
+		
+	
+         <div>
+            <h3>
+               <a id="s3.1">3.1 The TimeDimension type should specify both an absolute 'date' for tenor and a 'tenor'.</a>
+            </h3>
+			
+            <ul class="bulleted">
+				
+               <li>ID: 1</li>
+				
+               <li>Date Added: 2010-09-20</li>
+				
+               <li>Severity: Minor</li>
+				
+               <li>Version: fpml-5-0-5-wd-4</li>
+				
+               <li>View: Reporting</li>
+				
+               <li>Location: "http://www.fpml.org/FpML-5/reporting" -&gt; fpml-riskdef-5-0.xsd schema file -&gt; TimeDimension</li>
+				
+               <li>Description: In the "http://www.fpml.org/FpML-5/reporting" xmlns, in TimeDimension type, it was not possible to specify both tenor and absolute date for tenor. Master-schema's conversion script was removing an element 'tenor' from one of that choice group's options.</li>
+				
+               <li>Disposition: This will be corrected in the 5.0 Recommendation Build 9</li>
+			
+            </ul>
+		
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s3.2">3.2 The relatedParty should not be present within Party in the Confirmation View</a>
+               </h3>
+            </div>
+			
+            <ul class="bulleted">
+				
+               <li>ID: 2</li>
+				
+               <li>Date Added: 2010-09-29</li>
+				
+               <li>Severity: Minor</li>
+				
+               <li>Version: fpml-5-0-5-wd-4</li>
+				
+               <li>View: Confirmation</li>
+				
+               <li>Location: "http://www.fpml.org/FpML-5/confirmation" -&gt; fpml-shared-5-0.xsd schema file -&gt; Party</li>
+				
+               <li>Description: The relatedParty structure should not be present within the Party complex type in the Confirmation view. It should be present in such complex type only in the Reporting view.</li>
+				
+               <li>Disposition: This will be corrected in the 5.0 Recommendation Build 9</li>
+			
+            </ul>
+		
+         </div>
+      </div>
+      <div>
+         <div>
+            <h2>
+               <a id="s4">4 Build Number</a>
+            </h2>
+         </div>
+		
+         <p>The current build number for FpML 5.0 Recommendation, 07 July 2010. is: <b>8</b>
+         </p>
+		
+         <p>Every time there is a change on the schema, validation rules, or examples within a version the actual build number is incremented. If no changes have been made between releases within a version (i.e. from Trial Recommendation to Recommendation) the actual build number stays the same. The build number is published at:</p>
+		
+         <ul class="bulleted">
+			
+            <li>This errata page</li>
+			
+            <li>First page of the specification</li>
+			
+            <li>FpML Schema: actualBuild attribute within fpml-doc subschema file.</li>
+		
+         </ul>
+	
+      </div>
+      <p>Last Updated: Tue 10/12/2010 12:44:23.86</p>
+      <p>
+         <a href="http://validator.w3.org/check/referer">
+            <img src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1!" height="31" width="88"/>
+         </a>
+         <a href="http://jigsaw.w3.org/css-validator/">
+            <img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!"/>
+         </a>
+      </p>
+   </body>
+</html>

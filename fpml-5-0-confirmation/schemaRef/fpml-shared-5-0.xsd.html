@@ -1,0 +1,1710 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>XML Schema Documentation</title>
+      <meta http-equiv="Content-Type" content="text/xml; charset=UTF-8"/>
+      <style type="text/css">
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* More-configurable styles */
+
+/******** General ********/
+         
+/* Document body */
+body {
+   color: Black;
+   background-color: White;
+   font-family: Arial, sans-serif;
+   font-size: 10pt;
+}
+                  
+/* Horizontal rules */
+hr {
+   color: black;
+}
+/* Document title */
+h1 {
+   font-size: 18pt;
+   letter-spacing: 2px;
+   border-bottom: 1px #ccc solid;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+/* Main section headers */
+h2 {
+   font-size: 14pt;
+   letter-spacing: 1px;
+}
+/* Sub-section headers */
+h3, h3 a, h3 span {
+   font-size: 12pt;
+   font-weight: bold;
+   color: black;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties th, table.properties th a {
+   color: black;
+   background-color: #F99; /* Pink */
+}
+table.properties td {
+   background-color: #eee; /* Gray */
+}
+
+img{
+ border: 0;
+}         
+
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   color: #963; /* Orange-brown */
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   border: 2px solid #999;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+   background-color: #ccc;
+}
+table.namespaces td {
+   background-color: #eee;
+}
+/* Target namespace of the schema */
+span.targetNS {
+   color: #06C;
+   font-weight: bold;
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+   color: #F93; /* Orange */
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   border: 2px solid #999; /* Gray */
+}
+
+/* XML Instance Representation table */
+div.sample div.contents {
+   border: 1px dashed black;
+}
+
+
+/* Schema Component Representation table */
+div.schemaComponent div.contents {
+   border: 2px black solid;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   color: #036; /* Blue */
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Printer-version styles */
+
+@media print {
+
+/* Ensures that controls are hidden when printing */
+div#printerControls {
+   visibility: hidden;
+}
+div#globalControls {
+   visibility: hidden;
+}
+#legend {
+   display: none;
+}
+#legendTOC {
+   display: none;
+}
+#glossary {
+   display: none;
+}
+#glossaryTOC {
+   display: none;
+}
+
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Base styles */
+
+/******** General ********/
+
+/* Unordered lists */
+ul {
+   margin-left: 1.5em;
+   margin-bottom: 0em;
+}
+/* Tables */
+table {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 2px;
+   margin-right: 2px;
+}
+table th, table td {
+   font-size: 10pt;
+   vertical-align: top;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+table th {
+   font-weight: bold;
+   text-align: left;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties {
+   width: 90%;
+}
+table.properties th {
+   width: 30%;
+}
+/* Boxes that can make its content appear and disappear*/
+div.box {
+   margin: 1em;
+}
+   /* Box caption */
+div.box span.caption {
+   font-weight: bold;
+}
+   /* Button to open and close the box */
+div.box input.control {
+   width: 1.4em;
+   height: 1.4em;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 11pt;
+}
+   /* Box contents */
+div.box div.contents {
+   margin-top: 3px;
+}
+
+
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   white-space: nowrap;
+   font-weight: bold;
+   padding: 5px;
+   margin: 5px;
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   padding: 10px;
+   margin: 5px;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+}
+table.namespaces td {
+}
+/* Target namespace of the schema */
+span.targetNS {
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   width: 90%;
+}
+table.hierarchy th {
+   font-weight: normal;
+   font-style: italic;
+   width: 20%;
+}
+table.hierarchy th, table.hierarchy td {
+   padding: 5px;
+}
+
+/* XML Instance Representation table */
+div.sample {
+   width: 90%;
+}
+div.sample div.contents {
+   padding: 5px;
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+}
+   /* Normal elements and attributes */
+div.sample div.contents, div.sample div.contents a {
+   color: black;
+}
+   /* Group Headers */
+div.sample div.contents .group, div.sample div.contents .group a {
+   color: #999; /* Light gray */
+}
+   /* Type Information */
+div.sample div.contents .type, div.sample div.contents .type a {
+   color: #999; /* Light gray */
+}
+   /* Occurrence Information */
+div.sample div.contents .occurs, div.sample div.contents .occurs a {
+   color: #999; /* Light gray */
+}
+   /* Fixed values */
+div.sample div.contents .fixed {
+   color: #063; /* Green */
+   font-weight: bold;
+}
+   /* Simple type constraints */
+div.sample div.contents .constraint, div.sample div.contents .constraint a {
+   color: #999; /* Light gray */
+}
+   /* Elements and attributes inherited from base type */
+div.sample div.contents .inherited, div.sample div.contents .inherited a {
+   color: #666; /* Dark gray */
+}
+   /* Elements and attributes added to or changed from base type */
+div.sample div.contents .newFields {
+   font-weight: bold;
+}
+   /* Other type of information */
+div.sample div.contents .other, div.sample div.contents .other a {
+   color: #369; /* Blue */
+   font-style: italic;
+}
+   /* Link to open up window displaying documentation */
+div.sample div.contents a.documentation {
+   text-decoration: none;
+   padding-left: 3px;
+   padding-right: 3px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   font-weight: bold;
+   font-size: 11pt;
+   background-color: #FFD;
+   color: #069;
+}
+   /* Invert colors when hovering over link to open up window 
+      displaying documentation */
+div.sample div.contents a.documentation:hover {
+   color: #FFD;
+   background-color: #069;
+}
+
+/* Schema Component Representation table */
+div.schemaComponent {
+   width: 90%;
+}
+div.schemaComponent div.contents {
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+   padding: 5px;
+}
+   /* Syntax characters */
+div.schemaComponent div.contents {
+   color: #00f; /* blue */
+}
+   /* Element and attribute tags */
+div.schemaComponent div.contents .scTag {
+   color: #933; /* maroon */
+}
+   /* Element and attribute content */
+div.schemaComponent div.contents .scContent, div.schemaComponent div.contents .scContent a {
+   color: black;
+   font-weight: bold;
+}
+   /* Comments */
+div.schemaComponent div.contents .comment {
+   color: #999; /* Light gray */
+}
+
+/******** Legend Section ********/
+
+div#legend table, div#legend div {
+   margin-bottom: 3px;
+}
+div#legend div.hint {
+   color: #999; /* Light gray */
+   width: 90%;
+   margin-left: 1em;
+   margin-bottom: 2em;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   font-weight: bold;
+}
+
+/********* Details *************/
+.detailsToc {
+  color: #666; /* Light gray */
+}
+
+.details {
+  color: #666; /* Light gray */
+  text-decoration:none;
+}
+
+/******** Footer ********/
+
+.footer {
+   font-size: 8pt;
+}
+</style>
+   </head>
+   <body>
+      <h1>
+         <a name="top">XML Schema Documentation</a>
+      </h1>
+      <h2>Table of Contents</h2>
+      <ul>
+         <li>
+            <a href="#SchemaProperties">Schema Document Properties</a>
+         </li>
+         <li>
+                           Global Declarations
+                        <ul>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_element_americanExercise.html">Element: <strong>americanExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_element_bermudaExercise.html">Element: <strong>bermudaExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_element_europeanExercise.html">Element: <strong>europeanExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_element_exercise.html">Element: <strong>exercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_element_product.html">Element: <strong>product</strong>
+                  </a>
+               </li>
+            </ul>
+         </li>
+         <li>
+                           Global Definitions
+                        <ul>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Account.html">Complex Type: <strong>Account</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AccountId.html">Complex Type: <strong>AccountId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AccountName.html">Complex Type: <strong>AccountName</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AccountReference.html">Complex Type: <strong>AccountReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Address.html">Complex Type: <strong>Address</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableDate.html">Complex Type: <strong>AdjustableDate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableDate2.html">Complex Type: <strong>AdjustableDate2</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableDates.html">Complex Type: <strong>AdjustableDates</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableDatesOrRelativeDateOffset.html">Complex Type: <strong>AdjustableDatesOrRelativeDateOffset</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableOrAdjustedDate.html">Complex Type: <strong>AdjustableOrAdjustedDate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableOrRelativeDate.html">Complex Type: <strong>AdjustableOrRelativeDate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableOrRelativeDates.html">Complex Type: <strong>AdjustableOrRelativeDates</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableRelativeOrPeriodicDates.html">Complex Type: <strong>AdjustableRelativeOrPeriodicDates</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustableRelativeOrPeriodicDates2.html">Complex Type: <strong>AdjustableRelativeOrPeriodicDates2</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AdjustedRelativeDateOffset.html">Complex Type: <strong>AdjustedRelativeDateOffset</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AgreementType.html">Complex Type: <strong>AgreementType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AgreementVersion.html">Complex Type: <strong>AgreementVersion</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AmericanExercise.html">Complex Type: <strong>AmericanExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AmountReference.html">Complex Type: <strong>AmountReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AmountSchedule.html">Complex Type: <strong>AmountSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AssetClass.html">Complex Type: <strong>AssetClass</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AutomaticExercise.html">Complex Type: <strong>AutomaticExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_AverageDailyTradingVolumeLimit.html">Complex Type: <strong>AverageDailyTradingVolumeLimit</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Beneficiary.html">Complex Type: <strong>Beneficiary</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BermudaExercise.html">Complex Type: <strong>BermudaExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BrokerConfirmation.html">Complex Type: <strong>BrokerConfirmation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BrokerConfirmationType.html">Complex Type: <strong>BrokerConfirmationType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessCenter.html">Complex Type: <strong>BusinessCenter</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessCenterTime.html">Complex Type: <strong>BusinessCenterTime</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessCenters.html">Complex Type: <strong>BusinessCenters</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessCentersReference.html">Complex Type: <strong>BusinessCentersReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessDateRange.html">Complex Type: <strong>BusinessDateRange</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessDayAdjustments.html">Complex Type: <strong>BusinessDayAdjustments</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_BusinessDayAdjustmentsReference.html">Complex Type: <strong>BusinessDayAdjustmentsReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CalculationAgent.html">Complex Type: <strong>CalculationAgent</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CalculationPeriodFrequency.html">Complex Type: <strong>CalculationPeriodFrequency</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CashSettlementReferenceBanks.html">Complex Type: <strong>CashSettlementReferenceBanks</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CashflowId.html">Complex Type: <strong>CashflowId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CashflowType.html">Complex Type: <strong>CashflowType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ClearanceSystem.html">Complex Type: <strong>ClearanceSystem</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ContractualDefinitions.html">Complex Type: <strong>ContractualDefinitions</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ContractualMatrix.html">Complex Type: <strong>ContractualMatrix</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ContractualSupplement.html">Complex Type: <strong>ContractualSupplement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ContractualTermsSupplement.html">Complex Type: <strong>ContractualTermsSupplement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CorrespondentInformation.html">Complex Type: <strong>CorrespondentInformation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CountryCode.html">Complex Type: <strong>CountryCode</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CreditRating.html">Complex Type: <strong>CreditRating</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CreditSeniority.html">Complex Type: <strong>CreditSeniority</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CreditSupportAgreement.html">Complex Type: <strong>CreditSupportAgreement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CreditSupportAgreementIdentifier.html">Complex Type: <strong>CreditSupportAgreementIdentifier</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CreditSupportAgreementType.html">Complex Type: <strong>CreditSupportAgreementType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Currency.html">Complex Type: <strong>Currency</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DateList.html">Complex Type: <strong>DateList</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DateOffset.html">Complex Type: <strong>DateOffset</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DateRange.html">Complex Type: <strong>DateRange</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DateReference.html">Complex Type: <strong>DateReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DateTimeList.html">Complex Type: <strong>DateTimeList</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DayCountFraction.html">Complex Type: <strong>DayCountFraction</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DeterminationMethod.html">Complex Type: <strong>DeterminationMethod</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_DeterminationMethodReference.html">Complex Type: <strong>DeterminationMethodReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Documentation.html">Complex Type: <strong>Documentation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Empty.html">Complex Type: <strong>Empty</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_EntityId.html">Complex Type: <strong>EntityId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_EntityName.html">Complex Type: <strong>EntityName</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_EuropeanExercise.html">Complex Type: <strong>EuropeanExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ExchangeId.html">Complex Type: <strong>ExchangeId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Exercise.html">Complex Type: <strong>Exercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ExerciseFee.html">Complex Type: <strong>ExerciseFee</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ExerciseFeeSchedule.html">Complex Type: <strong>ExerciseFeeSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ExerciseNotice.html">Complex Type: <strong>ExerciseNotice</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ExerciseProcedure.html">Complex Type: <strong>ExerciseProcedure</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FloatingRate.html">Complex Type: <strong>FloatingRate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FloatingRateCalculation.html">Complex Type: <strong>FloatingRateCalculation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FloatingRateIndex.html">Complex Type: <strong>FloatingRateIndex</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ForecastRateIndex.html">Complex Type: <strong>ForecastRateIndex</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Formula.html">Complex Type: <strong>Formula</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FormulaComponent.html">Complex Type: <strong>FormulaComponent</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Frequency.html">Complex Type: <strong>Frequency</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FutureValueAmount.html">Complex Type: <strong>FutureValueAmount</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FxCashSettlement.html">Complex Type: <strong>FxCashSettlement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FxFixing.html">Complex Type: <strong>FxFixing</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FxRate.html">Complex Type: <strong>FxRate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_FxSpotRateSource.html">Complex Type: <strong>FxSpotRateSource</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_GenericAgreement.html">Complex Type: <strong>GenericAgreement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_GoverningLaw.html">Complex Type: <strong>GoverningLaw</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_GrossCashflow.html">Complex Type: <strong>GrossCashflow</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_IdentifiedCurrency.html">Complex Type: <strong>IdentifiedCurrency</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_IdentifiedCurrencyReference.html">Complex Type: <strong>IdentifiedCurrencyReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_IdentifiedDate.html">Complex Type: <strong>IdentifiedDate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_IdentifiedPayerReceiver.html">Complex Type: <strong>IdentifiedPayerReceiver</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_IndustryClassification.html">Complex Type: <strong>IndustryClassification</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_InformationProvider.html">Complex Type: <strong>InformationProvider</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_InformationSource.html">Complex Type: <strong>InformationSource</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_InstrumentId.html">Complex Type: <strong>InstrumentId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_InterestAccrualsCompoundingMethod.html">Complex Type: <strong>InterestAccrualsCompoundingMethod</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_InterestAccrualsMethod.html">Complex Type: <strong>InterestAccrualsMethod</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_IntermediaryInformation.html">Complex Type: <strong>IntermediaryInformation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_InterpolationMethod.html">Complex Type: <strong>InterpolationMethod</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Leg.html">Complex Type: <strong>Leg</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_LegalEntity.html">Complex Type: <strong>LegalEntity</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_LegalEntityReference.html">Complex Type: <strong>LegalEntityReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MainPublication.html">Complex Type: <strong>MainPublication</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ManualExercise.html">Complex Type: <strong>ManualExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MasterAgreement.html">Complex Type: <strong>MasterAgreement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MasterAgreementType.html">Complex Type: <strong>MasterAgreementType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MasterAgreementVersion.html">Complex Type: <strong>MasterAgreementVersion</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MasterConfirmation.html">Complex Type: <strong>MasterConfirmation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MasterConfirmationAnnexType.html">Complex Type: <strong>MasterConfirmationAnnexType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MasterConfirmationType.html">Complex Type: <strong>MasterConfirmationType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MatchId.html">Complex Type: <strong>MatchId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Math.html">Complex Type: <strong>Math</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MatrixTerm.html">Complex Type: <strong>MatrixTerm</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MatrixType.html">Complex Type: <strong>MatrixType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MimeType.html">Complex Type: <strong>MimeType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Money.html">Complex Type: <strong>Money</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MoneyBase.html">Complex Type: <strong>MoneyBase</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_MultipleExercise.html">Complex Type: <strong>MultipleExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NonNegativeAmountSchedule.html">Complex Type: <strong>NonNegativeAmountSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NonNegativeMoney.html">Complex Type: <strong>NonNegativeMoney</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NonNegativePayment.html">Complex Type: <strong>NonNegativePayment</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NonNegativeSchedule.html">Complex Type: <strong>NonNegativeSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NonNegativeStep.html">Complex Type: <strong>NonNegativeStep</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NotionalAmount.html">Complex Type: <strong>NotionalAmount</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NotionalAmountReference.html">Complex Type: <strong>NotionalAmountReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NotionalReference.html">Complex Type: <strong>NotionalReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Offset.html">Complex Type: <strong>Offset</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_OffsetPrevailingTime.html">Complex Type: <strong>OffsetPrevailingTime</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartialExercise.html">Complex Type: <strong>PartialExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Party.html">Complex Type: <strong>Party</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyId.html">Complex Type: <strong>PartyId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyName.html">Complex Type: <strong>PartyName</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyReference.html">Complex Type: <strong>PartyReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyRelationship.html">Complex Type: <strong>PartyRelationship</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyRelationshipDocumentation.html">Complex Type: <strong>PartyRelationshipDocumentation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyRole.html">Complex Type: <strong>PartyRole</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PartyRoleType.html">Complex Type: <strong>PartyRoleType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Payment.html">Complex Type: <strong>Payment</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PaymentBase.html">Complex Type: <strong>PaymentBase</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PaymentBaseExtended.html">Complex Type: <strong>PaymentBaseExtended</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PaymentDetails.html">Complex Type: <strong>PaymentDetails</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PaymentReference.html">Complex Type: <strong>PaymentReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PaymentType.html">Complex Type: <strong>PaymentType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Period.html">Complex Type: <strong>Period</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PeriodicDates.html">Complex Type: <strong>PeriodicDates</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PositiveAmountSchedule.html">Complex Type: <strong>PositiveAmountSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PositiveMoney.html">Complex Type: <strong>PositiveMoney</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PositivePayment.html">Complex Type: <strong>PositivePayment</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PositiveSchedule.html">Complex Type: <strong>PositiveSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PositiveStep.html">Complex Type: <strong>PositiveStep</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PrevailingTime.html">Complex Type: <strong>PrevailingTime</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PricingStructure.html">Complex Type: <strong>PricingStructure</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PricingStructureReference.html">Complex Type: <strong>PricingStructureReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PrincipalExchanges.html">Complex Type: <strong>PrincipalExchanges</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Product.html">Complex Type: <strong>Product</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ProductId.html">Complex Type: <strong>ProductId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ProductReference.html">Complex Type: <strong>ProductReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ProductType.html">Complex Type: <strong>ProductType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_QuotedCurrencyPair.html">Complex Type: <strong>QuotedCurrencyPair</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Rate.html">Complex Type: <strong>Rate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RateObservation.html">Complex Type: <strong>RateObservation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RateReference.html">Complex Type: <strong>RateReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RateSourcePage.html">Complex Type: <strong>RateSourcePage</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Reference.html">Complex Type: <strong>Reference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ReferenceAmount.html">Complex Type: <strong>ReferenceAmount</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ReferenceBank.html">Complex Type: <strong>ReferenceBank</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ReferenceBankId.html">Complex Type: <strong>ReferenceBankId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RelatedParty.html">Complex Type: <strong>RelatedParty</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RelativeDateOffset.html">Complex Type: <strong>RelativeDateOffset</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RelativeDateSequence.html">Complex Type: <strong>RelativeDateSequence</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RelativeDates.html">Complex Type: <strong>RelativeDates</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RequiredIdentifierDate.html">Complex Type: <strong>RequiredIdentifierDate</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ResetFrequency.html">Complex Type: <strong>ResetFrequency</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ReturnSwapNotionalAmountReference.html">Complex Type: <strong>ReturnSwapNotionalAmountReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Rounding.html">Complex Type: <strong>Rounding</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Routing.html">Complex Type: <strong>Routing</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RoutingExplicitDetails.html">Complex Type: <strong>RoutingExplicitDetails</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RoutingId.html">Complex Type: <strong>RoutingId</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RoutingIds.html">Complex Type: <strong>RoutingIds</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RoutingIdsAndExplicitDetails.html">Complex Type: <strong>RoutingIdsAndExplicitDetails</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Schedule.html">Complex Type: <strong>Schedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_ScheduleReference.html">Complex Type: <strong>ScheduleReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SettlementInformation.html">Complex Type: <strong>SettlementInformation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SettlementInstruction.html">Complex Type: <strong>SettlementInstruction</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SettlementMethod.html">Complex Type: <strong>SettlementMethod</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SettlementPriceDefaultElection.html">Complex Type: <strong>SettlementPriceDefaultElection</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SettlementPriceSource.html">Complex Type: <strong>SettlementPriceSource</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SettlementRateSource.html">Complex Type: <strong>SettlementRateSource</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SharedAmericanExercise.html">Complex Type: <strong>SharedAmericanExercise</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SimplePayment.html">Complex Type: <strong>SimplePayment</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SplitSettlement.html">Complex Type: <strong>SplitSettlement</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SpreadSchedule.html">Complex Type: <strong>SpreadSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SpreadScheduleReference.html">Complex Type: <strong>SpreadScheduleReference</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_SpreadScheduleType.html">Complex Type: <strong>SpreadScheduleType</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Step.html">Complex Type: <strong>Step</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_StepBase.html">Complex Type: <strong>StepBase</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_StreetAddress.html">Complex Type: <strong>StreetAddress</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Strike.html">Complex Type: <strong>Strike</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_StrikeSchedule.html">Complex Type: <strong>StrikeSchedule</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Stub.html">Complex Type: <strong>Stub</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_StubValue.html">Complex Type: <strong>StubValue</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_TimezoneLocation.html">Complex Type: <strong>TimezoneLocation</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_AdjustableDate.model.html">Model Group: <strong>AdjustableDate.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_BusinessCentersOrReference.model.html">Model Group: <strong>BusinessCentersOrReference.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_BuyerSeller.model.html">Model Group: <strong>BuyerSeller.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_FloatingRateIndex.model.html">Model Group: <strong>FloatingRateIndex.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_PartialExercise.model.html">Model Group: <strong>PartialExercise.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_PartiesAndAccounts.model.html">Model Group: <strong>PartiesAndAccounts.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_PartyAndAccountReferences.model.html">Model Group: <strong>PartyAndAccountReferences.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_PartyInformation.model.html">Model Group: <strong>PartyInformation.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_PayerReceiver.model.html">Model Group: <strong>PayerReceiver.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_PaymentDiscounting.model.html">Model Group: <strong>PaymentDiscounting.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_Period.model.html">Model Group: <strong>Period.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_Premium.model.html">Model Group: <strong>Premium.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_Product.model.html">Model Group: <strong>Product.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_RoutingExplicitDetails.model.html">Model Group: <strong>RoutingExplicitDetails.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_RoutingIdentification.model.html">Model Group: <strong>RoutingIdentification.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_SettlementAmountOrCurrency.model.html">Model Group: <strong>SettlementAmountOrCurrency.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_group_VersionHistory.model.html">Model Group: <strong>VersionHistory.model</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_CorrelationValue.html">Simple Type: <strong>CorrelationValue</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_HourMinuteTime.html">Simple Type: <strong>HourMinuteTime</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_NonNegativeDecimal.html">Simple Type: <strong>NonNegativeDecimal</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_PositiveDecimal.html">Simple Type: <strong>PositiveDecimal</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_RestrictedPercentage.html">Simple Type: <strong>RestrictedPercentage</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Scheme.html">Simple Type: <strong>Scheme</strong>
+                  </a>
+               </li>
+               <li>
+                  <a href="fpml-shared-5-0.xsd.html_type_Token60.html">Simple Type: <strong>Token60</strong>
+                  </a>
+               </li>
+            </ul>
+         </li>
+      </ul>
+      <ul id="legendTOC" style="margin-top: 0em">
+         <li>
+            <a href="#Legend">Legend</a>
+         </li>
+      </ul>
+      <ul id="glossaryTOC" style="margin-top: 0em">
+         <li>
+            <a href="#Glossary">Glossary</a>
+         </li>
+      </ul>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <h2>
+         <a name="SchemaProperties">Schema Document Properties</a>
+      </h2>
+      <table class="properties">
+         <tr>
+            <th>
+               <a title="Look up 'Target Namespace' in glossary"
+                  href="fpml-shared-5-0.xsd.html#term_TargetNS">Target Namespace</a>
+            </th>
+            <td>
+               <span class="targetNS">http://www.fpml.org/FpML-5/confirmation</span>
+            </td>
+         </tr>
+         <tr>
+            <th>Version</th>
+            <td>$Revision: 2807 $</td>
+         </tr>
+         <tr>
+            <th>Element and Attribute Namespaces</th>
+            <td>
+               <ul>
+                  <li>Global element and attribute declarations belong to this schema's target namespace.</li>
+                  <li>By default, local element declarations belong to this schema's target namespace.</li>
+                  <li>By default, local attribute declarations have no namespace.</li>
+               </ul>
+            </td>
+         </tr>
+         <tr>
+            <th>Schema Composition</th>
+            <td>
+               <ul>
+                  <li>This schema includes components from the following schema document(s):<ul>
+                        <li>
+                           <a title="Jump to schema documentation for 'fpml-enum-5-0.xsd'."
+                              href="fpml-enum-5-0.xsd.html">fpml-enum-5-0.xsd</a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+            </td>
+         </tr>
+      </table>
+      <h3>Declared Namespaces</h3>
+      <table class="namespaces">
+         <tr>
+            <th>Prefix</th>
+            <th>Namespace</th>
+         </tr>
+         <tr>
+            <td>
+               <a name="ns_">Default namespace</a>
+            </td>
+            <td>
+               <span class="targetNS">http://www.fpml.org/FpML-5/confirmation</span>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <a name="ns_xml">xml</a>
+            </td>
+            <td>http://www.w3.org/XML/1998/namespace</td>
+         </tr>
+         <tr>
+            <td>
+               <a name="ns_fpml-annotation">fpml-annotation</a>
+            </td>
+            <td>http://www.fpml.org/annotation</td>
+         </tr>
+         <tr>
+            <td>
+               <a name="ns_xsd">xsd</a>
+            </td>
+            <td>http://www.w3.org/2001/XMLSchema</td>
+         </tr>
+         <tr>
+            <td>
+               <a name="ns_ecore">ecore</a>
+            </td>
+            <td>http://www.eclipse.org/emf/2002/Ecore</td>
+         </tr>
+      </table>
+      <div class="schemaComponent box">
+         <div> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="schema_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">xsd:schema</span> 
+               <span class="scTag">targetNamespace</span>="<span class="scContent">http://www.fpml.org/FpML-5/confirmation</span>" <span class="scTag">documentRoot</span>="<span class="scContent">FpML</span>" <span class="scTag">nsPrefix</span>="<span class="scContent">conf</span>" <span class="scTag">package</span>="<span class="scContent">org.fpml.confirmation</span>" <span class="scTag">version</span>="<span class="scContent">$Revision: 2807 $</span>" <span class="scTag">elementFormDefault</span>="<span class="scContent">qualified</span>" <span class="scTag">attributeFormDefault</span>="<span class="scContent">unqualified</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:include</span> 
+                  <span class="scTag">schemaLocation</span>="<span class="scContent">fpml-enum-5-0.xsd</span>"/&gt;</div>
+               <div class="scContent" style="margin-left: 1.5em">...</div>&lt;/<span class="scTag">xsd:schema</span>&gt;</div>
+         </div>
+      </div>
+      <div style="text-align: right; clear: both;">
+         <a href="#top">top</a>
+      </div>
+      <hr/>
+      <div id="legend">
+         <h2>
+            <a name="Legend">Legend</a>
+         </h2>
+         <div style="float: left; width: 15em;">
+            <h3 style="margin-bottom: 0px;">Complex Type:</h3>
+            <div class="hint" style="margin-left: 0em;">Schema Component Type</div>
+         </div>
+         <div style="float: left; width: 15em;">
+            <h3 style="margin-bottom: 0px;">
+               <span class="name">AusAddress</span>
+            </h3>
+            <div class="hint" style="margin-left: 0em;">Schema Component Name</div>
+         </div>
+         <table class="hierarchy" style="clear : both">
+            <tr>
+               <th>Super-types:</th>
+               <td>
+                  <span class="type" style="color: #0000FF; text-decoration:underline;">Address</span> &lt; <span class="current">AusAddress</span> (by extension)</td>
+            </tr>
+            <tr>
+               <th>Sub-types:</th>
+               <td>
+                  <ul>
+                     <li>
+                        <span class="type" style="color: #0000FF; text-decoration:underline;">QLDAddress</span> (by restriction)</li>
+                  </ul>
+               </td>
+            </tr>
+         </table>
+         <div class="hint">If this schema component is a type definition, its type hierarchy is shown in a gray-bordered box.</div>
+         <table class="properties">
+            <tr>
+               <th>Name</th>
+               <td>AusAddress</td>
+            </tr>
+            <tr>
+               <th>
+                  <a title="Look up 'Abstract' in glossary"
+                     href="fpml-shared-5-0.xsd.html#term_Abstract">Abstract</a>
+               </th>
+               <td>no</td>
+            </tr>
+         </table>
+         <div class="hint">The table above displays the properties of this schema component.</div>
+         <div class="sample box">
+            <div>
+               <span class="caption">XML Instance Representation</span>
+            </div>
+            <div class="contents">
+               <span style="margin-left: 0em">&lt;...</span>
+               <span class="newFields">
+                  <span> country="<span class="fixed">Australia</span>"</span>
+               </span>&gt; <br/>
+               <span style="margin-left: 1.5em" class="inherited">&lt;unitNo&gt; <span class="type">string</span> &lt;/unitNo&gt; <span class="occurs">[0..1]</span>
+               </span>
+               <br/>
+               <span style="margin-left: 1.5em" class="inherited">&lt;houseNo&gt; <span class="type">string</span> &lt;/houseNo&gt; <span class="occurs">[1]</span>
+               </span>
+               <br/>
+               <span style="margin-left: 1.5em" class="inherited">&lt;street&gt; <span class="type">string</span> &lt;/street&gt; <span class="occurs">[1]</span>
+               </span>
+               <br/>
+               <span class="group" style="margin-left: 1.5em">Start <a title="Look up 'Choice' in glossary" href="#term_Choice">Choice</a>
+                  <span class="occurs">[1]</span>
+               </span>
+               <br/>
+               <span style="margin-left: 3em" class="inherited">&lt;city&gt; <span class="type">string</span> &lt;/city&gt; <span class="occurs">[1]</span>
+               </span>
+               <br/>
+               <span style="margin-left: 3em" class="inherited">&lt;town&gt; <span class="type">string</span> &lt;/town&gt; <span class="occurs">[1]</span>
+               </span>
+               <br/>
+               <span class="group" style="margin-left: 1.5em">End Choice</span>
+               <br/>
+               <span class="newFields">
+                  <span style="margin-left: 1.5em">&lt;state&gt; <span class="type" style="text-decoration:underline;">AusStates</span> &lt;/state&gt; <span class="occurs">[1]</span>
+                  </span>
+                  <br/>
+                  <span style="margin-left: 1.5em">&lt;postcode&gt; <span class="constraint">string &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;</span> &lt;/postcode&gt; <span class="occurs">[1]</span>
+                  </span>
+                  <br/>
+               </span>
+               <span style="margin-left: 0em">&lt;/...&gt;</span>
+               <br/>
+            </div>
+         </div>
+         <div class="hint">
+            <p>The XML Instance Representation table above shows the schema component's content as an XML instance.</p>
+            <ul>
+               <li>The minimum and maximum occurrence of elements and attributes are provided in square brackets, e.g. [0..1].</li>
+               <li>Model group information are shown in gray, e.g. Start Choice ... End Choice.</li>
+               <li>For type derivations, the elements and attributes that have been added to or changed from the base type's content are shown in <span style="font-weight: bold">bold</span>.</li>
+               <li>If an element/attribute has a fixed value, the fixed value is shown in green, e.g. country="Australia".</li>
+               <li>Otherwise, the type of the element/attribute is displayed.
+               <ul>
+                     <li>If the element/attribute's type is in the schema, a link is provided to it.</li>
+                     <li>For local simple type definitions, the constraints are displayed in angle brackets, e.g. &lt;&lt;<em>pattern</em> = [1-9][0-9]{3}&gt;&gt;.</li>
+                  </ul>
+               </li>
+            </ul>
+         </div>
+         <div class="schemaComponent box">
+            <div>
+               <span class="caption">Schema Component Representation</span>
+            </div>
+            <div class="contents">
+               <span style="margin-left: 0em">&lt;<span class="scTag">complexType</span>
+                  <span class="scTag">name</span>="<span class="scContent">AusAddress</span>"&gt;</span>
+               <br/>
+               <span style="margin-left: 1.5em">&lt;<span class="scTag">complexContent</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 3em">&lt;<span class="scTag">extension</span>
+                  <span class="scTag">base</span>="<span class="scContent">
+                     <span class="type" style="text-decoration:underline;">Address</span>
+                  </span>"&gt;</span>
+               <br/>
+               <span style="margin-left: 4.5em">&lt;<span class="scTag">sequence</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 6em">&lt;<span class="scTag">element</span>
+                  <span class="scTag">name</span>="<span class="scContent">state</span>" <span class="scTag">type</span>="<span class="scContent">
+                     <span class="type" style="text-decoration:underline;">AusStates</span>
+                  </span>"/&gt;</span>
+               <br/>
+               <span style="margin-left: 6em">&lt;<span class="scTag">element</span>
+                  <span class="scTag">name</span>="<span class="scContent">postcode</span>"&gt;</span>
+               <br/>
+               <span style="margin-left: 7.5em">&lt;<span class="scTag">simpleType</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 9em">&lt;<span class="scTag">restriction</span>
+                  <span class="scTag">base</span>="<span class="scContent">
+                     <span class="type">string</span>
+                  </span>"&gt;</span>
+               <br/>
+               <span style="margin-left: 10.5em">&lt;<span class="scTag">pattern</span>
+                  <span class="scTag">value</span>="<span class="scContent">[1-9][0-9]{3}</span>"/&gt;</span>
+               <br/>
+               <span style="margin-left: 9em">&lt;/<span class="scTag">restriction</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 7.5em">&lt;/<span class="scTag">simpleType</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 6em">&lt;/<span class="scTag">element</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 4.5em">&lt;/<span class="scTag">sequence</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 4.5em">&lt;<span class="scTag">attribute</span>
+                  <span class="scTag">name</span>="<span class="scContent">country</span>" <span class="scTag">type</span>="<span class="scContent">
+                     <span class="type">string</span>
+                  </span>" <span class="scTag">fixed</span>="<span class="scContent">Australia</span>"/&gt;</span>
+               <br/>
+               <span style="margin-left: 3em">&lt;/<span class="scTag">extension</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 1.5em">&lt;/<span class="scTag">complexContent</span>&gt;</span>
+               <br/>
+               <span style="margin-left: 0em">&lt;/<span class="scTag">complexType</span>&gt;</span>
+               <br/>
+            </div>
+         </div>
+         <div class="hint">The Schema Component Representation table above displays the underlying XML representation of the schema component. (Annotations are not shown.)</div>
+         <div style="text-align: right; clear: both;">
+            <a href="#top">top</a>
+         </div>
+         <hr/>
+      </div>
+      <div id="glossary">
+         <h2>
+            <a name="Glossary">Glossary</a>
+         </h2>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Abstract">Abstract</a> 
+            </span>(Applies to complex type definitions and element declarations). An abstract element or complex type cannot used to validate an element instance. If there is a reference to an abstract element, only element declarations that can substitute the abstract element can be used to validate the instance. For references to abstract type definitions, only derived types can be used.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_All">All Model Group</a> 
+            </span>Child elements can be provided <em>in any order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-all"
+               href="http://www.w3.org/TR/xmlschema-1/#element-all">http://www.w3.org/TR/xmlschema-1/#element-all</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Choice">Choice Model Group</a> 
+            </span>
+            <em>Only one</em> from the list of child elements and model groups can be provided in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-choice"
+               href="http://www.w3.org/TR/xmlschema-1/#element-choice">http://www.w3.org/TR/xmlschema-1/#element-choice</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_CollapseWS">Collapse Whitespace Policy</a> 
+            </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32). Then, collapse contiguous sequences of space characters into single space character, and remove leading and trailing space characters.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_ElemBlock">Disallowed Substitutions</a> 
+            </span>(Applies to element declarations). If <em>substitution</em> is specified, then <a title="Look up 'substitution group' in glossary"
+               href="fpml-shared-5-0.xsd.html#term_SubGroup">substitution group</a> members cannot be used in place of the given element declaration to validate element instances. If <em>derivation methods</em>, e.g. extension, restriction, are specified, then the given element declaration will not validate element instances that have types derived from the element declaration's type using the specified derivation methods. Normally, element instances can override their declaration's type by specifying an <code>xsi:type</code> attribute.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Key">Key Constraint</a> 
+            </span>Like <a title="Look up 'Uniqueness Constraint' in glossary"
+               href="fpml-shared-5-0.xsd.html#term_Unique">Uniqueness Constraint</a>, but additionally requires that the specified value(s) must be provided. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_KeyRef">Key Reference Constraint</a> 
+            </span>Ensures that the specified value(s) must match value(s) from a <a title="Look up 'Key Constraint' in glossary"
+               href="fpml-shared-5-0.xsd.html#term_Key">Key Constraint</a> or <a title="Look up 'Uniqueness Constraint' in glossary"
+               href="fpml-shared-5-0.xsd.html#term_Unique">Uniqueness Constraint</a>. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_ModelGroup">Model Group</a> 
+            </span>Groups together element content, specifying the order in which the element content can occur and the number of times the group of element content may be repeated. See: <a title="http://www.w3.org/TR/xmlschema-1/#Model_Groups"
+               href="http://www.w3.org/TR/xmlschema-1/#Model_Groups">http://www.w3.org/TR/xmlschema-1/#Model_Groups</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Nillable">Nillable</a> 
+            </span>(Applies to element declarations). If an element declaration is nillable, instances can use the <code>xsi:nil</code> attribute. The <code>xsi:nil</code> attribute is the boolean attribute, <em>nil</em>, from the <em>http://www.w3.org/2001/XMLSchema-instance</em> namespace. If an element instance has an <code>xsi:nil</code> attribute set to true, it can be left empty, even though its element declaration may have required content.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Notation">Notation</a> 
+            </span>A notation is used to identify the format of a piece of data. Values of elements and attributes that are of type, NOTATION, must come from the names of declared notations. See: <a title="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations"
+               href="http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations">http://www.w3.org/TR/xmlschema-1/#cNotation_Declarations</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_PreserveWS">Preserve Whitespace Policy</a> 
+            </span>Preserve whitespaces exactly as they appear in instances.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_TypeFinal">Prohibited Derivations</a> 
+            </span>(Applies to type definitions). Derivation methods that cannot be used to create sub-types from a given type definition.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_TypeBlock">Prohibited Substitutions</a> 
+            </span>(Applies to complex type definitions). Prevents sub-types that have been derived using the specified derivation methods from validating element instances in place of the given type definition.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_ReplaceWS">Replace Whitespace Policy</a> 
+            </span>Replace tab, line feed, and carriage return characters with space character (Unicode character 32).</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Sequence">Sequence Model Group</a> 
+            </span>Child elements and model groups must be provided <em>in the specified order</em> in instances. See: <a title="http://www.w3.org/TR/xmlschema-1/#element-sequence"
+               href="http://www.w3.org/TR/xmlschema-1/#element-sequence">http://www.w3.org/TR/xmlschema-1/#element-sequence</a>.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_SubGroup">Substitution Group</a> 
+            </span>Elements that are <em>members</em> of a substitution group can be used wherever the <em>head</em> element of the substitution group is referenced.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_ElemFinal">Substitution Group Exclusions</a> 
+            </span>(Applies to element declarations). Prohibits element declarations from nominating themselves as being able to substitute a given element declaration, if they have types that are derived from the original element's type using the specified derivation methods.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_TargetNS">Target Namespace</a> 
+            </span>The target namespace identifies the namespace that components in this schema belongs to. If no target namespace is provided, then the schema components do not belong to any namespace.</p>
+         <p>
+            <span class="glossaryTerm">
+               <a name="term_Unique">Uniqueness Constraint</a> 
+            </span>Ensures uniqueness of an element/attribute value, or a combination of values, within a specified scope. See: <a title="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions"
+               href="http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions">http://www.w3.org/TR/xmlschema-1/#cIdentity-constraint_Definitions</a>.</p>
+         <div style="text-align: right; clear: both;">
+            <a href="#top">top</a>
+         </div>
+         <hr/>
+      </div>
+      <p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support.</p>
+   </body>
+</html>

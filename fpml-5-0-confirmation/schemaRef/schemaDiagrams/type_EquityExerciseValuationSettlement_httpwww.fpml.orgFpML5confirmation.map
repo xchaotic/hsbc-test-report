@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_EquityExerciseValuationSettlement_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_SettlementPriceSource'
+  coords='356,1092,537,1134'
+  href='fpml-shared-5-0.xsd.html_type_SettlementPriceSource.html#type_SettlementPriceSource'/>
+
+ <area
+  shape='rect'
+  alt='type_AdjustableOrRelativeDate'
+  coords='356,1252,580,1294'
+  href='fpml-shared-5-0.xsd.html_type_AdjustableOrRelativeDate.html#type_AdjustableOrRelativeDate'/>
+
+ <area
+  shape='rect'
+  alt='type_PartyReference'
+  coords='356,1304,638,1346'
+  href='fpml-shared-5-0.xsd.html_type_PartyReference.html#type_PartyReference'/>
+
+ <area
+  shape='rect'
+  alt='type_SettlementPriceDefaultElection'
+  coords='356,1356,581,1398'
+  href='fpml-shared-5-0.xsd.html_type_SettlementPriceDefaultElection.html#type_SettlementPriceDefaultElection'/>
+
+</map>

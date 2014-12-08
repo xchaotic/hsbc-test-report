@@ -1,0 +1,1794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s9">9 RETURN SWAPS PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	
+	
+	 
+ 
+	
+	
+	
+	
+	
+	
+	
+	
+
+         <div>
+            <h3>
+               <a id="s9.1">9.1 Introduction</a>
+            </h3>
+		
+            <p>FpML Return Swaps Product Architecture amends the previous Equity Swaps Product Architecture since it describes a more generic representation of return type swaps, not only equities. The generic representation includes the product coverage introduced in previous versions of FpML to support full conformance with ISDA 2002 Equity Derivative Definitions, intial and final stubs, and Equity Swap Transaction Supplement. In addition, it supports the representation of Total Return Swaps.</p>
+		
+            <p>This document provides an in-depth review of the technical architecture of the FpML Return Swap subschema. The scope as well as the current limitations of this schema, which will be addressed through a next release, are described in the first section of this document.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.2">9.2 Return Swaps Scope</a>
+               </h3>
+            </div>
+	
+            <p>FpML provides generic Return Swaps support including "long form" Equity Swap representations, as well as Total Return Swaps. A separate product element called equitySwapTransactionSupplement supports "short form" Equity Swap Transaction Supplement.</p>
+	
+            <p>Return-type Swaps have 1-to-many Legs, all of which must be derived from the ReturnSwapLeg type. Instances of Legs are returnLeg, interestLeg. Other Leg types may be derived from ReturnSwapLeg at will, to allow for private extensions to support whatever type of Generic Return Swap is desired.</p>
+	
+            <p>The scope of this FpML representation for return swaps is to capture the following types of swaps that have equity-related underlyers:</p>
+	
+            <ul class="bulleted">
+		
+               <li>Single stock swaps as well as basket swaps (i.e. swaps with multiple underlyers);</li>
+		
+               <li>Swaps that have a different types of underlying assets (equity, index, mutual funds, exchange-traded funds, convertible bond, futures), or a combination of these;</li>
+		
+               <li>2-legged swaps with a combination of an equity leg and a funding leg, as well as swaps that either have only one leg (e.g. fully funded or zero-strike swap) or multiple equity legs (e.g. outperformance swaps);</li>
+		
+               <li>Total Return Swaps, a type of swap in which one party (total return payer) transfers the total economic performance of a reference obligation to the other party (total return receiver).</li>
+		
+               <li>Swaps that have specific adjustment conditions, such as execution swaps or portfolio rebalancing swaps;</li>
+		
+               <li>Swaps that involve the exchange of principal cashflows;</li>
+		
+               <li>Swaps that have inital and final stubs;</li>
+		
+               <li>Swaps which can be represented as Transaction Supplements under ISDA Master Agreements;</li>
+	
+            </ul>
+	
+            <p>Extraordinary Events terms have been incorporated, to take into consideration the release of the 2002 ISDA Definitions for Equity Derivatives.</p>
+	
+            <p>Trigger swaps, in which equity risk morphs into a fixed income risk once a certain market level is reached, may be supported in a subsequent release.</p>
+
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.3">9.3 The structure of the generic Return Swap</a>
+               </h3>
+            </div>
+		
+            <p> The FpML representation of the returnSwap relies on the structures that are presented in the figure below:</p>
+		
+            <p>
+			
+               <a href="images/equity-swaps/returnSwap.jpg">
+                  <img src="images/equity-swaps/returnSwap.jpg" alt="images/equity-swaps/returnSwap.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Swaps may have 1-to-many Legs, the principal components of the return swap schema are as follows:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Return-type Swaps have 1-to-many Legs, all of which must be derived from the ReturnSwapLeg type. Instances of Legs are returnLeg (old equityLeg), interestLeg.<ul class="bulleted">
+				
+                     <li>The returnLeg (old equityLeg) component specifies the return leg of the swap. There can be one or several return legs;</li>
+				
+                     <li>The interestLeg component defines the interest leg of the swap. The possibility is provided for having swaps that do not have an interest leg (case of an outperformance swap where 2 equity underlyers are swapped, or a fully-funded swap where there is no financing component);</li>
+			
+                  </ul>
+			
+               </li>
+			
+               <li>Note: The equityLeg was <b>deprecated</b> in FpML 4.2 Second Working Draft and it has been removed in version 5.0.</li>
+			
+               <li>The principalExchangeFeatures is an optional component that describes the case where principal cashflows are exchanged between the parties to the trade;</li>
+			
+               <li>Similarly to the interest rate swap (but with a different structure, that serves the specific features of the return swaps), the additionalPayment component supports the other types of payments involving the parties to the trade, such as fees;</li>
+			
+               <li>Finally, the earlyTermination component specifies, for one or for both the parties to the trade, the date from which it can be early terminated.</li>
+		
+            </ul>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.4">9.4 Equity Swap Transaction Supplement</a>
+               </h3>
+            </div>
+		
+            <p>
+			
+               <a href="images/equity-swaps/equitySwapTransactionSupplement.jpg">
+                  <img src="images/equity-swaps/equitySwapTransactionSupplement.jpg" alt="images/equity-swaps/equitySwapTransactionSupplement.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>equitySwapTransactionSupplement implements Equity Swap Transaction Supplements by providing a short form representation for use in trades governed by a Master Confirmation Agreement. Due to the wide scope of the Equity Swap Transaction Supplement, it has not been possible to make the equitySwapTransactionSupplement component as compact as equityOptionTransactionSupplement </p>
+		
+            <p>The various sections below detail each of these five structures of the equity leg of the swap.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.5">9.5 The return leg</a>
+               </h3>
+            </div>
+		
+            <p> The figure 2 presents the structure of the return leg of the swap, which has 10 categories of components:</p>
+		
+            <p>
+			
+               <a href="images/equity-swaps/figure2_ReturnLeg.jpg">
+                  <img src="images/equity-swaps/figure2_ReturnLeg.jpg" alt="images/equity-swaps/figure2_ReturnLeg.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 2: The structure of the return leg.</p>
+		
+            <p>These 10 categories of components are described through the next few pages. They are the following:</p>
+		
+            <ul class="bulleted">
+			
+               <li>The identification of the payer and receiver party for this leg;</li>
+			
+               <li>The determination of the effective date and the termination date;</li>
+			
+               <li>The determination of the strike date for forward starting swaps;</li>
+			
+               <li>The description of the underlying asset(s);</li>
+			
+               <li>The Rate of Return terms;</li>
+			
+               <li>The specification of the notional;</li>
+			
+               <li>The determination of the payoff amount;</li>
+			
+               <li>The description of the return terms;</li>
+			
+               <li>The notional adjustments conditions;</li>
+			
+               <li>The currency exchange terms that can be associated with the equity leg of the swap.</li>
+		
+            </ul>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s9.5.1">9.5.1 The payer and receiver party</a>
+               </h4>
+			
+               <p>The identification of the payer and receiver party of the equity leg is done similarly to the other types of swaps, through the payerPartyReference and the receiverPartyReference data elements.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.2">9.5.2 The effective date and the termination date</a>
+               </h4>
+			
+               <p>The effective date and the termination date are similarly defined for both the interest and equity leg of the trade. Each of these dates can be specified either in reference to a date defined somewhere else in the document (using the relativeDate subcomponent), or as a specific date (using the adjustableDate subcomponent).</p>
+			
+               <p> The figure 3 presents the effective date as an example of how these two components are structured:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure3_effectiveDate.jpg">
+                     <img src="images/equity-swaps/figure3_effectiveDate.jpg" alt="images/equity-swaps/figure3_effectiveDate.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 3: The effectiveDate.</p>
+			
+               <p> The example 1 below presents how these schema structures are used for defining the effective date of the equity swap as a function of the trade date (the elapse time between these being the settlement cycle of the underlying security assets) and the termination date as a function of the last payment of the swap. This corresponds indeed to the most frequent practice for confirming equity swaps. </p>
+			
+               <p> Example 1 - Effective date as a function of the trade date and effective date as a function of the last payment date:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Effective date: 3 business days after the trade date (defined in another part of the document and referred to through the TradeDate reference);</li>
+				
+                  <li>Termination date: on the last payment date (also defined somewhere else in the document and referred to through the FinalEquityPaymentDate reference).</li>
+			
+               </ul>
+			
+               <pre>
+&lt;effectiveDate id="EffectiveDate"&gt;
+  &lt;relativeDate&gt;
+    &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+    &lt;period&gt;D&lt;/period&gt;
+    &lt;dayType&gt;ExchangeBusiness&lt;/dayType&gt;
+    &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+    &lt;dateRelativeTo href="TradeDate"/&gt;
+  &lt;/relativeDate&gt;
+&lt;/effectiveDate&gt;
+&lt;terminationDate id="TerminationDate"&gt;
+  &lt;relativeDate&gt;
+    &lt;periodMultiplier&gt;0&lt;/periodMultiplier&gt;
+    &lt;period&gt;D&lt;/period&gt;
+    &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+    &lt;dateRelativeTo href="FinalEquityPaymentDate"/&gt;
+  &lt;/relativeDate&gt;
+&lt;/terminationDate&gt;
+          </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.3">9.5.3 The underlyer</a>
+               </h4>
+			
+               <p>The underlyer component provides a detailed description of the characteristic of the underlying asset(s). Seven types of asset classes have been included as part of this release, of which six are actually used by the equity swap. These six underlying types are the convertible bond, the equity, the exchange-traded fund, the future contract, the index and the mutual fund. The seventh one is the bond, that is used by the schema for credit derivatives and will be later used by the schema for trigger swaps once it will be released. Each of these asset types has been defined by extending a component named underlyingAsset that contains some key attributes that are common across most of the underlyers: the identifier, the descriptive name, the currency of denomination, the stock exchange on which the underlyer is listed and the clearance system. With the exception of the identifier element, all these attributes are optional.</p>
+			
+               <p>Thereafter is the description of these six types of underlyers that are used by the schema for equity swaps. These diagrams also present the respective schemes that have been associated with these components. Not surprisingly, the exchangeId is used quite often.</p>
+			
+               <p> The equity:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure4_equity.jpg">
+                     <img src="images/equity-swaps/figure4_equity.jpg" alt="images/equity-swaps/figure4_equity.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 4: The equity underlyer extends the underlyingAsset component by adding two (optional) elements: the related exchange and the options exchange.</p>
+			
+               <p> The index:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure5_index.jpg">
+                     <img src="images/equity-swaps/figure5_index.jpg" alt="images/equity-swaps/figure5_index.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 5: The index underlyer extends the underlyingAsset component by adding two (optional) elements: the related exchange and the identifier of the reference future contract that may have been referenced as part of the swap contract.</p>
+			
+               <p> The mutual fund:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure6_mutualFund.jpg">
+                     <img src="images/equity-swaps/figure6_mutualFund.jpg" alt="images/equity-swaps/figure6_mutualFund.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 6: The mutual fund underlyer extends the underlyingAsset component by adding two (optional) elements: the indicator of whether the fund is open or closed and the name of the fund manager.</p>
+			
+               <p> The exchange-traded fund:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure7_ETF.jpg">
+                     <img src="images/equity-swaps/figure7_ETF.jpg" alt="images/equity-swaps/figure7_ETF.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 7: The exchange-traded fund underlyer extends the underlyingAsset component by adding three (optional) elements: the related exchange, the options exchange and the name of the fund manager.</p>
+			
+               <p> The future contract:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure8_future.jpg">
+                     <img src="images/equity-swaps/figure8_future.jpg" alt="images/equity-swaps/figure8_future.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 8: The future contract underlyer extends the underlyingAsset component by adding four (optional) elements: the related exchange, the options exchange, the contract multiplier and the specific reference of the future contract that is used as part of the swap.</p>
+			
+               <p> The convertible bond:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure9_CB.jpg">
+                     <img src="images/equity-swaps/figure9_CB.jpg" alt="images/equity-swaps/figure9_CB.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 9: The convertible bond underlyer extends the underlyingAsset component through six elements that characterize the instrument (the related exchange, the issuer name, the coupon rate, the maturity date, the par value and the face amount); in addition, the underlyingEquity component describes the equity underlyer in which the convertible bond can be turned into.</p>
+			
+               <p> The commodity:</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure10_COMM.jpg">
+                     <img src="images/equity-swaps/figure10_COMM.jpg" alt="images/equity-swaps/figure10_COMM.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 10: The commodity underlyer extends the IdentifiedAsset component and may be used in the same way as all other FpML underlyers.</p>
+			
+               <p> These various types of underlyers can be combined through two different structures, depending upon whether the swap has only one underlyer or has multiple underlying assets: the singleUnderlyer structure or the basket structure. The figure 11 below provides a high-level view of these two alternative structures, which are detailed in the following paragraphs.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure11_Underlyer.jpg">
+                     <img src="images/equity-swaps/figure11_Underlyer.jpg" alt="images/equity-swaps/figure11_Underlyer.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 11: Overview of the two alternative types of underlying structured: the singleUnderlyer and the basket.</p>
+			
+               <p> In the case of a single underlyer, the singleUnderlyer component specifies the number of open units, the description of the underlyer (through the underlyingAsset substitution group) and the dividend payout ratio (which is defined through the underlyer component rather than the return component for reasons that are related to the basket, and that are explained below). It should be noted that the seven members of the underlyingAsset substitution group (bond, convertibleBond, equity, exchangeTradedFund, future, index, mutualFund) do not appear in this diagram: only the basis elements are represented.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure12_SingleUnderlyer.jpg">
+                     <img src="images/equity-swaps/figure12_SingleUnderlyer.jpg" alt="images/equity-swaps/figure12_SingleUnderlyer.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 12: The single underlyer.</p>
+			
+               <p> The basket component is to be applied in the case where there are several underlyers, which are then specifically described through the basketConstituents component. This basket component is structured as follows: an identification of the number of basket units (typically, one) and a description of each of the basket constituents (through a one-to-many relationship).</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure13_Basket.jpg">
+                     <img src="images/equity-swaps/figure13_Basket.jpg" alt="images/equity-swaps/figure13_Basket.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 13: The basket.</p>
+			
+               <p>The structure that describes the basket is quite more complex than the one that specifies the single underlyer. Besides defining the number of basket units (typically, one), the structure specifies each of the basket constituents through an asset description, a constituent weight, a dividend payout ratio, a price and a notional description. The underlyingAsset component having been already described, the points below focus on the four latter components:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The constituentWeight specifies the number of units of each of the basket constituents and, optionally, their respective weight in the basket. It is an optional component, considering that some more exotic types of equity swaps do not have a relative weight associated with each their underlyer components.</li>
+				
+                  <li>The dividend payout ratio has been associated with the description of the underlyer rather than included in the definition of the return component in order to address the case where a different payout ratio is be associated with the respective components of a basket swap.</li>
+				
+                  <li>The underlyerPrice component describes the price of each of the basket components; it is optional in order to take into consideration the cases where the market participants do not specify the breakdown by underlyer of the price that is defined at the leg level (which, in the case of a basket swap, corresponds to the notional of the equity leg of the swap). Its structure is based upon the Price complex type, which provides a great flexibility in the way the price of an asset can be defined. This price structure is described in more details through the later developments that are devoted to the valuation component.</li>
+				
+                  <li>The underlyerNotional is also an optional component; it provides the possibility to break down by underlyer the notional for the equity leg, which can be particularly useful when several currencies are used across the various underlyers.</li>
+			
+               </ul>
+			
+               <p> As an illustration of this structure of the basket component and an introduction to the upcoming developments that are devoted to the valuation, the example below presents the case of a basket swap which underlyers components are listed in various currencies.</p>
+			
+               <p> Example 2 - Basket swap with underlyers listed in different currencies:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The basket is comprised of one underlyer that is listed in EUR (TIM.MI) and one that is listed in GBP (VOD.L);</li>
+				
+                  <li>The reference currency of the swap is USD (this information is carried through the equityAmount component, which is not indicated here);</li>
+				
+                  <li>Each of the two basketConstituent structures carry the information about both its local price and its price after conversion in USD;</li>
+				
+                  <li>The information about the currency conversion rates is specified through the valuation component (that is not depicted below), as this information is not specific to the underlyer;</li>
+				
+                  <li>The initial price of the swap is USD 7,376,406. This corresponds to the multiplication of each of the underlyer prices by its respective quantity, after conversion in USD: 4.182*783,000 [TIM.MI ]+ 165*24,860 [VOD.L]. It also corresponds to the initial notional of the equity swap. This initial price is not depicted here, as it is part of the valuation component of the equity leg.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;underlyer&gt;
+  &lt;basket&gt;
+    &lt;openUnits&gt;1&lt;/openUnits&gt;
+    &lt;basketConstituent&gt;
+      &lt;equity&gt;
+        &lt;instrumentId instrumentIdScheme="RIC"&gt;TIM.MI&lt;/instrumentId&gt;
+        &lt;description&gt;Telecom Italia Mobile spa&lt;/description&gt;
+        &lt;currency&gt;EUR&lt;/currency&gt;
+        &lt;exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.0/exchangeId"&gt;Milan Stock Exchange&lt;/exchangeId&gt;
+      &lt;/equity&gt;
+      &lt;constituentWeight&gt;
+        &lt;openUnits&gt;783000&lt;/openUnits&gt;
+      &lt;/constituentWeight&gt;
+      &lt;dividendPayout&gt;
+        &lt;dividendPayoutRatio&gt;85&lt;/dividendPayoutRatio&gt;
+      &lt;/dividendPayout&gt;
+      &lt;underlyerPrice&gt;
+        &lt;grossPrice&gt;
+          &lt;currency&gt;EUR&lt;/currency&gt;
+          &lt;amount&gt;4.14&lt;/amount&gt;
+          &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+        &lt;/grossPrice&gt;
+        &lt;netPrice&gt;
+          &lt;currency&gt;USD&lt;/currency&gt;
+          &lt;amount&gt;4.182&lt;/amount&gt;
+          &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+        &lt;/netPrice&gt;
+      &lt;/underlyerPrice&gt;
+      &lt;underlyerNotional&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;3274506&lt;/amount&gt;
+      &lt;/underlyerNotional&gt;
+    &lt;/basketConstituent&gt;
+    &lt;basketConstituent&gt;
+      &lt;equity&gt;
+        &lt;instrumentId instrumentIdScheme="RIC"&gt;VOD.L&lt;/instrumentId&gt;
+        &lt;description&gt;Vodafone Group&lt;/description&gt;
+        &lt;currency&gt;GBP&lt;/currency&gt;
+        &lt;exchangeId exchangeIdScheme="http://www.fpml.org/schemes/4.0/exchangeId"&gt;London Stock Exchange&lt;/exchangeId&gt;
+      &lt;/equity&gt;
+      &lt;constituentWeight&gt;
+        &lt;openUnits&gt;24860&lt;/openUnits&gt;
+      &lt;/constituentWeight&gt;
+      &lt;dividendPayout&gt;
+        &lt;dividendPayoutRatio&gt;85&lt;/dividendPayoutRatio&gt;
+      &lt;/dividendPayout&gt;
+      &lt;underlyerPrice&gt;
+        &lt;grossPrice&gt;
+          &lt;currency&gt;GBP&lt;/currency&gt;
+          &lt;amount&gt;110.00&lt;/amount&gt;
+          &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+        &lt;/grossPrice&gt;
+        &lt;netPrice&gt;
+          &lt;currency&gt;USD&lt;/currency&gt;
+          &lt;amount&gt;165.00&lt;/amount&gt;
+          &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+        &lt;/netPrice&gt;
+      &lt;/underlyerPrice&gt;
+      &lt;underlyerNotional&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;4101900&lt;/amount&gt;
+      &lt;/underlyerNotional&gt;
+    &lt;/basketConstituent&gt;
+  &lt;/basket&gt;
+&lt;/underlyer&gt;
+          </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.4">9.5.4 The valuation</a>
+               </h4>
+			
+               <p>Equity Options and Return Swaps both now use a common EquityValuation type.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure14_EquityValuation.jpg">
+                     <img src="images/equity-swaps/figure14_EquityValuation.jpg" alt="images/equity-swaps/figure14_EquityValuation.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 14: The EquityValuation type, that specifies the valuation terms of the return leg of the swap.</p>
+			
+               <p> The following developments present in more details the four main structures that are part of ReturnLegValuation type: the initialPrice, the valuationPriceInterim, the valuationPriceFinal and the paymentDates (old equityPaymentDates). Even if these components can appear quite complex at first glance, the objective here is to outline how they have been based upon a limited set of 'building blocks' that are systematically reused.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/ReturnLegValuation.jpg">
+                     <img src="images/equity-swaps/ReturnLegValuation.jpg" alt="images/equity-swaps/ReturnLegValuation.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p> The purpose of the initialPrice component is to specify the initial price for the underlyer of the trade (equity, bond, index). In most of the cases, this price will be known. There can however be certain cases, such as a forward trade, where the actual price is not known on trade date and where the trade confirmation will rather specify the terms according to which this initial price will be determined at a later point.</p>
+			
+               <p>The diagrams 15 and 16 below present the two sets of structures that are used for specifying these various cases: one (mandatory) structure that specifies the price and one (optional) structure that specifies the dates.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure15_initialPrice-Price.jpg">
+                     <img src="images/equity-swaps/figure15_initialPrice-Price.jpg" alt="images/equity-swaps/figure15_initialPrice-Price.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 15: The initialPrice component of the valuation, with a specific focus on the part of the structure that specifies the price.</p>
+			
+               <p> Three possible ways for defining the price of the underlyer are available: as an actual price and currency, in reference to an amount defined somewhere else in the document using the amountRelativeTo element, or by specifying a specific determination method using the determinationMethod component. Commissions can be associated with each of these three alternative definitions. For addressing the requirements related to composite FX swaps, the possibility is also provided, through the fxConversion component, to explicitly define the FX rate that has been used to convert the price from its listing currency to the reference currency of the swap.</p>
+			
+               <p>Considering that in the vast majority of the cases the initial price is defined as an actual price and currency, the examples below will focus on detailing the various options available for specifying such actual price. The other possibilities offered through the Price type will be further detailed through the interim and final price components.</p>
+			
+               <p> Example 3 - Specification of an initial price as an actual price that does not include commissions and FX terms:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Price amount: 37.44;</li>
+				
+                  <li>Price currency: USD;</li>
+				
+                  <li>Price expression: in absolute terms (as opposed to as a percentage of the notional);</li>
+				
+                  <li>There are no commissions nor FX terms associated with the price.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;initialPrice&gt;
+  &lt;netPrice&gt;
+    &lt;currency&gt;USD&lt;/currency&gt;
+    &lt;amount&gt;37.44&lt;/amount&gt;
+    &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+  &lt;/netPrice&gt;
+&lt;/initialPrice&gt;
+          </pre>
+			
+               <p> Example 4 - Specification of an initial price as an actual price that also includes commissions and FX terms:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Basket swap, which price at the leg level corresponds to the multiplication of the respective prices and quantities of the various underlyer components, i.e. to the notional of the swap;</li>
+				
+                  <li>Gross amount: 113,228,777 CAD;</li>
+				
+                  <li>Net amount: 84,089,141 USD;</li>
+				
+                  <li>Commission: 5 basis points</li>
+				
+                  <li>Exchange rate: 1 USD = 1.34665 CAD</li>
+				
+                  <li>Price expression: in absolute terms (as opposed to as a percentage of the notional);</li>
+				
+                  <li>There are no commissions nor FX terms associated with the price.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;initialPrice&gt;
+  &lt;commission&gt;
+    &lt;commissionDenomination&gt;BPS&lt;/commissionDenomination&gt;
+    &lt;commissionAmount&gt;5&lt;/commissionAmount&gt;
+  &lt;/commission&gt;
+  &lt;grossPrice&gt;
+    &lt;currency&gt;CAD&lt;/currency&gt;
+    &lt;amount&gt;113228777&lt;/amount&gt;
+    &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+  &lt;/grossPrice&gt;
+  &lt;netPrice&gt;
+    &lt;currency&gt;USD&lt;/currency&gt;
+    &lt;amount&gt;84089141&lt;/amount&gt;
+    &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+  &lt;/netPrice&gt;
+  &lt;fxConversion&gt;
+    &lt;fxRate&gt;
+      &lt;quotedCurrencyPair&gt;
+        &lt;currency1&gt;CAD&lt;/currency1&gt;
+        &lt;currency2&gt;USD&lt;/currency2&gt;
+        &lt;quoteBasis&gt;Currency1PerCurrency2&lt;/quoteBasis&gt;
+      &lt;/quotedCurrencyPair&gt;
+      &lt;rate&gt;1.34665&lt;/rate&gt;
+    &lt;/fxRate&gt;
+  &lt;/fxConversion&gt;
+&lt;/initialPrice&gt;
+          </pre>
+			
+               <p> Example 5 - Specification of an initial price as a percentage of the notional, without commissions nor FX terms:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Price: 94.80278% of the notional amount.</li>
+			
+               </ul>
+			
+               <pre>      
+&lt;initialPrice&gt;
+  &lt;netPrice&gt;
+    &lt;amount&gt;94.80278&lt;/amount&gt;
+    &lt;priceExpression&gt;PercentageOfNotional&lt;/priceExpression&gt;
+  &lt;/netPrice&gt;
+&lt;/initialPrice&gt;
+          </pre>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure16_initialPrice-Dates.jpg">
+                     <img src="images/equity-swaps/figure16_initialPrice-Dates.jpg" alt="images/equity-swaps/figure16_initialPrice-Dates.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 16: The initialPrice component of the valuation, with a specific focus on the part of the structure that specifies the date and time of the initial valuation.</p>
+			
+               <p> This structure that specifies the date and time of the valuation will typically not be used as part of the definition of the initial price. This is because in most cases the initialPrice component specifies the price of the underlyer that is used as the initial reference point for the swap, and there is no need to refer to any specific date or time. Considering that this 'building block is defined and used in a quite similar same way for the interim and final price, it will be detailed through these latter.</p>
+			
+               <p> The purpose of the valuationPriceInterim component is to specify the interim price(s) for the equity underlyer of the trade. This is an optional component, as it does not apply in the case of a bullet swap, where there is no reset date. Its other specificity vis-a-vis the initial and final valuation components it that this components can hold an array of valuation dates, as opposed to only one valuation date.</p>
+			
+               <p>Similarly to the initialPrice component, the diagrams 16 and 17 below present the two sets of structures that are part of the valuationPriceInterim component: one structure that specifies the price and one structure that specifies the valuation dates. Both structures are mandatory.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure17_valuationPriceInterim-Price.jpg">
+                     <img src="images/equity-swaps/figure17_valuationPriceInterim-Price.jpg" alt="images/equity-swaps/figure17_valuationPriceInterim-Price.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 17: The valuationPriceInterim component of the valuation, with a specific focus on the part of the structure that specifies the price.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure18_valuationPriceInterim-Dates.jpg">
+                     <img src="images/equity-swaps/figure18_valuationPriceInterim-Dates.jpg" alt="images/equity-swaps/figure18_valuationPriceInterim-Dates.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 18: The valuationPriceInterim component of the valuation, with a specific focus on the part of the structure that specifies the dates.</p>
+			
+               <p> The example 6 below is very illustrative of the typical use of the valuationPriceInterim structure for representing the interim valuation prices of an equity swap:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>As part of the Price structure, the determinationMethod node of the choice sequence will be used for specifying how the future prices of the underlyer will be determined;</li>
+				
+                  <li>The definition of the time of the valuation essentially relies upon the valuationTimeType element, that specifies the time of day at which the Calculation Agent values the underlyer: the valuationTime component, which purpose is to specify an actual valuation time, is expected to be used only in some rare cases;</li>
+				
+                  <li>Most often, a schedule of valuation dates will be specified, to which the payment schedule will refer.</li>
+			
+               </ul>
+			
+               <p> Example 6 - Typical example of how the valuationPriceInterim component is used to specify the the interim valuation:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>A schedule of 11 interim valuation dates is defined, that extends from October 12, 2001 to August 12, 2002;</li>
+				
+                  <li>This schedule of dates already takes into consideration the expected exchange holidays. Hence, no business day convention is applicable;</li>
+				
+                  <li>On each of these valuation dates, the equity underlyer will be valued at the market close.</li>
+			
+               </ul>
+			
+               <pre>    
+&lt;valuationPriceInterim&gt;
+  &lt;determinationMethod&gt;ValuationTime&lt;/determinationMethod&gt;
+  &lt;valuationTimeType&gt;Close&lt;/valuationTimeType&gt;
+  &lt;valuationDates id="InterimValuationDate"&gt;
+    &lt;adjustableDates&gt;
+      &lt;unadjustedDate&gt;2001-10-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2001-11-13&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2001-12-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-01-14&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-02-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-03-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-04-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-05-13&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-06-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-07-12&lt;/unadjustedDate&gt;
+      &lt;unadjustedDate&gt;2002-08-12&lt;/unadjustedDate&gt;
+      &lt;dateAdjustments&gt;
+        &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;/dateAdjustments&gt;
+    &lt;/adjustableDates&gt;
+  &lt;/valuationDates&gt;
+&lt;/valuationPriceInterim&gt;
+                        </pre>
+			
+               <p> The schema also provides the ability to address some more unusual situations. One of these relates to the case where the valuation dates are defined as a function of the equity payment dates. In such case, a specific consideration needs to be given to the various types of holidays, i.e. banking holidays versus exchange holidays. The relativeDateSequence component does provide such ability to define a date as a function of another date by applying a defined sequence of offsets, as opposed to only one offset as in the case of the relativeDate component. This case is illustrated in the example 7 below.</p>
+			
+               <p> Example 7 - The interim valuation dates are defined in relation to the payment dates:</p>
+			
+               <p/>
+			
+               <ul class="bulleted">
+				
+                  <li>The settlement cycle of the underlying equity is 3 business days;</li>
+				
+                  <li>The valuation date is defined as a function of the payment date. Considering that the payment date happens after the valuation date, a negative value is then specified as the periodMultiplier element;</li>
+				
+                  <li>In order to give consideration to the situations where the stock exchange is opened on certain banking holidays (e.g. Veteran Day in the United States) and vice-versa, a sequence of offsets is being applied. Considering a settlement cycle of 3 days, a first sequence of 2 currency business days is first applied, and then a sequence of 1 exchange business day. This avoids a situation where an offset of 3 currency business days could lead to specifying a valuation date that corresponds to an exchange business day.</li>
+				
+                  <li>Considering that the first offset sequence of 2 business days applies to currency business days, the ISDA business day convention is applicable; it is not applicable for the second offset sequence, which refers to exchange business days.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;valuationDates id="InterimValuationDates"&gt;
+  &lt;relativeDateSequence&gt;
+    &lt;dateRelativeTo href="InterimEquityPaymentDate"/&gt;
+    &lt;!--The first offset is 2 exchange business days prior to the payment date.--&gt;
+    &lt;dateOffset&gt;
+      &lt;periodMultiplier&gt;-2&lt;/periodMultiplier&gt;
+      &lt;period&gt;D&lt;/period&gt;
+      &lt;dayType&gt;CurrencyBusiness&lt;/dayType&gt;
+      &lt;businessDayConvention&gt;FOLLOWING&lt;/businessDayConvention&gt;
+      &lt;sequence&gt;1&lt;/sequence&gt;
+    &lt;/dateOffset&gt;
+    &lt;!--The second offset is 1 banking business day prior to the payment date.--&gt;
+    &lt;dateOffset&gt;
+      &lt;periodMultiplier&gt;-1&lt;/periodMultiplier&gt;
+      &lt;period&gt;D&lt;/period&gt;
+      &lt;dayType&gt;ExchangeBusiness&lt;/dayType&gt;
+      &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;sequence&gt;2&lt;/sequence&gt;
+    &lt;/dateOffset&gt;
+    &lt;businessCenters id="PrimaryBusinessCenter"&gt;
+      &lt;businessCenter&gt;USNY&lt;/businessCenter&gt;
+    &lt;/businessCenters&gt;
+  &lt;/relativeDateSequence&gt;
+&lt;/valuationDates&gt;
+                        </pre>
+			
+               <p> The example 8 below provides another example of an unusual definition of the interim valuation date. Here, the valuation dates are defined through a rule-based schedule, which corresponds to the market practice typically in use for fixed income swaps. This practice is however used only rarely in the case of equity derivatives.</p>
+			
+               <p> Example 8 - The interim valuation dates are defined through a rule-based schedule:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The underlyer is valued at the market close on each of the interim valuation dates;</li>
+				
+                  <li>The final valuation is based on the price obtained by the payer of the equity return when unwinding his hedge position;</li>
+				
+                  <li>The first valuation date is April 10, 2002;</li>
+				
+                  <li>Each of the following valuations is scheduled on the 10th of each month, until the last valuation date which is scheduled on March 12, 2003;</li>
+				
+                  <li>The business day convention is not applicable, because the terms 'Modified Following', 'Following', 'Preceding', etc. are not recognized ISDA terms in the context of exchange business days. On the other hand, the ISDA Definition for Equity Derivatives is, by default, to roll forward if a scheduled valuation date is not a exchange business day.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;valuationPriceInterim&gt;
+  &lt;determinationMethod&gt;Valuation time&lt;/determinationMethod&gt;
+  &lt;valuationTimeType&gt;Close&lt;/valuationTimeType&gt;
+  &lt;valuationDates id="InterimValuationDates"&gt;
+    &lt;periodicDates&gt;
+      &lt;calculationStartDate&gt;
+        &lt;adjustableDate&gt;
+          &lt;unadjustedDate&gt;2002-04-10&lt;/unadjustedDate&gt;
+          &lt;dateAdjustments&gt;
+            &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+          &lt;/dateAdjustments&gt;
+        &lt;/adjustableDate&gt;
+      &lt;/calculationStartDate&gt;
+      &lt;calculationPeriodFrequency&gt;
+        &lt;periodMultiplier&gt;1&lt;/periodMultiplier&gt;
+        &lt;period&gt;M&lt;/period&gt;
+        &lt;rollConvention&gt;10&lt;/rollConvention&gt;
+      &lt;/calculationPeriodFrequency&gt;
+      &lt;calculationPeriodDatesAdjustments&gt;
+        &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;/calculationPeriodDatesAdjustments&gt;
+    &lt;/periodicDates&gt;
+  &lt;/valuationDates&gt;
+&lt;/valuationPriceInterim&gt;
+&lt;valuationPriceFinal&gt;
+  &lt;determinationMethod&gt;HedgeUnwind&lt;/determinationMethod&gt;
+  &lt;valuationDate id="FinalValuationDate"&gt;
+    &lt;adjustableDate&gt;
+      &lt;unadjustedDate&gt;2003-03-12&lt;/unadjustedDate&gt;
+      &lt;dateAdjustments&gt;
+        &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;/dateAdjustments&gt;
+    &lt;/adjustableDate&gt;
+  &lt;/valuationDate&gt;
+&lt;/valuationPriceFinal&gt;
+                        </pre>
+			
+               <p> The purpose of the valuationPriceFinal component is to specify the final price for the equity underlyer of the trade.</p>
+			
+               <p>In a similar way than what has been previously detailed for the components that specify the initial and the intermediate valuations, the diagrams 18 and 19 below respectively detail the structure that specifies the final price and the structure that specifies the date on which this valuation will take place. Both structures are mandatory.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure19_valuationPriceFinal-Price.jpg">
+                     <img src="images/equity-swaps/figure19_valuationPriceFinal-Price.jpg" alt="images/equity-swaps/figure19_valuationPriceFinal-Price.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 19: The valuationPriceFinal component of the valuation, with a specific focus on the part of the structure that specifies the price.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure20_valuationPriceFinal-Date.jpg">
+                     <img src="images/equity-swaps/figure20_valuationPriceFinal-Date.jpg" alt="images/equity-swaps/figure20_valuationPriceFinal-Date.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 20: The valuationPriceFinal component of the valuation, with a specific focus on the part of the structure that specifies the final valuation date.</p>
+			
+               <p> It can be noted at this point that the only difference between this valuationPriceFinal component and the valuationPriceInterim component is that only one final valuation date can be specified, while the possibility is provided to define several interim valuation dates. The equityValuationDates component used for specifying the interim valuation dates has then been substituted with the equityValuationDate component, which allows only one date.</p>
+			
+               <p>The example 8 below presents the most common use of this structure, a specific final valuation date being defined while the final price is specified through the use of the determinationMethod element. Of course, if the interim valuation dates would be defined in reference to the payment dates (as illustrated in the example 7) or through a rule-based schedule (example 8), such method would also be applied for defining the final valuation date.</p>
+			
+               <p> Example 9 - The most common definition of the final valuation:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The final price of the equity underlyer will correspond to the price at which the payer of the equity leg will unwind his hedge position;</li>
+				
+                  <li>A commission of 60 basis points will be applied to this price;</li>
+				
+                  <li>The final valuation date is February 3, 2004;</li>
+				
+                  <li>In accordance to the market practice, this date has been determined by the Calculation Agent as corresponding to an exchange business day. As previously indicated, the terms 'Modified Following', 'Following', 'Preceding', etc. are not recognized ISDA terms in the context of exchange business days.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;valuationPriceFinal&gt;
+  &lt;commission&gt;
+    &lt;commissionDenomination&gt;BPS&lt;/commissionDenomination&gt;
+    &lt;commissionAmount&gt;60&lt;/commissionAmount&gt;
+  &lt;/commission&gt;
+  &lt;determinationMethod&gt;HedgeUnwind&lt;/determinationMethod&gt;
+  &lt;valuationDate id="FinalValuationDate"&gt;
+    &lt;adjustableDate&gt;
+      &lt;unadjustedDate&gt;2004-02-03&lt;/unadjustedDate&gt;
+      &lt;dateAdjustments&gt;
+        &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;/dateAdjustments&gt;
+    &lt;/adjustableDate&gt;
+  &lt;/valuationDate&gt;
+&lt;/valuationPriceFinal&gt;
+                        </pre>
+			
+               <p> The last structure that participates in the definition of the equity swap valuation is the schedule of equity payment dates. These dates are specified through the equityPaymentDates component. The structure of this component is threefold:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>An Identifier is associated to the equityPaymentDates root component, in order to allow to specify a generic reference to these payment dates. This unique reference to the payment dates is used through the dividend component, when it is specified that the dividend will be paid on the next equity payment date (see below the section related to the return component of the equity leg);</li>
+				
+                  <li>The equityPaymentDatesInterim component specifies the interim payment dates of the swap. It is optional to address the case of bullet swaps that do not have interim equity resets;</li>
+				
+                  <li>The equityPaymentDateFinal component specifies the final payment date. </li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure21_paymentDates.jpg">
+                     <img src="images/equity-swaps/figure21_paymentDates.jpg" alt="images/equity-swaps/figure21_paymentDates.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 21: The paymentDate (old equityPaymentDate) component, that specifies the schedule of payment dates.</p>
+			
+               <p>The structure of the paymentDatesInterim (old equityPaymentDatesInterim) and the paymentDateFinal (equityPaymentDateFinal) is very similar. The only difference is that several dates can be specified in the first case, and only one date in the latter.</p>
+			
+               <p>As a result, both the interim and the final payment dates can be defined either as a schedule of dates or in reference to a date defined somewhere else in the document. This latter approach is used most often, with the payment dates being specified as one settlement cycle after the valuation date to which they relate. This is illustrated through this final example relating to the valuation component, which provides a complete view of how the valuation dates are defined as an actual schedule of dates to which the payment dates refer.</p>
+			
+               <p> Example 10 - Equity swap which payment dates are defined in relation to the schedule of valuation dates:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The initial price of the swap is USD 37.44;</li>
+				
+                  <li>A schedule of 12 valuation dates is defined: 11 interim valuation dates (from October 12, 2001 to August 12, 2001) and 1 final valuation date (September 24, 2002);</li>
+				
+                  <li>The equity underlyer is to be valued at the market close on each of the interim valuation dates. Its final valuation will correspond to the price at which the payer of the equity return unwinds his hedge;</li>
+				
+                  <li>The payment dates are scheduled 3 currency business days after each of the valuation dates. Considering that these are currency business days, as opposed to exchange business days, the 'Following' business day convention is specified, New York being the reference business center.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;rateOfReturn&gt;
+  &lt;initialPrice&gt;
+    &lt;netPrice&gt;
+      &lt;currency&gt;USD&lt;/currency&gt;
+      &lt;amount&gt;37.44&lt;/amount&gt;
+      &lt;priceExpression&gt;AbsoluteTerms&lt;/priceExpression&gt;
+    &lt;/netPrice&gt;
+  &lt;/initialPrice&gt;
+  &lt;notionalReset&gt;true&lt;/equityNotionalReset&gt;
+  &lt;valuationPriceInterim&gt;
+    &lt;determinationMethod&gt;ValuationTime&lt;/determinationMethod&gt;
+    &lt;valuationTimeType&gt;Close&lt;/valuationTimeType&gt;
+    &lt;valuationDates id="InterimValuationDate"&gt;
+      &lt;adjustableDates&gt;
+        &lt;unadjustedDate&gt;2001-10-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2001-11-13&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2001-12-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-01-14&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-02-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-03-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-04-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-05-13&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-06-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-07-12&lt;/unadjustedDate&gt;
+        &lt;unadjustedDate&gt;2002-08-12&lt;/unadjustedDate&gt;
+        &lt;dateAdjustments&gt;
+          &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+        &lt;/dateAdjustments&gt;
+      &lt;/adjustableDates&gt;
+    &lt;/valuationDates&gt;
+  &lt;/valuationPriceInterim&gt;
+  &lt;valuationPriceFinal&gt;
+    &lt;determinationMethod&gt;HedgeUnwind&lt;/determinationMethod&gt;
+    &lt;valuationDate id="FinalValuationDate"&gt;
+      &lt;adjustableDate&gt;
+        &lt;unadjustedDate&gt;2002-09-24&lt;/unadjustedDate&gt;
+        &lt;dateAdjustments&gt;
+          &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+        &lt;/dateAdjustments&gt;
+      &lt;/adjustableDate&gt;
+    &lt;/valuationDate&gt;
+  &lt;/valuationPriceFinal&gt;
+  &lt;paymentDates id="EquityPaymentDate"&gt;
+    &lt;paymentDatesInterim id="InterimEquityPaymentDate"&gt;
+      &lt;relativeDates&gt;
+        &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+        &lt;period&gt;D&lt;/period&gt;
+        &lt;dayType&gt;CurrencyBusiness&lt;/dayType&gt;
+        &lt;businessDayConvention&gt;FOLLOWING&lt;/businessDayConvention&gt;
+        &lt;businessCenters id="PrimaryBusinessCenter"&gt;
+          &lt;businessCenter&gt;USNY&lt;/businessCenter&gt;
+        &lt;/businessCenters&gt;
+        &lt;dateRelativeTo href="InterimValuationDate"/&gt;
+      &lt;/relativeDates&gt;
+    &lt;/paymentDatesInterim&gt;
+    &lt;paymentDateFinal id="FinalEquityPaymentDate"&gt;
+      &lt;relativeDate&gt;
+        &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+        &lt;period&gt;D&lt;/period&gt;
+        &lt;dayType&gt;CurrencyBusiness&lt;/dayType&gt;
+        &lt;businessDayConvention&gt;FOLLOWING&lt;/businessDayConvention&gt;
+        &lt;businessCentersReference href="PrimaryBusinessCenter"/&gt;
+        &lt;dateRelativeTo href="FinalValuationDate"/&gt;
+      &lt;/relativeDate&gt;
+    &lt;/paymentDateFinal&gt;
+  &lt;/paymentDates&gt;
+&lt;/rateOfReturn&gt;
+                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.5">9.5.5 The notional amount</a>
+               </h4>
+			
+               <p>The notional component specifies the notional of each of the legs of the swap (it is indeed also present in the interest leg of the trade). Similarly to the price of the underlyer, four  possible ways of defining this notional are available:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>By specifying an actual amount and currency. This is used most often for the equity leg of the swap;</li>
+				
+                  <li>By referencing an amount specified somewhere else in the document. This is typically the case of the interest leg of the swap, which notional refers to notional specified through equity leg;</li>
+				
+                  <li>By specifying a determination method, using the determinationMethod component This is typically useful for forward swaps, which notional is not known on trade date.</li>
+				
+                  <li>By referencing a determination method specified somewhere else in the document. This is typically the case of the interest leg of the swap, which determination method refers to a determination method specified through equity leg;</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure22_notional.jpg">
+                     <img src="images/equity-swaps/figure22_notional.jpg" alt="images/equity-swaps/figure22_notional.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 22: The notional component.</p>
+			
+               <p>The four examples below illustrate each of these cases mentioned before:</p>
+			
+               <p> Example 11 - The explicit notional amount:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>This approach is typically used for specifying the notional of the equity leg of the swap;</li>
+				
+                  <li>The identifier attribute associated with the notional amount element is used so that the notional amount of the interest leg can refer to it (example 12 below).</li>
+			
+               </ul>
+			
+               <pre>
+&lt;notional&gt;
+  &lt;notionalAmount id="EquityNotionalAmount"&gt;
+    &lt;currency&gt;USD&lt;/currency&gt;
+    &lt;amount&gt;28469376&lt;/amount&gt;
+  &lt;/notionalAmount&gt;
+&lt;/notional&gt;
+                        </pre>
+			
+               <p> Example 12 - The reference to a notional amount defined somewhere else in the document:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>This approach is typically used for specifying the notional amount of the interest leg of the swap;</li>
+				
+                  <li>The relationship with the notional amount specified in the equity leg is established via the href, which refers to the value specified through the identifier associated with the explicit notional amount.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;notional&gt;
+  &lt;relativeNotionalAmount href="EquityNotionalAmount"/&gt;
+&lt;/notional&gt;
+                        </pre>
+			
+               <p> Example 13 - The use of the determinationMethod for specifying the notional amount:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The initial price of the equity underlyer is not known on trade inception: it will be determined at a later point;</li>
+				
+                  <li>As a consequence, only the method through which the notional is calculated is specified as part of the swap.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;notional&gt;
+  &lt;determinationMethod id="EquityNotionalAmount"&gt;Number of Shares * Initial Price&lt;/determinationMethod&gt;
+&lt;/notional&gt;
+                        </pre>
+			
+               <p> Example 13b - The reference to a determination method defined somewhere else in the document:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>This approach is typically used for specifying the notional determination method of the interest leg of the swap;</li>
+				
+                  <li>The relationship with the notional determination method specified in the equity leg is established via the href, which refers to the value specified through the identifier associated with the explicit notional determination method.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;notional&gt;
+  &lt;relativeDeterminationMethod href="EquityNotionalAmount"/&gt;
+&lt;/notional&gt;
+                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.6">9.5.6 The amount</a>
+               </h4>
+			
+               <p>The main purpose of the amount (old equityAmount) component is to specify the method that determines the amount to be paid/received on each of the payment dates. Its role however goes quite beyond this, as it also specifies:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Whether the swap will cash settle of physically settle;</li>
+				
+                  <li>The settlement currency of the return leg of the swap.</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure23_amount.jpg">
+                     <img src="images/equity-swaps/figure23_amount.jpg" alt="images/equity-swaps/figure23_amount.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 23: The amount (old equityAmount) component.</p>
+			
+               <p> This amount component is based on the LegAmount type that is also used for defining the interestAmount. It extends this type by adding a boolean cashSettlement element that specifies whether the swap will cash or physically settle.</p>
+			
+               <p>The paymentCurrency is the first component of this structure. It specifies the payment currency of the equity leg of the swap through three possible methods:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>As an actual ISO currency code;</li>
+				
+                  <li>As a determination method description, applicable in the case of some exotic swap where the payment currency of the trade will be a function of certain parameters;</li>
+				
+                  <li>Through the reference to a currency defined somewhere else in the document, as in the case of a quanto swap or a composite FX swap which reference currency is specified through the fxTerms component.</li>
+			
+               </ul>
+			
+               <p>The core of the component is its second component, which specifies the payoff of the return leg. This can done in three possible ways:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The referenceAmount element is aimed at holding the reference to the standard ISDA definition of the equity amount. (It can however be used beyond this sole purpose, as it is defined as a string element, without any specific enumerations;</li>
+				
+                  <li>The formula component is aimed at the exotic equity swaps, which equity payoff needs to be described through a mathematical formula. To meet this purpose, the formula component provides a flexible structure for describing the return payoff, using the combination of the formulaDescription component that provides a literary description of the payoff, the math container that uses the xsd:any XML structure to hold any type of formula description, and the formulaComponent element that describes the various components of the formula.</li>
+				
+                  <li>As an alternative to the XML representation of each of the details of the return payoff, the encodedDescription element provides the ability to encode an image that describes the payout formula, using a base64Binary structure.</li>
+			
+               </ul>
+			
+               <p>The optional calculationDates component is also aimed at these more complex equity swaps. It provides the possibility to define calculation dates (such as observation points in the case of an equity payoff that is a function of some specific market levels). These calculation dates can be specified similarly to the valuation dates:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>As an actual schedule of dates, using the adjustableDates component;</li>
+				
+                  <li>In relation to some dates defined elsewhere in the document, using the relativeDateSequence component;</li>
+				
+                  <li>Through a rule-based schedule, using the periodicDates component.</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure24_calculationDates.jpg">
+                     <img src="images/equity-swaps/figure24_calculationDates.jpg" alt="images/equity-swaps/figure24_calculationDates.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 24: The calculationDates component, that provides the opportunity to define calculation dates for more exotic types of equity swaps.</p>
+			
+               <p> Example 14 - The use of the amount component for a vanilla equity swap:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The payment currency of the return leg is USD;</li>
+				
+                  <li>The payoff amount of the return leg is specified as the ISDA standard definition, i.e. equal to the product of the underlyer notional amount and the rate of return;</li>
+				
+                  <li>The settlements will be made in cash.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;amount&gt;
+  &lt;paymentCurrency id="EquityPaymentCurrency"&gt;
+    &lt;currency&gt;USD&lt;/currency&gt;
+  &lt;/paymentCurrency&gt;
+  &lt;referenceAmount&gt;ISDA Standard&lt;/referenceAmount&gt;
+  &lt;cashSettlement&gt;true&lt;/cashSettlement&gt;
+&lt;/amount&gt;
+          </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.7">9.5.7 The return</a>
+               </h4>
+			
+               <p>The return component encapsulates the information that defines the dividend to be paid to the receiver of the equity amounts, with the exception of the dividend payout ratio, that is specified through the underlyer component. (As explained earlier, this is because a specific payout ratio can be associated with each underlyer component in the case of basket swaps; such situation can typically be related to different tax regimes across countries when those various underlyers originate from different market places.)</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure25_Return.jpg">
+                     <img src="images/equity-swaps/figure25_Return.jpg" alt="images/equity-swaps/figure25_Return.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 25: The return component.</p>
+			
+               <p> This return component has two sets of element: the returnType element, that specifies (through an enumeration) whether the contract is a total return swap, a price return swap or a dividend return swap, and the dividendConditions component, which describes the various conditions applicable to the dividend, including whether and how interests will be accrued if they are paid after the dividend pay date. This second component is optional, as it does not apply in the case of a price return swap. Its dividend terms are the following:</p>
+			
+               <ul class="bulleted">
+				
+                  <li> The dividendReinvestment, as a Boolean data element that determines whether the dividend will be reinvested into the equity notional;</li>
+				
+                  <li> The dividendEntitlement, to indicate when the counterparty is entitled to the dividend;</li>
+				
+                  <li> The dividendAmount, to refer to one on the 3 Amounts: RecordAmount, ExAmount, PaidAmount;</li>
+				
+                  <li> The dividendPaymentDate, to specify when the dividend will be paid. This date can be specified either through a set of pre-defined values that are associated with the dividendDateReference element that is part of this component, or as a specific date. These pre-defined values can refer either to dividend dates (ExDate, DividendPaymentDate, RecordDate) or to dates that relate to the swap contract (TerminationDate, EquityPaymentDate, FollowingPaymentDate);</li>
+				
+                  <li> The dividendPeriodEffectiveDate and the dividendPeriodEndDate, to indicate when the swap is considered as active from the perspective of dividend processing and when such period ends;</li>
+				
+                  <li> The extraOrdinaryDividends, to reference the party which determines if dividends are extraordinary in relation to normal levels;</li>
+				
+                  <li> The excessDividendAmount, to determine Gross Cash Dividend per Share;</li>
+				
+                  <li> The ReturnSwapCurrency.model, a choice between currency, determinationMethod and currencyReferenceto, to define return swap amount currency definition methods;</li>
+				
+                  <li> The dividendFxTriggerDate, to specify the date on which the FX rate will be considered in the case of a Composite FX swap;</li>
+				
+                  <li> The interestAccruals, to define how interests will be accrued on the dividend when this latter is paid some period of time after the dividend payment date.</li>
+				
+                  <li> The numberOfIndexUnits", to define the Number Of Index Units applicable to a Dividend;</li>
+				
+                  <li> The DeclaredCashAndCashEquivalentDividendPercentage.model, to declared Cash Dividend Percentage, or Cash Equivalent Dividend Percentage;</li>
+				
+                  <li> The nonCashDividendTreatment, to define treatment of Non-Cash Dividends;</li>
+				
+                  <li> The dividendComposition, to defines how the composition of Dividends is to be determined;</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.8">9.5.8 The notional adjustment</a>
+               </h4>
+			
+               <p>The notionalAdjustments component specifies whether the adjustment to the equity notional of the swap will obey to certain specific terms. These terms can be, according to the current industry practice, threefold: standard, execution and portfolio rebalancing. An execution-style swap is a trade where the quantity of underlyers is expected to vary quite often; in order to facilitate these later 'executions', the parties agree in advance on contractual terms that will facilitate these expected adjustments to the contract. A portfolio-rebalancing swap is a trade where the basket components will be often adjusted not only in terms of quantities but also in terms of types of underlyers; similarly to the previous case, some specific language will typically accommodate such adjustments.</p>
+			
+               <p>These legal terms are however not specified through the schema representation of the equity swap. There are two reasons for this. The first one is that they are not part of the ISDA Definitions for Equity Derivatives. The second reason is that this current version of the equity swap schema is focused on representing the economic description of the trade. These legal terms are then not part of it.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.5.9">9.5.9 The FX Feature (old FX terms)</a>
+               </h4>
+			
+               <p>Equity Derivatives and Equity Swaps both now use a common FxFeature component</p>
+			
+               <p>The fxFeature is an optional component that specifies the FX conversion terms that can be associated with the swap. This FX feature can either be Quanto or Composite FX. Both these components include a referenceCurrency element, which purpose is to explicitly state the reference currency of the swap.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure26_fxFeature-quanto.jpg">
+                     <img src="images/equity-swaps/figure26_fxFeature-quanto.jpg" alt="images/equity-swaps/figure26_fxFeature-quanto.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 26: The quanto component.</p>
+			
+               <p> The quanto component includes an explicit reference to a rate, through the quantoRate element. One or several rates can be defined, in order to address the case where a basket swap is composed of several underlyers that are listed in different currencies.</p>
+			
+               <p> The example below illustrates the application of this quanto component:</p>
+			
+               <p> Example 15 - The quanto component:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The business background for this trade is that the payment currency of the swap is USD, while some of the underlyers are listed in EUR and some others are listed in HKD. The payer of the equity return commits upfront to a set of exchange rates vis-a-vis the USD which are specified as part of the quanto component;</li>
+				
+                  <li>The EUR is quoted per units of USD and the exchange rate is 0.99140;</li>
+				
+                  <li>The HKD is also quoted per units of USD and the exchange rate is 7.80.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;fxFeature&gt;
+  &lt;quanto&gt;
+    &lt;referenceCurrency id="ReferenceCurrency"&gt;USD&lt;/referenceCurrency&gt;
+    &lt;fxRate&gt;
+      &lt;quotedCurrencyPair&gt;
+        &lt;currency1&gt;USD&lt;/currency1&gt;
+        &lt;currency2&gt;EUR&lt;/currency2&gt;
+        &lt;quoteBasis&gt;Currency2PerCurrency1&lt;/quoteBasis&gt;
+      &lt;/quotedCurrencyPair&gt;
+      &lt;rate&gt;0.99140&lt;/rate&gt;
+    &lt;/fxRate&gt;
+    &lt;fxRate&gt;
+      &lt;quotedCurrencyPair&gt;
+        &lt;currency1&gt;USD&lt;/currency1&gt;
+        &lt;currency2&gt;HKD&lt;/currency2&gt;
+        &lt;quoteBasis&gt;Currency2PerCurrency1&lt;/quoteBasis&gt;
+      &lt;/quotedCurrencyPair&gt;
+      &lt;rate&gt;7.80&lt;/rate&gt;
+    &lt;/fxRate&gt;
+  &lt;/quanto&gt;
+&lt;/fxFeature&gt;
+                        </pre>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure27_fxFeature-compositeFx.jpg">
+                     <img src="images/equity-swaps/figure27_fxFeature-compositeFx.jpg" alt="images/equity-swaps/figure27_fxFeature-compositeFx.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 27: The compositeFx component.</p>
+			
+               <p>The compositeFx component provides the framework for defining a currency rate at some point in the future. This can be done either by defining a generic method using the determinationMethod component (for example, when it is agreed that the exchange rate will be determined "in good faith by the Calculation Agent") or by specifying the information source and fixing time and date reference that will be used for defining this exchange rate, using the fxDetermination component.</p>
+			
+               <p> The example below illustrates the application of this compositeFx component:</p>
+			
+               <p> Example 16 - The compositeFx component:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The payment currency of the swap is EUR;</li>
+				
+                  <li>The exchange rate will be determined in good faith by the Calculation Agent.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;fxFeature&gt;
+  &lt;compositeFx&gt;
+    &lt;referenceCurrency id="ReferenceCurrency"&gt;USD&lt;/referenceCurrency&gt;
+    &lt;determinationMethod&gt;CalculationAgent&lt;/determinationMethod&gt;
+  &lt;/compositeFx&gt;
+&lt;/fxFeature&gt;
+                        </pre>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.6">9.6 The interest leg</a>
+               </h3>
+            </div>
+		
+            <p>The interest leg of the equity swap leverages for the most part the schema developed for the interest rate swaps.</p>
+		
+            <p>However, instead of simply reusing the entire swapStream, the interest rate leg of the equity swap schema reuses certain of the components that are part of this swapStream.</p>
+		
+            <p>This design approach is motivated by the differences in market practices that exist between the equity and fixed income products. The industry practice for the equity swaps consists in defining a schedule of actual dates for the equity valuation, while most of the other swap dates are defined in reference to this schedule. The practice in place in the interest rate area consists, on the other hand, in defining a rule-based schedule. As a result, the swapStream features are largely focused on defining such periodicity rules along with the appropriate calendar exceptions, and do not provide the possibility for defining a complete schedule of actual dates (if we except through the firstPeriodStartDate, the firstRegularPeriodStartDate and the lastRegularPeriodEndDate) and references to these.</p>
+		
+            <p>Instead of leveraging the whole swapStream component, the interest leg of the equity swap leverages then components at a more granular level, such as the resetFrequency component, the interestCalculation component and the calculationPeriodDatesReference element.</p>
+		
+            <p> As a result, the interest leg of the equity swap has six categories of components, which are presented in the figure 28 below and respectively specify the following features of the interest leg:</p>
+		
+            <ul class="bulleted">
+			
+               <li>The payer and the receiver party;</li>
+			
+               <li>The calculation dates;</li>
+			
+               <li>The notional amount;</li>
+			
+               <li>The interest amount;</li>
+			
+               <li>The interest calculation;</li>
+			
+               <li>The initial and final stubs.</li>
+		
+            </ul>
+		
+            <p>
+			
+               <a href="images/equity-swaps/figure28_InterestLeg.jpg">
+                  <img src="images/equity-swaps/figure28_InterestLeg.jpg" alt="images/equity-swaps/figure28_InterestLeg.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 28: The interest leg of the equity swap.</p>
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s9.6.1">9.6.1 The payer and receiver party</a>
+               </h4>
+			
+               <p>The identification of the payer and receiver party of the equity leg is done similarly than for the equity leg of the swap, through the payerPartyReference and receiverPartyReference data elements.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.6.2">9.6.2 The calculation dates</a>
+               </h4>
+			
+               <p>The interestLegCalculationPeriodDates component defines the various dates associated with the interest leg of the swap:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The effective date, through the effectiveDate component, also used for the equity leg of the swap;</li>
+				
+                  <li>The termination date, through the terminationDate component that is also similar to the equity leg;</li>
+				
+                  <li>The reset dates, via the interestLegResetDates component;</li>
+				
+                  <li>The payment dates, through the interestLegPaymentDates component.</li>
+			
+               </ul>
+			
+               <p>The diagram below presents the key features of these different date structures. Three of these components are structured in the same way: the effectiveDate, the terminationDate and the interestLegPaymentDates. These components indeed all provide the possibility to define a date (or several dates, in the case of the interestLegPaymentDates component) as either an actual date or in reference to a date specified somewhere else in the document.</p>
+			
+               <p>The interestLegResetDates component has been developed as a simplified version of the ResetDates type that is part of the interest rates derivatives schema. Three of the seven components that are part of this ResetDates type have indeed been reused:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The calculationPeriodDatesReference is an empty element that holds an href into the identifier attribute that is associated with the interestLegCalculationPeriodDates;</li>
+				
+                  <li>The resetRelativeTo specifies whether the reset dates are determined with respect to each adjusted calculation period start date or adjusted calculation period end date;</li>
+				
+                  <li>The resetFrequency component provides the possibility to define a specific reset frequency, instead of defining the reset in relation to the various interest calculation dates: the effective date, the respective interest payment dates and the termination date.</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure29_interestLegCalculationPeriodDates.jpg">
+                     <img src="images/equity-swaps/figure29_interestLegCalculationPeriodDates.jpg" alt="images/equity-swaps/figure29_interestLegCalculationPeriodDates.jpg" class="image" width="600"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 29: The interestLegCalculationPeriodDates component.</p>
+			
+               <p> The example below presents a typical example of how this schema is applied to the standard interest leg of an equity swap:</p>
+			
+               <p> Example 17 - The calculation period dates of the interest leg of an equity swap:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The effective date is defined similarly than for the equity leg, as one settlement cycle following the trade date;</li>
+				
+                  <li>The termination date is also defined in the same way than the equity leg, as corresponding to the last equity payment date;</li>
+				
+                  <li>The reset dates for the floating rate are defined as corresponding to the first day of each of the calculation periods by referencing the identifier that is associated with the interestLegCalculationPeriodDates node;</li>
+				
+                  <li>The interest payment dates are specified in reference to the equity payment dates: this is called a combined reset, as a net amount corresponding to the difference between the interest and the equity amount will be exchanged on each payment date.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;interestLegCalculationPeriodDates id="InterestLegPeriodDates"&gt;
+  &lt;effectiveDate&gt;
+    &lt;relativeDate&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;D&lt;/period&gt;
+      &lt;dayType&gt;ExchangeBusiness&lt;/dayType&gt;
+      &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;dateRelativeTo href="TradeDate"/&gt;
+    &lt;/relativeDate&gt;
+  &lt;/effectiveDate&gt;
+  &lt;terminationDate&gt;
+    &lt;relativeDate&gt;
+      &lt;periodMultiplier&gt;0&lt;/periodMultiplier&gt;
+      &lt;period&gt;D&lt;/period&gt;
+      &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;dateRelativeTo href="FinalEquityPaymentDate"/&gt;
+    &lt;/relativeDate&gt;
+  &lt;/terminationDate&gt;
+  &lt;interestLegResetDates&gt;
+    &lt;calculationPeriodDatesReference href="InterestLegPeriodDates"/&gt;
+    &lt;resetRelativeTo&gt;CalculationPeriodStartDate&lt;/resetRelativeTo&gt;
+  &lt;/interestLegResetDates&gt;
+  &lt;interestLegPaymentDates&gt;
+    &lt;relativeDates&gt;
+      &lt;periodMultiplier&gt;0&lt;/periodMultiplier&gt;
+      &lt;period&gt;D&lt;/period&gt;
+      &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;dateRelativeTo href="EquityPaymentDate"/&gt;
+    &lt;/relativeDates&gt;
+  &lt;/interestLegPaymentDates&gt;
+&lt;/interestLegCalculationPeriodDates&gt;
+                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.6.3">9.6.3 The notional amount</a>
+               </h4>
+			
+               <p>The notional amount is defined through the same structure than for the equity leg of the swap: the notional component. As mentioned earlier, and illustrated through the example 12, this component is most often used for referencing the notional amount that is defined as part of the equity leg.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.6.4">9.6.4 The interest amount</a>
+               </h4>
+			
+               <p>The interest amount is defined in the same way than the equity amount: using the LegAmount complex type. Used through the interest leg, it specifies the following elements:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The settlement currency of the interest leg of the swap;</li>
+				
+                  <li>The interest amount of the swap, either by referencing the standard ISDA Definition or by describing a very specific formula.</li>
+			
+               </ul>
+			
+               <p> Example 18 - The interest amount of an equity swap:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>This example illustrates a swap that has FX terms which are referenced through the fxTerms component that is part of the equity leg. An identifier is associated with the reference currency that is defined as part of that component, and the href that is part of the paymentCurrency element refers to this identifier;</li>
+				
+                  <li>The interest amount is specified by reference to the ISDA Equity Derivatives Definitions.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;interestAmount&gt;
+  &lt;paymentCurrency href="ReferenceCurrency"/&gt;
+  &lt;referenceAmount&gt;Standard ISDA&lt;/referenceAmount&gt;
+&lt;/interestAmount&gt;
+                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s9.6.5">9.6.5 The interest calculation</a>
+               </h4>
+			
+               <p>The interestCalculation component specifies the interest rate reference of the swap (by referring either to a fixed interest rate or to a floating reference rate) and the day count fraction to be applied. As indicated in the introduction to the interest leg section, this structure has been developed by leveraging the components defined for the interest rate swap schema.</p>
+			
+               <p>The component supports also compounding for on the interest leg (see optional compounding element within InterestCalculation.  The compounding rate on the Interest leg can be different than that used for funding calculation.  In addition, the structure supports the representation of multiple types of spreads, i.e. one for a long amount and one for a short amount.</p>
+			
+               <p>
+				
+                  <a href="images/equity-swaps/figure30_interestCalculation.jpg">
+                     <img src="images/equity-swaps/figure30_interestCalculation.jpg" alt="images/equity-swaps/figure30_interestCalculation.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>Figure 30: The interestCalculation component.</p>
+			
+               <p> The example below presents a typical example of how this interestCalculation component can be applied for specifying the floating rate of an equity swap:</p>
+			
+               <p> Example 19 - Specifying the floating rate of an equity swap:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The reference rate is 3 month USD-LIBOR-BBA;</li>
+				
+                  <li>The spread is plus 50 basis points;</li>
+				
+                  <li>The day count fraction is actual number of days / 360 days.</li>
+			
+               </ul>
+			
+               <pre>
+&lt;interestCalculation&gt;
+  &lt;floatingRateCalculation&gt;
+    &lt;floatingRateIndex&gt;USD-LIBOR-BBA&lt;/floatingRateIndex&gt;
+    &lt;indexTenor&gt;
+      &lt;periodMultiplier&gt;3&lt;/periodMultiplier&gt;
+      &lt;period&gt;M&lt;/period&gt;
+    &lt;/indexTenor&gt;
+    &lt;spreadSchedule&gt;
+      &lt;initialValue&gt;0.0050&lt;/initialValue&gt;
+    &lt;/spreadSchedule&gt;
+  &lt;/floatingRateCalculation&gt;
+  &lt;dayCountFraction&gt;ACT/360&lt;/dayCountFraction&gt;
+&lt;/interestCalculation&gt;
+                        </pre>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.7">9.7 The initial and final stub</a>
+               </h3>
+            </div>
+		
+            <p>The representation of the stub periods for the equity swaps schema makes use of the Stub type that was initially developed for the interest rates schema.</p>
+		
+            <p>The initialStub and the finalStub components respectively describe the initial and final stubs. For each of those, the component specifies the rate (or stub amount), the stub start date and the stub end date. The payment dates that relate to the stub period(s) are specified along with the payment dates of the main period, in the interestLegCalculationPeriodDates component.</p>
+		
+            <p>
+			
+               <a href="images/equity-swaps/figure_StubCalculationPeriod.jpg">
+                  <img src="images/equity-swaps/figure_StubCalculationPeriod.jpg" alt="images/equity-swaps/figure_StubCalculationPeriod.jpg" class="image"/>
+               </a>
+		
+            </p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.8">9.8 The principal exchange</a>
+               </h3>
+            </div>
+		
+            <p>Some types of equity swaps do not have an interest leg. Their economic structure relies instead in the exchange of the principal of the swap between the parties. These are the fully funded and zero-strike swaps. The purpose of the PrincipalExchangeFeatures component is to specify this feature that is associated with those swaps. (It should however be noted that the schema also accommodates some more exotic cases that would combine an interest leg which notional would be smaller than the notional of the equity leg, and that would also have a principal exchange.)</p>
+		
+            <p>
+			
+               <a href="images/equity-swaps/figure31_PrincipalExchangeFeatures.jpg">
+                  <img src="images/equity-swaps/figure31_PrincipalExchangeFeatures.jpg" alt="images/equity-swaps/figure31_PrincipalExchangeFeatures.jpg" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 31: The exchange of principal amounts.</p>
+		
+            <p>This component extends the design developed for the interest rate swaps (through the principalExchanges component) by adding the PrincipalExchangeDescriptions component, which has the following features:</p>
+		
+            <ul class="bulleted">
+			
+               <li>It specifies the payer and receiver party references;</li>
+			
+               <li>The date of each of the principal exchanges can be defined either as an actual date (using the adjustableDate component) or in relation to a date defined somewhere else in the document (via the relativeDate component);</li>
+			
+               <li>The principal exchange amount can be defined in three possible ways: (i) By pointing to an amount defined elsewhere in the swap document, through the use of the amountRelativeTo element; (ii) By using the determinationMethod element, that describes a method according to which an amount is determined; (iii) By using the principalAmount component, which allows to explicitly determine an actual amount.</li>
+		
+            </ul>swaps
+		<p> Example 20 - Initial principal exchange:</p>
+		
+            <ul class="bulleted">
+			
+               <li>The principal exchange takes place at the initial period of the swap;</li>
+			
+               <li>The payment date is defined as being the effective date of the swap;</li>
+			
+               <li>The amount paid to Party A is USD 55,911.60.</li>
+		
+            </ul>
+		
+            <pre>
+&lt;principalExchangeFeatures&gt;
+  &lt;principalExchanges&gt;
+    &lt;initialExchange&gt;true&lt;/initialExchange&gt;
+    &lt;finalExchange&gt;false&lt;/finalExchange&gt;
+    &lt;intermediateExchange&gt;false&lt;/intermediateExchange&gt;
+  &lt;/principalExchanges&gt;
+  &lt;principalExchangeDescriptions&gt;
+    &lt;payerPartyReference href="PartyB"/&gt;
+    &lt;receiverPartyReference href="PartyA"/&gt;
+    &lt;principalExchangeAmount&gt;
+      &lt;principalAmount&gt;
+        &lt;currency&gt;USD&lt;/currency&gt;
+        &lt;amount&gt;55911.60&lt;/amount&gt;
+      &lt;/principalAmount&gt;
+    &lt;/principalExchangeAmount&gt;
+    &lt;principalExchangeDate&gt;
+      &lt;relativeDate&gt;
+        &lt;periodMultiplier&gt;0&lt;/periodMultiplier&gt;
+        &lt;period&gt;D&lt;/period&gt;
+        &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+        &lt;dateRelativeTo href="EffectiveDate"/&gt;
+      &lt;/relativeDate&gt;
+    &lt;/principalExchangeDate&gt;
+  &lt;/principalExchangeDescriptions&gt;
+&lt;/principalExchangeFeatures&gt;
+                </pre>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.9">9.9 The additional payments when involving the principal parties to the trade</a>
+               </h3>
+            </div>
+		
+            <p>Similarly to the principal exchange, the EquitySwapAdditionalPayment complex type extends the design developed for the interest rate swaps by providing the ability to define dates in relation to other dates, as well as to specify the calculation logic that supports certain types of fees.</p>
+		
+            <p>
+			
+               <a href="images/equity-swaps/figure32_additionalPayment.jpg">
+                  <img src="images/equity-swaps/figure32_additionalPayment.jpg" alt="images/equity-swaps/figure32_additionalPayment.jpg" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 32: The additionalPayment component.</p>
+		
+            <p> This additionalPayment structure leverages some of the features that are also used through other components:</p>
+		
+            <ul class="bulleted">
+			
+               <li>The payer and receiver parties are specified similarly to the swap legs and the principal exchange, through the payerPartyReference and receiverPartyReference elements;</li>
+			
+               <li>The additionalPaymentAmount component provides the flexibility to define an actual amount (through the paymentAmount component) and/or to describe the methodology for determining such amount, leveraging the formula component developed for the LegAmount complex type;</li>
+			
+               <li>Similarly to the PrincipalExchangeFeatures component, the date of each of the additional payments can be defined either as actual dates or in relation to dates defined somewhere else in the document, through respectively the adjustableDate and the relativeDate components;</li>
+			
+               <li>The optional paymentType string element provides the opportunity to characterize the additional payment.</li>
+		
+            </ul>
+		
+            <p> Example 21 - Upfront fee:</p>
+		
+            <ul class="bulleted">
+			
+               <li>An upfront fee is paid by Party A to Party B, on the effective date of the swap;</li>
+			
+               <li>This upfront fee is equal to: 18388000 * Reference Price * [6.5% (the upfront Fee) + 0.63% (taxes)].</li>
+		
+            </ul>
+		
+            <pre>
+&lt;additionalPayment&gt;
+  &lt;payerPartyReference href="PartyA"/&gt;
+  &lt;receiverPartyReference href="PartyB"/&gt;
+  &lt;additionalPaymentAmount&gt;
+    &lt;formula&gt;
+      &lt;formulaDescription&gt;18388000 * Reference Price * [6.5% (the upfront Fee) + 0.63% (taxes)]&lt;/formulaDescription&gt;
+      &lt;math&gt;
+        &lt;mn&gt;18388000 &lt;/mn&gt;
+        &lt;mo&gt;*&lt;/mo&gt;
+        &lt;mi&gt;ReferencePrice&lt;/mi&gt;
+        &lt;mo&gt;*&lt;/mo&gt;
+        &lt;mo&gt;(&lt;/mo&gt;
+        &lt;mn&gt;6.5&lt;/mn&gt;
+        &lt;mo&gt;%&lt;/mo&gt;
+        &lt;mo&gt;+&lt;/mo&gt;
+        &lt;mn&gt;0.63&lt;/mn&gt;
+        &lt;mo&gt;%&lt;/mo&gt;
+        &lt;mo&gt;)&lt;/mo&gt;
+      &lt;/math&gt;
+      &lt;formulaComponent name="ReferencePrice"&gt;
+        &lt;componentDescription&gt;Volume-weighted average price per share of underlying security on Trade Date&lt;/componentDescription&gt;
+      &lt;/formulaComponent&gt;
+    &lt;/formula&gt;
+  &lt;/additionalPaymentAmount&gt;
+  &lt;additionalPaymentDate&gt;
+    &lt;relativeDate&gt;
+      &lt;periodMultiplier&gt;0&lt;/periodMultiplier&gt;
+      &lt;period&gt;D&lt;/period&gt;
+      &lt;businessDayConvention&gt;NotApplicable&lt;/businessDayConvention&gt;
+      &lt;dateRelativeTo href="EffectiveDate"/&gt;
+    &lt;/relativeDate&gt;
+  &lt;/additionalPaymentDate&gt;
+  &lt;paymentType&gt;Upfront fee&lt;/paymentType&gt;
+&lt;/additionalPayment&gt;
+                </pre>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s9.10">9.10 The optional early termination</a>
+               </h3>
+            </div>
+		
+            <p>The purpose of the ReturnSwapEarlyTermination component is to specify the date from which each of the parties to the trade may have the right to terminate it early. The figure 33 below presents the structure of this component:</p>
+		
+            <p>
+			
+               <a href="images/equity-swaps/figure33_ReturnSwapEarlyTermination.jpg">
+                  <img src="images/equity-swaps/figure33_ReturnSwapEarlyTermination.jpg" alt="images/equity-swaps/figure33_ReturnSwapEarlyTermination.jpg" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>Figure 33: The earlyTermination component.</p>
+		
+            <p>Similarly to the other date-related components that are part of the return swap, the date can be specified using either the adjustableDate component or the relativeDate component. Considering that the standard market practice is to provide the ability for both the parties to the trade to early terminate it starting on Trade Date, the relativeDate element should be used most often. This is illustrated in the example below.</p>
+		
+            <p> Example 22 - Each of the parties have the right to early terminate the trade starting on Trade Date:</p>
+		
+            <pre>
+&lt;earlyTermination&gt;
+  &lt;partyReference href="PartyA"/&gt;
+  &lt;startingDate&gt;
+    &lt;dateRelativeTo href="TradeDate"/&gt;
+  &lt;/startingDate&gt;
+&lt;/earlyTermination&gt;
+&lt;earlyTermination&gt;
+  &lt;partyReference href="PartyB"/&gt;
+  &lt;startingDate&gt;
+    &lt;dateRelativeTo href="TradeDate"/&gt;
+  &lt;/startingDate&gt;
+&lt;/earlyTermination&gt;
+                </pre>
+	
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('8',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('9',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('10',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s10">10 VARIANCE PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	 		
+ 
+	
+
+         <div>
+            <h3>
+               <a id="s10.1">10.1 Variance Derivatives Scope</a>
+            </h3>
+			
+            <p>The Equity Derivative Working Group extended FpML to cover:</p>
+			
+            <ul class="bulleted">
+				
+               <li>Variance Swaps, a type of volatility swap where the payout is linear to variance rather than volatility, therefore the payout will rise at a higher rate than volatility;</li>
+				
+               <li>Short Form Variance Options represented also as Transaction Supplements under ISDA Master Confirmation Agreements.</li>
+			
+            </ul>
+		
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s10.2">10.2 Overall Architecture</a>
+               </h3>
+            </div>
+		
+            <p>Variance Swaps and Options are modelled using the following product element in FpML:</p>
+		
+            <ul class="bulleted">
+			
+               <li>varianceSwap</li>
+			
+               <li>varianceSwapTransactionSupplement</li>
+			
+               <li>varianceOptionTransactionSupplement</li>
+		
+            </ul>
+		
+            <p>
+			
+               <a href="images/equity-options/ClassHierarchy.gif">
+                  <img src="images/equity-options/ClassHierarchy.gif" alt="images/equity-options/ClassHierarchy.gif" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>these components provide support for:</p>
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s10.2.1">10.2.1 varianceSwap</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-variance-swaps-5-0.xsd.html_element_varianceSwap.html">Variance Swap</a> specifies the structure of a variance swap.</p>
+			
+               <p>
+				
+                  <a href="images/variance-swaps/varianceSwap.jpg">
+                     <img src="images/variance-swaps/varianceSwap.jpg" alt="images/variance-swaps/varianceSwap.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <ul class="bulleted">
+				
+                  <li>productType - A classification of the type of product. FpML defines a simple product categorization using a coding scheme.</li>
+				
+                  <li>productId - A product reference identifier allocated by a party. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list..</li>
+				
+                  <li>additionalPayment - Specifies additional payment(s) between the principal parties to the netted swap.</li>
+				
+                  <li>extraordinaryEvents - Where the underlying is shares, defines market events affecting the issuer of those shares that may require the terms of the transaction to be adjusted.</li>
+				
+                  <li>varianceLeg - Variance leg. The maximum allowable number of variance legs has been increased to unbounded to allow Variance Dispersion to be supported.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s10.2.2">10.2.2 varianceSwapTransactionSupplement</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-variance-swaps-5-0.xsd.html_element_varianceSwapTransactionSupplement.html">Variance Swap Transaction Supplement</a> specifies the structure of a variance swap transaction supplement. This modelled using the same variance legs as Variance Swap, but does not allow for long form content such as extraordinary events.</p>
+			
+               <p>
+				
+                  <a href="images/variance-swaps/varianceSwapTransactionSupplement.jpg">
+                     <img src="images/variance-swaps/varianceSwapTransactionSupplement.jpg" alt="images/variance-swaps/varianceSwapTransactionSupplement.jpg" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s10.2.3">10.2.3 VarianceLeg</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-variance-swaps-5-0.xsd.html_type_VarianceLeg.html">VarianceLeg</a> - A type describing return which is driven by a Variance calculation.</p>
+			
+               <p>
+				
+                  <a href="images/variance-swaps/VarianceLeg.jpg">
+                     <img src="images/variance-swaps/VarianceLeg.jpg" alt="images/variance-swaps/VarianceLeg.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <ul class="bulleted">
+				
+                  <li>legIdentifier - Version aware identification of this leg. (e.g. Variance Dispersion typically involves many legs, with 1 IVS and 50 EVS legs being typical. Leg Identifier has been introduced as an optional child element to support identification of each of these legs.)</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s10.2.4">10.2.4 varianceOptionTransactionSupplement</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-variance-swaps-5-0.xsd.html_element_varianceOptionTransactionSupplement.html">Variance Option Transaction Supplement</a> specifies the structure of a variance option transaction supplement. VarianceOptionTransactionSupplement implements Variance Option Transaction Supplement by providing a short form representation for use in trades governed by a Master Confirmation Agreement.</p>
+			
+               <p>
+				
+                  <a href="images/variance-swaps/varianceOptionTransactionSupplement.jpg">
+                     <img src="images/variance-swaps/varianceOptionTransactionSupplement.jpg" alt="images/variance-swaps/varianceOptionTransactionSupplement.jpg" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('9',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('10',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('11',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

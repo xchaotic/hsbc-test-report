@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s15">15 COMMODITY DERIVATIVE PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	
+	
+	
+	
+	
+
+         <div>
+            <h3>
+               <a id="s15.1">15.1 Introduction</a>
+            </h3>
+		
+            <p>This section provides a detailed description of the product architecture for commodity derivatives. FpML provides support for commodity swaps (whether fix/float or float/float) and commodity options (American, European and Asian). Physically-settled trades are also covered including swaps for Electricity, Natural Gas, Oil, and Coal commodities. Support for Bullion Forwards is also included. A representation for a commodity underlyer has also been introduced, which is used within the commodity products but that can also be used within other products such as equity baskets.</p>
+		
+            <p>For an overview of the commodites coverage in FpML and its linking with the legal documentation see the following document: <a class="web" href="confirmations/com-coverage-matrix.pdf">FpML Commodities Coverage Matrix (pdf file)</a>
+            </p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s15.2">15.2 Commodity Underlyer</a>
+               </h3>
+            </div>
+		
+            <p>The 'commodity' underlyer is meant to identify the commodity ‘index’ which is subject to the trade and is flexible enough to support agricultural products, and energy. Support for other commodity types has not been fully evaluated but this does not preclude their being able to be represented A number of global elements are already defined in the FpML schema for various asset types. The commodity underlyer follows the same model.</p>
+		
+            <a href="images/commodity-derivatives/Commodity.jpg">
+               <img src="images/commodity-derivatives/Commodity.jpg" alt="images/commodity-derivatives/Commodity.jpg" class="image"/>
+            </a>
+		
+            <p>The 'instrumentId' and the 'description' elements are derived from the IdentifiedAsset type, which is used by multiple underlyers. The 'instrumentId' contains the unique identifier for the asset, and is intended to hold a Commodity Reference Price in the format set out by ISDA in the 1993 or 2005 Commodity Definitions. However, a CUSIP, ISIN, or any other identifier could also be used. The 'description' contains the name of the asset.</p>
+		
+            <p>The following sequence of elements is optional and they are specified only in the event that no ISDA Commodity Reference Price or other identifier for this commodity ‘index’ exists.</p>
+		
+            <ul class="bulleted">
+			
+               <li>The 'commodityBase' element identifies the base type of the commodity being traded, for example 'Oil'.</li>
+			
+               <li>The 'commodityDetails' also identifies the type of commodity but it is more specific than the base, for example 'Brent'.</li>
+			
+               <li>The 'unit' element identifies the unit in which the underlyer is denominated.</li>
+			
+               <li>The 'currency' identifies the currency in which the Commodity Reference Price is published.</li>
+			
+               <li>Either the 'exchange' or the 'publication' are specified. For those commodities being traded with reference to the price of a listed future, the exchange where that future is listed should be specified in the 'exchange' element. On the other hand, for those commodities being traded with reference to a price distributed by a publication, that publication should be specified in the 'publication' element.</li>
+		
+            </ul>
+		
+            <p>The 'specified Price' is not defined in the Commodity Reference Price and so needs to be stated in the underlyer definition as it will impact the calculation of the Floating Price.</p>
+		
+            <p>The 'deliveryDates' element is applicable for a Commodity Transaction that references a listed future.</p>
+		
+            <p>The 'deliveryDateRollConvention' specifies, for a Commodity Transaction that references a listed future via the 'deliveryDates' element, the day on which the specified future will roll to the next nearby month when the referenced future expires.</p>
+		
+            <p>The 'multiplier' specifies the multiplier associated with the transaction. This element is intended for use with freight transactions.</p>
+	
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s15.3">15.3 commoditySwap</a>
+               </h3>
+            </div>
+		
+            <p>The commodity swap product is designed to support both fixed/float swaps and float/float swaps. There is also support for describing the attributes of physical commodity delivery. Its design is fully compatible with other FpML products and reuses standard common types.</p>
+		
+            <p>As with all products in FpML the commodity swaps are accessed through a global element 'commoditySwap' which can substitute the 'product' element used in the construction of trade structures. The following diagram outlines the product structure.</p>
+		
+            <a href="images/commodity-derivatives/commoditySwap.jpg">
+               <img src="images/commodity-derivatives/commoditySwap.jpg" alt="images/commodity-derivatives/commoditySwap.jpg" class="image"/>
+            </a>
+		
+            <p>The 'commoditySwap' structure only defines parameters for product-related information (e.g. dates, rates, underlying commodity, price source, etc.). Other trade-related information (e.g. trade date, identifiers, legal documentation, etc.) is held in the containing trade structure.</p>
+		
+            <p>The repeating 'fixedLeg' and 'floatingLeg' elements contain the details of any scheduled payments or exchanges during the life of the instrument and are described later. A simple commodity swap would contain two legs, typically one fixed and one floating, but the repetition allows more complex multi-legged exchanges to be described.</p>
+		
+            <p>The product representation of physically-settled trades is done within 'coalPhysicalLeg', 'elecricityPhysicalLeg', 'gasPhysicalLeg', 'oilPhysicalLeg' paired with  'fixedLeg' or 'floatingLeg'  - see details in the Physical Leg section.</p>
+		
+            <p>The optional 'commonPricing' flag may be relevant for a Transaction that references more than one Commodity Reference Price. If Common Pricing is not specified or its value is set to 'false', it will be deemed not to apply.</p>
+		
+            <p>The optional 'marketDisruption' structure defines how the product should behave if there is a market disruption as defined in the 'ISDA 1993 Commodity Definitions' or in the 'ISDA 2005 Commodity Definitions', as applicable.</p>
+		
+            <a href="images/commodity-derivatives/CommodityMarketDisruption.jpg">
+               <img src="images/commodity-derivatives/CommodityMarketDisruption.jpg" alt="images/commodity-derivatives/CommodityMarketDisruption.jpg" class="image"/>
+            </a>
+		
+            <p>The commodity swap's 'rounding' element, if present, defines the direction and number of decimal places to which rounding should be performed in all amount calculations.</p>
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s15.3.1">15.3.1 fixedLeg</a>
+               </h4>
+			
+               <p>A schedule of fixed payments associated with a commodity swap are defined within a 'fixedLeg' using the following structure.</p>
+			
+               <a href="images/commodity-derivatives/FixedPriceLeg.jpg">
+                  <img src="images/commodity-derivatives/FixedPriceLeg.jpg" alt="images/commodity-derivatives/FixedPriceLeg.jpg" class="image"/>
+               </a>
+			
+               <p>As with other FpML leg structures the payer and receiver parties are explicitly indicated in the 'payerPartyReference' and 'receiverPartyReference'.</p>
+			
+               <p>The role of the remaining elements is as follows:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The 'calculationPeriods' or 'calculationDates' if the Calculation Periods are all one day long or the 'calculationPeriodsSchedule' is only intended to be used if the Calculation Periods differ on each leg. If Calculation Periods mirror another leg, then the 'calculationPeriodsReference' element should be used to point to the Calculation Periods on that leg or 'calculationPeriodsDatesReference' element should be used to point to the single-day-duration Calculation Periods on that leg or the 'calculationPeriodsScheduleReference' can be used to point to the Calculation Periods Schedule for that leg.</li>
+				
+                  <li>The 'fixedPrice' structure defines the price for a given unit of the underlying commodity where that price is fixed for the life of the trade.</li>
+				
+                  <li>On the other hand, if the fixed price varies over the life of the trade, then the 'fixedPriceSchedule' structure is used instead of the 'fixedPrice'. Note that the intention is that a fixed price step should be specified for each Calculation Period in the trade, regardless of whether there is a change in value between two periods. This is so as to match the fixed price schedule to the calculation periods as clearly as possible. The fixed price steps must be in chronological order (i.e the first step corresponds to the first Calculation Period, the last step to the last Calculation Period).</li>
+				
+                  <li>The 'totalPrice' structure specifies the total amount of all fixed payments due during the term of the trade.</li>
+				
+                  <li>The notional amount is specified stating either the 'notionalQuantity' or if the notional changes over the life of the transaction, then the 'notionalQuantitySchedule' is specified. The 'settlementPeriodsNotionalQuantity' should be specified for an electricity transaction, the Notional Quantity for a one or more groups of Settlement Periods to which the Notional Quantity is based. If the schedule differs for different groups of Settlement Periods, this element should be repeated. In addition, the 'totalNotionalQuantity' must be specified. Note that the intention is that a notional step should be specified for each Calculation Period in the trade, regardless of whether there is a change in value between two periods. This is so as to match the notional quantity schedule to the calculation periods as clearly as possible. The notional steps must be in chronological order (i.e the first step corresponds to the first Calculation Period, the last step to the last Calculation Period). If notional amount mirror another leg, then the 'quantityReference' element should be used to point to the Notional Quantity.</li>
+				
+                  <li>The 'paymentDates' structure supports either the definition of dates as either a series of unadjusted dates along with a date roll convention and business center list for adjustment, or as set of adjusted dates relative to some other date schedule defined elsewhere in the product (e.g. in the floating leg).</li>
+				
+                  <li>The 'relativePaymentDates' are specified when the payment dates are relative to the calculation periods.</li>
+				
+                  <li>The Flat Rate, applicable to Wet Voyager Charter Freight Swaps. Whether the Flat Rate is the New Worldwide Tanker Nominal Freight Scale for the Freight Index Route taken at the Trade Date of the transaction or taken on each Pricing Date. The 'flatRateAmount', If 'flatRate' is set to 'Fixed', is the actual value of the Flat Rate.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s15.3.2">15.3.2 floatingLeg</a>
+               </h4>
+			
+               <p>Each 'floatingLeg' defines a series of financial payments for a commodity who's value is derived from a floating price source such as an exchange.</p>
+			
+               <a href="images/commodity-derivatives/FloatingPriceLeg.jpg">
+                  <img src="images/commodity-derivatives/FloatingPriceLeg.jpg" alt="images/commodity-derivatives/FloatingPriceLeg.jpg" class="image"/>
+               </a>
+			
+               <p>As with the 'fixedLeg' they parties obligation to pay and receive the payments are explicitly indicated by the 'payerPartyReference' and 'receiverPartyReference' elements.</p>
+			
+               <p>Two structures distinguish the 'floatingLeg' from the 'fixedLeg': the existence of the 'commodity' underlyer (see description above at the Commodity Underlyer section) and the 'calculation' structure within the floating leg.</p>
+			
+		
+               <div>
+                  <h5>
+                     <a id="s15.3.2.1">15.3.2.1 calculation</a>
+                  </h5>
+				
+                  <p>The 'calculation' structure captures details relevant to the calculation of the floating price.</p>
+				
+                  <a href="images/commodity-derivatives/FloatingLegCalculation.jpg">
+                     <img src="images/commodity-derivatives/FloatingLegCalculation.jpg" alt="images/commodity-derivatives/FloatingLegCalculation.jpg" class="image"/>
+                  </a>
+				
+                  <p>The structure is defined by the following elements:</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>The 'pricingDates' represent the dates on which prices are observed for the underlyer.</li>
+					
+                     <li>The 'averagingMethod' element specifies the method of averaging specified by the parties when more than one pricing date is applicable.</li>
+					
+                     <li>If the Notional Quantity is specified in a unit that does not match the unit in which the Commodity Reference Price is quoted, the scaling or conversion factor used to convert the Commodity Reference Price unit into the Notional Quantity unit should be stated in the 'conversionFactor' element. If there is no conversion, the 'conversionFactor' element is not intended to be used.</li>
+					
+                     <li>The 'rounding' structure defines the rounding direction and precision for price values.</li>
+					
+                     <li>In some trades, there may be a spread under or over the Commodity Reference Price, in that case the spread may defined by the 'spread' element or if the spread is not constant over the life of the trade, the 'spreadStep' will be used to define the spread schedule. Note that the intention is that a spread step should be specified for each Calculation Period in the trade, regardless of whether there is a change in value between two periods. This is so as to match the spread schedule to the calculation periods as clearly as possible. The spread steps must be in chronological order (i.e the first step corresponds to the first Calculation Period, the last step to the last Calculation Period).</li>
+					
+                     <li>The FX observations to be used to convert the observed Commodity Reference Price to the Settlement Currency are covered by the 'fx' element.</li>
+				
+                  </ul>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s15.3.3">15.3.3 Physical Leg</a>
+               </h4>
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s15.3.3.1">15.3.3.1 Coverage</a>
+                  </h5>
+				
+                  <p>The support for physically-settled commodities trades includes,</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>Natural Gas</li>
+					
+                     <li>Oil</li>
+					
+                     <li>Electricity</li>
+					
+                     <li>Coal</li>
+				
+                  </ul>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s15.3.3.2">15.3.3.2 Product Representation</a>
+                  </h5>
+				
+                  <p>The product representation of physically-settled trades is done within the commoditySwap product element by adding a family of physical legs.</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>Fixed price transaction = xxxPhysicalLeg + fixedLeg</li>
+					
+                     <li>Floating price transaction = xxxPhysicalLeg + floatingLeg</li>
+				
+                  </ul>
+				
+                  <p>Note: xxx gets replaced by oil, gas, electricity, and coal.</p>
+				
+                  <p>The following structures vary between all these commodities,</p>
+				
+                  <ul class="bulleted">
+					
+                     <li>Delivery periods</li>
+					
+                     <li>Product</li>
+					
+                     <li>Delivery</li>
+					
+                     <li>Quantities</li>
+				
+                  </ul>
+				
+				
+				
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s15.3.3.2.1">15.3.3.2.1 Gas Physical Leg</a>
+                     </h5>
+					
+                     <p>Physically settled natural gas leg.</p>
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.1.1">15.3.3.2.1.1 gasPhysicalLeg - deliveryPeriods</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/gasPhysicalLeg-deliveryPeriods.jpg">
+                           <img src="images/commodity-derivatives/gasPhysicalLeg-deliveryPeriods.jpg" alt="images/commodity-derivatives/gasPhysicalLeg-deliveryPeriods.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.1.2">15.3.3.2.1.2 gasPhysicalLeg - product</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/gasPhysicalLeg-product.jpg">
+                           <img src="images/commodity-derivatives/gasPhysicalLeg-product.jpg" alt="images/commodity-derivatives/gasPhysicalLeg-product.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.1.3">15.3.3.2.1.3 gasPhysicalLeg - deliveryConditions</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/gasPhysicalLeg-deliveryConditions.jpg">
+                           <img src="images/commodity-derivatives/gasPhysicalLeg-deliveryConditions.jpg" alt="images/commodity-derivatives/gasPhysicalLeg-deliveryConditions.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.1.4">15.3.3.2.1.4 gasPhysicalLeg - deliveryQuantity</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/gasPhysicalLeg-deliveryQuantity.jpg">
+                           <img src="images/commodity-derivatives/gasPhysicalLeg-deliveryQuantity.jpg" alt="images/commodity-derivatives/gasPhysicalLeg-deliveryQuantity.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s15.3.3.2.2">15.3.3.2.2 Oil  Physical Leg</a>
+                     </h5>
+					
+                     <p>Physically settled oil or refined products leg.</p>
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.2.1">15.3.3.2.2.1 oilPhysicalLeg - deliveryPeriods</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/oilPhysicalLeg-deliveryPeriods.jpg">
+                           <img src="images/commodity-derivatives/oilPhysicalLeg-deliveryPeriods.jpg" alt="images/commodity-derivatives/oilPhysicalLeg-deliveryPeriods.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.2.2">15.3.3.2.2.2 oilPhysicalLeg - product</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/oilPhysicalLeg-product.jpg">
+                           <img src="images/commodity-derivatives/oilPhysicalLeg-product.jpg" alt="images/commodity-derivatives/oilPhysicalLeg-product.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.2.3">15.3.3.2.2.3 oilPhysicalLeg - deliveryConditions</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/oilPhysicalLeg-deliveryConditions.jpg">
+                           <img src="images/commodity-derivatives/oilPhysicalLeg-deliveryConditions.jpg" alt="images/commodity-derivatives/oilPhysicalLeg-deliveryConditions.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.2.4">15.3.3.2.2.4 oilPhysicalLeg - deliveryQuantity</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/oilPhysicalLeg-deliveryQuantity.jpg">
+                           <img src="images/commodity-derivatives/oilPhysicalLeg-deliveryQuantity.jpg" alt="images/commodity-derivatives/oilPhysicalLeg-deliveryQuantity.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s15.3.3.2.3">15.3.3.2.3 Electricity Physical Leg</a>
+                     </h5>
+					
+                     <p>Physically settled electricity leg.</p>
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.3.1">15.3.3.2.3.1 electricityPhysicalLeg - deliveryPeriods</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/electricityPhysicalLeg-deliveryPeriods.jpg">
+                           <img src="images/commodity-derivatives/electricityPhysicalLeg-deliveryPeriods.jpg" alt="images/commodity-derivatives/electricityPhysicalLeg-deliveryPeriods.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.3.2">15.3.3.2.3.2 electricityPhysicalLeg - product</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/electricityPhysicalLeg-product.jpg">
+                           <img src="images/commodity-derivatives/electricityPhysicalLeg-product.jpg" alt="images/commodity-derivatives/electricityPhysicalLeg-product.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.3.3">15.3.3.2.3.3 electricityPhysicalLeg - deliveryConditions</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/electricityPhysicalLeg-deliveryConditions.jpg">
+                           <img src="images/commodity-derivatives/electricityPhysicalLeg-deliveryConditions.jpg" alt="images/commodity-derivatives/electricityPhysicalLeg-deliveryConditions.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.3.4">15.3.3.2.3.4 electricityPhysicalLeg - deliveryQuantity</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/electricityPhysicalLeg-deliveryQuantity.jpg">
+                           <img src="images/commodity-derivatives/electricityPhysicalLeg-deliveryQuantity.jpg" alt="images/commodity-derivatives/electricityPhysicalLeg-deliveryQuantity.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s15.3.3.2.4">15.3.3.2.4 Coal Physical Leg</a>
+                     </h5>
+					
+                     <p>Physically settled coal leg.</p>
+					
+					
+					
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.4.1">15.3.3.2.4.1 coalPhysicalLeg - deliveryPeriods</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/coalPhysicalLeg-deliveryPeriods.jpg">
+                           <img src="images/commodity-derivatives/coalPhysicalLeg-deliveryPeriods.jpg" alt="images/commodity-derivatives/coalPhysicalLeg-deliveryPeriods.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.4.2">15.3.3.2.4.2 coalPhysicalLeg - product</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/coalPhysicalLeg-product.jpg">
+                           <img src="images/commodity-derivatives/coalPhysicalLeg-product.jpg" alt="images/commodity-derivatives/coalPhysicalLeg-product.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.4.3">15.3.3.2.4.3 coalPhysicalLeg - deliveryConditions</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/coalPhysicalLeg-deliveryConditions.jpg">
+                           <img src="images/commodity-derivatives/coalPhysicalLeg-deliveryConditions.jpg" alt="images/commodity-derivatives/coalPhysicalLeg-deliveryConditions.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                     <div>
+                        <h5>
+                           <a id="s15.3.3.2.4.4">15.3.3.2.4.4 coalPhysicalLeg - deliveryQuantity</a>
+                        </h5>
+						
+                        <a href="images/commodity-derivatives/coalPhysicalLeg-deliveryQuantity.jpg">
+                           <img src="images/commodity-derivatives/coalPhysicalLeg-deliveryQuantity.jpg" alt="images/commodity-derivatives/coalPhysicalLeg-deliveryQuantity.jpg" class="image"/>
+                        </a>
+					
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s15.4">15.4 commodityOption</a>
+               </h3>
+            </div>
+		
+            <p>The product support for financially-settled  and physically-settled commodity options in FpML is based on the creation of a new 'commodityOption' product. The product references the 'commodity' underlyer in order to support the underlying asset of the option.</p>
+		
+            <a href="images/commodity-derivatives/commodityOption.jpg">
+               <img src="images/commodity-derivatives/commodityOption.jpg" alt="images/commodity-derivatives/commodityOption.jpg" class="image"/>
+            </a>
+		
+            <p>All FpML products inherit two optional elements from the Product type: 'productType' and 'productId'. The 'productType' defines a classification of the type of product. FpML defines a simple product categorization using a coding scheme. The 'productId' contains a product reference identifier allocated by a party. In this case, FpML does not define the domain values associated with this element. </p>
+		
+            <p>The 'buyerPartyReference' and 'sellerPartyReference' contain references to the parties that buy or sell the instrument respectively. Buying the instrument means paying for the instrument and receiving the rights defined by it. On the other hand, selling the instrument means granting the rights defined by the instrument and in return receiving a payment for it.</p>
+		
+            <p>The optionType element is for specifying whether this is a call option or a put option.</p>
+		
+            <p>The choice allows to selecet the financially-settled commodity options or physically-settled options.</p>
+		
+		
+		
+            <p>The 'premium' element defines the option premium payable by the buyer to the seller. Should the premium differ over the course of an Asian options life (e.g. because delivery is per calendar day which is reflected in the premium), a premium schedule should be specified. Note that the intention is that a premium step should be specified for each Calculation Period in the trade, regardless of whether there is a change in value between two periods. This is so as to match the premium schedule to the calculation periods as clearly as possible. The premium steps must be in chronological order (i.e the first step corresponds to the first Calculation Period, the last step to the last Calculation Period).</p>
+		
+            <p>The 'commonPricing', 'marketDisruption', and 'rounding' elements are common across all commodity transactions. For a detailed description of them see the commoditySwap section.</p>
+	
+            <div>
+               <h4>
+                  <a id="s15.4.1">15.4.1 CommodityFinancialOption</a>
+               </h4>
+			
+               <p>The CommodityFinancialOption.model is specific to financially-settled commodity options:</p>
+			
+               <a href="images/commodity-derivatives/CommodityFinancialOption.jpg">
+                  <img src="images/commodity-derivatives/CommodityFinancialOption.jpg" alt="images/commodity-derivatives/CommodityFinancialOption.jpg" class="image"/>
+               </a>
+			
+               <p>The 'commodity' underlyer component is specified using a reference to the 'commodity' asset (see description above at the Commodity Underlyer section).</p>
+			
+               <p>The following elements are specific to asian/averaging commodity options only:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The 'effectiveDate' of the Commodity Option Transaction. Note that the Termination/Expiration Date should be specified in expirationDate within the CommodityAmericanExercise type or the CommodityEuropeanExercise type, as applicable.</li>
+				
+                  <li>The Calculation Periods are represented explicitly with the 'calculationPeriods' element or as a parametric representation with the 'calculationPeriodsSchedule' structure.</li>
+				
+                  <li>The 'pricingDates' element defines the dates on which the option will price.</li>
+				
+                  <li>The 'averagingMethod' is present if there is more than one 'pricingDates' element.</li>
+			
+               </ul>
+			
+               <p>As with the 'commoditySwap', the notional amount of the 'commodityOption' is specified stating either the 'notionalQuantity' or if the notional changes over the life of the transaction, then the 'notionalQuantitySchedule' is specified. In addition, the 'totalNotionalQuantity' must be specified. Note that the intention is that a notional step should be specified for each Calculation Period in the trade, regardless of whether there is a change in value between two periods. This is so as to match the notional quantity schedule to the calculation periods as clearly as possible. The notional steps must be in chronological order (i.e the first step corresponds to the first Calculation Period, the last step to the last Calculation Period).</p>
+			
+               <p>The 'exercise' structure contains the parameters for defining how the commodity option can be exercised and how it is settled.</p>
+			
+               <p>The different options for specifying the strike price per unit will consist of a single strike price of a strike price schedule. Note that the intention is that a strike price per unit step should be specified for each Calculation Period in the trade, regardless of whether there is a change in value between two periods. This is so as to match the strike price schedule to the calculation periods as clearly as possible. The strike price per unit of the strike price per unit steps must be in chronological order (i.e the first step corresponds to the first Calculation Period, the last step to the last Calculation Period).</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s15.4.2">15.4.2 CommodityPhysicalOption</a>
+               </h4>
+			
+               <p>The CommodityPhysicalOption.model is specific to physically-settled commodity options:</p>
+			
+               <a href="images/commodity-derivatives/CommodityPhysicalOption.jpg">
+                  <img src="images/commodity-derivatives/CommodityPhysicalOption.jpg" alt="images/commodity-derivatives/CommodityPhysicalOption.jpg" class="image"/>
+               </a>
+			
+               <p>The approach is similar to that used for interest rate swaptions by embedding a physically-settled swap/forward transaction within the option transaction. So that the exercise of an option results in a new physically-settled swap or forward transaction.</p>
+			
+               <p>The 'physicalExercise' structure defines how the commodity option can be exercised into a physical transaction.</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s15.5">15.5 commodityForward</a>
+               </h3>
+            </div>
+		
+            <p>The commodityForward product element supports the representation of Bullion Forwards. Whilst some commodity forwards are booked as single period swaps, precious forwards are extremely basic trades and are confirmed under a different ISDA confirmation template</p>
+		
+            <p>Even though the initial scope is limited to Bullion Forward, the intention of the working group is to allow support for other commodity classes should this be required.</p>
+		
+            <a href="images/commodity-derivatives/commodityForward.jpg">
+               <img src="images/commodity-derivatives/commodityForward.jpg" alt="images/commodity-derivatives/commodityForward.jpg" class="image"/>
+            </a>
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s15.5.1">15.5.1 fixedLeg</a>
+               </h4>
+			
+               <p>The fixed payment of the Commodity Forward product is represented using the fixedLeg element of type NonPeriodicFixedPriceLeg.</p>
+			
+               <a href="images/commodity-derivatives/fixedLeg.jpg">
+                  <img src="images/commodity-derivatives/fixedLeg.jpg" alt="images/commodity-derivatives/fixedLeg.jpg" class="image"/>
+               </a>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s15.5.2">15.5.2 bullionPhysicalLeg</a>
+               </h4>
+			
+               <p>The intention of the new leg is to re-use as many existing commodity components as possible to achieve a flexible implementation of a forward that will be adaptable for use with further commodity classes.</p>
+			
+               <p>Consequently, the BullionPhysicalLeg component will be a member of a choice group such that further commodity types can be added over time.</p>
+			
+               <a href="images/commodity-derivatives/bullionPhysicalLeg.jpg">
+                  <img src="images/commodity-derivatives/bullionPhysicalLeg.jpg" alt="images/commodity-derivatives/bullionPhysicalLeg.jpg" class="image"/>
+               </a>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('14',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('15',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('16',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

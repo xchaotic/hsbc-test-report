@@ -1,0 +1,68 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_loan_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_basket'
+  coords='234,682,347,744'
+  href='fpml-asset-5-0.xsd.html_element_basket.html#element_basket'/>
+
+ <area
+  shape='rect'
+  alt='element_bond'
+  coords='234,754,338,816'
+  href='fpml-asset-5-0.xsd.html_element_bond.html#element_bond'/>
+
+ <area
+  shape='rect'
+  alt='element_cash'
+  coords='234,826,337,888'
+  href='fpml-asset-5-0.xsd.html_element_cash.html#element_cash'/>
+
+ <area
+  shape='rect'
+  alt='element_commodity'
+  coords='234,898,370,960'
+  href='fpml-asset-5-0.xsd.html_element_commodity.html#element_commodity'/>
+
+ <area
+  shape='rect'
+  alt='element_convertibleBond'
+  coords='234,970,398,1032'
+  href='fpml-asset-5-0.xsd.html_element_convertibleBond.html#element_convertibleBond'/>
+
+ <area
+  shape='rect'
+  alt='element_equity'
+  coords='234,1042,342,1104'
+  href='fpml-asset-5-0.xsd.html_element_equity.html#element_equity'/>
+
+ <area
+  shape='rect'
+  alt='element_exchangeTradedFund'
+  coords='234,1114,430,1176'
+  href='fpml-asset-5-0.xsd.html_element_exchangeTradedFund.html#element_exchangeTradedFund'/>
+
+ <area
+  shape='rect'
+  alt='element_future'
+  coords='234,1186,341,1248'
+  href='fpml-asset-5-0.xsd.html_element_future.html#element_future'/>
+
+ <area
+  shape='rect'
+  alt='element_index'
+  coords='234,1258,339,1320'
+  href='fpml-asset-5-0.xsd.html_element_index.html#element_index'/>
+
+ <area
+  shape='rect'
+  alt='element_mortgage'
+  coords='234,1402,363,1464'
+  href='fpml-asset-5-0.xsd.html_element_mortgage.html#element_mortgage'/>
+
+ <area
+  shape='rect'
+  alt='element_mutualFund'
+  coords='234,1474,376,1536'
+  href='fpml-asset-5-0.xsd.html_element_mutualFund.html#element_mutualFund'/>
+
+</map>

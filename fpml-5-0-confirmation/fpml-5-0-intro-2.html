@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s2">2 FpML OVERVIEW</a>
+            </h2>
+         </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+         <div>
+            <h3>
+               <a id="s2.1">2.1 FpML</a>
+            </h3>
+		
+            <p>FpML is designed based on a number of key principles and conventions. Some of these include:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Use XML's structuring ability to create reusable building blocks.</li>
+			
+               <li>Follow naming and structuring conventions to create a more consistent XML appearance.</li>
+			
+               <li>Where possible, share definitions across products and asset classes.</li>
+			
+               <li>Minimize evolution in instance documents from version to version.</li>
+		
+            </ul>
+		
+            <p>Although these basic principles have consistently been observed, over the life of the specification there has been some evolution in the details, and as a result there have been some changes in the appearance of FpML. A number of these changes have been introduced to take advantage of the power created by XML schema. The original version of the FpML Architecture is located at <a class="web" href="http://www.fpml.org/spec/2001/rec-fpml-1-0-2001-05-14/">FpML Architecture 1.0</a>. The latest version of the FpML architecture principles is described in detail in the <a class="web" href="http://www.fpml.org/spec/fpml-arch-3-0-lcwd-1/"> FpML Architecture 3.0</a>. That document discusses how to create and extend FpML definitions.</p>
+		
+            <p>The remainder of this section is intended to describe how the architecture principles were applied in developing FpML, and how to use the resulting spec. Please see the end of this section for a fuller explanation of the motivation for the FpML design approach.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.2">2.2 Overview of FpML views</a>
+               </h3>
+            </div>
+		
+            <p>With FpML 5-0 , FpML has been divided into several very closely related schemas to better support different types of business processes.  Each of these schemas, called a "view", has a distinct namespace and element and type definitions.  However, each view is built from the same source schema, and so shares a number of features, such as element names.</p>
+		
+            <p>The following features are the SAME across all views:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Element names</li>
+			
+               <li>Type names</li>
+			
+               <li>Product names</li>
+			
+               <li>Available product features, and the representation of those features</li>
+			
+               <li>The FpML version</li>
+		
+            </ul>
+		
+            <p>The following features are DIFFERENT in different views:</p>
+		
+            <ul class="bulleted">
+			
+               <li>The intended usage of the standard, i.e. the types of business processes that it will be used for</li>
+			
+               <li>The list of available business processes and messages</li>
+			
+               <li>The "cardinality" of elements within a product or message (i.e. whether they are mandatory or optional)</li>
+			
+               <li>The exact list of supported products (may differ from view to view)</li>
+			
+               <li>The namespace</li>
+			
+               <li>The list of non-product features that are supported</li>
+		
+            </ul>
+		
+            <p>In FpML 5-0, the list of supported views includes:</p>
+		
+            <ul class="bulleted">
+			
+			
+               <li>
+                  <b>Reporting</b>:  This view is intended to be used for reporting trading and business activities and positions (including as part of STP flows), as well as processes such as reconciliation. This view has a moderately loose product representation; it requires key economic information such as the notional, key dates, and parties, but leaves other information optional.</li>
+			
+               <li>
+                  <b>Confirmation</b>:  This view is intended to be used for confirming the precise details of contracts and post-trade business events. This view is intended to have similar charactistics to the FpML versions 1-4 product representation, i.e. a very detailed product representation capturing the details needed for a transaction confirmation.</li>
+		
+            </ul>
+		
+		
+            <p>The <b>rationale</b> for the concept of "views" is to provide a consistent representation of key information across many types of business process, while allowing the set of mandatory and optional data to vary between processes.  For example, when a firm reporting on an interest rate swap it may not provide information such as: payment date and reset date definitions on the floating side, or the business day adjustments that were used, etc.  However, all of these pieces of information are crucial for confirming that swap once it is traded.  So for confirmation view we want these pieces of information to be mandatory, while they are optional for pre-trade view.</p>
+		
+            <p>A present, the concept of views is implemented as follows:</p>
+		
+            <ul class="bulleted">
+			
+               <li>A single "master" schema is maintained for all views</li>
+			
+               <li>This master schema includes a number of annotations using a simple syntax for overriding specific items (typically cardinalities) for a specific view.</li>
+			
+               <li>The published schema for each view is generated using an XSLT processing script from the master schema.</li>
+			
+               <li>ISDA publishes a separate schema and set of examples for each view.</li>
+		
+            </ul>
+		
+		
+            <p>In the reporting view, a firm reporting on an interest rate swap may provide the following elements:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Streams for both the fixed and floating sides.</li>
+			
+               <li>Streams for both the fixed and floating sides.</li>
+			
+               <li>The absolute effective and termination dates.</li>
+			
+               <li>The payer and receiver party references for both sides.</li>
+			
+               <li>Calculation frequencies for both sides.</li>
+			
+               <li>The notional that was traded.</li>
+			
+               <li>The day count fraction on each stream.</li>
+		
+            </ul>
+		
+            <p>Thus, the FpML for reporting on a 5-year USD-LIBOR-3M swap may look something as follows:</p>
+		
+            <pre>
+		&lt;swap&gt;
+			&lt;productType&gt;InterestRateSwap&lt;/productType&gt;
+				&lt;assetClass&gt;InterestRates&lt;/assetClass&gt;
+					&lt;swapStream&gt;
+						&lt;payerPartyReference href="hedge_global"/&gt;
+						&lt;calculationPeriodDates id="floatingCalcPeriodDates"&gt;
+							&lt;effectiveDate&gt;
+								&lt;adjustedDate&gt;2009-08-04Z&lt;/adjustedDate&gt;
+							&lt;/effectiveDate&gt;
+							&lt;terminationDate&gt;
+								&lt;adjustedDate&gt;2021-03-01Z&lt;/adjustedDate&gt;
+							&lt;/terminationDate&gt;
+						&lt;/calculationPeriodDates&gt;
+						&lt;calculationPeriodAmount&gt;
+							&lt;calculation&gt;
+								&lt;notionalSchedule&gt;
+									&lt;notionalStepSchedule&gt;
+										&lt;initialValue&gt;623161.01&lt;/initialValue&gt;
+										&lt;step&gt;
+											&lt;stepDate&gt;2009-09-01&lt;/stepDate&gt;
+											&lt;stepValue&gt;617840.01&lt;/stepValue&gt;
+										&lt;/step&gt;
+										&lt;!-- .... intermediate values removed --&gt;
+										&lt;step&gt;
+											&lt;stepDate&gt;2021-01-01&lt;/stepDate&gt;
+											&lt;stepValue&gt;9792.01&lt;/stepValue&gt;
+										&lt;/step&gt;
+										&lt;step&gt;
+											&lt;stepDate&gt;2021-02-01&lt;/stepDate&gt;
+											&lt;stepValue&gt;5486.01&lt;/stepValue&gt;
+										&lt;/step&gt;
+										&lt;currency&gt;USD&lt;/currency&gt;
+									&lt;/notionalStepSchedule&gt;
+								&lt;/notionalSchedule&gt;
+								&lt;floatingRateCalculation&gt;
+									&lt;floatingRateIndex&gt;USD-LIBOR-BBA&lt;/floatingRateIndex&gt;
+									&lt;indexTenor&gt;
+										&lt;periodMultiplier&gt;1&lt;/periodMultiplier&gt;
+										&lt;period&gt;M&lt;/period&gt;
+									&lt;/indexTenor&gt;
+									&lt;spreadSchedule&gt;
+										&lt;initialValue&gt;3.40&lt;/initialValue&gt;
+									&lt;/spreadSchedule&gt;
+								&lt;/floatingRateCalculation&gt;
+								&lt;dayCountFraction&gt;ACT/360&lt;/dayCountFraction&gt;
+							&lt;/calculation&gt;
+						&lt;/calculationPeriodAmount&gt;
+					&lt;/swapStream&gt;
+					&lt;swapStream&gt;
+						&lt;receiverPartyReference href="hedge_global"/&gt;
+						&lt;calculationPeriodAmount&gt;
+						&lt;calculation&gt;
+						&lt;notionalSchedule&gt;
+							&lt;notionalStepSchedule&gt;
+								&lt;initialValue&gt;623161.01&lt;/initialValue&gt;
+								&lt;step&gt;
+									&lt;stepDate&gt;2009-09-01&lt;/stepDate&gt;
+									&lt;stepValue&gt;617840.01&lt;/stepValue&gt;
+								&lt;/step&gt;
+								&lt;!-- .... intermediate values removed --&gt;
+								&lt;step&gt;
+									&lt;stepDate&gt;2021-01-01&lt;/stepDate&gt;
+									&lt;stepValue&gt;9792.01&lt;/stepValue&gt;
+								&lt;/step&gt;
+								&lt;step&gt;
+									&lt;stepDate&gt;2021-02-01&lt;/stepDate&gt;
+									&lt;stepValue&gt;5486.01&lt;/stepValue&gt;
+								&lt;/step&gt;
+								&lt;currency&gt;USD&lt;/currency&gt;
+							&lt;/notionalStepSchedule&gt;
+						&lt;/notionalSchedule&gt;
+						&lt;fixedRateSchedule&gt;
+							&lt;initialValue&gt;0.0711&lt;/initialValue&gt;
+						&lt;/fixedRateSchedule&gt;
+						&lt;dayCountFraction&gt;ACT/360&lt;/dayCountFraction&gt;
+					&lt;/calculation&gt;
+				&lt;/calculationPeriodAmount&gt;
+			&lt;/swapStream&gt;
+		&lt;/swap&gt;
+                              </pre>
+               	
+            <p>In confirmation view, a firm confirming a swap would include, in addition to the above, the following elements:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Date adjustments.</li>
+			
+               <li>Payment date definitions.</li>
+			
+               <li>Reset date definitions on the floating side.</li>
+		
+            </ul>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.3">2.3 Overview of the organization of the master schema</a>
+               </h3>
+            </div>
+		
+            <p>FpML is divided into several sub-schema files, which organize the definitions into smaller and more maintainable building blocks. These building blocks include:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Core Definitions:
+				<ul class="bulleted">
+					
+                     <li>All Views
+						<ul class="bulleted">
+							
+                           <li>
+                              <b>fpml-main-5-0.xsd</b> - Root definitions.</li>
+							
+                           <li>
+                              <b>fpml-doc-5-0.xsd</b> - Trade definitions and definitions relating to validation.</li>
+							
+                           <li>
+                              <b>fpml-shared-5-0.xsd</b> - Shared definitions used widely throughout the specification. These include items such as base types, shared financial structures, etc.</li>
+							
+                           <li>
+                              <b>fpml-enum-5-0.xsd</b> - Shared enumeration definitions. These definitions list the values that enumerated types may take.</li>
+							
+                           <li>
+                              <b>fpml-asset-5-0.xsd</b> - Underlyer definitions plus some types used by them (e.g. ones relating to commissions or dividend payouts).</li>
+						
+                        </ul>
+					
+                     </li>
+				
+                  </ul>
+			
+               </li>
+			
+               <li>Products:<ul class="bulleted">
+				
+                     <li>All Views<ul class="bulleted">
+						
+                           <li>IRD<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-ird-5-0.xsd</b> - Interest rate derivative product definitions.</li>	
+							
+                              </ul>
+						
+                           </li>
+						
+						
+                           <li>CD<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-cd-5-0.xsd</b> - Credit derivative product definitions.</li>	
+							
+                              </ul>
+						
+                           </li>
+						
+                           <li>EQD<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-eq-shared-5-0.xsd</b> - Definitions shared by types with Equity Underlyers.</li>
+								
+                                 <li>
+                                    <b>fpml-eqd-5-0.xsd</b> - Equity Option and Equity Forward Product Definitions.</li>
+								
+                                 <li>
+                                    <b>fpml-return-swaps-5-0.xsd</b> - Return Swaps Product Definitions.</li>
+								
+                                 <li>
+                                    <b>fpml-variance-swaps-5-0.xsd</b> - Variance Swap and Variance Option Product Definitions.</li>
+								
+                                 <li>
+                                    <b>fpml-correlation-swap-5-0.xsd</b> - Correlation Swap Product Definitions.</li>
+								
+                                 <li>
+                                    <b>fpml-dividend-swap-5-0.xsd</b> - Dividend Swap Product Definitions.</li>
+							
+                              </ul>
+						
+                           </li>
+						
+                           <li>Bond Options<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-bond-option-5-0.xsd</b> - Bond and Convertible Bond Options Product Definitions.</li>
+							
+                              </ul>
+						
+                           </li>
+						
+                           <li>Options shared<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-option-shared-5-0.xsd</b> - Shared option definitions used for defining the common features of options.</li>
+							
+                              </ul>
+						
+                           </li>
+						
+						
+                           <li>Commodity<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-com-5-0.xsd</b> - Commodity Swap and Commodity Option Derivative Poduct Definitions.</li>
+							
+                              </ul>
+						
+                           </li>
+						
+					
+                        </ul>
+				
+                     </li>	
+				
+                     <li>Reporting View<ul class="bulleted">
+						
+                           <li>Generic<ul class="bulleted">
+								
+                                 <li>
+                                    <b>fpml-generic-5-0.xsd</b> - Non Schema Product elements and types Definitions.</li>
+							
+                              </ul>
+						
+                           </li>
+					
+                        </ul>
+				
+                     </li>
+				
+                  </ul>
+			
+               </li>
+			
+               <li>Business Processes:
+				<ul class="bulleted">
+					
+                     <li>All Views<ul class="bulleted">
+							
+                           <li>
+                              <b>fpml-msg-5-0.xsd</b> - Definitions related to messaging and workflow. </li>
+							
+                           <li>
+                              <b>fpml-credit-event-notification-5-0.xsd</b> - Credit event notification components</li>
+							
+                           <li>
+                              <b>fpml-business-events-5-0.xsd</b> - Business event notification components, such as creation of a trade, amendment, increase, termination and novation.</li>
+						
+                        </ul>	
+					
+                     </li>
+					
+					
+                     <li>Confirmation View<ul class="bulleted">
+							
+                           <li>
+                              <b>fpml-confirmation-processes-5-0.xsd</b> - Definitions of trade and post-trade messaging components such as execution, execution advice, trade change, consent negotiation, confirmation, clearing and allocation.</li>
+						
+                        </ul>	
+					
+                     </li>
+					
+                     <li>Reporting View<ul class="bulleted">
+							
+                           <li>
+                              <b>fpml-reconciliation-5-0.xsd</b> - Cash flow matching and portfolio reconciliation messaging components</li>
+							
+                           <li>
+                              <b>fpml-reporting-5-0.xsd</b> - Definitions of reporting messaging components such as position activity report , event activity report and reset report.</li>
+							
+                           <li>Pricing and Risking:<ul class="bulleted">
+									
+                                 <li>
+                                    <b>fpml-valuation-5-0.xsd</b> – Valuation result sets and related definitions.</li>
+									
+                                 <li>
+                                    <b>fpml-mktenv-5-0.xsd</b> – Definitions of market environment data structures such as yield curves, volatility matrices, and the like. </li>
+									
+                                 <li>
+                                    <b>fpml-riskdef-5-0.xsd</b> – Definitions of valuation and sensitivity results. They include detailed definitions of sensitivity calculations and are intended to be used by sophisticated users.</li>
+								
+                              </ul>
+							
+                           </li>
+						
+                        </ul>	
+					
+                     </li>
+				
+                  </ul>
+			
+               </li>
+		
+            </ul>
+		
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.4">2.4 Overview of Document Types</a>
+               </h3>
+            </div>
+		
+            <p>An FpML document can be either of two categories:</p>
+		
+            <ul class="bulleted">
+			
+               <li>A DataDocument is a document that contains only data, such as trades, parties, and portfolios. This structure is very similar to an FpML version 3 and 4 document. The DataDocument type is provided for those who do not wish to use FpML messaging features.</li>
+			
+               <li>A Message is a document that contains a message header and data elements specific to that message. In fact, an FpML message will always be of a more specific type derived from Message, such as "RequestTradeStatus". To learn more about FpML messaging, please see the Business Process section of this specification.</li>
+		
+            </ul>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.5">2.5 Using FpML</a>
+               </h3>
+            </div>
+		
+            <p>Before beginning to use FpML, an architect must answer several questions:</p>
+		
+            <ul class="bulleted">
+			
+               <li>How will the FpML be used? Is it primarily a messaging application, or primarily a data storage and retrieval application?</li>
+			
+               <li>If it is a messaging application, is there an existing workflow format that is used to coordinate interactions between the entities exchanging messages, or is a new one required?</li>
+			
+               <li>Will the FpML be used within a single institution, or across a number of institutions?</li>
+			
+               <li>What asset classes of products will be required?</li>
+			
+               <li>Will there need to be local data or product extensions?</li>
+			
+               <li>Are there any other XML schemas or DTDs the FpML needs to interact with?</li>
+		
+            </ul>
+		
+            <p>If the application requires a new messaging layer, particularly if it will be used between institutions, the FpML messaging layer is recommended. If the application is primarily a data storage and retrieval application, the DataDocument type is available. For example, to store trades in an XML trade archive, and then retrieve them for a display or to generate, say, a confirmation, the DataDocument format will likely be sufficient. To implement a trade matching service between institutions, you should use the messaging layer. </p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.6">2.6 The FpML root element</a>
+               </h3>
+            </div>
+		
+            <p>
+			
+               <a href="images/main/dataDocument.png">
+                  <img src="images/main/dataDocument.png" alt="images/main/dataDocument.png" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>In FpML 5.0, there is a different root element for each different message or document type.  For example, a message to request that a novation be confirmed begins "&lt;requestNovationConfirmation&gt; ...", while a Data Document begins "&lt;dataDocument&gt; ...".  Each different root element defines a structure that corresponds to the business requirements of that message or document.</p>
+		
+            <p>The following short example illustrates this, using a "Request Quote" message from the pre-trade view:</p>
+
+            <pre>
+&lt;requestQuote 
+	fpmlVersion="5-0" 
+	xmlns="http://www.fpml.org/FpML-5-0/pretrade" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.fpml.org/FpML-5-0/pretrade ../fpml-main-5-0.xsd"&gt;
+  &lt;header&gt;
+    &lt;messageId messageIdScheme="http://www.fpml.org/msg-id"&gt;123&lt;/messageId&gt;
+    &lt;sentBy&gt;DEF&lt;/sentBy&gt;
+    &lt;sendTo&gt;ABC&lt;/sendTo&gt;
+    &lt;creationTimestamp&gt;2007-04-02T15:38:00-00:00&lt;/creationTimestamp&gt;
+  &lt;/header&gt;
+  &lt;creditDefaultSwap&gt;
+    &lt;!-- details omitted --&gt;
+  &lt;/creditDefaultSwap&gt;
+&lt;/requestQuote&gt;
+			</pre>
+
+		
+            <p>The simplest FpML document is a "DataDocument" (root='dataDocument'). This is similar to an FpML 3.0 document, and is described in the next section.</p>
+		
+            <p>The FpML root element contains attributes that specify the FpML version (fpmlVersion='5-0' for FpML 5.0), the schema name and location, the namespace, and related properties.  The "version" attribute from previous FpML versions has been renamed to "fpmlVersion" to provide an unambiguous indicator of the beginning of the FpML document that is not reliant on namespaces.  Each different view has a different namespace. See the Architecture 2.1 specification for more details on this.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.7">2.7 Annotations</a>
+               </h3>
+            </div>
+		
+            <p>Since version 4.3, the FpML Schema has included a set of eCore annotations. These annotations improve the existing model by providing additional information that W3C Schema is not able to represent.</p>
+		
+	
+            <div>
+               <h4>
+                  <a id="s2.7.1">2.7.1 eCore</a>
+               </h4>
+			
+               <p>eCore is part of the <a class="web" href="http://www.eclipse.org/emf/">Eclipse Modelling Framework</a>. This is the modelling technology Eclipse based on a subset of UML.</p>
+			
+               <p>eCore annotations add back the model information missing from XML Schema, specifically:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The type of IDREFs</li>
+				
+                  <li>Canonical namespace prefix</li>
+				
+                  <li>Package names</li>
+				
+                  <li>Root documents</li>
+			
+               </ul>
+			
+               <p>In terms of implementation, the FpML Schema root element includes these additional attributes:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>the eCore namespace: xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"</li>
+				
+                  <li>the canonical namespace prefix: ecore:nsPrefix="fpml"</li>
+				
+                  <li>the package name: ecore:package="org.fpml"</li>
+				
+                  <li>the root element: ecore:documentRoot="FpML"</li>
+			
+               </ul>
+			
+               <p>In addition, the ecore annotations specify the specific target of an href attribute:</p>
+			
+               <pre>
+&lt;xsd:complexType name="AccountReference"&gt;
+	&lt;xsd:annotation&gt;
+		&lt;xsd:documentation xml:lang="en"&gt;Reference to an account.&lt;/xsd:documentation&gt;
+	&lt;/xsd:annotation&gt;
+	&lt;xsd:attribute name="href" type="xsd:IDREF" use="required" ecore:reference="Account"/&gt;
+&lt;/xsd:complexType&gt;
+				</pre>
+			
+               <p>Benefits of eCore annotations include:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>FpML controls the object oriented models built from FpML</li>
+				
+                  <li>The same OO model is shared, which is good for interoperability</li>
+				
+                  <li>Modelling use now work with FpML</li>
+				
+                  <li>Developers who can't unerstand XML Schema, can understand UML</li>
+				
+                  <li>The FpML Schema is still valid and XML Schema tools are unaffected</li>
+			
+               </ul>
+			
+               <p>More details about eCore annotations are available at: http://www.eclipse.org/modeling/emf/docs/overviews/XMLSchemaToEcoreMapping.pdf </p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.8">2.8 Main Components</a>
+               </h3>
+            </div>
+		
+            <p>There are a set of elements in FpML that are used across the different message types. These include elements such as trades, portfolios, events and parties.</p>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s2.8.1">2.8.1 The DataDocument type</a>
+               </h4>
+			
+               <p>As mentioned above, the structure of the FpML document depends on the "type" attribute. The simplest FpML document is a "DataDocument", which is similar to an FpML 3.0 document. The DataDocument is used to represent static data. A DataDocument looks like this:</p>
+			
+               <a href="images/main/dataDocument.png">
+                  <img src="images/main/dataDocument.png" alt="images/main/dataDocument.png" class="image"/>
+               </a>
+			
+               <p>It contains:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Optional validation rules identification</li>
+				
+                  <li>A trade or trades</li>
+				
+                  <li>A portfolio or portfolios. Portfolios contain only trade references, if the trades themselves need to be included in the document then the trades can be included within the root element.</li>
+				
+                  <li>An event or events</li>
+				
+                  <li>A party or parties</li>
+			
+               </ul>
+			
+               <p>Since the introduction of event in FpML 4.1, the content of "DataDocument" was constraint using "xsd:choice" to reduce the number of permutations between the different elements.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.8.2">2.8.2 The Trade Component</a>
+               </h4>
+			
+               <p>The trade is typically a top-level component within an FpML root element. A trade is an agreement between two parties to enter into a financial contract and the trade component in FpML contains the information necessary to execute and confirm that trade. </p>
+			
+               <a href="images/main/Trade.jpg">
+                  <img src="images/main/Trade.jpg" alt="images/main/Trade.jpg" class="image"/>
+               </a>
+			
+			
+			
+			
+			
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s2.8.2.1">2.8.2.1 tradeHeader</a>
+                  </h5>
+				
+                  <p>The information within tradeHeader is common across all types of trade regardless of product. In FpML 5.0 this element contains the trade date and party trade identifiers, as well as party-specific trade information.</p>
+				
+                  <a href="images/main/TradeHeader.jpg">
+                     <img src="images/main/TradeHeader.jpg" alt="images/main/TradeHeader.jpg" class="image"/>
+                  </a>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s2.8.2.1.1">2.8.2.1.1 Primary Trade Identifier</a>
+                     </h5>
+					
+                     <p>In FpML, there is no notion of primary trade or contract identifier. Trade identification is meaningful within the context of a party. That’s why the partyTradeIdentifier structure contains a partyReference element referencing a party. Within the structure, multiple tradeId or versionedTradeId elements can be specified. This is useful for allowing organizations with multiple systems, each one of them generating one or multiple trade identifiers, to be able to record that in the FpML message. Each system is identified by a unique value in the tradeIdScheme attribute.</p>
+					
+                     <pre>
+&lt;partyTradeIdentifier&gt;
+	&lt;partyReference href="INVM1"/&gt;
+  	&lt;versionedTradeId&gt;
+		&lt;tradetId contractIdScheme="http://www.investmentmgm.com/coding-scheme/trade-id"&gt;CDI290204&lt;/tradetId&gt;
+        		&lt;version&gt;1&lt;/version&gt;
+    	&lt;/versionedTradetId&gt;
+    	&lt;versionedTradeId&gt;
+        		&lt;tradeId tradeIdScheme=”valuation-system/trade-id”&gt;VS3456332&lt;/tradeId&gt;
+        		&lt;version&gt;1&lt;/version&gt;
+	&lt;/versionedTradeId&gt;
+&lt;/partyTradeIdentifier&gt;
+                                        </pre>
+					
+                     <p>In order to be able to process trade identification information, in absense of a central system, participants should decide on how to store the identification information of the trade:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>Recipients may choose to process all trade identifers and sources sent in a message and their relationship so in subsequent messages, the sender may send only one of the previous identifiers and the recipient may still be able to identify the trade.</li>
+						
+                        <li>Recipients may choose to process a single trade identifier. In that case, participants must agree which system source is relevant, and ignore the others. Participants must exchange the tradeIdScheme values that are going to be relevant for processing. In the example above, the recipient may keep the trade id of ‘http://www.investmentmgm.com/coding-scheme/trade-id’ and ignore the other trade id.</li>
+					
+                     </ul>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.2">2.8.2.2 product</a>
+                  </h5>
+				
+                  <p>Product is an abstract concept in FpML and an actual product element is not used. Instead, one of the FpML products will appear directly under trade.</p>
+				
+                  <a href="images/main/Product.jpg">
+                     <img src="images/main/Product.jpg" alt="images/main/Product.jpg" class="image"/>
+                  </a>
+				
+                  <p>All FpML products inherit two optional elements from the Product type: productType and productId.</p>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s2.8.2.2.1">2.8.2.2.1 Product Identification</a>
+                     </h5>
+					
+                     <p>In order to identify the type of product contained within an FpML message, the Standards Committee encourages the use of structural analysis. Structural analysis is based on checking the presence of some specific elements within the message instead of relying on the value of a specific element such as productType.</p>
+					
+                     <p>The presence of some specific elements helps to define the product category of the transaction that is being sent. For example, the presence of the creditDefaultSwap and referenceInformation elements in a message is critical to categorize the product as single name credit default swap.</p>
+					
+                     <p>Product categorization using only the productType element value should be avoided. It should only be used by internal messaging implementations or by service providers. In both cases the code list is well-controlled and commonly understood by all participants.</p>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.3">2.8.2.3 otherPartyPayment</a>
+                  </h5>
+				
+                  <p>This component contains additional payments such as brokerage paid to third parties which are not part of the economics of a trade itself.</p>
+				
+                  <a href="images/main/otherPartyPayment.jpg">
+                     <img src="images/main/otherPartyPayment.jpg" alt="images/main/otherPartyPayment.jpg" class="image"/>
+                  </a>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.4">2.8.2.4 brokerPartyReference</a>
+                  </h5>
+				
+                  <p>The brokerPartyReference identifies the party or parties that arranged the trade.</p>
+				
+                  <a href="images/main/brokerPartyReference.jpg">
+                     <img src="images/main/brokerPartyReference.jpg" alt="images/main/brokerPartyReference.jpg" class="image"/>
+                  </a>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.5">2.8.2.5 calculationAgent</a>
+                  </h5>
+				
+                  <p>The calculation agent identifies the party or parties responsible for performing calculation duties, such as cash settlement calculations.</p>
+				
+                  <a href="images/main/calculationAgent.jpg">
+                     <img src="images/main/calculationAgent.jpg" alt="images/main/calculationAgent.jpg" class="image"/>
+                  </a>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.6">2.8.2.6 documentation</a>
+                  </h5>
+				
+                  <p>The documentation element defines where the legal definitions used for the trade are documented. </p>
+				
+                  <a href="images/main/documentation.jpg">
+                     <img src="images/main/documentation.jpg" alt="images/main/documentation.jpg" class="image"/>
+                  </a>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s2.8.2.6.1">2.8.2.6.1 contractualMatrix</a>
+                     </h5>
+					
+                     <p>The contractualMatrix element is a generic mechanism for making references to ISDA-published matrices within an FpML trade definition.</p>
+					
+                     <a href="images/main/contractualMatrix.jpg">
+                        <img src="images/main/contractualMatrix.jpg" alt="images/main/contractualMatrix.jpg" class="image"/>
+                     </a>
+					
+                     <p>Specifically it is designed to:</p>
+					
+                     <ul class="bulleted">
+						
+                        <li>Reference zero, one or more applicable matrices in a single trade definition.</li>
+						
+                        <li>Identify the form of applicable matrix, e.g. the “2000 ISDA Definitions Settlement Matrix for Early Terminations and Swaptions” or “Credit Derivatives Physical Settlement Matrix” etc.</li>
+						
+                        <li>Optionally identify the relevant version of the matrix through reference to its publication date (this is currently the mechanism recommended by ISDA). The publication date is optional since typically the incorporation language defines which version would be applicable based on the Trade Date of the relevant Transaction.</li>
+						
+                        <li>Allow an additional term to be specified that acts as a “key” into the matrix for identifying the applicable sub-set of relevant data in the matrix. For example, in the case of the Credit Derivatives Physical Settlement Matrix the Transaction Type term identifies the applicable column of defaults in the matrix that is applicable to the Transaction. For the 2000 ISDA Definitions Settlement Matrix no additional terms need to be specified since the “key” into the matrix is the Settlement Currency which is already captured as part of the standard trade terms.</li>
+					
+                     </ul>
+					
+				
+                     <div>
+                        <h5>
+                           <a id="s2.8.2.6.1.1">2.8.2.6.1.1 Examples of using the contractualMatrix structure</a>
+                        </h5>
+						
+                        <p>For Interest Rate Derivatives:</p>
+						
+                        <p>To specify that the July 1, 2004 version of the ISDA Definitions Settlement Matrix for Early Terminations and Swaptions is incorporated into the Confirmation:</p>
+						
+                        <pre>
+&lt;documentation&gt;
+  ...
+          &lt;contractualDefinitions&gt;ISDA2000&lt;/contractualDefinitions&gt;
+          &lt;contractualMatrix&gt;
+                    &lt;matrixType&gt;SettlementMatrix&lt;/matrixType&gt;
+                    &lt;publicationDate&gt;2004-07-01&lt;/publicationDate&gt;
+          &lt;/contractualMatrix&gt;
+&lt;/documentation&gt;
+                                        </pre>
+						
+                        <p>For Credit Derivatives:</p>
+						
+                        <p>To specify that the March 7, 2005 version of the Credit Derivatives Physical Settlement Matrix is incorporated into the Confirmation and that the applicable Transaction Type is North American Corporate:</p>
+						
+                        <pre>
+&lt;documentation&gt;
+  ...
+          &lt;contractualDefinitions&gt;ISDA2003Credit&lt;/contractualDefinitions&gt;
+          &lt;contractualSupplement&gt;ISDA2003CreditMay2003&lt;/contractualSupplement&gt;
+          &lt;contractualSupplement&gt;ISDA2003Credit2005MatrixSupplement&lt;/contractualSupplement&gt;
+          &lt;contractualMatrix&gt;
+                    &lt;matrixType&gt;CreditDerivativesPhysicalSettlementMatrix&lt;/matrixType&gt;
+                    &lt;publicationDate&gt;2005-03-07&lt;/publicationDate&gt;
+                    &lt;matrixTerm matrixTermScheme="http://www.fpml.org/coding-scheme/
+credit-matrix-transaction-type-1-0"&gt;NorthAmericanCorporate&lt;/matrixTerm&gt;
+          &lt;/contractualMatrix&gt;
+&lt;/documentation&gt;
+                                        </pre>
+					
+                     </div>
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.7">2.8.2.7 collateral</a>
+                  </h5>
+				
+                  <p>The collateral element defines the collateral obligations of a party. The collateral element is an optional child of Trade and Independent Amount is a mandatory child of the Collateral element.</p>
+				
+                  <p>
+					
+                     <a href="images/main/collateral.jpg">
+                        <img src="images/main/collateral.jpg" alt="images/main/collateral.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s2.8.2.7.1">2.8.2.7.1 independentAmount</a>
+                     </h5>
+					
+                     <p>Independent Amount was present at a Product Specific level, being both defined and used within Credit Derivatives. However, the concept of Independent Amount applies across products; it is the method of calculation which varies according to the type of Product. For this reason Independent Amount was moved to the trade level in version 4.1 Last Call Working Draft.</p>
+					
+                     <p>
+						
+                        <a href="images/main/independentAmount.jpg">
+                           <img src="images/main/independentAmount.jpg" alt="images/main/independentAmount.jpg" class="image"/>
+                        </a>
+					
+                     </p>
+					
+                     <p>PaymentRule is an abstract type defined for extension purposes. PercentageRule is a derived type from PaymentRule. It contains the payment percentage and a reference to the notional amount. Type substitution mechanism will be used in this case, which makes it extensible in case there is a need to add other calculation methods in the future. </p>
+					
+                     <p>
+						
+                        <a href="images/main/PercentageRule.jpg">
+                           <img src="images/main/PercentageRule.jpg" alt="images/main/PercentageRule.jpg" class="image"/>
+                        </a>
+					
+                     </p>
+					
+                     <p>The notionalAmountReference defines a reference to the notional amount. This reference is particularly useful in products like interest rate swaps, in which the leg of the notional needs to be specified. In order to accomplish that, an optional id attribute (IDREF type) has been added to the notional amount elements of the different products.</p>
+					
+                     <p>After some discussion, the Credit Derivatives Working Group decided that people will not use FpML without a CSA being signed, so a collateral party element is not necessary. The Collateral element itself should is a useful container for future work. The independentAmount element may not be required in the presence of CSA, but its optional inclusion should be supported for the avoidance of doubt, and expression of any variation from the CSA</p>
+				
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s2.8.2.8">2.8.2.8 governingLaw</a>
+                  </h5>
+				
+                  <p>The governingLaw element identifies which legal system will be used to enforce the contract. </p>
+				
+                  <a href="images/main/governingLaw.jpg">
+                     <img src="images/main/governingLaw.jpg" alt="images/main/governingLaw.jpg" class="image"/>
+                  </a>
+			
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.8.3">2.8.3 The Portfolio Component</a>
+               </h4>
+			
+               <p>The portfolio component specifies a set of trades as a list of tradeIds and a list of sub portfolios. Portfolios can be composed of other portfolios using a composition pattern. By using the tradeId to identify the trade the standard allows for portfolios to be sent around without the full trade record.</p>
+			
+               <a href="images/main/Portfolio.jpg">
+                  <img src="images/main/Portfolio.jpg" alt="images/main/Portfolio.jpg" class="image"/>
+               </a>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.8.4">2.8.4 The Party Component</a>
+               </h4>
+			
+               <p>The party component holds information about a party in involved any of the trades or portfolios included in the document. Parties can perform multiple roles in a trade lifecycle. For example, the principal parties obligated to make payments from time to time during the term of the trade, but may include other parties involved in, or incidental to, the trade, such as parties acting in the role of novation transferor/transferee, broker, calculation agent, etc. In FpML roles are defined in multiple places within a document.</p>
+			
+               <p>It should be noted that an FpML document is not 'written' from the perspective of one particular party, i.e. it is symmetrical with respect to the principal parties. The particular role that a party plays in the trade, e.g. buyer, seller, stream payer/receiver, fee payer/receiver, is modeled via the use of references from the component where the role is identified (relatedParty structure) to the party component.</p>
+			
+               <a href="images/main/Party.jpg">
+                  <img src="images/main/Party.jpg" alt="images/main/Party.jpg" class="image"/>
+               </a>
+			
+               <p>This is a description of the elements:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>partyId: A party identifier, e.g. a S.W.I.F.T. bank identifier code (BIC).</li>
+				
+                  <li>partyName: The name of the party. A free format string. FpML does not define usage rules for this element.</li>
+				
+                  <li>relatedParty: Identifies a related party performing a role within the transaction.</li>
+			
+               </ul>
+			
+               <p>Example:</p>
+			
+               <pre>
+                    ...
+	&lt;party id="SKY"&gt;
+		&lt;partyId partyIdScheme="http://www.sky.org/coding-schem/code-id"&gt;SkyLTD&lt;/partyId&gt;
+		&lt;partyName&gt;Sky Limited&lt;/partyName&gt;
+	&lt;/party&gt;
+                    ...
+                                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.8.5">2.8.5 The Account Component</a>
+               </h4>
+			
+               <p>The Account component holds information about an account that represents any party's account at another party. Parties may be identified by the account at another party.</p>
+			
+               <a href="images/main/account.jpg">
+                  <img src="images/main/account.jpg" alt="images/main/account.jpg" class="image"/>
+               </a>
+			
+               <p>This is a description of the elements:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>accountId: An account identifier. For example an Account number.</li>
+				
+                  <li>accountName: The name by which the account is known.</li>
+				
+                  <li>accountBeneficiary: The beneficiary of the account.</li>
+				
+                  <li>servicingParty: A reference to the party that services/supports the account..</li>
+			
+               </ul>
+			
+               <p>Example:</p>
+			
+               <pre>
+                    ...
+	&lt;account id="GEN478"&gt;
+		&lt;accountId&gt;47896325&lt;/accountId&gt;
+		&lt;accountName&gt;Sky General Account&lt;/accountName&gt;
+		&lt;accountBeneficiary href="SKY"/&gt;
+	&lt;/account&gt;
+                    ...
+                                        </pre>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.8.6">2.8.6 The Product Component</a>
+               </h4>
+			
+               <p>The product component specifies the financial instrument being traded. This component captures the economic details of the trade. It is modeled as a substitution group; each asset class may create one or more product definitions. Some examples of products that different working groups have defined include:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Interest rate swaps</li>
+				
+                  <li>FRAs</li>
+				
+                  <li>caps/floors</li>
+				
+                  <li>swaptions</li>
+				
+				
+                  <li>Equity options</li>
+				
+                  <li>Equity swaps</li>
+				
+                  <li>Equity forwards</li>
+				
+                  <li>Commodity swaps</li>
+				
+                  <li>Commodity options</li>
+				
+                  <li>Correlation swap</li>
+				
+                  <li>Credit default swaps</li>
+				
+                  <li>Dividend swap</li>
+				
+                  <li>Variance swap</li>
+				
+                  <li>Variance option</li>
+				
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.8.7">2.8.7 The Strategy Component</a>
+               </h4>
+			
+               <p>This component defines a special kind of product that allows the structuring of trade by combining any number of products within a strategy. A trade can be of a strategy rather than of a base product; this strategy can then in turn contain other products, such as multiple options. For example, you could define a strategy consisting of an FX call and an FX put to create a straddle or strangle, and then create a trade of that strategy.</p>
+			
+               <p>This component also defines the simple strategies of strike spread and calendar spread for Equity Options</p>
+			
+               <p>The Strategy component makes use of a composition pattern since strategy itself is a product. This means that strategies can themselves contain strategies.</p>
+			
+               <a href="images/main/Strategy.jpg">
+                  <img src="images/main/Strategy.jpg" alt="images/main/Strategy.jpg" class="image"/>
+               </a>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s2.9">2.9 More Background on FpML's Design</a>
+               </h3>
+            </div>
+		
+            <p>This section provides some additional background on the design of FpML.</p>
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s2.9.1">2.9.1 Rationale for Structured Approach</a>
+               </h4>
+			
+               <p>FpML incorporates a significant level of structure, rather than being a 'flat' representation of data. This structuring is achieved through the grouping of related elements describing particular features of a trade into components. Components can both contain, and be contained by, other components.</p>
+			
+               <p>An alternative approach would have been to collect all the required elements in a single large component representing a product or trade. A flat structure of this kind would capture all the relevant information concisely but would also constrain the model in two important respects, namely, ease of implementation and extensibility.</p>
+			
+               <p>Grouping related elements into components makes it easier to validate that the model is correct, that it is complete and that it doesn't contain redundancy. This is true, both from the perspective of readability to the human eye, and also from the perspective of processing services. Processing services that do not need all the information in a trade definition can isolate components and be sure that the complete set of elements required, and only the elements required, is available for the particular process in hand.</p>
+			
+               <p>Components additionally serve as the building blocks for a flexible and extensible model. Generally speaking, the complexity of financial products is a result of combining a few simple ideas in a variety of different ways. The component structure supports a trade content definition that is flexible enough to represent the wide variation of features found in traded financial instruments.</p>
+			
+               <p>It should be noted that the application of the guiding principles of extensibility and ease of use has resulted in a different approach with regard to the forward rate agreement. Because this product is straightforward, commoditized and unlikely to develop further, the advantage to be gained from the extensive use of components is outweighed by the concision of a single component.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.9.2">2.9.2 Component Framework</a>
+               </h4>
+			
+               <p>The optimum level of granularity is important to FpML. FpML separates the elements which collectively describe a feature of a product or trade into a separate component with each component serving a particular semantic purpose. Every grouping of elements in FpML is regarded as a component and each component is regarded as a container for the elements that describe that component. In the majority of cases each component will contain a mixture of other components and primitive elements, e.g. a date or string, that collectively describe the features of the component. Components are typically represented in the FpML schema as Complex Types.</p>
+			
+               <p>Generally speaking, the lower level a component is, the more re-usable it will be. FpML makes use of a number of primitive entity components that describe the basic building blocks of financial products, for example, FpML_Money, FpML_AdjustableDate, FpML_BusinessCenters, FpML_Interval, FpML_BusinessDayAdjustments etc. These primitive components are re-used in different business contexts.</p>
+			
+               <p>Primitive components are contained in higher level components that describe the features of particular products. For this reason these higher level components will tend not to be re-usable to the same extent. Examples within the definition of swapStream are the components required to construct schedules of dates such as calculationPeriodDates, resetDates and paymentDates. However, it should not be inferred from this that any fundamental distinction is drawn between components in usage or structure. </p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s2.9.3">2.9.3 Coding Schemes</a>
+               </h4>
+			
+               <p>A necessary feature of a portable data standard is both an agreed set of elements and an agreed set of permissible values (the value domain) for those elements. An FpML document exchanged between two parties would not be mutually understandable if either or both of the parties used internal or proprietary coding schemes to populate elements. For FpML 4.0 the handling of coding schemes was changed from previous versions of FpML, with the introduction of the use of enumerations and the elimination of scheme default attributes from the FpML root element. The following description refers to the updated approach.</p>
+			
+               <p>One possible means of identifying value domains is to include the domain of permitted values within the schema, using an XML Schema enumeration structure. This mechanism was adopted in FpML 4.0 for element values that satisfy the following criteria:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>The list of allowable values is relatively short.</li>
+				
+                  <li>The list of allowable values is not expected to change during the lifetime of the specification</li>
+				
+                  <li>It's not possible to change the list of allowable values without affecting the meaning of the specification.</li>
+			
+               </ul>
+			
+               <p>This leave a number of lists of values not meeting the above criteria that are represented by "schemes". "Schemes" are lists of values that can be changed dynamically without affecting the schema. They include items such as currency codes, party identifiers, business centers, floating rate indexes, etc. For these data elements, the "scheme" is a URI, as identified in an FpML attribute, that designates the universe of acceptable values the element may take. This scheme definition list is typically encoded as an XML document, but does not in general need to be. In cases where the ISDA wishes to designate a default scheme, this is recorded as a default attribute value in the schema. In other cases, the scheme attribute is required.</p>
+			
+               <p>For further details on the architectural framework behind Schemes, refer to the FpML Architecture Version 1.0 and Version 2.0 documents.</p>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('1',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('2',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('3',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

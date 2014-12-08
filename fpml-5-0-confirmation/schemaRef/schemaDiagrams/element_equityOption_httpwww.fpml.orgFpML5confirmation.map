@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_equityOption_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_brokerEquityOption'
+  coords='231,526,411,588'
+  href='fpml-eqd-5-0.xsd.html_element_brokerEquityOption.html#element_brokerEquityOption'/>
+
+ <area
+  shape='rect'
+  alt='element_equityForward'
+  coords='231,598,384,660'
+  href='fpml-eqd-5-0.xsd.html_element_equityForward.html#element_equityForward'/>
+
+ <area
+  shape='rect'
+  alt='element_equityOptionTransactionSupplement'
+  coords='231,742,507,804'
+  href='fpml-eqd-5-0.xsd.html_element_equityOptionTransactionSupplement.html#element_equityOptionTransactionSupplement'/>
+
+ <area
+  shape='rect'
+  alt='element_returnSwap'
+  coords='231,814,370,876'
+  href='fpml-eq-shared-5-0.xsd.html_element_returnSwap.html#element_returnSwap'/>
+
+</map>

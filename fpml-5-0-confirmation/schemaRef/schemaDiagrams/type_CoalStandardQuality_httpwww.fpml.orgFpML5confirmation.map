@@ -1,0 +1,20 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_CoalStandardQuality_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='group_CommodityCoalComposition.model'
+  coords='279,36,557,62'
+  href='fpml-com-5-0.xsd.html_group_CommodityCoalComposition.model.html#group_CommodityCoalComposition.model'/>
+
+ <area
+  shape='rect'
+  alt='group_CommodityCoalProperties.model'
+  coords='279,72,543,98'
+  href='fpml-com-5-0.xsd.html_group_CommodityCoalProperties.model.html#group_CommodityCoalProperties.model'/>
+
+ <area
+  shape='rect'
+  alt='group_CommodityCoalReducingAtmosphere.model'
+  coords='279,108,606,134'
+  href='fpml-com-5-0.xsd.html_group_CommodityCoalReducingAtmosphere.model.html#group_CommodityCoalReducingAtmosphere.model'/>
+
+</map>

@@ -1,0 +1,561 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>EQD rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Equity Derivatives (EQD)
+      </h1>
+      <div>
+         		
+         <p> This is the Equity Derivatives part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory
+            section in the draft contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. These test cases have
+            been analysed using Systemwire's xlinkit rule engine to highlight relevant document portions accessed by a rule. The cut down
+            test cases are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         		
+         <p> Additionally, an XQuery implementation of the validation rules is also provided. See the <a class="web" href="../fpml-5-0-intro-4.html#s4.2.4">Reference Implementations</a> section for details. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+         <li>
+            
+            					Rules with comments
+            
+            					
+            <ul>
+               <li><a href="#eqd-3">eqd-3</a></li>
+               <li><a href="#eqd-4">eqd-4</a></li>
+               <li><a href="#eqd-8">eqd-8</a></li>
+               <li><a href="#eqd-9">eqd-9</a></li>
+               <li><a href="#eqd-10">eqd-10</a></li>
+               <li><a href="#eqd-12">eqd-12</a></li>
+               <li><a href="#eqd-13">eqd-13</a></li>
+               <li><a href="#eqd-14">eqd-14</a></li>
+               <li><a href="#eqd-15">eqd-15</a></li>
+               <li><a href="#eqd-17">eqd-17</a></li>
+               <li><a href="#eqd-18">eqd-18</a></li>
+               <li><a href="#eqd-25">eqd-25</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#same-currency" target="_blank">same-currency</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">Trade//element(*, Trade)</span> (complex type): <a href="#eqd-2">eqd-2</a> 
+         </li>
+         <li><span class="element">EquityAmericanExercise</span> (complex type): <a href="#eqd-3">eqd-3</a> 
+         </li>
+         <li><span class="element">Trade</span> (complex type): <a href="#eqd-4">eqd-4</a> <a href="#eqd-12">eqd-12</a> <a href="#eqd-13">eqd-13</a> <a href="#eqd-14">eqd-14</a> <a href="#eqd-31">eqd-31</a> 
+         </li>
+         <li><span class="element">EquityBermudaExercise</span> (complex type): <a href="#eqd-6">eqd-6</a> <a href="#eqd-8">eqd-8</a> <a href="#eqd-9">eqd-9</a> <a href="#eqd-10">eqd-10</a> 
+         </li>
+         <li><span class="element">EquityExerciseValuationSettlement</span> (complex type): <a href="#eqd-15">eqd-15</a> 
+         </li>
+         <li><span class="element">EquityOption</span> (complex type): <a href="#eqd-17">eqd-17</a> <a href="#eqd-18">eqd-18</a> <a href="#eqd-19">eqd-19</a> <a href="#eqd-20">eqd-20</a> <a href="#eqd-26b">eqd-26b</a> 
+         </li>
+         <li><span class="element">EquityDerivativeBase</span> (complex type): <a href="#eqd-22">eqd-22</a> 
+         </li>
+         <li><span class="element">AveragingSchedule</span> (complex type): <a href="#eqd-24">eqd-24</a> 
+         </li>
+         <li><span class="element">BrokerEquityOption</span> (complex type): <a href="#eqd-25">eqd-25</a> 
+         </li>
+         <li><span class="element">EquityOptionelement(*, EquityOption)</span> (complex type): <a href="#eqd-26">eqd-26</a> 
+         </li>
+         <li><span class="element">EquityMultipleExercise</span> (complex type): <a href="#eqd-27">eqd-27</a> <a href="#eqd-28">eqd-28</a> <a href="#eqd-29">eqd-29</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="eqd-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-2</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">equityOption/equityExercise/equityAmericanExercise</span> exists, then <span class="element">equityOption/equityExercise/equityAmericanExercise/expirationDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: //element(*, Trade)<br><div style="background-color:#d0d0d0">[exists(<span class="element">equityOption/equityExercise/equityAmericanExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">equityOption/equityExercise/equityAmericanExercise/expirationDate/adjustableDate/unadjustedDate</span> ge <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-2-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-3</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityAmericanExercise (complex type)<br>If <span class="element">latestExerciseTimeType</span> is equal to "<span class="value">SpecificTime</span>", then <span class="element">latestExerciseTime</span> exists
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityAmericanExercise<br><div style="background-color:#d0d0d0">[<span class="element">latestExerciseTimeType</span> eq "<span class="value">SpecificTime</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">latestExerciseTime</span>)
+            </div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>When the latest time an option can be exercised is a value, that value must be provided. This rule is equivalent to eqd-6,
+            except for American Exercise. When equity options are refactored this rule can be merged with eqd-6.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-3-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">equityOption/equityExercise/equityBermudaExercise</span> exists, then <span class="element">equityOption/equityExercise/equityBermudaExercise/commencementDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">equityOption/equityExercise/equityBermudaExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">equityOption/equityExercise/equityBermudaExercise/commencementDate/adjustableDate/unadjustedDate</span> ge <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>When traded, a contractual option expiry date must be after the trade date. This rule is the equivalent of eqd-2 and eqd-12,
+            but for Bermuda Exercise. When the equity options are refactored this rule should merge with eqd-2, eqd-12.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-4-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-6</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityBermudaExercise (complex type)<br>If <span class="element">latestExerciseTimeType</span> is equal to "<span class="value">SpecificTime</span>", then <span class="element">latestExerciseTime</span> exists
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityBermudaExercise<br><div style="background-color:#d0d0d0">[<span class="element">latestExerciseTimeType</span> eq "<span class="value">SpecificTime</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">latestExerciseTime</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-6-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityBermudaExercise (complex type)<br> All dates in <span class="element">bermudaExerciseDates/date</span> must be after <span class="element">commencementDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityBermudaExercise<br><div style="background-color:#d0d0d0;padding:5px"> every <span class="element">$date</span> in <span class="element">.//bermudaExerciseDates/date</span> satisfies <span class="element">$date</span> gt <span class="element">commencementDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Every Bermuda Exercise date must be after the commencementDate.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-8-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-eqd-8-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-eqd-8-03.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityBermudaExercise (complex type)<br> All dates in <span class="element">bermudaExerciseDates/date</span> must be before or equal to <span class="element">expirationDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityBermudaExercise<br><div style="background-color:#d0d0d0;padding:5px">every <span class="element">$date</span> in <span class="element">.//bermudaExerciseDates/date</span> satisfies <span class="element">$date</span> le <span class="element">expirationDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Every exercise date must be before option expiry date.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-9-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityBermudaExercise (complex type)<br> The dates in <span class="element">bermudaExerciseDates/date</span> must be unique
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityBermudaExercise<br><div style="background-color:#d0d0d0;padding:5px">count(distinct-values(<span class="element">bermudaExerciseDates/date</span>)) eq count(<span class="element">bermudaExerciseDates/date</span>)
+            </div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Each exercise date must be listed only once.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-10-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">equityOption/equityExercise/equityEuropeanExercise</span> exists, then <span class="element">equityOption/equityExercise/equityEuropeanExercise/expirationDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">equityOption/equityExercise/equityEuropeanExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">equityOption/equityExercise/equityEuropeanExercise/expirationDate/adjustableDate/unadjustedDate</span> ge <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>When traded, a contractual option expiry date must be after the trade date. This rule is the equivalent of eqd-2 and eqd-4,
+            but for European Exercise. When the equity options are refactored this rule should merge with eqd-2, eqd-4.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-12-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-13" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-13</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">equityOption/equityPremium/paymentDate/unadjustedDate</span> exists, then <span class="element">equityOption/equityPremium/paymentDate/unadjustedDate</span> must be after or equal to <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">equityOption/equityPremium/paymentDate/unadjustedDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">equityOption/equityPremium/paymentDate/unadjustedDate</span> ge <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>When traded, a contractual option premium payment date must be after the trade date.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-13-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-14" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-14</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">brokerEquityOption/equityPremium/paymentDate/unadjustedDate</span> exists, then <span class="element">brokerEquityOption/equityPremium/paymentDate/unadjustedDate</span> must be after or equal to <span class="element">tradeHeader/tradeDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">brokerEquityOption/equityPremium/paymentDate/unadjustedDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">brokerEquityOption/equityPremium/paymentDate/unadjustedDate</span> ge <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>When traded, a contractual option premium payment date must be after the trade date. This is the equivalent of eqd-13 for
+            brokerEquityOption.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-14-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-15" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-15</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityExerciseValuationSettlement (complex type)<br>If <span class="element">equityValuation/valuationDate/adjustableDate</span> exists, and if <span class="element">equityEuropeanExercise</span> exists, then <span class="element">equityValuation/valuationDate/adjustableDate/unadjustedDate</span> must be equal to  <span class="element">equityEuropeanExercise/expirationDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityExerciseValuationSettlement<br><div style="background-color:#d0d0d0">[exists(<span class="element">equityValuation/valuationDate/adjustableDate</span>)] [exists(<span class="element">equityEuropeanExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">equityValuation/valuationDate/adjustableDate/unadjustedDate</span> eq <span class="element">equityEuropeanExercise/expirationDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>For European exercise, the valuation date and expiration date are the same date.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-15-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-17" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-17</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityOption (complex type)<br>EquityDerivativeShortFormBase (complex type)<br>If <span class="element">numberOfOptions</span> exists, and if <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span> exists, and if <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span>exists, then <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span> multiplied by <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span> must be less than or equal to the <span class="element">numberOfOptions</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityOption<br>EquityDerivativeShortFormBase<br><div style="background-color:#d0d0d0">[exists(<span class="element">numberOfOptions</span>)] [exists(<span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span>)] [exists(<span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span> * <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span> le <span class="element">numberOfOptions</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Issue: The integralMultipleExercise is not applicable for the last exercise ( automatic or manual ).
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-17-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-eqd-17-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-18" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-18</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityOption (complex type)<br>EquityDerivativeShortFormBase (complex type)<br>If <span class="element">numberOfOptions</span> exists, and if <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span> exists, and if  <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/integralMultipleExercise</span> exists, then <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span> multiplied by <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/integralMultipleExercise</span> must be less than or equal to the <span class="element">numberOfOptions</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityOption<br>EquityDerivativeShortFormBase<br><div style="background-color:#d0d0d0">[exists(<span class="element">numberOfOptions</span>)] [exists(<span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span>)] [exists(<span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/integralMultipleExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span> * <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/integralMultipleExercise</span> le <span class="element">numberOfOptions</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Issue: The integralMultipleExercise is not applicable for the last exercise ( automatic or manual ).
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-18-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-eqd-18-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-eqd-18-03.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-19" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-19</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityOption (complex type)<br>EquityDerivativeShortFormBase (complex type)<br>If <span class="element">notional</span>, <span class="element">equityPremium/percentageOfNotional</span> and <span class="element">equityPremium/paymentAmount</span> exist, and if <span class="element">equityPremium/paymentAmount</span> and <span class="element">notional</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">equityPremium/paymentAmount/amount</span> is equal to <span class="element">notional/amount</span> multiplied by <span class="element">equityPremium/percentageOfNotional</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityOption<br>EquityDerivativeShortFormBase<br><div style="background-color:#d0d0d0">[exists(<span class="element">notional</span>)] [exists(<span class="element">equityPremium/percentageOfNotional</span>)] [exists(<span class="element">equityPremium/paymentAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">equityPremium/paymentAmount</span>,<span class="element">notional</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">equityPremium/paymentAmount/amount</span> eq <span class="element">notional/amount</span> * <span class="element">equityPremium/percentageOfNotional</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-19-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-20" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-20</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityOption (complex type)<br>EquityOptionTransactionSupplement (complex type)<br>If <span class="element">numberOfOptions</span> exists, and if <span class="element">optionEntitlement</span> exists, and if <span class="element">equityPremium/paymentAmount</span> exists, and if <span class="element">equityPremium/pricePerOption</span> exists, and if <span class="element">equityPremium/paymentAmount</span> and <span class="element">equityPremium/pricePerOption</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">equityPremium/pricePerOption/amount</span> multiplied by <span class="element">numberOfOptions</span> multiplied by <span class="element">optionEntitlement</span> is equal to <span class="element">equityPremium/paymentAmount/amount</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityOption<br>EquityOptionTransactionSupplement<br><div style="background-color:#d0d0d0">[exists(<span class="element">numberOfOptions</span>)] [exists(<span class="element">optionEntitlement</span>)] [exists(<span class="element">equityPremium/paymentAmount</span>)] [exists(<span class="element">equityPremium/pricePerOption</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">equityPremium/paymentAmount</span>,<span class="element">equityPremium/pricePerOption</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">equityPremium/pricePerOption/amount</span> * <span class="element">numberOfOptions</span> * <span class="element">optionEntitlement</span> eq <span class="element">equityPremium/paymentAmount/amount</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-20-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-eqd-20-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-22" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-22</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityDerivativeBase (complex type)<br>
+            			<span class="element">buyerPartyReference/@href</span> and <span class="element">sellerPartyReference/@href</span> must be different
+            		
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityDerivativeBase<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">buyerPartyReference/@href</span> ne <span class="element">sellerPartyReference/@href</span>
+               		
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-22-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-24" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-24</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: AveragingSchedule (complex type)<br>
+            			<span class="element">startDate</span> must be before or equal to <span class="element">endDate</span>
+            		
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: AveragingSchedule<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">startDate</span> le <span class="element">endDate</span>
+               		
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-24-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BrokerEquityOption (complex type)<br>If <span class="element">numberOfOptions</span> exists, and if <span class="element">equityPremium/paymentAmount</span> exists, and if <span class="element">equityPremium/pricePerOption</span> exists, and if <span class="element">equityPremium/paymentAmount</span> and <span class="element">equityPremium/pricePerOption</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">equityPremium/pricePerOption/amount</span> multiplied by <span class="element">numberOfOptions</span> is equal to <span class="element">equityPremium/paymentAmount/amount</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BrokerEquityOption<br><div style="background-color:#d0d0d0">[exists(<span class="element">numberOfOptions</span>)] [exists(<span class="element">equityPremium/paymentAmount</span>)] [exists(<span class="element">equityPremium/pricePerOption</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">equityPremium/paymentAmount</span>,<span class="element">equityPremium/pricePerOption</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">equityPremium/pricePerOption/amount</span> * <span class="element">numberOfOptions</span> eq <span class="element">equityPremium/paymentAmount/amount</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span> This is equivalent to eqd-20, but for brokerEquityOption, where there is no optionEntitlement. 
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-25-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-26</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityOption (complex type)<br>EquityDerivativeShortFormBase (complex type)<br>
+            			You cannot exercise more than the number of options you have.
+            			If <span class="element">numberOfOptions</span> exists, and if <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span> exists, and if <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span> does not exist, then <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span> must be less than or equal to <span class="element">numberOfOptions</span>
+            		
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: element(*, EquityOption)<br>element(*, EquityDerivativeShortFormBase)<br><div style="background-color:#d0d0d0">[exists(<span class="element">numberOfOptions</span>)] [exists(<span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span>)] [not(exists(<span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/maximumNumberOfOptions</span> le <span class="element">numberOfOptions</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-26-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-26b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-26b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityOption (complex type)<br>EquityDerivativeShortFormBase (complex type)<br>
+            			You cannot exercise more than the number of options you have.
+            			If <span class="element">numberOfOptions</span> exists, and if <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span> exists, and if <span class="element">equityExercise/equityAmericanExercise/equityMultipleExercise/integralMultipleExercise</span> does not exist, then <span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span> must be less than or equal to <span class="element">numberOfOptions</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityOption<br>EquityDerivativeShortFormBase<br><div style="background-color:#d0d0d0">[exists(<span class="element">numberOfOptions</span>)] [exists(<span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span>)] [not(exists(<span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/integralMultipleExercise</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">equityExercise/equityBermudaExercise/equityMultipleExercise/maximumNumberOfOptions</span> le <span class="element">numberOfOptions</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-26b-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityMultipleExercise (complex type)<br>Maximum number of options to exercise must be greater than or equal to minimum number of options to exercise
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityMultipleExercise<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">minimumNumberOfOptions</span> le <span class="element">maximumNumberOfOptions</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-27-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-28</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityMultipleExercise (complex type)<br>When integral multiple exercise exists, the minimum number of options (<span class="element">minimumNumberOfOptions</span>) exercised must be a positive integer multiple of integral multiple exercise (<span class="element">integralMultipleExercise</span>)
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityMultipleExercise<br><div style="background-color:#d0d0d0">[exists(<span class="element">integralMultipleExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">minimumNumberOfOptions</span> mod <span class="element">integralMultipleExercise</span> eq 0
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-28-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-29" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-29</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: EquityMultipleExercise (complex type)<br>When integral multiple exercise exists, the maximum number of options (<span class="element">maximumNumberOfOptions</span>) exercised must be a positive integer multiple of integral multiple exercise (<span class="element">integralMultipleExercise</span>).
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: EquityMultipleExercise<br><div style="background-color:#d0d0d0">[exists(<span class="element">integralMultipleExercise</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">maximumNumberOfOptions</span> mod <span class="element">integralMultipleExercise</span> eq 0
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-29-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="eqd-31" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-31</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>The starting date of an equity option must be after the trade date
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[//element(*, EquityDerivativeBase)/equityEffectiveDate)] </div>
+            <div style="background-color:#d0d0d0;padding:5px"> every <span class="element">$equityDerivativeBase</span> in <span class="element">//element(*, EquityDerivativeBase)[exists(equityEffectiveDate)]</span> satisfies <span class="element">$equityDerivativeBase/equityEffectiveDate</span> ge <span class="element">tradeHeader/tradeDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-eqd-31-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <div id="eqd-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-1</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Trade, Contract; Description: <span class="element">//americanExercise/commencementDate/adjustableDate/unadjustedDate</span> must be equal to <span class="element">tradeHeader/tradeDate</span>.
+            			Rationale for removal: incorrect from business perspective.
+            		
+         </div>
+      </div>
+      <div id="eqd-2b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-2b</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: If <span class="element">equityOption/equityExercise/equityAmericanExercise</span> exists, then <span class="element">equityOption/equityExercise/equityAmericanExercise/expirationDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">header/contractDate</span>.
+            			Rationale for removal: Use rule eqd-2.
+            		
+         </div>
+      </div>
+      <div id="eqd-4b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-4b</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: If <span class="element">equityOption/bermudaExercise</span> exists, then <span class="element">equityOption/bermudaExercise/commencementDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">header/contractDate</span>.
+            			Rationale for removal: Use rule eqd-4.
+            		
+         </div>
+      </div>
+      <div id="eqd-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-5</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Trade, Contract; Description: <span class="element">//equityExercise/equityBermudaExercise/expirationDate/adjustableDate/unadjustedDate</span> must be greater than or equal to <span class="element">tradeHeader/tradeDate</span>.
+            			Rationale for removal: eqd-5 is redundant. The effect of eqd-5 is available by entailment on eqd-4, eqd-8, eqd-9.
+            		
+         </div>
+      </div>
+      <div id="eqd-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-7</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: equityBermudaExercise; Description: The elements in <span class="element">bermudaExerciseDates/date</span> should be in order, earliest date first.
+            			Rationale for removal: Enforcing that data should be in specific order is not permitted.
+            		
+         </div>
+      </div>
+      <div id="eqd-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-11</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: EquityBermudanExercise; Description: <span class="element">latestExerciseTime/hourMinuteTime</span> must be before or equal to <span class="element">equityExpirationTime/hourMinuteTime</span>.
+            			
+            		
+         </div>
+      </div>
+      <div id="eqd-12b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-12b</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: If <span class="element">equityOption/europeanExercise</span> exists, then  <span class="element">equityOption/europeanExercise/expirationDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">header/contractDate</span>.
+            			Rationale for removal: Use rule eqd-12.
+            		
+         </div>
+      </div>
+      <div id="eqd-13b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-13b</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: If <span class="element">equityOption/premium/paymentDate/adjustableDate/unadjustedDate</span> exists, then <span class="element">equityOption/premium/paymentDate/adjustableDate/unadjustedDate</span> must be after or equal to <span class="element">header/contractDate</span>.
+            			Rationale for removal: Use rule eqd-12.
+            		
+         </div>
+      </div>
+      <div id="eqd-14b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-14b</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: If <span class="element">brokerEquityOption/equityPremium/paymentDate/unadjustedDate</span> exists, then <span class="element">brokerEquityOption/equityPremium/paymentDate/unadjustedDate</span> must be after or equal to <span class="element">header/contractDate</span>.
+            			Rationale for removal: Use rule eqd-14.
+            		
+         </div>
+      </div>
+      <div id="eqd-16" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-16</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: EquityMultipleExercise; Description: <span class="element">minimumNumberOfOptions</span> lt <span class="element">maximumNumberOfOptions</span>.
+            			Rationale for removal: inconsistent with rule eqd-27
+            		
+         </div>
+      </div>
+      <div id="eqd-21" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-21</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: CalculationAgent; Description: <span class="element">calculationAgentPartyReference</span> must exist.
+            			Rationale for removal: EQDWG 2007-11-30; agreed that this rule doesn't make any business sense since the calculation agent
+            may be specified in the master confirmation or the master agreement.
+            		
+         </div>
+      </div>
+      <div id="eqd-23" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-23</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Trade; Description: If <span class="element">equityOption/equityEffectiveDate</span> exists, then <span class="element">equityOption/equityEffectiveDate</span> must be after or equal to <span class="element">tradeHeader/tradeDate</span>.
+            			Rationale for removal: eqd-23 is redundant. The effect of eqd-23 is available by entailment of a more generic rule eqd-31.
+            		
+         </div>
+      </div>
+      <div id="eqd-30" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-30</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: If <span class="element">equityOption/equityEffectiveDate</span> exists, then <span class="element">equityOption/equityEffectiveDate</span> must be after or equal to <span class="element">header/contractDate</span>.
+            			Rationale for removal: eqd-30 is redundant. The effect of eqd-30 is available by entailment of a more generic rule eqd-32.
+            		
+         </div>
+      </div>
+      <div id="eqd-32" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">eqd-32</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Contract; Description: The starting date of an equity option must be after the contract date.
+            			Rationale for removal: Use rule eqd-31.
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>

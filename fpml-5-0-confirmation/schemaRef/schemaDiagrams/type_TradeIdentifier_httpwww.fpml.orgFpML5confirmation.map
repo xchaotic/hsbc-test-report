@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_TradeIdentifier_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_TradeId'
+  coords='317,160,411,186'
+  href='fpml-doc-5-0.xsd.html_type_TradeId.html#type_TradeId'/>
+
+ <area
+  shape='rect'
+  alt='type_VersionedTradeId'
+  coords='317,196,469,222'
+  href='fpml-doc-5-0.xsd.html_type_VersionedTradeId.html#type_VersionedTradeId'/>
+
+</map>

@@ -1,0 +1,3716 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s16">16 PRICING AND RISK ARCHITECTURE</a>
+            </h2>
+         </div>
+        
+        
+         
+
+                
+        
+        
+        
+        
+        
+
+         <div>
+            <h3>
+               <a id="s16.1">16.1 Introduction</a>
+            </h3>
+                
+            <p>This section is the initial deliverable of the FpML Pricing and Risk
+                        Working Group (PRWG). </p>
+                
+            <p>Included in this section are:</p>
+                
+            <ul class="bulleted">
+                        
+               <li>A very brief introduction to derivatives pricing and risk, and how
+                                this specification relates to those processes.</li>
+                        
+               <li>The scope of the initial deliverable</li>
+                        
+               <li>The requirements to address that scope</li>
+                        
+               <li>A high-level overview of the structures in the schema used to
+                                address the requirements.</li>
+                        
+               <li>A more detailed explanation of the usage scenarios together with
+                                examples</li>
+                        
+               <li>A short glossary</li>
+                
+            </ul>
+        
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.2">16.2 Derivatives Pricing and Risk</a>
+               </h3>
+            </div>
+                
+                
+        
+            <div>
+               <h4>
+                  <a id="s16.2.1">16.2.1 Pricing</a>
+               </h4>
+                        
+               <p>Interest rate derivatives are typically priced (a.k.a. “valued”)
+                                by forecasting the future price and price evolution of the assets
+                                that underlie the derivative, using these forecasts to estimate the
+                                future cash flows of the derivative instrument, and then discounting
+                                these cash flows to the preset.</p>
+                        
+               <p>For example, interest rate swap cash flows are typically
+                                calculated based in part on an floating interest rate index (such as
+                                US Dollar 3 month LIBOR). An interest rate swap’s value is usually
+                                estimated by forecasting the floating rate (in this example,
+                                USD-LIBOR-3M), calculating the forecast cash flows, and then
+                                discounting them to the present using a discount curve.</p>
+                        
+               <p>More complex products such as option products frequently use a
+                                similar process, but price the instrument under a variety of
+                                forecasts and estimate the value of the derivative by averaging or
+                                otherwise combining the various forecasts.</p>
+                        
+               <p>This specification describes ways to represent the data that is
+                                needed for generating these forecasts, if required for valuation
+                                reporting.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.2.2">16.2.2 Valuation and Risk Reporting</a>
+               </h4>
+                        
+               <p>A series of values (“measures”) can be computed about
+                                derivatives. The measures include:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>a variety of price-like values (e.g. Net Present Value,
+                                        Clean Price, Dirty Price, Accrued Interest, Cash Payable,
+                                        etc.), </li>
+                                
+                  <li>the sensitivities of some of the above values (particularly
+                                        the NPV) to changes in pricing assumptions</li>
+                                
+                  <li>other risk measures, such as Potential Exposure, Value At
+                                        Risk, etc.</li>
+                        
+               </ul>
+                        
+               <p>The specification provides way to represent these measures and if
+                                desired to describe them in some detail.</p>
+                
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.3">16.3 Pricing and Risk Scope</a>
+               </h3>
+            </div>
+        
+            <p>The Pricing and Risk scope for FpML 5.0 Recommendation is:</p>
+        
+            <p>Valuation and basic risk on the following products:</p>
+        
+            <ul class="bulleted">
+                
+               <li>Vanilla IR Swaps (single and dual currency fix/float swaps, non-CMS/CMT) <ul class="bulleted">
+                                
+                     <li>Valuation reporting (trades only)</li>
+                                
+                     <li>Market Data (Yield Curves, FX spot rates) </li>
+                                
+                     <li>Market risk reporting (Delta Risk vs. Curve Inputs, FX
+                                        exposures) for trades</li>
+                        
+                  </ul>
+                
+               </li>
+                
+               <li>Credit Default Swaps <ul class="bulleted">
+                                
+                     <li>Valuation reporting for trades</li>
+                                
+                     <li>Market Data (ir curves, credit spread, recovery rate,
+                                        probability of default)</li>
+                                
+                     <li>Market risk reporting (risk with respect to. the above
+                                        variables) for trades</li>
+                        
+                  </ul>
+                
+               </li>
+                
+               <li>IR Caps/Floors/ EuropeanSwaptions, and corresponding risk types <ul class="bulleted">
+                                
+                     <li>Valuation reporting for trades</li>
+                                
+                     <li>Market data (volatility surfaces)</li>
+                                
+                     <li>Market risk reporting <ul class="bulleted">
+                                                
+                           <li>Volatility/Vega Risk</li>
+                                                
+                           <li>Convexity/Gamma Risk (applies to all products)</li>
+                                                
+                           <li>Time Decay/Theta (applies to all products)</li>
+                                        
+                        </ul>
+                                
+                     </li>
+                        
+                  </ul>
+                
+               </li>
+                
+               <li>Portfolio level valuation and risk <ul class="bulleted">
+                                
+                     <li>Valuation</li>
+                                
+                     <li>Risk reporting</li>
+                        
+                  </ul>
+                
+               </li>
+        
+            </ul>
+        
+            <p>The Pricing and Risk Working Group has also provided some definitions that might
+                be useful for other types of valuation and risk reporting.</p>
+
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.4">16.4 Requirements</a>
+               </h3>
+            </div>
+                
+                
+                
+                
+                
+                
+                
+        
+            <div>
+               <h4>
+                  <a id="s16.4.1">16.4.1 Introduction</a>
+               </h4>
+                        
+               <p>The aim of the FpML Pricing and Valuations Working Group (PRWG)
+                                is to define a set of extensions to the FpML schema that allow the
+                                description of:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>A request to provide valuation and risk information about a
+                                        trade or group of trades, henceforth referred to as a
+                                        Valuation Request.</li>
+                                
+                  <li>A report providing valuation and risk information about a
+                                        trade or group trades, henceforth referred to as a Valuation
+                                        Report.</li>
+                        
+               </ul>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.4.2">16.4.2 Usage Scenarios</a>
+               </h4>
+                        
+               <p>The intended uses of this specification include:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>Submitting valuation requests by relatively unsophisticated
+                                        clients to more sophisticated providers, and returning the
+                                        results.</li>
+                                
+                  <li>Submitting valuation requests from sophisticated trading
+                                        users or applications to a valuation engine or system.</li>
+                                
+                  <li>Providing sensitivity results with a variety of levels of
+                                        rigor and definitional detail</li>
+                                
+                  <li>Communicating market data between clients and providers for
+                                        the purposes of either requesting valuations or explaining
+                                        how valuation results were obtained.</li>
+                        
+               </ul>
+                        
+               <p>These scenarios are described below in more detail in the “Use
+                                Cases and Examples” section.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.4.3">16.4.3 Product Coverage</a>
+               </h4>
+                        
+               <p>The products to be supported are those covered by the FpML 4.0
+                                specification. However, we will in particular focus on the following
+                                product groupings:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>Vanilla IR Swaps (single and dual currency fix/float swaps,
+                                        non CMS/CMT)</li>
+                                
+                  <li>Credit Default Swaps</li>
+                                
+                  <li>IR Caps/Floors and European Swaptions.</li>
+                        
+               </ul>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.4.4">16.4.4 Valuation and Risk Measures</a>
+               </h4>
+                        
+               <p>The specification and reporting of following valuation and risk
+                                measures are to be supported:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>Net Present Value</li>
+                                
+                  <li>Market Risk Sensitivities, including, but not limited to: <ul class="bulleted">
+                                                
+                        <li>Interest Rate Delta (Sensitivity to Curve
+                                                  Inputs)</li>
+                                                
+                        <li>Interest Rate Delta (Sensitivity to Forward
+                                                  Rates)</li>
+                                                
+                        <li>Interest Rate Vega</li>
+                                                
+                        <li>Interest Rate Gamma</li>
+                                                
+                        <li>FX Spot Sensitivity</li>
+                                                
+                        <li>Credit Spread Sensitivity</li>
+                                                
+                        <li>Sensitivity to Probability of Default</li>
+                                                
+                        <li>Recovery Rate sensitivity</li>
+                                        
+                     </ul>
+                                
+                  </li>
+                        
+               </ul>
+                        
+               <p>In addition, the schema should be easily extensible to allow
+                                additional valuation or risk measures to specified and
+                        reported.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.4.5">16.4.5 Market and Pricing Data</a>
+               </h4>
+                        
+               <p>The schema should allow the description of market or pricing
+                                data. Here we refer to market data as observable market rates or
+                                prices in some structured form (e.g. a yield curve of interest
+                                rates), and pricing data as market data that has been processed in
+                                some way (e.g. a term structure of discount factors). </p>
+                        
+               <p>This market and pricing data may be referred to by the Valuation
+                                Request as data to be used in calculating the requested valuation
+                                and risk measures, or can be included in the Valuation Report as
+                                data used to produce the reported valuation and risk measures.</p>
+                        
+               <p>In addition, a Valuation Request may refer to market and pricing
+                                data (as a group) by reference (e.g. an identifier denoting ‘use
+                                current market data’ or ‘use yesterday’s end-of-day market
+                        data).</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.4.6">16.4.6 Valuation Scenarios</a>
+               </h4>
+                        
+               <p>The schema should allow the specification of shocks to one or
+                                more market data elements, collectively referred to as a Scenario,
+                                and the calculation and reporting of all applicable valuation and
+                                risk measures in the context of the Scenario rather than the base
+                                market data.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.4.7">16.4.7 Portfolios</a>
+               </h4>
+                        
+               <p>The schema should allow specification of a Valuation Request for
+                                a single trade or group of trades, henceforth referred to as a
+                                Portfolio. A trade may be defined ‘in place’, i.e. as a complete
+                                FpML trade representation, or by reference (e.g. a trade
+                                identifier). A portfolio may be specified in the following ways:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>A list of trades defined ‘in place’</li>
+                                
+                  <li>A list of trade references</li>
+                                
+                  <li>A portfolio reference (e.g. a portfolio identifier)</li>
+                                
+                  <li>A query or logical definition (e.g. all trades with
+                                        counterparty x)</li>
+                        
+               </ul>
+                
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.5">16.5 Overview of design</a>
+               </h3>
+            </div>
+                
+                
+                
+                
+                
+                
+                
+        
+            <div>
+               <h4>
+                  <a id="s16.5.1">16.5.1 Overview</a>
+               </h4>
+                        
+               <p>The Pricing and Risk schema is intended to meet the requirements
+                                described above. Because the requirements include both high-level,
+                                simplified representations as well as sophisticated, detailed
+                                definitions, the schema has been designed to allow a variety of
+                                amounts of detail to be provided. It will be up to the client and
+                                the provider to negotiate minimum requirements for data as well as
+                                well as the list of maximum supported elements.</p>
+                        
+               <p>The schema has been subdivided into several subschema files,
+                                corresponding to different topic areas, to reduce the number of
+                                definitions that a user needs to review and understand to be able to
+                                use the schema. These subschema include (where x-y is the FpML
+                                version number):</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>fpml-valuation-shared-x-y.xsd – This includes base types
+                                        used throughout the pricing and risk schema, such as
+                                        quotations characteristics, measure types, etc.</li>
+                                
+                  <li>fpml-valuation-x-y.xsd – This includes valuation result sets
+                                        and related definitions.</li>
+                                
+                  <li>fpml-reporting-x-y.xsd – This include messages used for
+                                        requesting and providing valuation reporting results.</li>
+                                
+                  <li>fpml-mktenv-x-y.xsd – This include definitions of market
+                                        environment data structures such as yield curves, volatility
+                                        matrices, and the like. It contains the largest set of
+                                        definitions, but is not necessary for simple uses of the
+                                        standard.</li>
+                                
+                  <li>fpml-riskdef-x-y.xsd – This includes detailed definitions of
+                                        valuation and sensitivity results. They include detailed
+                                        definitions of sensitivity calculations and are intended to
+                                        be used by sophisticated users.</li>
+                        
+               </ul>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.5.2">16.5.2 Shared Types</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.5.2.1">16.5.2.1 Introduction</a>
+                  </h5>
+                                
+                  <p>The Pricing and Risk shared types include ways to
+                                        represent valuations about single objects, such as assets or
+                                        pricing inputs. They include quotation characteristics,
+                                        measure types, and base level valuation
+                                structures.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.2.2">16.5.2.2 Quotation Characteristics</a>
+                  </h5>
+                                
+                  <p>The QuotationCharacteristics.model model group, and the
+                                        corresponding type QuotationCharacteristics, allow a variety
+                                        of descriptors to be applied to any particular quotation.
+                                        These descriptors include items such as:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>The measure reported (ie. The type or purpose of the
+                                                quotation)</li>
+                                        
+                     <li>The units of measure</li>
+                                        
+                     <li>Which point of view the quotation is expressed for
+                                                (buyer, seller, mid-market)</li>
+                                        
+                     <li>The currency of the quotation</li>
+                                        
+                     <li>Whether the quotation is for opening of business, daily high/low/mid, close of day.</li>
+                                        
+                     <li>A business center or the exchange (e.g. stock or futures exchange) needs also to be supplied if the time is supplied.</li>
+                                        
+                     <li>The information source where a published or displayed market rate will be obtained, e.g. Telerate Page 3750.</li>
+                                        
+                     <li>The time the quotation was recorded.</li>
+		           
+                     <li>The valuation date is the date when the quote was computed.</li>
+                                        
+                     <li>How long the quotation remains valid</li>
+                                        
+                     <li>For cash flow quotations, the type of cash flow.
+                                                (This is a sub-measure; in a future draft this may
+                                                be generalized further).</li>
+                                
+                  </ul>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/QuotationCharacteristics.jpg">
+                        <img src="images/valuation/QuotationCharacteristics.jpg" alt="images/valuation/QuotationCharacteristics.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The Quotation Characteristics structures are used
+                                        relatively consistently throughout the schema to describe
+                                        values that may be reported.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.2.3">16.5.2.3 Measure Types</a>
+                  </h5>
+                                
+                  <p>“Measure Types” are represented by the “AssetMeasureType”
+                                        type, which is an FpML scheme. A wide variety of measures
+                                        have been defined (see “scheme values” for more
+                                        information), but additional ones could also be defined.
+                                        Current measures are divided into three broad categories:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Valuation measures, such as NPV, cash, accrued
+                                                interest.</li>
+                                        
+                     <li>Sensitivity measures, such as
+                                        	BucketedInterestRateSensitivity</li>
+                                        
+                     <li>Risk measures, such as Value at Risk.</li>
+                                
+                  </ul>
+                                
+                  <p>Please see the FpML “schemes” documentation for a
+                                        complete list of the measures. A number of measure types
+                                        have been defined for areas beyond the current scope of this
+                                        working group.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.2.4">16.5.2.4 BasicQuotations</a>
+                  </h5>
+                                
+                  <p>A BasicQuotation is a type that provides a value with a
+                                        set of QuotationCharacteristics as defined above.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/BasicQuotation.jpg">
+                        <img src="images/valuation/BasicQuotation.jpg" alt="images/valuation/BasicQuotation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>A BasicQuotation is provided for quoting simple assets
+                                        where sensitivities are not required, e.g. for quotes for
+                                        input instruments in curves</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.2.5">16.5.2.5 Valuation</a>
+                  </h5>
+                                
+                  <p>Valuation is a type used as a base for types that
+                                        represent valuations, i.e. quotations associated with
+                                        objects for a particular valuation scenario.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/Valuation.jpg">
+                        <img src="images/valuation/Valuation.jpg" alt="images/valuation/Valuation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It includes:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>An object reference, which identifies the object
+                                                that is valued.</li>
+                                        
+                     <li>An optional valuation scenario reference, which
+                                                identifies the valuation scenario that this
+                                                valuation is for.</li>
+                                
+                  </ul>
+                                
+                  <p>Valuation is extended for objects such as assets and
+                                        pricing structures.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.2.6">16.5.2.6 Basic Asset Valuation</a>
+                  </h5>
+                                
+                  <p>A BasicAssetValuation object extends the Valuation type
+                                        with a BasicQuotation. It is used for representing basic
+                                        valuations of assets such as benchmarks assets used as
+                                        inputs to a yield curve. It is not typically used for
+                                        reporting values of derivative instruments.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/BasicValuation.jpg">
+                        <img src="images/valuation/BasicValuation.jpg" alt="images/valuation/BasicValuation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.5.3">16.5.3 Valuation Sets and related definitions</a>
+               </h4>
+                        
+               <p>The following types are used to represent valuations of assets
+                                and the corresponding sensitivity valuations. These definitions are
+                                mostly contained in the fpml-pr-x-y.xsd subschema file.</p>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.5.3.1">16.5.3.1 Quotation</a>
+                  </h5>
+                                
+                  <p>The Quotation type is similar to the BasicQuotation but
+                                        also allows a collection of sensitivities to be added. This
+                                        allows sensitivities to be associated directly with a
+                                        specific measure, to provide a precise relationship between
+                                        the sensitivities and the base value. (Note that both the
+                                        base value and the sensitivities are optional, so that only
+                                        one or the other could be reported.)</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/Quotation.jpg">
+                        <img src="images/valuation/Quotation.jpg" alt="images/valuation/Quotation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.3.2">16.5.3.2 Asset Valuation</a>
+                  </h5>
+                                
+                  <p>The AssetValuation type extends the Valuation types with
+                                        a full Quotation and an FX rate. The full Quotation allows values (and the associated
+                                        sensitivities) to be represented for a single asset, such as
+                                        a trade or a portfolio. The FX rate indicates the rate of a currency conversion that may have been used to compute valuations.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/AssetValuation.jpg">
+                        <img src="images/valuation/AssetValuation.jpg" alt="images/valuation/AssetValuation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.3.3">16.5.3.3 Sensitivity Set</a>
+                  </h5>
+                                
+                  <p>A Sensitivity Set is collection of sensitivities,
+                                        normally related somehow. It is used for containing a mini
+                                        “risk report” for a single asset, e.g. bucketed interest
+                                        rate delta risk for a trade or portfolio.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/SensitivitySet.jpg">
+                        <img src="images/valuation/SensitivitySet.jpg" alt="images/valuation/SensitivitySet.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It can contain:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>The name of the sensitivity sets, used to describe
+                                                its purpose to a human.</li>
+                                        
+                     <li>A reference to the definition of the sensitivity
+                                                set, used to fully explain the meaning of the
+                                                sensitivities</li>
+                                        
+                     <li>A collection of sensitivities.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.3.4">16.5.3.4 Sensitivity</a>
+                  </h5>
+                                
+                  <p>A sensitivity is a structure that contains a numerical
+                                        result for the sensitivity of a valuation to a pricing input
+                                        change:</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/Sensitivity.jpg">
+                        <img src="images/valuation/Sensitivity.jpg" alt="images/valuation/Sensitivity.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It contains only a single numeric value. The associated
+                                        valuation is obtained via containment (i.e. the sensitivity
+                                        is directly under the same quotation structure). It has two
+                                        optional attributes: A name, which is a human-readable
+                                        description of the sensitivity value (e.g the “2Y” point on
+                                        an interest rate delta curve), and a definitionRef, which is
+                                        a reference to a Sensitivity Defintion (described in detail
+                                        below). At least one of these two attributes must be filled
+                                        it.</p>
+                                
+                  <p>The units of the sensitivity (and other quotation
+                                        characteristics) can be provided via the Sensitivity
+                                        Definition or the Sensitivity Set definition. If a quotation
+                                        characteristic is provided at both levels, the finer grained
+                                        one (ie. that applying to the SensitivityDefinition)
+                                        prevails.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.3.5">16.5.3.5 Valuation Set</a>
+                  </h5>
+                                
+                  <p>The valuation set, in effect a short “risk report” or
+                                        “valuation report”, is a collection of valuations, together
+                                        with some identifying and descriptive information.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/valuationSet.jpg">
+                        <img src="images/valuation/valuationSet.jpg" alt="images/valuation/valuationSet.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>Contents include:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>The name of the valuation set, for human readers</li>
+                                        
+                     <li>The valuation scenario that was applied (this
+                                                describes items such as valuation date, the base
+                                                counterparty, and the market environment).</li>
+                                        
+                     <li>The base party, from which point of view the
+                                                valuations are computed.</li>
+                                        
+                     <li>The default quotation characteristics (used to
+                                                abbreviate large valuation sets containing many
+                                                similar quotations, such as NPVs).</li>
+                                        
+                     <li>The definitions of any sensitivity sets, ie.
+                                                definitions of the sensitivity risk reports
+                                                provided.</li>
+                                        
+                     <li>A flag indicating whether the market environment is
+                                                or should be included.</li>
+                                        
+                     <li>A collection of asset valuations, as described
+                                                above.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.3.6">16.5.3.6 Valuation Scenario</a>
+                  </h5>
+                                
+                  <p>The Valuation Scenario is a type that is used to define
+                                        how the valuation was (or is to be) computed. It specifies
+                                        the input assumptions for the valuations.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/valuationScenario.jpg">
+                        <img src="images/valuation/valuationScenario.jpg" alt="images/valuation/valuationScenario.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It includes, or can include:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>A name, for humans to understand the purpose.</li>
+                                        
+                     <li>The date for which the valuation is performed.</li>
+                                        
+                     <li>A reference to the market environment (see below).</li>
+                                        
+                     <li>Constructs for defining how the base market
+                                                environment is to be adjusted prior to valuation.
+                                                (See below in risk definitions for more
+                                        detail.)</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.3.7">16.5.3.7 Summary</a>
+                  </h5>
+                                
+                  <p>Following is an overview diagram showing many of the
+                                        structures described above.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/valuationSetExpanded.jpg">
+                        <img src="images/valuation/valuationSetExpanded.jpg" alt="images/valuation/valuationSetExpanded.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.5.4">16.5.4 Pricing Inputs</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.5.4.1">16.5.4.1 Overview</a>
+                  </h5>
+                                
+                  <p>This section describes representations for market inputs,
+                                        such as yield curves and volatility matrices. These market
+                                        inputs may be shared for the purpose of requesting a
+                                        valuation or of reporting how a valuation was obtained.</p>
+                                
+                  <p>Market inputs are divided into two main types:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Pricing Structures provide a name/identifier to
+                                                allow the pricing input to be referenced and
+                                                identified, but provide no values.</li>
+                                        
+                     <li>Pricing Structure Valuations provide values (inputs
+                                                and/or outputs) for a pricing structure. They are
+                                                typically associated with a particular valuation
+                                                scenario.</li>
+                                
+                  </ul>
+                                
+                  <p>Each of these is specialized into a variety of pricing
+                                        input structures, which are in turn built out of building
+                                        blocks such as TermCurves (for representing term structures)
+                                        and Underlying Assets with quotations.</p>
+                                
+                  <p>A collection of pricing inputs is defined by a “market”
+                                        or “market Environment.”</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.2">16.5.4.2 Abstract Structures</a>
+                  </h5>
+                                
+                  <p>The Pricing Structure type is used as a placeholder for
+                                        identifying a pricing input, such as a curve or matrix. It
+                                        is extended for particular pricing structures.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PricingStructure.jpg">
+                        <img src="images/valuation/PricingStructure.jpg" alt="images/valuation/PricingStructure.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The Pricing Structure Valuation type is used to hold
+                                        valuations associated with the pricing structure. It
+                                        includes </p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>A reference to the pricing structure that is valued.</li>
+                                        
+                     <li>A reference to the valuation scenario that this is
+                                                for</li>
+                                        
+                     <li>A variety of pieces of date information to describe
+                                                the valuation. </li>
+                                
+                  </ul>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/pricingStructureValuation.jpg">
+                        <img src="images/valuation/pricingStructureValuation.jpg" alt="images/valuation/pricingStructureValuation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.3">16.5.4.3 Term Points and Curves</a>
+                  </h5>
+                                
+                  <p>A term curve is a building block structure used to
+                                        represent a set of market values over a term structure. It
+                                        contains a set of Term Points, as well as some information
+                                        about interpolation and extrapolation. It is used for
+                                        representing term structures such as discount factor curves.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/TermCurve.jpg">
+                        <img src="images/valuation/TermCurve.jpg" alt="images/valuation/TermCurve.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The Term Point allows bid, ask, mid, and spread values to
+                                        be specified for a particular term. The Term is in turn
+                                        defined as a tenor and/or a date.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/TermPoint.jpg">
+                        <img src="images/valuation/TermPoint.jpg" alt="images/valuation/TermPoint.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.4">16.5.4.4 Underlying Assets</a>
+                  </h5>
+                                
+                  <p>Underlying assets are used to represent simple benchmark
+                                        assets, in this case for constructing market inputs such as
+                                        curves. Underlying assets have a number of shared
+                                        attributes:</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/UnderlyingAsset.jpg">
+                        <img src="images/valuation/UnderlyingAsset.jpg" alt="images/valuation/UnderlyingAsset.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>Most of the shared elements of an underlying asset are
+                                        self-explanatory. The “definition” element allows a
+                                        reference to a full FpML product definition for the
+                                        instrument, to allow a more complete definition to be
+                                        provided.</p>
+                                
+                  <p>In addition, a variety of specialized underlying assets
+                                        have been produced, including, for example:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Bonds – typically used for government bonds</li>
+                                        
+                     <li>Cash – used to represent currency assets that need
+                                                to be discounted</li>
+                                        
+                     <li>Deposit – used to represent simple term deposits</li>
+                                        
+                     <li>FxRate – used to represent FX spot rates used to
+                                                build pricing inputs (like FX forward curves)</li>
+                                        
+                     <li>RateIndex – used to represent interest rate indexes,
+                                                such as Libor.</li>
+                                        
+                     <li>SimpleFra – used to represent Floating Rate
+                                                Agreement rates used to construct yield curves.</li>
+                                        
+                     <li>SimpleIrSwap – used to represent benchmark Interest
+                                                Rate Swaps used to construct yield curves.</li>
+                                
+                  </ul>
+                                
+                  <p>These are all contained in the fpml-asset-x-y.xsd schema
+                                        file.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.5">16.5.4.5 Quoted Asset Sets</a>
+                  </h5>
+                                
+                  <p>The quoted asset set allows a set of underlyingAssets to
+                                        be created and quotations to be provided for them:</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/QuotedAssetSet.jpg">
+                        <img src="images/valuation/QuotedAssetSet.jpg" alt="images/valuation/QuotedAssetSet.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It is used for calibrating pricing inputs, such as yield
+                                        curve inputs, and for providing a set of quotes for
+                                        instruments, such as FX rates, Floating Rate Index rates,
+                                        etc.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.6">16.5.4.6 Yield Curves</a>
+                  </h5>
+                                
+                  <p>Yield curves are relatively complex and are divided into
+                                        several types, including:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Yield Curve – basic curve identifier</li>
+                                        
+                     <li>Yield Curve Valuation – holder of valuation
+                                                information about a yield curve</li>
+                                        
+                     <li>Zero Curve – component of Yield Curve Valuation to
+                                                hold a zero curve</li>
+                                        
+                     <li>Forward Curve – component of Yield Curve Valuation
+                                                to hold forward curve(s).</li>
+                                
+                  </ul>
+                                
+                                
+                                
+                                
+                        
+                  <div>
+                     <h5>
+                        <a id="s16.5.4.6.1">16.5.4.6.1 Yield Curve</a>
+                     </h5>
+                                        
+                     <p>This structure provides a high level identifier
+                                                for an interest rate curve model.</p>
+                                        
+                     <p>
+                                                
+                        <a href="images/valuation/yieldCurve.jpg">
+                           <img src="images/valuation/yieldCurve.jpg" alt="images/valuation/yieldCurve.jpg" class="image"/>
+                        </a>
+                                        
+                     </p>
+                                
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s16.5.4.6.2">16.5.4.6.2 Yield Curve Valuation</a>
+                     </h5>
+                                        
+                     <p>The Yield Curve Valuation is a type of Pricing
+                                                Structure Valuation that is able to hold a variety
+                                                of pieces of information about an interest rate
+                                                model, including:</p>
+                                        
+                     <ul class="bulleted">
+                                                
+                        <li>An optional set of input instruments used
+                                                  for building the yield curve</li>
+                                                
+                        <li>An optional zero curve, used for
+                                                  representing a term structure of zero-coupon
+                                                  interest rates.</li>
+                                                
+                        <li>An optional discount factor curve, used for
+                                                  representing a term structure of discount
+                                                  factors</li>
+                                                
+                        <li>Optional forward curves, used for
+                                                  representing forward rate projections for
+                                                  specific indexes.</li>
+                                        
+                     </ul>
+                                        
+                     <p>
+                                                
+                        <a href="images/valuation/yieldCurveValuation.jpg">
+                           <img src="images/valuation/yieldCurveValuation.jpg" alt="images/valuation/yieldCurveValuation.jpg" class="image"/>
+                        </a>
+                                        
+                     </p>
+                                
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s16.5.4.6.3">16.5.4.6.3 Zero Rate Curve</a>
+                     </h5>
+                                        
+                     <p>A zero rate curve provides a term structure of
+                                                zero coupon interest rates.</p>
+                                        
+                     <p>
+                                                
+                        <a href="images/valuation/ZeroRateCurve.jpg">
+                           <img src="images/valuation/ZeroRateCurve.jpg" alt="images/valuation/ZeroRateCurve.jpg" class="image"/>
+                        </a>
+                                        
+                     </p>
+                                
+                  </div>
+                  <div>
+                     <h5>
+                        <a id="s16.5.4.6.4">16.5.4.6.4 Forward Rate Curve</a>
+                     </h5>
+                                        
+                     <p>A forward rate curve represents a set of forward
+                                                rates for a particular floating rate index asset.</p>
+                                        
+                     <p>
+                                                
+                        <a href="images/valuation/forwardRateCurve.jpg">
+                           <img src="images/valuation/forwardRateCurve.jpg" alt="images/valuation/forwardRateCurve.jpg" class="image"/>
+                        </a>
+                                        
+                     </p>
+                                
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.7">16.5.4.7 FX Forward Curves</a>
+                  </h5>
+                                
+                  <p>The FXCurve structure represents the abstract pricing
+                                        model associated with forecasting FX rates. It extends
+                                        PricingInput, adding a quoted currency pair to identify what
+                                        is quoted.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/FXCurve.jpg">
+                        <img src="images/valuation/FXCurve.jpg" alt="images/valuation/FXCurve.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The FXCurveValuation represents the valuation for
+                                        forecasting FX rates. It extends PricingInputValuation.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/FXCurveValuation.jpg">
+                        <img src="images/valuation/FXCurveValuation.jpg" alt="images/valuation/FXCurveValuation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.8">16.5.4.8 Credit Curves</a>
+                  </h5>
+                                
+                  <p>The CreditCurve structure represents the abstract pricing
+                                        model associated with forecasting Credit market values (such
+                                        as default probabilities). It extends PricingInput, adding
+                                        several characteristics identifying the credit entity that
+                                        is quoted.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/CreditCurve.jpg">
+                        <img src="images/valuation/CreditCurve.jpg" alt="images/valuation/CreditCurve.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The Credit Curve Valuation models the valuation of a
+                                        credit curve:</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/CreditCurveValuation.jpg">
+                        <img src="images/valuation/CreditCurveValuation.jpg" alt="images/valuation/CreditCurveValuation.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The default probability curve is a special type of
+                                        pricing input valuation that models the default probability
+                                        of a credit entity:</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/DefaultProbabilityCurve.jpg">
+                        <img src="images/valuation/DefaultProbabilityCurve.jpg" alt="images/valuation/DefaultProbabilityCurve.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.9">16.5.4.9 Multi-dimensional Pricing Data</a>
+                  </h5>
+                                
+                  <p>The multi-dimensional pricing data structure is used to
+                                        represent complex pricing structures such as volatility
+                                        matrices. It consists of a set of Pricing Structure Points.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/MultidimensionalPricingData.jpg">
+                        <img src="images/valuation/MultidimensionalPricingData.jpg" alt="images/valuation/MultidimensionalPricingData.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The Pricing Structure Point represents a single point of
+                                        a multi-dimensional pricing structure. It provides a
+                                        coordinate or coordinate reference (e.g. a combination of
+                                        expiration, strike, and/or tenor), plus a value and some
+                                        optional quotation characteristics.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PricingStructurePoint.jpg">
+                        <img src="images/valuation/PricingStructurePoint.jpg" alt="images/valuation/PricingStructurePoint.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>The Pricing Data Point Coordinate allows a choice of
+                                        index dimension.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PricingDataPointCoordinate.jpg">
+                        <img src="images/valuation/PricingDataPointCoordinate.jpg" alt="images/valuation/PricingDataPointCoordinate.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.4.10">16.5.4.10 Markets</a>
+                  </h5>
+                                
+                  <p>A market collects a set of the above pricing structures
+                                        to provide an environment for valuing a set of assets.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/Market.jpg">
+                        <img src="images/valuation/Market.jpg" alt="images/valuation/Market.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It contains:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>A set of benchmark quotes for benchmark instruments,
+                                                such as FX rates and IR indices.</li>
+                                        
+                     <li>A set of pricing structures and their associated
+                                                valuations.</li>
+                                        
+                     <li>A set of benchmark pricing methods, which associate
+                                                benchmark assets with corresponding pricing
+                                                structures. These, for example, allow the forecast
+                                                model for an interest rate index to be
+                                        specified.</li>
+                                
+                  </ul>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.5.5">16.5.5 Risk Definition</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.5.5.1">16.5.5.1 Overview</a>
+                  </h5>
+                                
+                  <p>The fpml-riskdef-x-y.xsd file contains definitions
+                                        relating to sensitivities and valuation
+                                scenarios.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.5.2">16.5.5.2 Sensitivity Set Definitions</a>
+                  </h5>
+                                
+                  <p>The Sensitivity Set Definition describes a set of related
+                                        sensitivities, providing a name, a set of characteristics, a
+                                        reference to the valuation scenario, a reference to the
+                                        pricing input (e.g. to the yield curve), and a set of
+                                        definition of the individual sensitivities.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/SensitivitySetDefinition.jpg">
+                        <img src="images/valuation/SensitivitySetDefinition.jpg" alt="images/valuation/SensitivitySetDefinition.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.5.3">16.5.5.3 Sensitivity Definitions</a>
+                  </h5>
+                                
+                  <p>The Sensitivity Definition is used to define each
+                                        individual sensitivity. It can contain a name and a
+                                        valuation scenario (if these are different from those of the
+                                        Sensitivity Set Definition), as well as either an explicit
+                                        definition of the derivatives that was computed, or a
+                                        listing of the term structure point or coordinates that the
+                                        sensitivity corresponds to.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/SensitivityDefinition.jpg">
+                        <img src="images/valuation/SensitivityDefinition.jpg" alt="images/valuation/SensitivityDefinition.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.5.4">16.5.5.4 Pricing Parameter Derivative</a>
+                  </h5>
+                                
+                  <p>The Pricing Parameter derivative describes a single
+                                        partial derivative. It indicates the pricing parameter to
+                                        which the sensitivity is computed, the units of the reported
+                                        value, and how the derivative is computed (numerically or
+                                        analytically).</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PricingParameterDerivative.jpg">
+                        <img src="images/valuation/PricingParameterDerivative.jpg" alt="images/valuation/PricingParameterDerivative.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.5.5">16.5.5.5 Derivative Formula</a>
+                  </h5>
+                                
+                  <p>The derivative formula describes how to compute a
+                                        derivative from a set of partial derivatives. It is normally
+                                        only required for complex derivatives, such as Hessians,
+                                        cross-gammas, etc.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/DerivatveFormula.jpg">
+                        <img src="images/valuation/DerivatveFormula.jpg" alt="images/valuation/DerivatveFormula.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.5.6">16.5.5.6 Derived Valuation Scenario</a>
+                  </h5>
+                                
+                  <p>The Derived Valuation Scenario is a valuation scenario
+                                        that is derived from another valuation scenario by the
+                                        substitution or shift of market input data. It is used for
+                                        scenario reporting, such as stress testing.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/DerivedValuationScenario.jpg">
+                        <img src="images/valuation/DerivedValuationScenario.jpg" alt="images/valuation/DerivedValuationScenario.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.5.7">16.5.5.7 Pricing Parameter Shift</a>
+                  </h5>
+                                
+                  <p>The pricing parameter shift describes how a pricing
+                                        parameter can be shifted, e.g. to define a valuation
+                                        scenario.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PricingParameterShift.jpg">
+                        <img src="images/valuation/PricingParameterShift.jpg" alt="images/valuation/PricingParameterShift.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.5.6">16.5.6 Query Portfolio</a>
+               </h4>
+                        
+               <p>The QueryPortfolio type allows a portfolio to be created by
+                                grouping together trades that meet specific criteria. These criteria
+                                are defined by one or more elements of type QueryParameter. A
+                                QueryParameter contains a triplet consisting of elements of type
+                                QueryParamterId, QueryParameterValue, and QueryParameterOperator. A
+                                queryParameterId element will state a specific criteria such as
+                                product, or payment date, from a list defined by attribute
+                                queryParameterIdScheme. The queryParameterValue for that stated
+                                queryParameterId will provide a value for comparison such as swap,
+                                or 20040923, and the queryParameterOperator will define the nature
+                                of the comparison such as equals, or greater than, from a list
+                                defined by attribute queryParameterOperatorScheme. </p>
+                        
+               <p>
+                                
+                  <a href="images/valuation/QueryPortfolio.jpg">
+                     <img src="images/valuation/QueryPortfolio.jpg" alt="images/valuation/QueryPortfolio.jpg" class="image"/>
+                  </a>
+                        
+               </p>
+                        
+               <p>A queryPortfolio element identified as port1 by its id attribute
+                                that is composed of swap trades with payment dates greater than
+                                20040923 would be created using the following XML segment:</p>
+                        
+               <pre>
+&lt;queryPortfolio id="port1"&gt;
+	&lt;queryParameter&gt;
+		&lt;queryParameterId queryParameterIdScheme="http://www.fpml.org/spec/2004/query-parameter-id-1-0"&gt;product&lt;/queryParameterId&gt;
+		&lt;queryParameterValue&gt;swap&lt;/queryParameterValue&gt;
+		&lt;queryParameterOperator queryParameterOperatorScheme="http://www.fpml.org/spec/2004/query-parameter-operator-1-0"&gt;equals&lt;/queryParameterOperator&gt;
+	&lt;/queryParameter&gt;
+	&lt;queryParameter&gt;
+		&lt;queryParameterId queryParameterIdScheme="http://www.fpml.org/spec/2004/query-parameter-id-1-0"&gt;PaymentDate&lt;/queryParameterId&gt;
+		&lt;queryParameterValue&gt;20040923&lt;/queryParameterValue&gt;
+		&lt;queryParameterOperator queryParameterOperatorScheme="http://www.fpml.org/spec/2004/query-parameter-operator-1-0"&gt;greater than&lt;/queryParameterOperator&gt;
+	&lt;/queryParameter&gt;
+&lt;/queryPortfolio&gt;
+
+                          </pre>
+                        
+               <p>The queryParameters within a queryPortfolio are implicitly ANDed
+                                together. Query Portfolios can also be created by defining
+                                queryPortfolio elements that are children of another queryPortfolio.
+                                In this case the child queryPortfolios are ORed together.</p>
+                        
+               <p>A queryPortfolio element identified as Port3 by its id attribute
+                                that is composed of swap, or equitySwap trades with payment dates
+                                greater than 20040923 would be created using the following XML
+                                segment:</p>
+                        
+               <pre>
+&lt;queryPortfolio id="port3" &gt;
+	&lt;queryPortfolio id="port1"&gt;
+		&lt;queryParameter&gt;
+			&lt;queryParameterId queryParameterIdScheme="http://www.fpml.org/spec/2004/query-parameter-id-1-0"&gt;product&lt;/queryParameterId&gt;
+		                              &lt;queryParameterValue&gt;swap&lt;/queryParameterValue&gt;
+		                              &lt;queryParameterOperator queryParameterOperatorScheme="http://www.fpml.org/spec/2004/query-parameter-operator-1-0"&gt;equals&lt;/queryParameterOperator&gt;
+		&lt;/queryParameter&gt;
+		&lt;queryParameter&gt;
+			&lt;queryParameterId queryParameterIdScheme="http://www.fpml.org/spec/2004/query-parameter-id-1-0"&gt;PaymentDate&lt;/queryParameterId&gt;
+			&lt;queryParameterValue&gt;20040923&lt;/queryParameterValue&gt;
+			&lt;queryParameterOperator queryParameterOperatorScheme="http://www.fpml.org/spec/2004/query-parameter-operator-1-0"&gt;greater than&lt;/queryParameterOperator&gt;
+		&lt;/queryParameter&gt;
+	&lt;/queryPortfolio&gt;
+	&lt;queryPortfolio id="port2" &gt;
+		&lt;queryParameter&gt;
+			&lt;queryParameterId queryParameterIdScheme="http://www.fpml.org/spec/2004/query-parameter-id-1-0"&gt;product&lt;/queryParameterId&gt;
+		                             &lt;queryParameterValue&gt;equitySwap&lt;/queryParameterValue&gt;
+		                             &lt;queryParameterOperator queryParameterOperatorScheme="http://www.fpml.org/spec/2004/query-parameter-operator-1-0"&gt;equals&lt;/queryParameterOperator&gt;
+		&lt;/queryParameter&gt;
+		&lt;queryParameter&gt;
+			&lt;queryParameterId queryParameterIdScheme="http://www.fpml.org/spec/2004/query-parameter-id-1-0"&gt;PaymentDate&lt;/queryParameterId&gt;
+			&lt;queryParameterValue&gt;20040923&lt;/queryParameterValue&gt;
+			&lt;queryParameterOperator queryParameterOperatorScheme="http://www.fpml.org/spec/2004/query-parameter-operator-1-0"&gt;greater than&lt;/queryParameterOperator&gt;
+		&lt;/queryParameter&gt;
+	&lt;/queryPortfolio&gt;
+&lt;/queryPortfolio&gt;
+                              </pre>
+                        
+               <p>A queryPortfolio may either consist of queryParameters or other
+                                queryPortfolios, but not both.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.5.7">16.5.7 Valuation Messaging</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.5.7.1">16.5.7.1 Introduction</a>
+                  </h5>
+                                
+                  <p>The “fpml-reporting-x-y.xsd” subschema contains
+                                        definitions relating to requesting valuations and reporting
+                                        them in the form of messages.</p>
+                                
+                  <p>This includes:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>TradeValuationItem</li>
+                                        
+                     <li>PortfolioValuationItem</li>
+                                        
+                     <li>RequestValuationReport</li>
+                                        
+                     <li>ValuationReport</li>
+                                        
+                     <li>PositionReport</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.7.2">16.5.7.2 Messaging Guidelines for 'Valuation Report' and 'Position                                 Report'</a>
+                  </h5>
+                                
+                  <p>The FpML Pricing and Risk definitions include two types
+                                        of messages for reporting valuations. PositionReport and
+                                        ValuationReport should be used under certain criteria.</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>The PositionReport is a relatively simple structure
+                                                intended to link trade economics and valuation
+                                                information for applications that require
+                                                notification of the current open positions and their
+                                                valuations. It is not intended for complex risk
+                                                reporting applications. </li>
+                                        
+                     <li>The ValuationReport is a structure that groups
+                                                related valuation information and supports anywhere
+                                                from simple to complex reports. It is intended to be
+                                                used when the primary application is to report
+                                                valuations and sensitivities and not trade
+                                                economics.</li>
+                                
+                  </ul>
+                                
+                                
+                  <p>These guidelines are provided to assist implementers on
+                                        the correct valuation message usage.</p>
+                                
+                  <p>Use the ValuationReport in any of the following cases:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li> When reporting portfolio-level information</li>
+                                        
+                     <li> When reporting trade level valuations without the
+                                                trade economics, e.g. a list of NPVs for a large
+                                                number of trades.</li>
+                                        
+                     <li>When reporting sensitivities</li>
+                                        
+                     <li> When reporting on valuation scenarios, such as
+                                                stress tests</li>
+                                        
+                     <li> When providing market inputs</li>
+                                        
+                     <li> When responding to a ValuationRequest
+                                        message</li>
+                                
+                  </ul>
+                                
+                  <p>Use the PositionReport message:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>When providing both trade economics and valuations
+                                                together</li>
+                                        
+                     <li>When providing a statement of current position,
+                                                rather than any kind of what-if analysis</li>
+                                        
+                     <li>When performing portfolio reconciliation</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.7.3">16.5.7.3 TradeValuationItem</a>
+                  </h5>
+                                
+                  <p>A trade valuation item identifies a trade or trades to be
+                                        valued, and contains a valuation set that describes the
+                                        required valuation measures. If the trade not defined, the
+                                        measures defined by the valuation set are requested for all
+                                        trades in the relevant portfolio.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/TradeValuationItem.jpg">
+                        <img src="images/valuation/TradeValuationItem.jpg" alt="images/valuation/TradeValuationItem.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.7.4">16.5.7.4 PortfolioValuationItem</a>
+                  </h5>
+                                
+                  <p>A portfolio valuation item identifies portfolio to be
+                                        valued, and contains a valuation set that describes the
+                                        required valuation measures.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PortfolioValuationItem.jpg">
+                        <img src="images/valuation/PortfolioValuationItem.jpg" alt="images/valuation/PortfolioValuationItem.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.7.5">16.5.7.5 RequestValuationReport</a>
+                  </h5>
+                                
+                  <p>This is a request message for requesting portfolio and/or
+                                        trade valuations. It contains portfolio and/or trade
+                                        valuation items that are requested.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/RequestValuationReport.jpg">
+                        <img src="images/valuation/RequestValuationReport.jpg" alt="images/valuation/RequestValuationReport.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.7.6">16.5.7.6 ValuationReport</a>
+                  </h5>
+                                
+                  <p>This is a response message, sent in response to a
+                                        “RequestValuationReport” message. It contains portfolio
+                                        and/or trade valuation items and optionally market data.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/ValuationReport.jpg">
+                        <img src="images/valuation/ValuationReport.jpg" alt="images/valuation/ValuationReport.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.5.7.7">16.5.7.7 PositionReport</a>
+                  </h5>
+                                
+                  <p>This is a notification message to support position
+                                        reporting. It can send one or multiple positions. It
+                                        implements the requirements defined by DSWG for position
+                                        reports.</p>
+                                
+                  <p>
+                                        
+                     <a href="images/valuation/PositionReport.jpg">
+                        <img src="images/valuation/PositionReport.jpg" alt="images/valuation/PositionReport.jpg" class="image"/>
+                     </a>
+                                
+                  </p>
+                                
+                  <p>It contains:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Version attribute</li>
+                                        
+                     <li>Message header, giving addressing and message
+                                                identification information</li>
+                                        
+                     <li>An optional asOfDate, identifying the date for which
+                                                the report has been prepared.</li>
+                                        
+                     <li>An optional data set name, to assist subdividing a
+                                                feed into multiple files.</li>
+                                        
+                     <li>A set of default quotation characteristics, which
+                                                can include for example the default reporting
+                                                currency for NPV, the market side (mid/bid/ask),
+                                                etc.</li>
+                                        
+                                        
+                     <li>A collection of positions, including valuation
+                                                information.</li>
+                                        
+                     <li>The parties referenced by the trades or involved in
+                                                the reporting process.</li>
+                                
+                  </ul>
+                                
+                        
+                  <div>
+                     <h5>
+                        <a id="s16.5.7.7.1">16.5.7.7.1 Position</a>
+                     </h5>
+                                        
+                     <p>This type is used to hold individual positions.
+                                                Currently only positions based on single OTC
+                                                contracts are used.</p>
+                                        
+                     <p>
+                                                
+                        <a href="images/valuation/Position.jpg">
+                           <img src="images/valuation/Position.jpg" alt="images/valuation/Position.jpg" class="image"/>
+                        </a>
+                                        
+                     </p>
+                                        
+                     <p>It contains:</p>
+                                        
+                     <ul class="bulleted">
+                                                
+                        <li>Information about the roles of the parties
+                                                  with respect to reporting the positions.</li>
+                                                
+                        <li>The components that create this position,
+                                                  currently a trade or a reference to a trade.</li>
+                                                
+                        <li>Position level scheduled dates, such as
+                                                  final payment dates, in a simple and
+                                                  flexible format.</li>
+                                                
+                        <li>Valuations reported for the position, such
+                                                  as NPV or accrued interest. The asset/object
+                                                  references in the valuations should refer to
+                                                  the deal or components of the deal in the
+                                                  position, e.g. legs, streams, or
+                                                underlyers.</li>
+                                        
+                     </ul>
+                                
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.6">16.6 Use Cases/Examples</a>
+               </h3>
+            </div>
+                
+            <p>Pricing and Risk Use Cases/Examples are available at 
+                        <a class="web" href="fpml-5-0-examples.html#s10">fpml-5-0-examples.html</a>
+                
+            </p>
+        
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.7">16.7 Glossary</a>
+               </h3>
+            </div>
+                
+            <p>Many of the terms used in this document can be, and often are,
+                        interpreted in a wide fashion throughout the derivatives industry and in
+                        particular in the context of derivatives pricing and risk management systems
+                        and technology. Often, the same term may be used to convey similar but
+                        subtly different concepts in two different institutions. This section
+                        attempts to define what various common terms used within this document are
+                        meant convey. </p>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+        
+            <div>
+               <h4>
+                  <a id="s16.7.1">16.7.1 Valuation</a>
+               </h4>
+                        
+               <p>The act of calculating one or more ‘Valuation Measures’ for a
+                                trade. </p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.2">16.7.2 Risk</a>
+               </h4>
+                        
+               <p>The exposure of the value of a trade to one or more
+                                non-deterministic variables.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.3">16.7.3 Valuation Measure</a>
+               </h4>
+                        
+               <p>A value that can be calculated for a trade at some given point in
+                                time. Valuation Measures may be generically applicable for all trade
+                                types, for example Present Value, or may be specific to certain
+                                trade type, for example Accrued Interest or Yield. Valuation
+                                Measures may vary from one day to the next, distinguishing them from
+                                static trade information such as maturity date, counterparty
+                        etc.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.4">16.7.4 Risk Measure</a>
+               </h4>
+                        
+               <p>A particular type of ‘Valuation Measure’ that measures the
+                                exposure of the value of a trade to a particular variable or set of
+                                variables. Examples include Interest Rate Sensitivity, Credit Spread
+                                Sensitivity, VAR, DEAR, RAROC, Peak Credit Exposure.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.5">16.7.5 Market Environment</a>
+               </h4>
+                        
+               <p>A term that refers to the complete set of market data required
+                                (or available) to value a trade or portfolio. A Market Environment
+                                is made up of one more ‘Market Data’ elements.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.6">16.7.6 Market Data</a>
+               </h4>
+                        
+               <p>A list of related market data values that are typically grouped
+                                together for pricing purposes. Examples include an Interest Rate
+                                Yield Curve, a Credit Spread Curve, a collection of FX spot rates, a
+                                Volatility Surface, a term curve of Discount Factors or a Default
+                                Probability Curve.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.7">16.7.7 Market Data Value</a>
+               </h4>
+                        
+               <p>A single value associated with a particular market observable
+                                instrument or synthetically derived instrument. Examples might
+                                include the par rate for a 5 year Swap, the discount factor for a
+                                synthetic 5 year zero-coupon bond or the volatility of an
+                                At-the-Money 3-into-5 Swaption.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.8">16.7.8 Pricing Data</a>
+               </h4>
+                        
+               <p>Data required by a particular pricing model that is not directly
+                                associated with a market observable instrument or a synthetically
+                                derived instrument. An examples would be factor loadings for a
+                                multi-factor HJM/BGM Monte Carlo model.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.9">16.7.9 Portfolio</a>
+               </h4>
+                        
+               <p>An abstract definition of a group of trades.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.10">16.7.10 Scenario</a>
+               </h4>
+                        
+               <p>A grouping of one or more shocks to be applied to a ‘Market
+                                Environment’.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.11">16.7.11 Sensitivity</a>
+               </h4>
+                        
+               <p>A particular type of ‘Risk Measure’ that measures the sensitivity
+                                of the value of a trade to a change in one or more items of market
+                                data. </p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.7.12">16.7.12 Shock</a>
+               </h4>
+                        
+               <p>A change to be applied to a single ‘Market Data’ element within a
+                                ‘Market Environment’. The shock may affect one or more ‘Market Data
+                                Values’ within the specified ‘Market Data’ element.</p>
+                
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.8">16.8 Validation Rules</a>
+               </h3>
+            </div>
+                
+                
+                
+                
+                
+                
+        
+            <div>
+               <h4>
+                  <a id="s16.8.1">16.8.1 Introduction</a>
+               </h4>
+                        
+               <p>This section describes how to define some validation rules that
+                                cannot be enforced by the schema. It is intended as input to the
+                                Validation Working Group.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.8.2">16.8.2 Reference Integrity</a>
+               </h4>
+                        
+               <p>Intra-document references have been typed in the schema (e.g.
+                                “ValuationScenarioReference” is a reference to a ValuationScenario.)
+                                In XML schema the type of the target cannot easily be enforced; this
+                                should be enforced in the valuation rules.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.8.3">16.8.3 Date uniqueness</a>
+               </h4>
+                        
+               <p>Frequently in pricing structures (especially curves) it is not
+                                allowed to have multiple values referring to the same point. For
+                                instance, there can be only one discount factor for a single DF
+                                curve on a given date.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.8.4">16.8.4 Optionality</a>
+               </h4>
+                        
+               <p>There are many optional elements in the schema. This means that
+                                it is difficult to ensure that some kind of necessary data are
+                                present. Here are some suggested checks:</p>
+                        
+               <ul class="bulleted">
+                                
+                  <li>For a given AssetValuation, a ValuationScenarioReference
+                                        should be supplied either directly or in the containing
+                                        ValuationSet.</li>
+                                
+                  <li>If the marketEnvironmentIncluded flag is true, a market
+                                        environment should be included.</li>
+                        
+               </ul>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.8.5">16.8.5 Names/Definitions</a>
+               </h4>
+                        
+               <p>For sensitivities, either the name or the definitionRef attribute
+                                (or both) must be filled in. It is not easy to enforce this
+                                requirement in the schema.</p>
+                
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.8.6">16.8.6 Consistency of definitions/references</a>
+               </h4>
+                        
+               <p>Where there are two ways to traverse references upward through
+                                parallel structures, the resulting destination must be the same. For
+                                example, assume that a Sensitivity has a definitionRef to a
+                                SensitivityDefinition. This is contained within a
+                                SensitivitySetDefinition. If the SensitivitySet that contains the
+                                Sensitivity also has a definitionReference, it must be the same
+                                SensitivitySetDefinition as before. Following is an illustration:</p>
+                        
+               <p>
+                                
+                  <a href="images/valuation/consistencyOfDefinitions.jpg">
+                     <img src="images/valuation/consistencyOfDefinitions.jpg" alt="images/valuation/consistencyOfDefinitions.jpg" class="image"/>
+                  </a>
+                        
+               </p>
+                        
+               <p>Similarly, there will normally be consistency between valuation
+                                scenario references in sensitivity definitions and those in
+                                sensitivity set definitions, if they are present in
+                        both.</p>
+                
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s16.9">16.9 Appendix: Design Decisions</a>
+               </h3>
+            </div>
+                
+            <p>This section discusses issues that had particular complexity in
+                        representation, together with options for resolving these issues and a
+                        rationale for the chosen solution</p>
+                
+                
+                
+                
+                
+        
+            <div>
+               <h4>
+                  <a id="s16.9.1">16.9.1 Abstract vs. Actual Products</a>
+               </h4>
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.9.1.1">16.9.1.1 Issue 1: Defining an abstract product</a>
+                  </h5>
+                                
+                  <p>The FpML specification deals with actual trades, that is
+                                        products that have been or are in the process of being
+                                        traded between two counterparties. When it comes to
+                                        Valuation, there is a need for abstract deals, representing
+                                        typically what the Broker market is quoting. The question is
+                                        how to represent these “abstract deals”. </p>
+                                
+                  <p>Options:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Define these abstract products from scratch. This
+                                                can be done in two different ways: <ul class="bulleted">
+                                                  
+                           <li>a) Provide short definitions and
+                                                  rely on market convention. At the
+                                                  extreme, these could be only names,
+                                                  e.g. SWAPUSD-10Y. The advantage is
+                                                  that the task can be carried out
+                                                  relatively fast, counting on the
+                                                  fact that the number of abstract
+                                                  deals needed is small. The
+                                                  disadvantage is that relying on
+                                                  market conventions, can potentially
+                                                  lead to a disagreement between two
+                                                  parties. </li>
+                                                  
+                           <li>b) Provide a thorough definition.
+                                                  This would avoid ambiguity but it
+                                                  means the PRWG could potentially
+                                                  have to redo a large part of what
+                                                  the a FpML product group has already
+                                                  done. </li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                                
+                  <p>Both of the above (a,b) cases would require that systems
+                                        be enhanced to parse these new definitions. </p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Reuse the FpML standard to define abstract trades.
+                                                Disadvantages related to this approach include: <ul class="bulleted">
+                                                  
+                           <li>a) Some elements in the FpML
+                                                  standard are irrelevant for abstract
+                                                  products (for example parties).</li>
+                                                  
+                           <li>b) Some elements must be “tweaked”
+                                                  to accommodate specificity of the
+                                                  abstract trades. Typically, an
+                                                  abstract trade is usually defined as
+                                                  a “sliding maturity” product (the
+                                                  case of futures being more
+                                                  ambiguous) whereas a real deal has a
+                                                  converging maturity. Dates
+                                                  accommodates the latter, tenors the
+                                                  former. </li>
+                                                  
+                           <li>c) These definitions are verbose.</li>
+                                                  
+                           <li>d) Some abstract deals are not
+                                                  defined by FpML (typically the
+                                                  discount factor of maturity T is a
+                                                  very useful concept when it comes to
+                                                  valuation).</li>
+                                                  
+                           <li>Even with the above (a,b,c,d)
+                                                  issues, there are noticeable
+                                                  advantages to this approach
+                                                  including :</li>
+                                                  
+                           <li>a) Leveraging the existing standard
+                                                  and reusing existing definitions,
+                                                  would avoid redundant work and
+                                                  mistakes. </li>
+                                                  
+                           <li>b) Enhancing systems that already
+                                                  process FpML to deal with abstract
+                                                  products is an easier task.
+                                                  </li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.1.2">16.9.1.2 Issue 2:  Use of tenors instead of absolute dates</a>
+                  </h5>
+                                
+                  <p>The main difference of abstract deals with FpML products
+                                        is that most of the times these deals are “sliding” instead
+                                        of “converging”, that is their maturity is not fixed and
+                                        they cannot be defined in terms of dates but in terms of
+                                        “tenors”. </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.1.3">16.9.1.3 Issue 3:  Stub definitions</a>
+                  </h5>
+                                
+                  <p>In FpML, the stub is defined in terms of dates
+                                        (FirstRegularPeriodStartDate...). Since in abstract deals
+                                        this is not possible we must define the stubs a priori.
+                                        There are implicit market conventions for these but they are
+                                        rather loosely defined. A stub can be placed:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>at the beginning</li>
+                                        
+                     <li>at the end</li>
+                                        
+                     <li>both</li>
+                                
+                  </ul>
+                                
+                  <p>The term of a stub can be:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>short, which means shorter than the regular period</li>
+                                        
+                     <li>long</li>
+                                
+                  </ul>
+                                
+                  <p>It is always possible to create a short stub from a long
+                                        one by creating an extra-regular period. The reciprocal is
+                                        true, by aggregating the short period to the next or
+                                        previous regular period. </p>
+                                
+                  <p>The market convention tends to refuse to have a stub that
+                                        is “too” short (say 10 days). </p>
+                                
+                  <p>The only reason why you would have a stub at the
+                                        beginning and at the end is because the Roll Convention is
+                                        not on the start or termination date. </p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.9.2">16.9.2 Product and Trade Identification and Description</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.9.2.1">16.9.2.1 Issue 1:  Trade Summaries</a>
+                  </h5>
+                                
+                  <p>The example valuation and risk reports generally include
+                                        some kind of trade information summary, but FpML does not
+                                        currently support this type of summary.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.2">16.9.2.2 Options:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Create a summary view for required products.</li>
+                                        
+                     <li>Include full trade details</li>
+                                        
+                     <li>Reference trade via ID or xml reference.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.3">16.9.2.3 Solution:</a>
+                  </h5>
+                                
+                  <p>Reference the trade via ID or xml reference. Do not
+                                        create a trade summary.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.4">16.9.2.4 Rationale:</a>
+                  </h5>
+                                
+                  <p>Trade summaries are mostly useful for humans, not
+                                        computers. FpML should provide a useful, forward-looking
+                                        solution, not try to mechanize the past.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.5">16.9.2.5 Issue 2:  Trade Identification</a>
+                  </h5>
+                                
+                  <p>FpML allows trades to be identified by multiple external
+                                        IDs (tradeIdentitifier/partyTradeIdentifier). Trades can
+                                        also be identified by an internal XML document identifier
+                                        (as long as the trade is in the same FpML
+                                document.).</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.6">16.9.2.6 Options:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>1. Allow single external ID per trade</li>
+                                        
+                     <li>2. Allow multiple external IDs per trade</li>
+                                        
+                     <li>3. Use XML internal ID for each trade.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.7">16.9.2.7 Solution:</a>
+                  </h5>
+                                
+                  <p>Number 2</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.2.8">16.9.2.8 Rationale:</a>
+                  </h5>
+                                
+                  <p>Most valuation reports will be for a large number of
+                                        trades not sent in the same document, so an internal XML ID
+                                        is not useful, and there is no FpML-standard document
+                                        identification scheme.</p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.9.3">16.9.3 Pricing Inputs</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.9.3.1">16.9.3.1 Issue 1:  Term Representation</a>
+                  </h5>
+                                
+                  <p>It will be necessary to be able to represent term
+                                        structures for a variety of pricing inputs as well as for
+                                        risk reports. There are a variety of ways to represent the
+                                        time dimension for the term structure.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.2">16.9.3.2 Options</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Explicit date</li>
+                                        
+                     <li>Tenor (number plus period)</li>
+                                        
+                     <li>Reference to another structure that contains a date.</li>
+                                        
+                     <li>Number of days</li>
+                                        
+                     <li>Year Fraction</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.3">16.9.3.3 Solution:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>For yield curves: <ul class="bulleted">
+                                                  
+                           <li>Date is mandatory</li>
+                                                  
+                           <li>Tenor is optional</li>
+                                                  
+                           <li>Reference to another structure is
+                                                  optional</li>
+                                                  
+                           <li>Year fraction is optional</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>For volatility surfaces <ul class="bulleted">
+                                                  
+                           <li>Tenor is normally required.</li>
+                                                  
+                           <li>Date is optional.</li>
+                                                  
+                           <li>Reference to another structure is
+                                                  optional</li>
+                                                  
+                           <li>Year fraction is optional</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>For credit spread / recovery rate curves <ul class="bulleted">
+                                                  
+                           <li>Date is mandatory</li>
+                                                  
+                           <li>Tenor is optional</li>
+                                                  
+                           <li>Reference to another structure is
+                                                  optional</li>
+                                                  
+                           <li>Year fraction is optional</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.4">16.9.3.4 Rationale:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Dates are most useful for yield curves and most
+                                                explicit.</li>
+                                        
+                     <li>Tenors are the market convention for credit spread
+                                                curves, but use of dates as default will make the
+                                                curves consistent with yield curves. </li>
+                                        
+                     <li>For volatility surfaces, precise dates aren’t so
+                                                important and using tenor provides better usability.</li>
+                                        
+                     <li>Year fraction is a calculated value and can’t
+                                                necessarily be supported by all systems.</li>
+                                        
+                     <li>Number of days could be supported by using the tenor
+                                                (in days).</li>
+                                
+                  </ul>
+                                
+                  <p>Comment: it would be more consistent to make the same
+                                        index (e.g. date) mandatory for everything. If someone
+                                        wanted to roll the vol surface to another day, they could do
+                                        this as long as the sender had supplied a tenor.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.5">16.9.3.5 Issue 2:  Ability to handle different dimensionality for                                 pricing inputs</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Some pricing inputs, especially volatility
+                                                representations, can vary in dimensionality. (points
+                                                vs. curves vs. surfaces vs. cubes). We need to be
+                                                able to accommodate this.</li>
+                                        
+                     <li>There is considerable similarity across pricing
+                                                inputs in the need for term structures of various
+                                                dimensionality. It would be nice to reuse
+                                        this.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.6">16.9.3.6 Options:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Separate structures for each pricing input/number of
+                                                dimensions.</li>
+                                        
+                     <li>Single n-dimensional structure</li>
+                                        
+                     <li>Generic ability to add another term structure
+                                                dimension to an existing structure.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.7">16.9.3.7 Solution:</a>
+                  </h5>
+                                
+                  <p>Generic ability to add another term structure dimension
+                                        to an existing structure.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.8">16.9.3.8 Rationale:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Generic structure may be too abstract to handle
+                                                easily.</li>
+                                        
+                     <li>Separate Structures don’t provide reuse.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.9">16.9.3.9 Issue 3:  Dates used within pricing structures</a>
+                  </h5>
+                                
+                  <p>For a single market input (e.g. curve), there are
+                                        multiple dates that can describe the data. These include:</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Date of input points – date data was retrieved from.</li>
+                                        
+                     <li>Base date – date used a base for computation.
+                                                (Typical this will be the same as above, but not
+                                                always.)</li>
+                                        
+                     <li>Spot date – base date plus settlement lag for the
+                                                currency. (“days to spot”).</li>
+                                        
+                     <li>Date/time generated - the date and time the
+                                                calculation was actually performed.</li>
+                                
+                  </ul>
+                                
+                  <p>Which of these should be required and/or
+                                optional?</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.10">16.9.3.10 Solution:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Base date should be required</li>
+                                        
+                     <li>Input data date should be optional; normally this
+                                                would not be supplied if the same as base date.</li>
+                                        
+                     <li>Spot date would be optional</li>
+                                        
+                     <li>Date generated would be optional.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.11">16.9.3.11 Rationale:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Base date is necessary for understanding the meaning
+                                                of the values expressed by the curve.</li>
+                                        
+                     <li>Spot date is derivable from base date.</li>
+                                        
+                     <li>Input data date is normally same as base date,
+                                                except in unusual cases.</li>
+                                        
+                     <li>Date generated is useful for tracking and sequencing
+                                                purposes, but has no other processing
+                                        significance.</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.12">16.9.3.12 Issue 4:  Compactness of term structure indexes</a>
+                  </h5>
+                                
+                  <p>FpML architectural guidelines and standard XML modeling
+                                        practice require putting business data in elements. However,
+                                        for repeated numerical data like term structures, i) this
+                                        produces very verbose, possibly difficult-to-read XML, and
+                                        ii) the term structure indexes can be thought of as
+                                        meta-data anyway, since the real data is the numerical
+                                        value.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.13">16.9.3.13 Options:</a>
+                  </h5>
+                                
+                  <p>1. Indexes in elements reusing existing FpML structures,
+                                        e.g.:</p>
+                                
+                  <pre>
+&lt;dfpoint&gt;
+	&lt;date&gt;2004-06-01&lt;/date&gt;
+&lt;tenor&gt;
+&lt;periodMultiplier&gt;1&lt;/periodMultiplier&gt;
+&lt;/period&gt;D&lt;/period&gt;
+&lt;/tenor&gt;
+&lt;value&gt;0.995&lt;/value&gt;
+&lt;/dfpoint&gt;
+                                </pre>
+                                
+                  <p>2. Indexes in elements using more compact structures,
+                                        e.g.:</p>
+                                
+                  <pre>
+&lt;dfpoint&gt;
+	&lt;date&gt;2004-06-01&lt;/date&gt;
+&lt;tenor&gt;1D&lt;/tenor&gt;
+&lt;value&gt;0.995&lt;/value&gt;
+&lt;/dfpoint&gt;
+                                </pre>
+                                
+                  <p>3. Indexes in attributes:</p>
+                                
+                  <pre>
+&lt;df date=”2004-06-01” tenor=”1D”&gt;0.995&lt;/df&gt;
+                                </pre>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.14">16.9.3.14 Solution:</a>
+                  </h5>
+                                
+                  <p>We have chosen to use the fully expanded form, but to
+                                        allow referencing some of the coordinates so that the
+                                        information does not have to be repeated.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.15">16.9.3.15 Rationale:</a>
+                  </h5>
+                                
+                  <p>Compromise that preserves FpML design rules but allows a
+                                        more compact representation.</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>solution 1: 134 characters = 3.1 x</li>
+                                        
+                     <li>solution 2: 79 characters = 1.8 x</li>
+                                        
+                     <li>solution 3: 43 characters = 1.0 x</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.16">16.9.3.16 Issue 6: Handling of currency conversion </a>
+                  </h5>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.17">16.9.3.17 Solution:</a>
+                  </h5>
+                                
+                  <p>FX rates need to be treated as pricing / reporting
+                                inputs</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.18">16.9.3.18 Rationale:</a>
+                  </h5>
+                                
+                  <p>FX conversion is often required in reporting values and
+                                        risks.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.19">16.9.3.19 Issue 7: Handling of credit default swap basis conventions</a>
+                  </h5>
+                                
+                  <p>This applies to credit default swaps and recovery rates.
+                                        Are all CDS basis conventions required for specification of
+                                        credit curves?</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.20">16.9.3.20 Option 1: partial description</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Reference entity – underlying entity used to
+                                                determine default condition. Should include the full
+                                                name, RED identifier and/or other standard
+                                                identifier. For index transactions, a unique
+                                                identifier (e.g. DJ TRAC-X NA 100 Series 2)</li>
+                                        
+                     <li>Debt seniority – One of the following: senior, T3
+                                                Subordinated, LT2 Subordinated, UT2 Subordinated, T1
+                                                Subordinated</li>
+                                        
+                     <li>Secured – Yes / No flag if the protection is on
+                                                secured debt.</li>
+                                        
+                     <li>Currency – Currency of the protection payout</li>
+                                        
+                     <li>Restructuring event - no restructuring, modified
+                                                restructuring, modified modified restructuring, etc.</li>
+                                        
+                     <li>Optional descriptor – ability to add additional
+                                                terms to distinguish this set of market
+                                        data</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.21">16.9.3.21 Option 2: full description:</a>
+                  </h5>
+                                
+                  <table class="table">
+                                        
+                                        
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>
+                                                  
+                              <b>Contract Term</b>
+                                                  
+                           </p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>
+                                                  
+                              <b>Description</b>
+                                                  
+                           </p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>
+                                                  
+                              <b>Options/Value</b>
+                                                  
+                           </p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>
+                                                  
+                              <b>Defaults</b>
+                                                  
+                           </p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Reference Entity </p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Underlying entity used to
+                                                  determine default condition. Should
+                                                  include the full name, RED
+                                                  identifier and/or other standard
+                                                  identifier</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Text name of the underlying
+                                                  entity; RED identifier of the
+                                                  underlying entity; Other identifier
+                                                  of the underlying entity</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>N/A</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Credit Event</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>The material credit event.
+                                                  Multiple selection and at least one
+                                                  required. Modified Restructuring is
+                                                  where a Restructuring event is
+                                                  allowed but a Restructuring Maturity
+                                                  Limitation applies</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Bankruptcy; Failure To Pay;
+                                                  Restructuring; Modified
+                                                  Restructuring; Modified-Modified
+                                                  Restructuring; No
+                                                  Restructuring</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Bankruptcy; Failure To Pay;
+                                                  Restructuring</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Seniority</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>The seniority of the deliverable
+                                                  obligation. Single selection and
+                                                  required.</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Senior; Sub Tier 1; Sub (Upper
+                                                  Tier 2); Sub (Lower Tier 2); Sub
+                                                  Tier 3</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Senior</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Secured Flag</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Whether the deliverable
+                                                  obligation is secured or unsecured.
+                                                  Single selection and
+                                                  required.</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>No</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p/>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Currency</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>The currency of denomination of
+                                                  the deliverable obligation. Single
+                                                  selection and required.</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>List of supported
+                                                  currencies</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>USD</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Obligation Category</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>What sort of reference payment
+                                                  will trigger a credit event. Single
+                                                  selection and required.</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Payment; Borrowed Money;
+                                                  Reference Obligations Only; Bond or
+                                                  Loan; Bond; Loan;</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Borrowed Money</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Deliverable Obligation
+                                                  Category</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>What sort of obligation may be
+                                                  delivered in the event of the credit
+                                                  event. Single selection and
+                                                  required.</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Payment; Borrowed Money;
+                                                  Reference Obligations Only; Bond or
+                                                  Loan; Bond; Loan;</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Bond or Loan</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>ISDA CD Definitions</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Specifies what ISDA document and
+                                                  supplement (if any) is applicable to
+                                                  this curve. Multiple selection and
+                                                  required.</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>1999 ISDA; 1999 Successor
+                                                  Supplement; 1999 Convert Supplement;
+                                                  1999 MR Supplement; 2003 ISDA
+                                                  </p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>1999 ISDA; 1999 Successor
+                                                  Supplement; 1999 Convert Supplement;
+                                                  1999 MR Supplement;</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Deliverable
+                                                  Exclusions</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Security types excluded from
+                                                  delivery of this
+                                                  contract</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Exclude zero coupon; Exclude
+                                                  convertible; Exclude floating rate
+                                                  note</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>None</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Obligation
+                                                  characteristics</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Types of obligations that may be
+                                                  considered for default
+                                                  determination</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Pari Passu Ranking; Not
+                                                  Contingent; Not Domestic Issuance;
+                                                  Not Domestic Currency; Not Sovereign
+                                                  Lender; Listed; Not Domestic Law;
+                                                  Specified Currency OECD; Specified
+                                                  Currency non-OECD</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Multiple selection</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                        
+                     <tr>
+                                                
+                        <td>
+                                                  
+                           <p>Deliverable obligation
+                                                  characteristics</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Types of securities that can be
+                                                  delivered to the protection holder
+                                                  upon trigger of the
+                                                  contract</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Pari Passu Ranking; Not
+                                                  Contingent; Not Domestic Issuance;
+                                                  Not Domestic Currency; Not Sovereign
+                                                  Lender; Listed; Not Domestic Law;
+                                                  Specified Currency OECD; Specified
+                                                  Currency non-OECD; Accelerated or
+                                                  Matured; Not Bearer</p>
+                                                
+                        </td>
+                                                
+                        <td>
+                                                  
+                           <p>Multiple selection</p>
+                                                
+                        </td>
+                                        
+                     </tr>
+                                
+                  </table>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.22">16.9.3.22 Option 3: fpml CD 4.x specification: </a>
+                  </h5>
+                                
+                  <p>Refer to the existing fpml CD v4.0 specification for all
+                                        references to unique terms defining CDS
+                                instruments</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.23">16.9.3.23 Solution:</a>
+                  </h5>
+                                
+                  <p>Option 1: Use the partial description.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.3.24">16.9.3.24 Rationale:</a>
+                  </h5>
+                                
+                  <p>Simplified approach captures most relevant components for
+                                        determining pricing basis. Can be expanded at a later time
+                                        using the optional field (or via amendments to the
+                                        specification).</p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.9.4">16.9.4 Valuation Reporting</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.9.4.1">16.9.4.1 Issue 1: How much detail is needed for the NPVs?</a>
+                  </h5>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.4.2">16.9.4.2 Options:</a>
+                  </h5>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Pay vs. receive?</li>
+                                        
+                     <li>Cash flows on value date</li>
+                                        
+                     <li>Currency translation</li>
+                                        
+                     <li>Pricing currency</li>
+                                        
+                     <li>Valuation date</li>
+                                        
+                     <li>Underlying security or benchmark price if applicable</li>
+                                        
+                     <li>Volatility and Delta if applicable</li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.4.3">16.9.4.3 Solution:</a>
+                  </h5>
+                                
+                  <p>Use Asset Measures to allow a variety of results to be
+                                        returned.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.4.4">16.9.4.4 Rationale:</a>
+                  </h5>
+                                
+                  <p>This allows a user to extend the standard to provide more
+                                        types of returned values.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.4.5">16.9.4.5 Issue 2:  Reporting Currency</a>
+                  </h5>
+                                
+                  <p>Reporting should be in a single specified currency, with
+                                        currency conversion rates and the source of those rates
+                                        identified for any trades not in the reporting
+                                currency.</p>
+                        
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s16.9.5">16.9.5 Risk Types and Measures</a>
+               </h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
+               <div>
+                  <h5>
+                     <a id="s16.9.5.1">16.9.5.1 Issue 1:  Risk types and measures</a>
+                  </h5>
+                                
+                  <p>Need to specify the risk type and measure of the
+                                        submitted risk figures.</p>
+                                
+                  <p>
+                                        
+                     <b>Risk Types</b>
+                                
+                  </p>
+                                
+                  <p>There are a number of broad market risk types.</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Interest Rate</li>
+                                        
+                     <li>Credit Spread</li>
+                                        
+                     <li>FX Rate</li>
+                                        
+                     <li>Equity Price</li>
+                                        
+                     <li>Commodity Price</li>
+                                
+                  </ul>
+                                
+                  <p>
+                                        
+                     <b>Risk Measures</b>
+                                
+                  </p>
+                                
+                  <p>For each of the broad risk types a number of risk
+                                        measures are used. Risk measures are typically generated by
+                                        perturbing the valuation parameters and calculating the
+                                        effect on the net present value of the trades or portfolio.</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Delta, first order sensitivity to a shift in the
+                                                valuation parameter <ul class="bulleted">
+                                                  
+                           <li>Parallel shift (applicable to all
+                                                  risk types)</li>
+                                                  
+                           <li>1-dimensional, bucketed risk
+                                                  (applicable yield curves and credit
+                                                  curves)</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Gamma, second order sensitivity to a shift in the
+                                                valuation parameter <ul class="bulleted">
+                                                  
+                           <li>Parallel shift</li>
+                                                  
+                           <li>1-dimensional</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Vega <ul class="bulleted">
+                                                  
+                           <li>Parallel shift</li>
+                                                  
+                           <li>2 or 3 dimensional, risk against
+                                                  each individual entry in the
+                                                  volatility surface/cube</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Scenario <ul class="bulleted">
+                                                  
+                           <li>A single number representing the
+                                                  sensitivity to a shift in the
+                                                  valuation parameters defined by a
+                                                  (separately) specified
+                                                  scenario</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.2">16.9.5.2 Solution</a>
+                  </h5>
+                                
+                  <p>We therefore need to be label a risk figure with an entry
+                                        from the following hierarchy. </p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Market Risk <ul class="bulleted">
+                                                  
+                           <li>Interest Rate <ul class="bulleted">
+                                                  
+                                 <li>Delta</li>
+                                                  
+                                 <li>Gamma</li>
+                                                  
+                                 <li>Vega</li>
+                                                  
+                                 <li>Scenario</li>
+                                                  
+                              </ul>
+                                                  
+                           </li>
+                                                  
+                           <li>Credit Spread <ul class="bulleted">
+                                                  
+                                 <li>Delta</li>
+                                                  
+                                 <li>Gamma</li>
+                                                  
+                                 <li>Vega</li>
+                                                  
+                                 <li>Scenario</li>
+                                                  
+                              </ul>
+                                                  
+                           </li>
+                                                  
+                           <li>FX Rate <ul class="bulleted">
+                                                  
+                                 <li>Delta</li>
+                                                  
+                                 <li>Gamma</li>
+                                                  
+                                 <li>Vega</li>
+                                                  
+                                 <li>Scenario</li>
+                                                  
+                              </ul>
+                                                  
+                           </li>
+                                                  
+                           <li>Equity Price <ul class="bulleted">
+                                                  
+                                 <li>Delta</li>
+                                                  
+                                 <li>Gamma</li>
+                                                  
+                                 <li>Vega</li>
+                                                  
+                                 <li>Scenario</li>
+                                                  
+                              </ul>
+                                                  
+                           </li>
+                                                  
+                           <li>Commodity Price <ul class="bulleted">
+                                                  
+                                 <li>Delta</li>
+                                                  
+                                 <li>Gamma</li>
+                                                  
+                                 <li>Vega</li>
+                                                  
+                                 <li>Scenario</li>
+                                                  
+                              </ul>
+                                                  
+                           </li>
+                                                  
+                           <li>Scenarios cross risk type</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Credit Risk <ul class="bulleted">
+                                                  
+                           <li>Current Exposure</li>
+                                                  
+                           <li>Potential Exposure</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                                
+                  <p>For yield curves, the shifts can be performed in either</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Input Rates <ul class="bulleted">
+                                                  
+                           <li>The yield curve benchmark
+                                                  prices</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Output rates of resulting term structure of <ul class="bulleted">
+                                                  
+                           <li>The resulting term structure of
+                                                  implied <ul class="bulleted">
+                                                  
+                                 <li>Zero Rates</li>
+                                                  
+                                 <li>Forward Rates</li>
+                                                  
+                                 <li>Par Rates</li>
+                                                  
+                              </ul>
+                                                  
+                           </li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                                
+                  <p>Other valuation parameters typically do not have both
+                                        input and output values.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.3">16.9.5.3 Solution</a>
+                  </h5>
+                                
+                  <p>The risk data must include a reference to the perturbed
+                                        node of a valuation parameter. And the node can be an input
+                                        node or an output node.</p>
+                                
+                  <p>References can be either to a bucket node / matrix
+                                        element or it can be reference to the full yield curve /
+                                        volatility / object. In the latter case it is a parallel
+                                        shift greek.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.4">16.9.5.4 Issue2:  Shift size</a>
+                  </h5>
+                                
+                  <p>Shift sizes can potentially be a subject for discussion.
+                                        Either we specify one standard definition or we include the
+                                        shift size in the message. </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.5">16.9.5.5 Solution</a>
+                  </h5>
+                                
+                  <p>In order to keep the complexity down, we define the shift
+                                        sizes to be</p>
+                                
+                  <ul class="bulleted">
+                                        
+                     <li>Delta and gamma sensitivities are based on shift
+                                                size <ul class="bulleted">
+                                                  
+                           <li>interest rates 1 basis point (0.01%)</li>
+                                                  
+                           <li>credit spreads 1 basis point
+                                                  (0.01%)</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Vega <ul class="bulleted">
+                                                  
+                           <li>all risk types 1%</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                        
+                     <li>Scenarios <ul class="bulleted">
+                                                  
+                           <li>The shift size for each individual
+                                                  risk factor is specified in separate
+                                                  scenario representation which
+                                                  includes a large set of references
+                                                  to the nodes in valuation parameters
+                                                  and shift sizes.</li>
+                                                
+                        </ul>
+                                        
+                     </li>
+                                
+                  </ul>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.6">16.9.5.6 Issue 3 Shift method</a>
+                  </h5>
+                                
+                  <p>A number of different shift methods are used when
+                                        calculating sensitivities (central differences, right hand
+                                        side, scaling etc). </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.7">16.9.5.7 Solution</a>
+                  </h5>
+                                
+                  <p>It is not our ambition to harmonize calculation methods
+                                        but rather to reach a common understanding of the resulting
+                                        numbers. We therefore leave out the applied method from the
+                                        message.</p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.8">16.9.5.8 Issue 4 Risk currency</a>
+                  </h5>
+                                
+                  <p>The currency in which a risk figure is expressed is
+                                        needed. </p>
+                        
+               </div>
+               <div>
+                  <h5>
+                     <a id="s16.9.5.9">16.9.5.9 Solution</a>
+                  </h5>
+                                
+                  <p>Typically the risk figures are expressed in the same
+                                        currency as the currency of the trade. Trades involving more
+                                        than one currency will have its risk expressed separately
+                                        against yield curves etc for each currency. The currency
+                                        element should be part of the message.</p>
+                        
+               </div>
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('15',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('16',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('17',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

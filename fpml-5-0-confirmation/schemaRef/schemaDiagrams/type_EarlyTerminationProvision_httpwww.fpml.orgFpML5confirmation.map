@@ -1,0 +1,20 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_EarlyTerminationProvision_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='group_MandatoryEarlyTermination.model'
+  coords='382,52,649,78'
+  href='fpml-ird-5-0.xsd.html_group_MandatoryEarlyTermination.model.html#group_MandatoryEarlyTermination.model'/>
+
+ <area
+  shape='rect'
+  alt='group_OptionalEarlyTermination.model'
+  coords='382,88,639,130'
+  href='fpml-ird-5-0.xsd.html_group_OptionalEarlyTermination.model.html#group_OptionalEarlyTermination.model'/>
+
+ <area
+  shape='rect'
+  alt='group_OptionalEarlyTermination.model'
+  coords='296,140,553,166'
+  href='fpml-ird-5-0.xsd.html_group_OptionalEarlyTermination.model.html#group_OptionalEarlyTermination.model'/>
+
+</map>

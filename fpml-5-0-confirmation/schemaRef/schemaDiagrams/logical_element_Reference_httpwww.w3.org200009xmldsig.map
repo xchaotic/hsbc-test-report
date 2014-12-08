@@ -1,0 +1,20 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='logical_element_Reference_httpwww.w3.org200009xmldsig'>
+ <area
+  shape='rect'
+  alt='element_Transforms'
+  coords='311,159,536,235'
+  href='xmldsig-core-schema.xsd.html_element_Transforms.html#element_Transforms'/>
+
+ <area
+  shape='rect'
+  alt='element_DigestMethod'
+  coords='311,245,536,305'
+  href='xmldsig-core-schema.xsd.html_element_DigestMethod.html#element_DigestMethod'/>
+
+ <area
+  shape='rect'
+  alt='element_DigestValue'
+  coords='311,315,536,375'
+  href='xmldsig-core-schema.xsd.html_element_DigestValue.html#element_DigestValue'/>
+
+</map>

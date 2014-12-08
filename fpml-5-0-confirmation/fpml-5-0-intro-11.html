@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s11">11 DIVIDEND PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	 
+ 
+	
+
+         <div>
+            <h3>
+               <a id="s11.1">11.1 Dividend Derivatives Scope</a>
+            </h3>
+	
+            <p>The Equity Derivative Working Group extended FpML to cover:</p>
+    
+            <ul class="bulleted">
+        
+               <li>Dividend Swap Transaction Supplement</li>
+    
+            </ul>
+
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s11.2">11.2 Overall Architecture</a>
+               </h3>
+            </div>
+		
+            <p>Dividend Swaps (Transaction Supplement form) are modelled using the following product element in FpML: dividendSwapTransactionSupplement.</p>
+		
+            <ul class="bulleted">
+			
+               <li>dividendSwapTransactionSupplement</li>
+		
+            </ul>
+		
+            <p>
+			
+               <a href="images/equity-options/ClassHierarchy.gif">
+                  <img src="images/equity-options/ClassHierarchy.gif" alt="images/equity-options/ClassHierarchy.gif" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s11.2.1">11.2.1 dividendSwapTransactionSupplement</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-dividend-swaps-5-0.xsd.html_element_dividendSwapTransactionSupplement.html">Dividend Swap Transaction Supplement</a> specifies the structure of the dividend swap transaction supplement.</p>
+			
+               <p>
+				
+                  <a href="images/dividend-swaps/dividendSwapTransactionSupplement.jpg">
+                     <img src="images/dividend-swaps/dividendSwapTransactionSupplement.jpg" alt="images/dividend-swaps/dividendSwapTransactionSupplement.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <ul class="bulleted">
+				
+                  <li>productType - A classification of the type of product. FpML defines a simple product categorization using a coding scheme.</li>
+				
+                  <li>productId - A product reference identifier allocated by a party. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list.</li>
+				
+                  <li>additionalPayment - Specifies additional payment(s) between the principal parties to the netted swap.</li>
+				
+                  <li>extraordinaryEvents - Where the underlying is shares, defines market events affecting the issuer of those shares that may require the terms of the transaction to be adjusted.</li>
+				
+                  <li>dividendLeg - Dividend leg.</li>
+				
+                  <li>fixedLeg - Fixed payment leg.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s11.2.2">11.2.2 dividendLeg</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-dividend-swaps-5-0.xsd.html_type_DividendLeg.html">dividendLeg</a> - Floating Payment Leg of a Dividend Swap.</p>
+			
+               <p>
+				
+                  <a href="images/dividend-swaps/dividendLeg.jpg">
+                     <img src="images/dividend-swaps/dividendLeg.jpg" alt="images/dividend-swaps/dividendLeg.jpg" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s11.2.3">11.2.3 fixedLeg</a>
+               </h4>
+			
+               <p>
+                  <a class="web" href="schemaRef/fpml-dividend-swaps-5-0.xsd.html_type_FixedPaymentLeg.html">fixedLeg</a> - Fixed Payment Leg of a Dividend Swap.</p>
+			
+               <p>
+				
+                  <a href="images/dividend-swaps/fixedLeg.jpg">
+                     <img src="images/dividend-swaps/fixedLeg.jpg" alt="images/dividend-swaps/fixedLeg.jpg" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('10',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('11',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('12',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_CommodityRelativePaymentDates_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='group_CommodityCalculationPeriodsPointer.model'
+  coords='354,268,679,294'
+  href='fpml-com-5-0.xsd.html_group_CommodityCalculationPeriodsPointer.model.html#group_CommodityCalculationPeriodsPointer.model'/>
+
+ <area
+  shape='rect'
+  alt='group_BusinessCentersOrReference.model'
+  coords='354,428,639,470'
+  href='fpml-shared-5-0.xsd.html_group_BusinessCentersOrReference.model.html#group_BusinessCentersOrReference.model'/>
+
+</map>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s12">12 CORRELATION PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	 		
+ 
+	
+
+         <div>
+            <h3>
+               <a id="s12.1">12.1 Correlation Derivatives Scope</a>
+            </h3>
+			
+            <p>The Equity Derivative Working Group extended FpML to cover:</p>
+			
+            <ul class="bulleted">
+				
+               <li>Correlation Swaps</li>
+			
+            </ul>
+		
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s12.2">12.2 Overall Architecture</a>
+               </h3>
+            </div>
+		
+            <p>Correlation Swaps are modelled using the following product element in FpML:</p>
+		
+            <ul class="bulleted">
+			
+               <li>correlationSwap</li>
+		
+            </ul>
+		
+            <p>
+			
+               <a href="images/equity-options/ClassHierarchy.gif">
+                  <img src="images/equity-options/ClassHierarchy.gif" alt="images/equity-options/ClassHierarchy.gif" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s12.2.1">12.2.1 correlationSwap</a>
+               </h4>
+			
+               <p>The <a class="web" href="schemaRef/fpml-correlation-swaps-5-0.xsd.html_element_correlationSwap.html">Correlation Swap</a> product is modelled as a single netted leg.</p>
+			
+               <p>
+				
+                  <a href="images/correlation-swaps/correlationSwap.jpg">
+                     <img src="images/correlation-swaps/correlationSwap.jpg" alt="images/correlation-swaps/correlationSwap.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <ul class="bulleted">
+				
+                  <li>productType - A classification of the type of product. FpML defines a simple product categorization using a coding scheme.</li>
+				
+                  <li>productId - A product reference identifier allocated by a party. FpML does not define the domain values associated with this element. Note that the domain values for this element are not strictly an enumerated list..</li>
+				
+                  <li>additionalPayment - Specifies additional payment(s) between the principal parties to the netted swap.</li>
+				
+                  <li>extraordinaryEvents - Where the underlying is shares, defines market events affecting the issuer of those shares that may require the terms of the transaction to be adjusted.</li>
+				
+                  <li>correlationLeg - A type describing return which is driven by a Correlation calculation.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s12.2.2">12.2.2 correlationLeg</a>
+               </h4>
+			
+               <p>The <a class="web" href="schemaRef/fpml-correlation-swaps-5-0.xsd.html_type_CorrelationLeg.html">correlationLeg</a>  - A type describing return which is driven by a Correlation calculation.</p>
+			
+               <p>
+				
+                  <a href="images/correlation-swaps/correlationLeg.jpg">
+                     <img src="images/correlation-swaps/correlationLeg.jpg" alt="images/correlation-swaps/correlationLeg.jpg" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('11',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('12',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('13',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

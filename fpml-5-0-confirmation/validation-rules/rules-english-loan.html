@@ -1,0 +1,470 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>LOAN rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Loan Messages
+      </h1>
+      <div>
+         		
+         <p> This is the Loan part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory section in the
+            validation section of the specifications contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. The cut down test cases
+            are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+         <li>
+            
+            					Rules with comments
+            
+            					
+            <ul>
+               <li><a href="#ln-2">ln-2</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#same-currency" target="_blank">same-currency</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">LoanContract</span> (complex type): <a href="#ln-1">ln-1</a> 
+         </li>
+         <li><span class="element">DrawdownNotice</span> (complex type): <a href="#ln-2">ln-2</a> <a href="#ln-14">ln-14</a> <a href="#ln-15">ln-15</a> <a href="#ln-16">ln-16</a> <a href="#ln-17">ln-17</a> <a href="#ln-18">ln-18</a> <a href="#ln-19">ln-19</a> 
+         </li>
+         <li><span class="element">InterestRatePeriod</span> (complex type): <a href="#ln-3">ln-3</a> <a href="#ln-4">ln-4</a> <a href="#ln-5">ln-5</a> 
+         </li>
+         <li><span class="element">InterestAccrualSchedule</span> (complex type): <a href="#ln-6">ln-6</a> <a href="#ln-7">ln-7</a> <a href="#ln-8">ln-8</a> <a href="#ln-9">ln-9</a> 
+         </li>
+         <li><span class="element">FacilityNotice</span> (complex type): <a href="#ln-10">ln-10</a> <a href="#ln-11">ln-11</a> <a href="#ln-12">ln-12</a> <a href="#ln-30">ln-30</a> <a href="#ln-31">ln-31</a> 
+         </li>
+         <li><span class="element">LoanContractNotice</span> (complex type): <a href="#ln-11b">ln-11b</a> <a href="#ln-13">ln-13</a> 
+         </li>
+         <li><span class="element">InterestPaymentNotice</span> (complex type): <a href="#ln-20">ln-20</a> <a href="#ln-21">ln-21</a> 
+         </li>
+         <li><span class="element">LoanContractRepayment</span> (complex type): <a href="#ln-22">ln-22</a> 
+         </li>
+         <li><span class="element">RepaymentNotice</span> (complex type): <a href="#ln-24">ln-24</a> 
+         </li>
+         <li><span class="element">Repayment</span> (complex type): <a href="#ln-25">ln-25</a> <a href="#ln-26">ln-26</a> 
+         </li>
+         <li><span class="element">OneOffFeeNotice</span> (complex type): <a href="#ln-27">ln-27</a> <a href="#ln-28">ln-28</a> 
+         </li>
+         <li><span class="element">OneOffFeePayment</span> (complex type): <a href="#ln-29">ln-29</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="ln-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: LoanContract (complex type)<br><span class="element">currentInterestRatePeriod/startDate</span> is greater than or equal to <span class="element">effectiveDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: LoanContract<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">currentInterestRatePeriod/startDate</span> ge <span class="element">effectiveDate</span></div>
+         </div>
+      </div>
+      <div id="ln-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-2</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br>If <span class="element">loanContract</span> exists, and if <span class="element">loanContract/currentInterestRatePeriod/floatingRateIndex</span> contains the string "<span class="value">PRIME</span>" then <span class="element">loanContract/currentInterestRatePeriod/rateFixingDate</span>  is equal to <span class="element">loanContract/effectiveDate</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">loanContract</span>)] [<span class="element">loanContract/currentInterestRatePeriod/floatingRateIndex</span> eq "<span class="value">PRIME</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">loanContract/currentInterestRatePeriod/rateFixingDate</span> eq <span class="element">loanContract/effectiveDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>For a LoanContract the fixing date for the rate is always the effective date of the contract.
+         </div>
+      </div>
+      <div id="ln-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-3</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRatePeriod (complex type)<br><span class="element">endDate</span> is greater than or equal to <span class="element">startDate</span> is greater than or equal to <span class="element">rateFixingDate</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRatePeriod<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">endDate</span> ge <span class="element">startDate</span> ge <span class="element">rateFixingDate</span></div>
+         </div>
+      </div>
+      <div id="ln-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRatePeriod (complex type)<br>If <span class="element">mandatoryCostRate</span> doesn't exist, and if <span class="element">interestRate</span>, and if <span class="element">margin</span> and <span class="element">allInRate</span> exist, then <span class="element">allInRate</span> is equal to  <span class="element">margin</span> plus <span class="element">interestRate</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRatePeriod<br><div style="background-color:#d0d0d0">[not(exists(<span class="element">mandatoryCostRate</span>))] [exists(<span class="element">interestRate</span>)] [exists(<span class="element">margin</span>)] [exists(<span class="element">allInRate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">allInRate</span> eq <span class="element">margin</span> + <span class="element">interestRate</span></div>
+         </div>
+      </div>
+      <div id="ln-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-5</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestRatePeriod (complex type)<br>If <span class="element">mandatoryCostRate</span> and <span class="element">interestRate</span> and <span class="element">margin</span> and <span class="element">allInRate</span> exist, then <span class="element">allInRate</span>  is equal to <span class="element">margin</span> plus <span class="element">interestRate</span> plus <span class="element">mandatoryCostRate</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestRatePeriod<br><div style="background-color:#d0d0d0">[exists(<span class="element">mandatoryCostRate</span>)] [exists(<span class="element">interestRate</span>)] [exists(<span class="element">margin</span>)] [exists(<span class="element">allInRate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">allInRate</span> eq <span class="element">margin</span> + <span class="element">interestRate</span> + <span class="element">mandatoryCostRate</span></div>
+         </div>
+      </div>
+      <div id="ln-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-6</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestAccrualSchedule (complex type)<br><span class="element">interestRatePeriod/startDate</span> must be equal to <span class="element">lenderLoanContractPeriod/startDate</span> must be equal to  <span class="element">interestAccrualPeriod/startDate</span>, in each period.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestAccrualSchedule<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">interestRatePeriod/startDate</span> eq <span class="element">lenderLoanContractPeriod/startDate</span> eq <span class="element">interestAccrualPeriod/startDate</span>, in each period
+            </div>
+         </div>
+      </div>
+      <div id="ln-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-7</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestAccrualSchedule (complex type)<br>If more than one <span class="element">interestRatePeriod</span> exists, then the entire chronological series must form a contiguous block of <span class="element">interestRatePeriod</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestAccrualSchedule<br><div style="background-color:#d0d0d0">[count(<span class="element">interestRatePeriod</span>) gt <span class="value">1</span>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">every <span class="element">$startDate</span> in <span class="element">$interestAccrualSchedule/interestRatePeriod</span>[<span class="element">startDate</span> gt min(<span class="element">$interestAccrualSchedule/interestRatePeriod/startDate</span>)]<span class="element">/startDate</span> satisfies <span class="element">$startDate</span> - "<span class="value">P1D</span>" eq <span class="element">$interestAccrualSchedule/interestRatePeriod/endDate</span></div>
+         </div>
+      </div>
+      <div id="ln-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestAccrualSchedule (complex type)<br>If more than one <span class="element">lenderLoanContractPeriod</span> exists, then the entire chronological series must form a contiguous block of <span class="element">lenderLoanContractPeriod</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestAccrualSchedule<br><div style="background-color:#d0d0d0">[count(<span class="element">lenderLoanContractPeriod</span>) gt <span class="value">1</span>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">every <span class="element">$startDate</span> in <span class="element">$interestAccrualSchedule/lenderLoanContractPeriod</span>[<span class="element">startDate</span> gt min(<span class="element">$interestAccrualSchedule/lenderLoanContractPeriod/startDate</span>)]<span class="element">/startDate</span> satisfies <span class="element">$startDate</span> - "<span class="value">P1D</span>" eq <span class="element">$interestAccrualSchedule/lenderLoanContractPeriod/endDate</span></div>
+         </div>
+      </div>
+      <div id="ln-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestAccrualSchedule (complex type)<br>If more than one <span class="element">interestAccrualPeriod</span> exists, then the entire chronological series must form a contiguous block of <span class="element">interestAccrualPeriod</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestAccrualSchedule<br><div style="background-color:#d0d0d0">[count(<span class="element">interestAccrualPeriod</span>) gt <span class="value">1</span>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">every <span class="element">$startDate</span> in <span class="element">$interestAccrualSchedule/interestAccrualPeriod</span>[<span class="element">startDate</span> gt min(<span class="element">$interestAccrualSchedule/interestAccrualPeriod/startDate</span>)]<span class="element">/startDate</span> satisfies <span class="element">$startDate</span> - "<span class="value">P1D</span>" eq <span class="element">$interestAccrualSchedule/interestAccrualPeriod/endDate</span></div>
+         </div>
+      </div>
+      <div id="ln-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FacilityNotice (complex type)<br>If <span class="element">facilitySummary/originalCommitmentAmount</span> and <span class="element">facilityCommitmentPosition/loanContractPosition/loanContractSummary/originalAmount</span> exist, and if <span class="element">facilitySummary/originalCommitmentAmount</span> and <span class="element">facilityCommitmentPosition/loanContractPosition/loanContractSummary/originalAmount</span> have  the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilitySummary/originalCommitmentAmount</span> is  greater than or equal to <span class="element">facilityCommitmentPosition/loanContractPosition/loanContractSummary/originalAmount</span>. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FacilityNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilitySummary/originalCommitmentAmount</span>)] [exists(<span class="element">facilityCommitmentPosition/loanContractPosition/loanContractSummary/originalAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilitySummary/originalCommitmentAmount</span>,<span class="element">facilityCommitmentPosition/loanContractPosition/loanContractSummary/originalAmount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilitySummary/originalCommitmentAmount/amount</span> ge <span class="element">facilityCommitmentPosition/loanContractPosition/loanContractSummary/originalAmount/amount</span></div>
+         </div>
+      </div>
+      <div id="ln-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-11</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FacilityNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/loanContractPosition</span> exists, and if <span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span> and all <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span> have  the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span> is  greater than or equal to the sum of all <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FacilityNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/loanContractPosition</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span>,//<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span> ge sum(<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-11b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-11b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: LoanContractNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/loanContractPosition</span> exists, and if <span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span> and all <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span> have  the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span> is  greater than or equal to the sum of all <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: LoanContractNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/loanContractPosition</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span>,//<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/currentAmount/shareAmount/amount</span> ge sum(<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/shareAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FacilityNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/loanContractPosition</span> exists, and if <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> and all <span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> must be greater than or equal to the sum of all <span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FacilityNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/loanContractPosition</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span>,//<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> ge sum(<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-13" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-13</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: LoanContractNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/loanContractPosition</span> exists, and if <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> and all<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> must be greater than or equal to the sum of all <span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: LoanContractNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/loanContractPosition</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span>,//<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> ge sum(<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/shareAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-14" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-14</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br>If <span class="element">loanContract</span> exists, then <span class="element">drawdownPayment/paymentDate</span> is greater than or equal to <span class="element">loanContract/effectiveDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">loanContract</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">drawdownPayment/paymentDate</span> ge <span class="element">loanContract/effectiveDate</span></div>
+         </div>
+      </div>
+      <div id="ln-15" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-15</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br>If <span class="element">dealSummary/creditAgreementDate</span> exists, then <span class="element">loanContract/effectiveDate</span> is greater than or equal to  <span class="element">dealSummary/creditAgreementDate</span> and <span class="element">drawdownPayment/paymentDate</span> is greater than or equal to <span class="element">dealSummary/creditAgreementDate</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">dealSummary/creditAgreementDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> (<span class="element">loanContract/effectiveDate</span> ge <span class="element">dealSummary/creditAgreementDate</span>) and (<span class="element">drawdownPayment/paymentDate</span> ge <span class="element">dealSummary/creditAgreementDate</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-16" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-16</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/priorAmount/shareAmount</span> exists, and if <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> and <span class="element">drawdownPayment/shareLoanContractAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">drawdownPayment/shareLoanContractAmount/amount</span> is less than or equal to <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/priorAmount/shareAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span>,<span class="element">drawdownPayment/shareLoanContractAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">drawdownPayment/shareLoanContractAmount/amount</span> le <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span></div>
+         </div>
+      </div>
+      <div id="ln-17" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-17</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br>If <span class="element">loanContract</span> exists, and if <span class="element">loanContract/amount/amount</span> and <span class="element">drawdownPayment/shareLoanContractAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">loanContract/amount/amount</span> is greater than or equal to <span class="element">drawdownPayment/shareLoanContractAmount/amount</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">loanContract</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">loanContract/amount/amount</span>,<span class="element">drawdownPayment/shareLoanContractAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">loanContract/amount/amount</span> ge <span class="element">drawdownPayment/shareLoanContractAmount/amount</span></div>
+         </div>
+      </div>
+      <div id="ln-18" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-18</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br>If <span class="element">loanContractSummary</span> exists, and if <span class="element">loanContractSummary/originalAmount/amount</span> and <span class="element">drawdownPayment/shareLoanContractAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">loanContractSummary/originalAmount/amount</span> is greater than or equal to <span class="element">drawdownPayment/shareLoanContractAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">loanContractSummary</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">loanContractSummary/originalAmount/amount</span>,<span class="element">drawdownPayment/shareLoanContractAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">loanContractSummary/originalAmount/amount</span> ge <span class="element">drawdownPayment/shareLoanContractAmount/amount</span></div>
+         </div>
+      </div>
+      <div id="ln-19" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-19</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DrawdownNotice (complex type)<br> If drawdownEventType is equal to "<span class="value">RateSetEvent</span>", and if <span class="element">loanContract</span> exists, then <span class="element">loanContract/currentInterestRatePeriod/interestRate</span> and <span class="element">loanContract/currentInterestRatePeriod/margin</span> and <span class="element">loanContract/currentInterestRatePeriod/allInRate</span> and <span class="element">loanContract/currentInterestRatePeriod/interestDayBasis</span> and <span class="element">loanContract/currentInterestRatePeriod/indexTenor</span> must exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DrawdownNotice<br><div style="background-color:#d0d0d0">[<span class="element">drawdownEventType</span> eq "<span class="value">RateSetEvent</span>"] [exists(<span class="element">loanContract</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">loanContract/currentInterestRatePeriod/interestRate</span>) and exists(<span class="element">loanContract/currentInterestRatePeriod/margin</span>) and exists(<span class="element">loanContract/currentInterestRatePeriod/allInRate</span>) and exists(<span class="element">loanContract/currentInterestRatePeriod/interestDayBasis</span>) and exists(<span class="element">loanContract/currentInterestRatePeriod/indexTenor</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-20" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-20</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestPaymentNotice (complex type)<br>If <span class="element">interestPayment/amount/shareAmount/amount</span> and all <span class="element">interestAccrualSchedule/interestAccrualPeriod/shareInterestAccrualAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a> , then <span class="element">interestPayment/amount/shareAmount/amount</span> must be equal to the sum of all <span class="element">interestAccrualSchedule/interestAccrualPeriod/shareInterestAccrualAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestPaymentNotice<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">interestPayment/amount/shareAmount/amount</span>,//<span class="element">interestAccrualSchedule/interestAccrualPeriod/shareInterestAccrualAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">interestPayment/amount/shareAmount/amount</span> eq sum(<span class="element">interestAccrualSchedule/interestAccrualPeriod/shareInterestAccrualAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-21" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-21</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: InterestPaymentNotice (complex type)<br><span class="element">interestAccrualSchedule/interestRatePeriod/interestRate</span> and <span class="element">interestAccrualSchedule/interestRatePeriod/margin</span> and <span class="element">interestAccrualSchedule/interestRatePeriod/allInRate</span> and <span class="element">interestAccrualSchedule/interestRatePeriod/interestDayBasis</span> and <span class="element">interestAccrualSchedule/interestRatePeriod/indexTenor</span> must exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: InterestPaymentNotice<br><div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">interestAccrualSchedule/interestRatePeriod/interestRate</span>) and exists(<span class="element">interestAccrualSchedule/interestRatePeriod/margin</span>) and exists(<span class="element">interestAccrualSchedule/interestRatePeriod/allInRate</span>) and exists(<span class="element">interestAccrualSchedule/interestRatePeriod/interestDayBasis</span>) and exists(<span class="element">interestAccrualSchedule/interestRatePeriod/indexTenor</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-22" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-22</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: LoanContractRepayment (complex type)<br>If <span class="element">loanContractSummary/originalAmount</span> exists, and if <span class="element">loanContractSummary/originalAmount/amount</span> and <span class="element">amount/globalAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">loanContractSummary/originalAmount/amount</span> is greater than or equal to <span class="element">amount/globalAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: LoanContractRepayment<br><div style="background-color:#d0d0d0">[exists(<span class="element">loanContractSummary/originalAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">loanContractSummary/originalAmount/amount</span>,<span class="element">amount/globalAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">loanContractSummary/originalAmount/amount</span> ge <span class="element">amount/globalAmount/amount</span></div>
+         </div>
+      </div>
+      <div id="ln-24" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-24</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: RepaymentNotice (complex type)<br>If <span class="element">facilityCommitmentPosition</span> exists and if <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> and <span class="element">repayment/facilityRepayment/amount/shareAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span>is greater than or equal to <span class="element">repayment/facilityRepayment/amount/shareAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: RepaymentNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span>,<span class="element">repayment/facilityRepayment/amount/shareAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/priorAmount/shareAmount/amount</span> ge <span class="element">repayment/facilityRepayment/amount/shareAmount/amount</span></div>
+         </div>
+      </div>
+      <div id="ln-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Repayment (complex type)<br>If <span class="element">facilityRepayment/amount/shareAmount/amount</span> and all <span class="element">loanContractRepayment/amount/shareAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityRepayment/amount/shareAmount/amount</span> must be greater than or equal to the sum of all <span class="element">loanContractRepayment/amount/shareAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Repayment<br><div style="background-color:#d0d0d0">[<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityRepayment/amount/shareAmount/amount</span>,//<span class="element">loanContractRepayment/amount/shareAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">facilityRepayment/amount/shareAmount/amount</span> ge sum(<span class="element">loanContractRepayment/amount/shareAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-26</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Repayment (complex type)<br>If <span class="element">loanContractRepayment/amount/globalAmount</span> exists, and if <span class="element">facilityRepayment/amount/globalAmount/amount</span> and all <span class="element">loanContractRepayment/amount/globalAmount/amount</span> have  the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityRepayment/amount/globalAmount/amount</span> must be greater than or equal to the sum of all <span class="element">loanContractRepayment/amount/globalAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Repayment<br><div style="background-color:#d0d0d0">[exists(<span class="element">loanContractRepayment/amount/globalAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityRepayment/amount/globalAmount/amount</span>,//<span class="element">loanContractRepayment/amount/globalAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityRepayment/amount/globalAmount/amount</span> ge sum(<span class="element">loanContractRepayment/amount/globalAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: OneOffFeeNotice (complex type)<br>If <span class="element">feePayment/feeType</span> is equal to "<span class="value">BreakageFee</span>", then <span class="element">loanContractSummary</span> must exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: OneOffFeeNotice<br><div style="background-color:#d0d0d0">[<span class="element">feePayment/feeType</span> eq "<span class="value">BreakageFee</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">loanContractSummary</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-28</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: OneOffFeeNotice (complex type)<br>If <span class="element">feePayment/feeType</span> is equal to "<span class="value">AssignmentFee</span>", then <span class="element">loanContractSummary</span> must not exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: OneOffFeeNotice<br><div style="background-color:#d0d0d0">[<span class="element">feePayment/feeType</span> eq "<span class="value">AssignmentFee</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists((<span class="element">loanContractSummary</span>))
+            </div>
+         </div>
+      </div>
+      <div id="ln-29" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-29</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: OneOffFeePayment (complex type)<br><span class="element">paymentDate</span> is greater than or equal to <span class="element">effectiveDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: OneOffFeePayment<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">paymentDate</span> ge <span class="element">effectiveDate</span></div>
+         </div>
+      </div>
+      <div id="ln-30" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-30</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FacilityNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/globalAmount</span> and <span class="element">facilityCommitmentPosition/currentAmount/globalAmount</span> exist, and if <span class="element">facilityCommitmentPosition/currentAmount/globalAmount/amount</span> and all <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/globalAmount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/currentAmount/globalAmount/amount</span> is greater than or equal to the sum of all <span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/globalAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FacilityNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/globalAmount</span>)] [exists(<span class="element">facilityCommitmentPosition/currentAmount/globalAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/currentAmount/globalAmount/amount</span>,//<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/globalAmount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/currentAmount/globalAmount/amount</span> ge sum(<span class="element">facilityCommitmentPosition/loanContractPosition/currentAmount/globalAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <div id="ln-31" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-31</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: FacilityNotice (complex type)<br>If <span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/globalAmount</span> and <span class="element">facilityCommitmentPosition/priorAmount/globalAmount</span> exist, and if <span class="element">facilityCommitmentPosition/priorAmount/globalAmount/amount</span> and all <span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/globalAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityCommitmentPosition/priorAmount/globalAmount/amount</span>is greater than or equal to the sum of all <span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/globalAmount/amount</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: FacilityNotice<br><div style="background-color:#d0d0d0">[exists(<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/globalAmount</span>)] [exists(<span class="element">facilityCommitmentPosition/priorAmount/globalAmount</span>)] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">facilityCommitmentPosition/priorAmount/globalAmount/amount</span>,//<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/globalAmount/amount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">facilityCommitmentPosition/priorAmount/globalAmount/amount</span> ge sum(<span class="element">facilityCommitmentPosition/loanContractPosition/priorAmount/globalAmount/amount</span>)
+            </div>
+         </div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <div id="ln-23" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">ln-23</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Repayment: If <span class="element">facilityRepayment/amount/globalAmount/amount</span> and all <span class="element">loanContractRepayment/loanContractSummary/originalAmount/amount</span> have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">facilityRepayment/amount/globalAmount/amount</span> must be greater than or equal to the sum of all <span class="element">loanContractRepayment/loanContractSummary/originalAmount/amount</span>.
+            			Rationale for removal: Rule ln-23 is incorrectly defined since there is no credible relationship between the original amount
+            of a loan contract and the repayment occurring at a point in time in the future after that..
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>

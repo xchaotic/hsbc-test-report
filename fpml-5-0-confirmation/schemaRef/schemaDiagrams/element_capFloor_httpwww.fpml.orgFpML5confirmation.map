@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_capFloor_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_bulletPayment'
+  coords='211,490,365,552'
+  href='fpml-ird-5-0.xsd.html_element_bulletPayment.html#element_bulletPayment'/>
+
+ <area
+  shape='rect'
+  alt='element_fra'
+  coords='211,634,307,696'
+  href='fpml-ird-5-0.xsd.html_element_fra.html#element_fra'/>
+
+ <area
+  shape='rect'
+  alt='element_swap'
+  coords='211,706,317,768'
+  href='fpml-ird-5-0.xsd.html_element_swap.html#element_swap'/>
+
+ <area
+  shape='rect'
+  alt='element_swaption'
+  coords='211,778,337,840'
+  href='fpml-ird-5-0.xsd.html_element_swaption.html#element_swaption'/>
+
+</map>

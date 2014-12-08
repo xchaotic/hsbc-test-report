@@ -1,0 +1,563 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>XML Schema Documentation - Complex Type FeeLeg</title>
+      <meta http-equiv="Content-Type" content="text/xml; charset=iso-8859-1"/>
+      <style type="text/css">
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* More-configurable styles */
+
+/******** General ********/
+         
+/* Document body */
+body {
+   color: Black;
+   background-color: White;
+   font-family: Arial, sans-serif;
+   font-size: 10pt;
+}
+                  
+/* Horizontal rules */
+hr {
+   color: black;
+}
+/* Document title */
+h1 {
+   font-size: 18pt;
+   letter-spacing: 2px;
+   border-bottom: 1px #ccc solid;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+/* Main section headers */
+h2 {
+   font-size: 14pt;
+   letter-spacing: 1px;
+}
+/* Sub-section headers */
+h3, h3 a, h3 span {
+   font-size: 12pt;
+   font-weight: bold;
+   color: black;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties th, table.properties th a {
+   color: black;
+   background-color: #F99; /* Pink */
+}
+table.properties td {
+   background-color: #eee; /* Gray */
+}
+
+img{
+ border: 0;
+}         
+
+/********* Documentation style *************/
+p.documentation {
+   color:black;
+   font-style:italic;
+         background-color: #EEEEFF;
+         border: 1px solid #DDDDFF;
+         padding-top: 1px;
+         margin-right: 30px;
+         margin-top: 1px;
+}
+
+         
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   color: #963; /* Orange-brown */
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   border: 2px solid #999;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+   background-color: #ccc;
+}
+table.namespaces td {
+   background-color: #eee;
+}
+/* Target namespace of the schema */
+span.targetNS {
+   color: #06C;
+   font-weight: bold;
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+   color: #F93; /* Orange */
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   border: 2px solid #999; /* Gray */
+}
+
+/* XML Instance Representation table */
+div.sample div.contents {
+   border: 1px dashed black;
+}
+
+
+/* Schema Component Representation table */
+div.schemaComponent div.contents {
+   border: 2px black solid;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   color: #036; /* Blue */
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Printer-version styles */
+
+@media print {
+
+/* Ensures that controls are hidden when printing */
+div#printerControls {
+   visibility: hidden;
+}
+div#globalControls {
+   visibility: hidden;
+}
+#legend {
+   display: none;
+}
+#legendTOC {
+   display: none;
+}
+#glossary {
+   display: none;
+}
+#glossaryTOC {
+   display: none;
+}
+
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* Base styles */
+
+/******** General ********/
+
+/* Unordered lists */
+ul {
+   margin-left: 1.5em;
+   margin-bottom: 0em;
+}
+/* Tables */
+table {
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 2px;
+   margin-right: 2px;
+}
+table th, table td {
+   font-size: 10pt;
+   vertical-align: top;
+   padding-top: 3px;
+   padding-bottom: 3px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+table th {
+   font-weight: bold;
+   text-align: left;
+}
+/* Table displaying the properties of the schema components or the
+   schema document itself */
+table.properties {
+   width: 90%;
+}
+table.properties th {
+   width: 30%;
+}
+/* Boxes that can make its content appear and disappear*/
+div.box {
+   margin: 1em;
+}
+   /* Box caption */
+div.box span.caption {
+   font-weight: bold;
+}
+   /* Button to open and close the box */
+div.box input.control {
+   width: 1.4em;
+   height: 1.4em;
+   text-align: center;
+   vertical-align: middle;
+   font-size: 11pt;
+}
+   /* Box contents */
+div.box div.contents {
+   margin-top: 3px;
+}
+
+
+/******** Table of Contents Section ********/
+
+/* Controls for switching between printing and viewing modes */
+div#printerControls {
+   white-space: nowrap;
+   font-weight: bold;
+   padding: 5px;
+   margin: 5px;
+}
+/* Controls that can collapse or expand all XML Instance
+   Representation and Schema Component Representation boxes */
+div#globalControls {
+   padding: 10px;
+   margin: 5px;
+}
+
+
+/******** Schema Document Properties Section ********/
+
+/* Table displaying the namespaces declared in the schema */
+table.namespaces th {
+}
+table.namespaces td {
+}
+/* Target namespace of the schema */
+span.targetNS {
+}
+
+
+/******** Schema Components' Sections ********/
+
+/* Name of schema component */
+.name {
+}
+
+/* Hierarchy table */
+table.hierarchy {
+   width: 90%;
+}
+table.hierarchy th {
+   font-weight: normal;
+   font-style: italic;
+   width: 20%;
+}
+table.hierarchy th, table.hierarchy td {
+   padding: 5px;
+}
+
+/* XML Instance Representation table */
+div.sample {
+   width: 90%;
+}
+div.sample div.contents {
+   padding: 5px;
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+}
+   /* Normal elements and attributes */
+div.sample div.contents, div.sample div.contents a {
+   color: black;
+}
+   /* Group Headers */
+div.sample div.contents .group, div.sample div.contents .group a {
+   color: #999; /* Light gray */
+}
+   /* Type Information */
+div.sample div.contents .type, div.sample div.contents .type a {
+   color: #999; /* Light gray */
+}
+   /* Occurrence Information */
+div.sample div.contents .occurs, div.sample div.contents .occurs a {
+   color: #999; /* Light gray */
+}
+   /* Fixed values */
+div.sample div.contents .fixed {
+   color: #063; /* Green */
+   font-weight: bold;
+}
+   /* Simple type constraints */
+div.sample div.contents .constraint, div.sample div.contents .constraint a {
+   color: #999; /* Light gray */
+}
+   /* Elements and attributes inherited from base type */
+div.sample div.contents .inherited, div.sample div.contents .inherited a {
+   color: #666; /* Dark gray */
+}
+   /* Elements and attributes added to or changed from base type */
+div.sample div.contents .newFields {
+   font-weight: bold;
+}
+   /* Other type of information */
+div.sample div.contents .other, div.sample div.contents .other a {
+   color: #369; /* Blue */
+   font-style: italic;
+}
+   /* Link to open up window displaying documentation */
+div.sample div.contents a.documentation {
+   text-decoration: none;
+   padding-left: 3px;
+   padding-right: 3px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+   font-weight: bold;
+   font-size: 11pt;
+   background-color: #FFD;
+   color: #069;
+}
+   /* Invert colors when hovering over link to open up window 
+      displaying documentation */
+div.sample div.contents a.documentation:hover {
+   color: #FFD;
+   background-color: #069;
+}
+
+/* Schema Component Representation table */
+div.schemaComponent {
+   width: 90%;
+}
+div.schemaComponent div.contents {
+   font-family: Courier New, sans-serif;
+   font-size: 10pt;
+   padding: 5px;
+}
+   /* Syntax characters */
+div.schemaComponent div.contents {
+   color: #00f; /* blue */
+}
+   /* Element and attribute tags */
+div.schemaComponent div.contents .scTag {
+   color: #933; /* maroon */
+}
+   /* Element and attribute content */
+div.schemaComponent div.contents .scContent, div.schemaComponent div.contents .scContent a {
+   color: black;
+   font-weight: bold;
+}
+   /* Comments */
+div.schemaComponent div.contents .comment {
+   color: #999; /* Light gray */
+}
+
+/******** Legend Section ********/
+
+div#legend table, div#legend div {
+   margin-bottom: 3px;
+}
+div#legend div.hint {
+   color: #999; /* Light gray */
+   width: 90%;
+   margin-left: 1em;
+   margin-bottom: 2em;
+}
+
+
+/******** Glossary Section ********/
+
+/* Glossary Terms */
+.glossaryTerm {
+   font-weight: bold;
+}
+
+/********* Details *************/
+.detailsToc {
+  color: #666; /* Light gray */
+}
+
+.details {
+  color: #666; /* Light gray */
+  text-decoration:none;
+}
+
+/******** Footer ********/
+
+.footer {
+   font-size: 8pt;
+}
+</style>
+   </head>
+   <body>
+      <h1>
+         <a name="top">XML Schema Documentation</a>
+      </h1>
+      <h3>Complex Type: <a name="type_FeeLeg" class="name">FeeLeg</a>
+      </h3>
+      <h4>
+         <a href="fpml-cd-5-0.xsd.html" class="details">[Table of contents]</a>
+      </h4>
+      <table class="hierarchy">
+         <tr>
+            <th>Super-types:</th>
+            <td>
+               <span class="type">
+                  <a title="Jump to &#34;Leg&#34; type definition(located in external schema documentation)."
+                     href="fpml-shared-5-0.xsd.html_type_Leg.html"
+                     class="externalLink">Leg</a>
+               </span> &lt; <strong>FeeLeg</strong> (by extension)</td>
+         </tr>
+         <tr>
+            <th>Sub-types:</th>
+            <td>None</td>
+         </tr>
+      </table>
+      <table class="properties">
+         <tr>
+            <th>Name</th>
+            <td>FeeLeg</td>
+         </tr>
+         <tr>
+            <th>Used by (from the same schema document)</th>
+            <td>Complex Type <b>
+                  <a href="fpml-cd-5-0.xsd.html_type_CreditDefaultSwap.html">CreditDefaultSwap</a>
+               </b>
+            </td>
+         </tr>
+         <tr>
+            <th>
+               <a title="Look up 'Abstract' in glossary"
+                  href="fpml-cd-5-0.xsd.html#term_Abstract">Abstract</a>
+            </th>
+            <td>no</td>
+         </tr>
+      </table>
+      <div class="sample box">
+         <div> 
+            <span class="caption">XML Instance Representation</span>
+         </div>
+         <div id="type_FeeLeg_xibox" class="contents">
+            <div style="margin-left: 0em">&lt;...<br/>
+               <span style="margin-left: 0.5em" class="inherited"> id="<span class="type">
+                     <a href="fpml-shared-5-0.xsd.html#ns_xsd"
+                        title="Find out namespace of 'xsd' prefix">xsd</a>:ID</span> 
+                  <span class="occurs">[0..1]</span>"</span>&gt; <br/>
+               <div style="margin-left: 1.5em" class="newFields">&lt;initialPayment&gt; <span class="type">
+                     <a title="Jump to &#34;InitialPayment&#34; type definition."
+                        href="fpml-cd-5-0.xsd.html_type_InitialPayment.html">InitialPayment</a>
+                  </span> &lt;/initialPayment&gt; <span class="occurs">[0..1]</span> 
+                  <p class="documentation">'Specifies a single fixed payment that is payable by the payer to the receiver on the initial payment date. The fixed payment to be paid is specified in terms of a known currency amount. This element should be used for CDS Index trades and can be used for CDS trades where it is necessary to represent a payment from Seller to Buyer. For CDS trades where a payment is to be made from Buyer to Seller the feeLeg/singlePayment structure must be used.'</p>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;singlePayment&gt; <span class="type">
+                     <a title="Jump to &#34;SinglePayment&#34; type definition."
+                        href="fpml-cd-5-0.xsd.html_type_SinglePayment.html">SinglePayment</a>
+                  </span> &lt;/singlePayment&gt; <span class="occurs">[0..*]</span> 
+                  <p class="documentation">'Specifies a single fixed amount that is payable by the buyer to the seller on the fixed rate payer payment date. The fixed amount to be paid is specified in terms of a known currency amount.'</p>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;periodicPayment&gt; <span class="type">
+                     <a title="Jump to &#34;PeriodicPayment&#34; type definition."
+                        href="fpml-cd-5-0.xsd.html_type_PeriodicPayment.html">PeriodicPayment</a>
+                  </span> &lt;/periodicPayment&gt; <span class="occurs">[0..1]</span> 
+                  <p class="documentation">'Specifies a periodic schedule of fixed amounts that are payable by the buyer to the seller on the fixed rate payer payment dates. The fixed amount to be paid on each payment date can be specified in terms of a known currency amount or as an amount calculated on a formula basis by reference to a per annum fixed rate. The applicable business day convention and business day for adjusting any fixed rate payer payment date if it would otherwise fall on a day that is not a business day are those specified in the dateAdjustments element within the generalTerms component. ISDA 2003 Term:'</p>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;marketFixedRate&gt; <span class="type">
+                     <a href="fpml-cd-5-0.xsd.html#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span> &lt;/marketFixedRate&gt; <span class="occurs">[0..1]</span> 
+                  <p class="documentation">'An optional element that only has meaning in a credit index trade. This element contains the credit spread (\"fair value\") at which the trade was executed. Unlike the fixedRate of an index, the marketFixedRate varies over the life of the index depending on market conditions. The marketFixedRate is the price of the index as quoted by trading desks.'</p>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;paymentDelay&gt; <span class="type">
+                     <a href="fpml-cd-5-0.xsd.html#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span> &lt;/paymentDelay&gt; <span class="occurs">[0..1]</span> 
+                  <p class="documentation">'Applicable to CDS on MBS to specify whether payment delays are applicable to the fixed Amount. RMBS typically have a payment delay of 5 days between the coupon date of the reference obligation and the payment date of the synthetic swap. CMBS do not, on the other hand, with both payment dates being on the 25th of each month.'</p>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;initialPoints&gt; <span class="type">
+                     <a href="fpml-cd-5-0.xsd.html#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span> &lt;/initialPoints&gt; <span class="occurs">[0..1]</span> 
+                  <p class="documentation">'An optional element that contains the up-front points expressed as a percentage of the notional. An initialPoints value of 5% would be represented as 0.05. The initialPoints element is an alternative to marketFixedRate in quoting the traded level of a trade. When initialPoints is used, the traded level is the sum of fixedRate and initialPoints. The initialPoints is one of the items that are factored into the initialPayment calculation and is payable by the Buyer to the Seller. Note that initialPoints and marketFixedRate may both be present in the same document when both implied values are desired.'</p>
+               </div>
+               <div style="margin-left: 1.5em" class="newFields">&lt;quotationStyle&gt; <span class="type">
+                     <a title="Jump to &#34;QuotationStyleEnum&#34; type definition(located in external schema documentation)."
+                        href="fpml-enum-5-0.xsd.html_type_QuotationStyleEnum.html"
+                        class="externalLink">QuotationStyleEnum</a>
+                  </span> &lt;/quotationStyle&gt; <span class="occurs">[0..1]</span> 
+                  <p class="documentation">'The type of quotation that was used between the trading desks. The purpose of this element is to indicate the actual quotation style that was used to quote this trade which may not be apparent when both marketFixedRate and initialPoints are included in the document. When quotationStyle is ‘PointsUpFront’, the initialPoints element should be populated. When quotationStyle is ‘TradedSpread’, the marketFixedRate element should be populated.'</p>
+               </div>&lt;/...&gt;</div>
+         </div>
+      </div>
+      <div class="sample box">
+         <div> 
+            <span class="caption">Diagram</span>
+         </div>
+         <div id="type_FeeLeg_diagram" class="contents">
+            <img usemap="#type_FeeLeg_httpwww.fpml.orgFpML5confirmation"
+                 src="schemaDiagrams/type_FeeLeg_httpwww.fpml.orgFpML5confirmation.png"/>
+            <!--
+            Map ref: file:html/confirmation/schemaRef/schemaDiagrams/type_FeeLeg_httpwww.fpml.orgFpML5confirmation.map--><map name="type_FeeLeg_httpwww.fpml.orgFpML5confirmation">
+</map>
+         </div>
+      </div>
+      <div class="schemaComponent box">
+         <div> 
+            <span class="caption">Schema Component Representation</span>
+         </div>
+         <div id="type_FeeLeg_scbox" class="contents">
+            <div style="margin-left: 0em">&lt;<span class="scTag">xsd:complexType</span> 
+               <span class="scTag">name</span>="<span class="scContent">FeeLeg</span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:complexContent</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:extension</span> 
+                     <span class="scTag">base</span>="<span class="scContent">
+                        <span class="type">
+                           <a title="Jump to &#34;Leg&#34; type definition(located in external schema documentation)."
+                              href="fpml-shared-5-0.xsd.html_type_Leg.html"
+                              class="externalLink">Leg</a>
+                        </span>
+                     </span>"&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:sequence</span>&gt;<div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">initialPayment</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;InitialPayment&#34; type definition."
+                                    href="fpml-cd-5-0.xsd.html_type_InitialPayment.html">InitialPayment</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">singlePayment</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;SinglePayment&#34; type definition."
+                                    href="fpml-cd-5-0.xsd.html_type_SinglePayment.html">SinglePayment</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>" <span class="scTag">maxOccurs</span>="<span class="scContent">unbounded</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">periodicPayment</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;PeriodicPayment&#34; type definition."
+                                    href="fpml-cd-5-0.xsd.html_type_PeriodicPayment.html">PeriodicPayment</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">marketFixedRate</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a href="fpml-cd-5-0.xsd.html#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">paymentDelay</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a href="fpml-cd-5-0.xsd.html#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:boolean</span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">initialPoints</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a href="fpml-cd-5-0.xsd.html#ns_xsd" title="Find out namespace of 'xsd' prefix">xsd</a>:decimal</span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>
+                        <div style="margin-left: 1.5em">&lt;<span class="scTag">xsd:element</span> 
+                           <span class="scTag">name</span>="<span class="scContent">quotationStyle</span>" <span class="scTag">type</span>="<span class="scContent">
+                              <span class="type">
+                                 <a title="Jump to &#34;QuotationStyleEnum&#34; type definition(located in external schema documentation)."
+                                    href="fpml-enum-5-0.xsd.html_type_QuotationStyleEnum.html"
+                                    class="externalLink">QuotationStyleEnum</a>
+                              </span>
+                           </span>" <span class="scTag">minOccurs</span>="<span class="scContent">0</span>"/&gt;</div>&lt;/<span class="scTag">xsd:sequence</span>&gt;</div>&lt;/<span class="scTag">xsd:extension</span>&gt;</div>&lt;/<span class="scTag">xsd:complexContent</span>&gt;</div>&lt;/<span class="scTag">xsd:complexType</span>&gt;</div>
+         </div>
+      </div>
+      <hr/>
+      <p class="footer">Generated by <a href="http://www.oxygenxml.com">&lt;oXygen/&gt; XML Editor</a> using a modified version of <a href="http://titanium.dstc.edu.au/xml/xs3p">xs3p</a> that adds schema diagrams and chunking support.</p>
+   </body>
+</html>

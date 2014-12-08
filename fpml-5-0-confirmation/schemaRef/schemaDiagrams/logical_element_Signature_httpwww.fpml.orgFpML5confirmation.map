@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='logical_element_Signature_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_SignedInfo'
+  coords='311,53,536,113'
+  href='fpml-msg-5-0.xsd.html_element_SignedInfo.html#element_SignedInfo'/>
+
+ <area
+  shape='rect'
+  alt='element_SignatureValue'
+  coords='311,123,536,183'
+  href='fpml-msg-5-0.xsd.html_element_SignatureValue.html#element_SignatureValue'/>
+
+ <area
+  shape='rect'
+  alt='element_KeyInfo'
+  coords='311,193,536,269'
+  href='fpml-msg-5-0.xsd.html_element_KeyInfo.html#element_KeyInfo'/>
+
+ <area
+  shape='rect'
+  alt='element_Object'
+  coords='311,279,536,355'
+  href='fpml-msg-5-0.xsd.html_element_Object.html#element_Object'/>
+
+</map>

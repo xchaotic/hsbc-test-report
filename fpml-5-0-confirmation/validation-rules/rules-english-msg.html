@@ -1,0 +1,115 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>MSG rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Messaging 
+      </h1>
+      <div>
+         		
+         <p> This section is the constraints that implement the Business Process definition and Messaging definition in the FpML 5.0 Recommendation.</p>
+         		
+         <p>These constraints apply to the set of all known messages to validate the Business Process and Messaging definitions. The rules
+            are tested by applying to the collection of all messages available, both sent and received. Each message is referred to as
+            a "document", as this meets the requirement to use XPath 2.0 for paths.
+         </p>
+         		
+         <p>The constraints are written as invariant rules that return "false" when they are failed and "true" when they are satisfied.
+            The constraints are written to accommodate the open world assumption that there may be other messages that are not yet known
+            about. For example messages that have not yet been sent or arrived are unknown.
+         </p>
+         		
+         <p>A subset of constraints is identified as "Warnings". These constraints are used when knowledge from a message is expected
+            but absent and it is impossible to distinguish between the messages being incorrect and the message not yet being known about.
+            For example a Request might not yet be known about to match to a Response. 
+         </p>
+         		
+         <p>The constraints that are not "Warnings" are termed "Mandatory" constraints, which is consistent with all other rules.</p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+         <li>
+            
+            					Rules with comments
+            
+            					
+            <ul>
+               <li><a href="#msg-1">msg-1</a></li>
+               <li><a href="#msg-2">msg-2</a></li>
+               <li><a href="#msg-3">msg-3</a></li>
+               <li><a href="#msg-4">msg-4</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#fpml:deep-equal" target="_blank">fpml:deep-equal</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">collection()</span>: <a href="#msg-1">msg-1</a> <a href="#msg-2">msg-2</a> <a href="#msg-3">msg-3</a> <a href="#msg-4">msg-4</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="msg-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">msg-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: collection()<br>
+            			<span class="element">Every /FpML/header/messageId</span> must be unique. The comparison function for correlation is <a href="rules-functions.html#fpml:deep-equal" target="_blank">fpml:deep-equal</a>()
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>MessageId is unique
+         </div>
+      </div>
+      <div id="msg-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">msg-2</span> (Warning)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: collection()<br>every <span class="element">/FpML/header/inReplyTo</span> must correlate to one <span class="element">/FpML/header/messageId</span>. The comparison function for correlation is <a href="rules-functions.html#fpml:deep-equal" target="_blank">fpml:deep-equal</a>()
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>A reply must be in response to a message. You may not yet have the message being responded to.
+         </div>
+      </div>
+      <div id="msg-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">msg-3</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: collection()<br>every <span class="element">/FpML/header/inReplyTo</span> must not correlate to a <span class="element">/FpML/header/messageId</span> in the same document. The comparison function for correlation is <a href="rules-functions.html#fpml:deep-equal" target="_blank">fpml:deep-equal</a>()
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>A message cannot reply to itself.
+         </div>
+      </div>
+      <div id="msg-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">msg-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: collection()<br>every <span class="element">/element(*, MessageRejected)/header/inReplyTo</span> must not correlate to  <span class="element">/element(*, MessageRejected)/header/messageId</span>. The comparison function for correlation is <a href="rules-functions.html#fpml:deep-equal" target="_blank">fpml:deep-equal</a>()
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>If you know it is a MessageRejected message then it may not be rejected.
+         </div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <hr>
+   </body>
+</html>

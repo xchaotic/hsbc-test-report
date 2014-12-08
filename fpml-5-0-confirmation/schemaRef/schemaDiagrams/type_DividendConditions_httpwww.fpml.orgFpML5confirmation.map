@@ -1,0 +1,20 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_DividendConditions_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_DividendAmountTypeEnum'
+  coords='274,268,418,310'
+  href='fpml-enum-5-0.xsd.html_type_DividendAmountTypeEnum.html#type_DividendAmountTypeEnum'/>
+
+ <area
+  shape='rect'
+  alt='group_CurrencyAndDeterminationMethod.model'
+  coords='274,1032,580,1074'
+  href='fpml-eq-shared-5-0.xsd.html_group_CurrencyAndDeterminationMethod.model.html#group_CurrencyAndDeterminationMethod.model'/>
+
+ <area
+  shape='rect'
+  alt='group_DeclaredCashAndCashEquivalentDividendPercentage.model'
+  coords='274,1460,691,1486'
+  href='fpml-eq-shared-5-0.xsd.html_group_DeclaredCashAndCashEquivalentDividendPercentage.model.html#group_DeclaredCashAndCashEquivalentDividendPercentage.model'/>
+
+</map>

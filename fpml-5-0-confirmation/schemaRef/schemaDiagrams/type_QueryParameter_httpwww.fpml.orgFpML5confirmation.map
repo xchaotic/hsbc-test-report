@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_QueryParameter_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_QueryParameterId'
+  coords='256,52,410,78'
+  href='fpml-doc-5-0.xsd.html_type_QueryParameterId.html#type_QueryParameterId'/>
+
+ <area
+  shape='rect'
+  alt='type_QueryParameterOperator'
+  coords='256,140,448,182'
+  href='fpml-doc-5-0.xsd.html_type_QueryParameterOperator.html#type_QueryParameterOperator'/>
+
+</map>

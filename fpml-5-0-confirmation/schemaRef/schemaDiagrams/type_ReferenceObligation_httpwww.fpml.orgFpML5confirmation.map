@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_ReferenceObligation_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_bond'
+  coords='351,0,435,26'
+  href='fpml-asset-5-0.xsd.html_element_bond.html#element_bond'/>
+
+ <area
+  shape='rect'
+  alt='element_convertibleBond'
+  coords='351,36,495,62'
+  href='fpml-asset-5-0.xsd.html_element_convertibleBond.html#element_convertibleBond'/>
+
+ <area
+  shape='rect'
+  alt='element_mortgage'
+  coords='351,72,460,98'
+  href='fpml-asset-5-0.xsd.html_element_mortgage.html#element_mortgage'/>
+
+ <area
+  shape='rect'
+  alt='element_loan'
+  coords='351,108,431,134'
+  href='fpml-asset-5-0.xsd.html_element_loan.html#element_loan'/>
+
+</map>

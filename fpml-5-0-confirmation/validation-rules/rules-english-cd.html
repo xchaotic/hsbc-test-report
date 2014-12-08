@@ -1,0 +1,759 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>CD rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Credit Derivatives (CD)
+      </h1>
+      <div>
+         		
+         <p> This is the Credit Derivatives part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory
+            section in the validation section of the specifications contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. The cut down test cases
+            are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#conditions">Conditions</a><ul></ul>
+         </li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+         <li>
+            
+            					Rules with comments
+            
+            					
+            <ul>
+               <li><a href="#cd-1">cd-1</a></li>
+               <li><a href="#cd-1b">cd-1b</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="conditions">Conditions</h2>
+      <p>The Validation Conditions only apply when specific rules reference them. The following conditions are always to be executed
+         relative to the root of the FpML document being validated. The context of the rule is NOT carried through to the condition.
+      </p><a name="ISDA1999Credit"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">ISDA1999Credit</span><div style="margin-top:0.5em">
+            			
+            		(context: Trade)
+            	
+            			At least one of <span class="element">documentation/contractualDefinition</span> element and <span class="element">documentation/masterConfirmation/masterConfirmationType</span> element exists and contains the string "<span class="value">ISDA1999Credit</span>".
+            			
+            <p>Formal description: some <span class="element">$document</span> in (//element(*, <span class="element">Trade</span>) | //element(*, <span class="element">Contract</span>))/<span class="element">documentation</span>/(<span class="element">contractualDefinitions</span> | <span class="element">masterConfirmation/masterConfirmationType</span>) satisfies contains(<span class="element">$document</span>, "<span class="value">ISDA1999Credit</span>")
+            </p>
+            		
+         </div>
+      </div><a name="ISDA2003"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">ISDA2003</span><div style="margin-top:0.5em">
+            			
+            		(context: Trade)
+            	
+            			Some <span class="element">documentation/contractualDefinitions</span> element begins with the string "<span class="value">ISDA2003Credit</span>" (this includes ISDA2003CreditJapan, etc.) or the <span class="element">documentation/masterConfirmation/masterConfirmationType</span> element begins with the string "<span class="value">ISDA2003Credit</span>" or "<span class="value">ISDA2004Credit</span>".
+            		
+         </div>
+      </div><a name="ShortForm"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">ShortForm</span><div style="margin-top:0.5em">
+            			
+            		(context: Trade)
+            	
+            			<span class="element">documentation/masterConfirmation</span> exists, or <span class="element">documentation/contractualMatrix</span> exists, or <span class="element">documentation/contractualTermsSupplement</span> exists and documentation/contractualTermsSupplement/type begins with string "<span class="value">iTraxx</span>" or "<span class="value">CDX</span>". 
+            		
+         </div>
+      </div><a name="LongForm"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">LongForm</span><div style="margin-top:0.5em">
+            			
+            		(context: Trade)
+            	
+            			<span class="element">documentation/masterConfirmation</span> and <span class="element">documentation/contractualMatrix</span> do not exist and SingleName condition applies.
+         </div>
+      </div><a name="SingleName"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">SingleName</span><div style="margin-top:0.5em">
+            			
+            		(context: Trade)
+            	
+            			<span class="element">creditDefaultSwap/generalTerms/referenceInformation</span> exists.
+         </div>
+      </div><a name="CreditIndex"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">CreditIndex</span><div style="margin-top:0.5em">
+            			
+            		(context: CreditDefaultSwap)
+            	
+            			<span class="element">generalTerms/indexReferenceInformation</span> exists and <span class="element">generalTerms/indexReferenceInformation/tranche</span> does not exist.
+         </div>
+      </div><a name="quotationAmount"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">quotationAmount</span><div style="margin-top:0.5em">
+            			
+            		(context: CashSettlementTerms)
+            	
+            			<span class="element">quotationAmount</span> exists.
+         </div>
+      </div><a name="minimumQuotationAmount"></a><div class="termdef"><span class="emph">Condition: </span><span class="termname">minimumQuotationAmount</span><div style="margin-top:0.5em">
+            			
+            		(context: CashSettlementTerms)
+            	
+            			<span class="element">minimumQuotationAmount</span> exists.
+         </div>
+      </div>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#same-currency" target="_blank">same-currency</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">Trade</span> (complex type): <a href="#cd-1">cd-1</a> <a href="#cd-1b">cd-1b</a> <a href="#cd-2">cd-2</a> 
+         </li>
+         <li><span class="element">ContractualTermsSupplement</span> (complex type): <a href="#cd-3b">cd-3b</a> <a href="#cd-4b">cd-4b</a> 
+         </li>
+         <li><span class="element">GeneralTerms</span> (complex type): <a href="#cd-5">cd-5</a> <a href="#cd-6">cd-6</a> <a href="#cd-7">cd-7</a> <a href="#cd-8">cd-8</a> <a href="#cd-41">cd-41</a> <a href="#cd-42">cd-42</a> 
+         </li>
+         <li><span class="element">ReferenceInformation</span> (complex type): <a href="#cd-9">cd-9</a> <a href="#cd-10">cd-10</a> <a href="#cd-11">cd-11</a> <a href="#cd-12">cd-12</a> 
+         </li>
+         <li><span class="element">CreditDefaultSwap</span> (complex type): <a href="#cd-13">cd-13</a> <a href="#cd-14">cd-14</a> <a href="#cd-15">cd-15</a> <a href="#cd-16">cd-16</a> <a href="#cd-17">cd-17</a> <a href="#cd-18">cd-18</a> <a href="#cd-19">cd-19</a> <a href="#cd-20">cd-20</a> <a href="#cd-21">cd-21</a> <a href="#cd-21b">cd-21b</a> <a href="#cd-22">cd-22</a> <a href="#cd-23">cd-23</a> <a href="#cd-24">cd-24</a> <a href="#cd-25">cd-25</a> <a href="#cd-26">cd-26</a> <a href="#cd-27">cd-27</a> <a href="#cd-28">cd-28</a> <a href="#cd-29">cd-29</a> <a href="#cd-30">cd-30</a> 
+         </li>
+         <li><span class="element">PeriodicPayment</span> (complex type): <a href="#cd-31">cd-31</a> <a href="#cd-32">cd-32</a> <a href="#cd-33">cd-33</a> 
+         </li>
+         <li><span class="element">DeliverableObligations</span> (complex type): <a href="#cd-34">cd-34</a> 
+         </li>
+         <li><span class="element">CreditEvents</span> (complex type): <a href="#cd-35">cd-35</a> 
+         </li>
+         <li><span class="element">PubliclyAvailableInformation</span> (complex type): <a href="#cd-36">cd-36</a> 
+         </li>
+         <li><span class="element">CashSettlementTerms</span> (complex type): <a href="#cd-37">cd-37</a> 
+         </li>
+         <li><span class="element">ReferencePool</span> (complex type): <a href="#cd-38">cd-38</a> <a href="#cd-44">cd-44</a> 
+         </li>
+         <li><span class="element">BasketReferenceInformation</span> (complex type): <a href="#cd-39">cd-39</a> 
+         </li>
+         <li><span class="element">Tranche</span> (complex type): <a href="#cd-40">cd-40</a> 
+         </li>
+         <li><a href="#d0e2depr">Deprecated rules</a></li>
+         <li><a href="#d0e2rmvd">Removed rules</a></li>
+      </ul>
+      <div id="cd-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>
+            			if <span class="element">creditDefaultSwap/generalTerms/referenceInformation</span> exists, <span class="element">tradeHeader/tradeDate</span> must be before <span class="element">creditDefaultSwap/generalTerms/effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">creditDefaultSwap/generalTerms/referenceInformation</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">tradeHeader/tradeDate</span> lt <span class="element">creditDefaultSwap/generalTerms/effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>This rule may be updated in the third working draft for version 4.6 to support Standard Single Name trades.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-1-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-1b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-1b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If condition <span class="element">CreditIndex</span> is true, and if <span class="element">creditDefaultSwap/generalTerms/effectiveDate</span> exists, then <span class="element">tradeHeader/tradeDate</span> must be after <span class="element">creditDefaultSwap/generalTerms/effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[<a href="#CreditIndex">CreditIndex</a>] [exists(<span class="element">creditDefaultSwap/generalTerms/effectiveDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">tradeHeader/tradeDate</span> ge <span class="element">creditDefaultSwap/generalTerms/effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>This rule may be updated in the third working draft for version 4.6 to support Standard Single Name trades.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-1b-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-2</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br> <span class="element">calculationAgent</span> may contain only <span class="element">calculationAgentPartyReference</span> elements or <span class="element">calculationAgentParty</span> with the value "<span class="value">AsSpecifiedInMasterAgreement</span>"
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(<span class="element">calculationAgent</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> every <span class="element">$calculationAgent</span> in <span class="element">calculationAgent</span> satisfies ((<span class="element">$calculationAgent/calculationAgentParty</span> eq "AsSpecifiedInMasterAgreement") or <span class="element">$calculationAgent/calculationAgentPartyReference</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-2-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-3b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-3b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ContractualTermsSupplement (complex type)<br>If condition <span class="element">ISDA1999Credit</span> is true, then the content of <span class="element">type</span> must not begin with the string "<span class="value">ISDA2003Credit</span>".
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ContractualTermsSupplement<br><div style="background-color:#d0d0d0">[<a href="#ISDA1999Credit">ISDA1999Credit</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(start-with(<span class="element">type</span>, "<span class="value">ISDA2003Credit</span>"))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-3b-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-4b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-4b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ContractualTermsSupplement (complex type)<br>If condition <span class="element">ISDA2003</span> is true, then the content of <span class="element">type</span> must not begin with the string "<span class="value">ISDA1999Credit</span>"
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ContractualTermsSupplement<br><div style="background-color:#d0d0d0">[<a href="#ISDA2003">ISDA2003</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(start-with(<span class="element">type</span>, "<span class="value">ISDA1999Credit</span>"))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-4b-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-5</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: GeneralTerms (complex type)<br>If <span class="element">effectiveDate</span> exists, and if <span class="element">scheduledTerminationDate</span> exists, then <span class="element">effectiveDate/unadjustedDate</span> must be before <span class="element">scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: GeneralTerms<br><div style="background-color:#d0d0d0">[exists(<span class="element">effectiveDate</span>)] [exists(<span class="element">scheduledTerminationDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">effectiveDate/unadjustedDate</span> lt  <span class="element">scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-5-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-5-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-6</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: GeneralTerms (complex type)<br>The <span class="element">@href</span> attribute of <span class="element">buyerPartyReference</span> must not be equal to the <span class="element">@href</span> attribute of <span class="element">sellerPartyReference</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: GeneralTerms<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">buyerPartyReference/@href</span> ne <span class="element">sellerPartyReference/@href</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-6-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-7</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: GeneralTerms (complex type)<br>If condition <span class="element">LongForm</span> is true, then <span class="element">effectiveDate/dateAdjustments</span> or <span class="element">effectiveDate/dateAdjustmentsReference</span> must exist. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: GeneralTerms<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">effectiveDate/dateAdjustments</span>) or exists(<span class="element">effectiveDate/dateAdjustmentsReference</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-7-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: GeneralTerms (complex type)<br>If condition <span class="element">LongForm</span> is true, and if <span class="element">scheduledTerminationDate</span> exists then <span class="element">scheduledTerminationDate/adjustableDate/dateAdjustments</span> or <span class="element">scheduledTerminationDate/adjustableDate/dateAdjustmentsReference</span> must exist. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: GeneralTerms<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] [exists(<span class="element">scheduledTerminationDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">scheduledTerminationDate/adjustableDate/dateAdjustments</span>) or exists(<span class="element">scheduledTerminationDate/adjustableDate/dateAdjustmentsReference</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-8-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ReferenceInformation (complex type)<br>If <span class="element">referenceObligation/primaryObligorReference</span> exists, then the attribute <span class="element">@href</span> of every <span class="element">referenceObligation/primaryObligorReference</span> must be equal to the <span class="element">@id</span> attribute of <span class="element">referenceEntity</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ReferenceInformation<br><div style="background-color:#d0d0d0">[exists(<span class="element">referenceObligation/primaryObligorReference</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">id(referenceObligation/primaryObligorReference/@href)</span> is <span class="element">referenceEntity</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-9-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ReferenceInformation (complex type)<br>If <span class="element">referenceObligation/guarantorReference</span> exists, then the attribute <span class="element">@href</span> of every <span class="element">referenceObligation/guarantorReference</span> must be equal to the <span class="element">@id</span> attribute of <span class="element">referenceEntity</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ReferenceInformation<br><div style="background-color:#d0d0d0">[exists(<span class="element">referenceObligation/guarantorReference</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">id(referenceObligation/guarantorReference/@href)</span> is <span class="element">referenceEntity</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-10-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-11</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ReferenceInformation (complex type)<br>If condition <span class="element">LongForm</span> is true, and if condition <span class="element">ISDA2003</span> is true, then <span class="element">allGuarantees</span> must exist. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ReferenceInformation<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] [<a href="#ISDA2003">ISDA2003</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">allGuarantees</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-11-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ReferenceInformation (complex type)<br>If <span class="element">referencePrice</span> exists, <span class="element">referencePrice</span> must be greater or equal to <span class="value">0</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ReferenceInformation<br><div style="background-color:#d0d0d0">[exists(<span class="element">referencePrice</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">referencePrice</span> ge <span class="value">0</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-12-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-13" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-13</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/buyerPartyReference</span> exists, then the <span class="element">@href</span> attribute of <span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/buyerPartyReference</span> is equal to the <span class="element">@href</span> attribute of <span class="element">generalTerms/buyerPartyReference</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/buyerPartyReference</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/buyerPartyReference/@href</span> eq <span class="element">generalTerms/buyerPartyReference/@href</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-13-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-14" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-14</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/sellerPartyReference</span> exists, then the <span class="element">@href</span> attribute of <span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/sellerPartyReference</span> must be equal to the <span class="element">@href</span> attribute of <span class="element">generalTerms/sellerPartyReference</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/sellerPartyReference</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">protectionTerms/creditEvents/creditEventNotice/notifyingParty/sellerPartyReference/@href</span> eq <span class="element">generalTerms/sellerPartyReference/@href</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-14-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-15" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-15</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If there's exactly one <span class="element">generalTerms/referenceInformation/referenceObligation</span>, and if <span class="element">cashSettlementTerms/valuationDate/singleValuationDate</span> exists, then the value of <span class="element">cashSettlementTerms/valuationMethod</span> must be equal to "<span class="value">Market</span>" or "<span class="value">Highest</span>".
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[count(<span class="element">generalTerms/referenceInformation/referenceObligation</span>) eq <span class="value">1</span>] [exists(<span class="element">cashSettlementTerms/valuationDate/singleValuationDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlementTerms/valuationMethod</span> = ("<span class="value">Market</span>", "<span class="value">Highest</span>")
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-15-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-16" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-16</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If there is exactly one <span class="element">generalTerms/referenceInformation/referenceObligation</span>, and if <span class="element">cashSettlementTerms/valuationDate/multipleValuationDates</span> exists, then the value of <span class="element">cashSettlementTerms/valuationMethod</span> must be equal to "<span class="value">AverageMarket</span>", "<span class="value">Highest</span>", or "<span class="value">AverageHighest</span>". 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[count(<span class="element">generalTerms/referenceInformation/referenceObligation</span>) eq <span class="value">1</span>] [exists(<span class="element">cashSettlementTerms/valuationDate/multipleValuationDates</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlementTerms/valuationMethod</span> = ("<span class="value">AverageMarket</span>", "<span class="value">Highest</span>", "<span class="value">AverageHighest</span>")
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-16-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-17" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-17</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If there is more than one <span class="element">generalTerms/referenceInformation/referenceObligation</span>, and if <span class="element">cashSettlementTerms/valuationDate/singleValuationDate</span> exists, then the value of <span class="element">cashSettlementTerms/valuationMethod</span> must be equal to "<span class="value">BlendedMarket</span>" or "<span class="value">BlendedHighest</span>". 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[count(<span class="element">generalTerms/referenceInformation/referenceObligation</span>) gt <span class="value">1</span>] [exists(<span class="element">cashSettlementTerms/valuationDate/singleValuationDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlementTerms/valuationMethod</span> = ("<span class="value">BlendedMarket</span>", "<span class="value">BlendedHighest</span>")
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-17-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-18" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-18</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If there is more than one <span class="element">generalTerms/referenceInformation/referenceObligation</span>, and if  <span class="element">cashSettlementTerms/valuationDate/multipleValuationDates</span> exists, then the value of <span class="element">cashSettlementTerms/valuationMethod</span> must be equal to "<span class="value">AverageBlendedMarket</span>" or "<span class="value">AverageBlendedHighest</span>". 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[count(<span class="element">generalTerms/referenceInformation/referenceObligation</span>) gt <span class="value">1</span>] [exists(<span class="element">cashSettlementTerms/valuationDate/multipleValuationDates</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">cashSettlementTerms/valuationMethod</span> = ("<span class="value">AverageBlendedMarket</span>", "<span class="value">AverageBlendedHighest</span>")
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-18-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-19" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-19</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">ISDA1999Credit</span> is true, then the following elements must not exist: <span class="element">protectionTerms/creditEvents/creditEventNotice/businessCenter</span>, <span class="element">protectionTerms/creditEvents/restructuring/multipleHolderObligation</span>, <span class="element">protectionTerms/creditEvents/restructuring/multipleCreditEventNotices</span>, <span class="element">generalTerms/referenceInformation/allGuarantees</span>, <span class="element">generalTerms/indexReferenceInformation</span>, <span class="element">generalTerms/substitution</span>, <span class="element">generalTerms/modifiedEquityDelivery</span>. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#ISDA1999Credit">ISDA1999Credit</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">protectionTerms/creditEvents/creditEventNotice/businessCenter</span>)) and not(exists(<span class="element">protectionTerms/creditEvents/restructuring/multipleHolderObligation</span>)) and not(exists(<span class="element">protectionTerms/creditEvents/restructuring/multipleCreditEventNotices</span>)) and not(exists(<span class="element">generalTerms/referenceInformation/allGuarantees</span>)) and not(exists(<span class="element">generalTerms/indexReferenceInformation</span>)) and not(exists(<span class="element">generalTerms/substitution</span>)) and not(exists(<span class="element">generalTerms/modifiedEquityDelivery</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-19-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-19-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-19-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-19-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-19-05.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-19-06.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-19-07.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-20" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-20</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">ISDA2003</span> is true, then <span class="element">protectionTerms/obligations/notContingent</span> must not exist. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#ISDA2003">ISDA2003</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">protectionTerms/obligations/notContingent</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-20-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-21" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-21</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">ShortForm</span> is true, and if the condition <span class="element">SingleName</span> is true, then the following elements must not exist: <span class="element">cashSettlementTerms/settlementCurrency</span>, <span class="element">cashSettlementTerms/valuationDate</span>, <span class="element">cashSettlementTerms/valuationTime</span>, <span class="element">cashSettlementTerms/quotationMethod</span>, <span class="element">cashSettlementTerms/quotationAmount</span>, <span class="element">cashSettlementTerms/minimumQuotationAmount</span>, <span class="element">cashSettlementTerms/dealer</span>, <span class="element">cashSettlementTerms/cashSettlementBusinessDays</span>, <span class="element">cashSettlementTerms/accruedInterest</span>, <span class="element">cashSettlementTerms/valuationMethod</span>, <span class="element">physicalSettlementTerms</span>, <span class="element">feeLeg/periodicPayment/fixedAmountCalculation/calculationAmount</span>, <span class="element">feeLeg/periodicPayment/fixedAmountCalculation/dayCountFraction</span>, <span class="element">protectionTerms/obligations</span>, <span class="element">generalTerms/referenceInformation/allGuarantees</span>, <span class="element">generalTerms/referenceInformation/referencePrice</span>, <span class="element">generalTerms/effectiveDate/dateAdjustments</span>, <span class="element">generalTerms/effectiveDate/dateAdjustmentsReference</span>, <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustments</span>, <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustmentsReference</span>, <span class="element">generalTerms/dateAdjustments</span>. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#ShortForm">ShortForm</a>] [<a href="#SingleName">SingleName</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">cashSettlementTerms/settlementCurrency</span>)) and not(exists(<span class="element">cashSettlementTerms/valuationDate</span>)) and not(exists(<span class="element">cashSettlementTerms/valuationTime</span>)) and not(exists(<span class="element">cashSettlementTerms/quotationMethod</span>)) and not(exists(<span class="element">cashSettlementTerms/quotationAmount</span>)) and not(exists(<span class="element">cashSettlementTerms/minimumQuotationAmount</span>)) and not(exists(<span class="element">cashSettlementTerms/dealer</span>)) and not(exists(<span class="element">cashSettlementTerms/cashSettlementBusinessDays</span>)) and not(exists(<span class="element">cashSettlementTerms/accruedInterest</span>)) and not(exists(<span class="element">cashSettlementTerms/valuationMethod</span>)) and not(exists(<span class="element">physicalSettlementTerms</span>)) and not(exists(<span class="element">feeLeg/periodicPayment/fixedAmountCalculation/calculationAmount</span>)) and not(exists(<span class="element">feeLeg/periodicPayment/fixedAmountCalculation/dayCountFraction</span>)) and not(exists(<span class="element">protectionTerms/obligations</span>)) and not(exists(<span class="element">generalTerms/referenceInformation/allGuarantees</span>)) and not(exists(<span class="element">generalTerms/referenceInformation/referencePrice</span>)) and not(exists(<span class="element">generalTerms/effectiveDate/dateAdjustments</span>)) and not(exists(<span class="element">generalTerms/effectiveDate/dateAdjustmentsReference</span>)) and not(exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustments</span>)) and not(exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustmentsReference</span>)) and not(exists(<span class="element">generalTerms/dateAdjustments</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-21-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-05.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-06.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-07.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-08.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-09.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-10.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-11.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21-12.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-21b" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-21b</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">ShortForm</span> is true, and if the condition <span class="element">CreditIndex</span> is true, then the following elements must not exist: <span class="element">cashSettlementTerms</span>, <span class="element">physicalSettlementTerms</span>, <span class="element">feeLeg/periodicPayment/fixedAmountCalculation/calculationAmount</span>, <span class="element">feeLeg/periodicPayment/fixedAmountCalculation/dayCountFraction</span>, <span class="element">protectionTerms/obligations</span>, <span class="element">generalTerms/effectiveDate/dateAdjustments</span>, <span class="element">generalTerms/effectiveDate/dateAdjustmentsReference</span>, <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustments</span>, <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustmentsReference</span>, <span class="element">generalTerms/dateAdjustments</span>, <span class="element">protectionTerms/creditEvents</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#ShortForm">ShortForm</a>] [<a href="#CreditIndex">CreditIndex</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">cashSettlementTerms</span>)) and not(exists(<span class="element">physicalSettlementTerms</span>)) and not(exists(<span class="element">feeLeg/periodicPayment/fixedAmountCalculation/calculationAmount</span>)) and not(exists(<span class="element">feeLeg/periodicPayment/fixedAmountCalculation/dayCountFraction</span>)) and not(exists(<span class="element">protectionTerms/obligations</span>)) and not(exists(<span class="element">generalTerms/effectiveDate/dateAdjustments</span>)) and not(exists(<span class="element">generalTerms/effectiveDate/dateAdjustmentsReference</span>)) and not(exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustments</span>)) and not(exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate/dateAdjustmentsReference</span>)) and not(exists(<span class="element">generalTerms/dateAdjustments</span>)) and not(exists(<span class="element">protectionTerms/creditEvents</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-21b-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-05.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-06.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-07.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-08.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-09.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-10.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-21b-11.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-22" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-22</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">ShortForm</span> is true, then the following elements must not exist: <span class="element">protectionTerms/creditEvents/bankruptcy</span>, <span class="element">protectionTerms/creditEvents/failureToPay</span>, <span class="element">protectionTerms/creditEvents/repudiationMoratorium</span>, <span class="element">protectionTerms/creditEvents/obligationDefault</span>, <span class="element">protectionTerms/creditEvents/obligationAcceleration</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#ShortForm">ShortForm</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">protectionTerms/creditEvents/bankruptcy</span>)) and not(exists(<span class="element">protectionTerms/creditEvents/failureToPay</span>)) and not(exists(<span class="element">protectionTerms/creditEvents/repudiationMoratorium</span>)) and not(exists(<span class="element">protectionTerms/creditEvents/obligationDefault</span>)) and not(exists(<span class="element">protectionTerms/creditEvents/obligationAcceleration</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-22-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-22-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-22-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-22-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-23" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-23</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">LongForm</span> is true, then <span class="element">cashSettlementTerms</span> or <span class="element">physicalSettlementTerms</span> must exist. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">cashSettlementTerms</span>) or exists(<span class="element">physicalSettlementTerms</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-23-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-24" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-24</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">LongForm</span> is true, then the following elements must exist: <span class="element">protectionTerms/creditEvents/creditEventNotice</span>, <span class="element">protectionTerms/obligations</span>, <span class="element">generalTerms/referenceInformation/referencePrice</span>. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">protectionTerms/creditEvents/creditEventNotice</span>) and exists(<span class="element">protectionTerms/obligations</span>) and exists(<span class="element">generalTerms/referenceInformation/referencePrice</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-24-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-24-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-24-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-24-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If the condition <span class="element">LongForm</span> is true, and if <span class="element">physicalSettlementTerms</span> exists, then <span class="element">physicalSettlementTerms</span> must contain <span class="element">settlementCurrency</span>, <span class="element">physicalSettlementPeriod</span>, <span class="element">escrow</span> and <span class="element">deliverableObligations/accruedInterest</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] [exists(<span class="element">physicalSettlementTerms</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">physicalSettlementTerms/settlementCurrency</span>) and exists(<span class="element">physicalSettlementTerms/physicalSettlementPeriod</span>) and exists(<span class="element">physicalSettlementTerms/escrow</span>) and exists(<span class="element">physicalSettlementTerms/deliverableObligations/accruedInterest</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-25-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-25-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-25-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-25-04.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-26</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">feeLeg/singlePayment/adjustablePaymentDate</span> exists, then <span class="element">feeLeg/singlePayment/adjustablePaymentDate</span> must be after <span class="element">generalTerms/effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">feeLeg/singlePayment/adjustablePaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">feeLeg/singlePayment/adjustablePaymentDate</span> gt <span class="element">generalTerms/effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-26-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-26-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">feeLeg/singlePayment/adjustablePaymentDate</span> exists, and if <span class="element">generalTerms/scheduledTerminationDate/adjustableDate</span> exists, then <span class="element">feeLeg/singlePayment/adjustablePaymentDate</span> must be before <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">feeLeg/singlePayment/adjustablePaymentDate</span>)] [exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">feeLeg/singlePayment/adjustablePaymentDate</span> lt <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-27-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-27-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-28</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">feeLeg/periodicPayment/firstPaymentDate</span> exists, then <span class="element">feeLeg/periodicPayment/firstPaymentDate</span> must be after <span class="element">generalTerms/effectiveDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">feeLeg/periodicPayment/firstPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">feeLeg/periodicPayment/firstPaymentDate</span> gt <span class="element">generalTerms/effectiveDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-28-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-29" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-29</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">feeLeg/periodicPayment/firstPaymentDate</span> exists, and if <span class="element">generalTerms/scheduledTerminationDate/adjustableDate</span> exists, then <span class="element">feeLeg/periodicPayment/firstPaymentDate</span> must be before <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">feeLeg/periodicPayment/firstPaymentDate</span>)] [exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">feeLeg/periodicPayment/firstPaymentDate</span> lt <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-29-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-30" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-30</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditDefaultSwap (complex type)<br>If <span class="element">feeLeg/periodicPayment/lastRegularPaymentDate</span> exists, and if <span class="element">generalTerms/scheduledTerminationDate/adjustableDate</span> exists, then <span class="element">feeLeg/periodicPayment/lastRegularPaymentDate</span> must be before <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditDefaultSwap<br><div style="background-color:#d0d0d0">[exists(<span class="element">feeLeg/periodicPayment/lastRegularPaymentDate</span>)] [exists(<span class="element">generalTerms/scheduledTerminationDate/adjustableDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">feeLeg/periodicPayment/lastRegularPaymentDate</span> lt <span class="element">generalTerms/scheduledTerminationDate/adjustableDate/unadjustedDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-30-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-30-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-31" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-31</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PeriodicPayment (complex type)<br>If <span class="element">firstPaymentDate</span> exists, and if <span class="element">lastRegularPaymentDate</span> exists, then <span class="element">firstPaymentDate</span> must be before <span class="element">lastRegularPaymentDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PeriodicPayment<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstPaymentDate</span>)] [exists(<span class="element">lastRegularPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">firstPaymentDate</span> lt <span class="element">lastRegularPaymentDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-31-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-31-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-32" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-32</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PeriodicPayment (complex type)<br>If condition <span class="element">LongForm</span> is true, and if <span class="element">fixedAmountCalculation/calculationAmount</span> exists, then <span class="element">fixedAmountCalculation/dayCountFraction</span> must exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PeriodicPayment<br><div style="background-color:#d0d0d0">[<a href="#LongForm">LongForm</a>] [exists(<span class="element">fixedAmountCalculation/calculationAmount</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">fixedAmountCalculation/dayCountFraction</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-32-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-32-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-33" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-33</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PeriodicPayment (complex type)<br>If <span class="element">firstPaymentDate</span> exists, and if <span class="element">lastRegularPaymentDate</span> exists, then <span class="element">lastRegularPaymentDate</span> must fall precisely on a date reachable by adding an integer multiple of the period in <span class="element">paymentFrequency</span> to <span class="element">firstPaymentDate</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PeriodicPayment<br><div style="background-color:#d0d0d0">[exists(<span class="element">firstPaymentDate</span>)] [exists(<span class="element">lastRegularPaymentDate</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">lastRegularPaymentDate</span> must fall precisely on a date reachable by adding an integer multiple of the period in <span class="element">paymentFrequency</span> to <span class="element">firstPaymentDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-33-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-cd-33-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-34" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-34</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DeliverableObligations (complex type)<br>If <span class="element">category</span> is equal to "<span class="value">ReferenceObligationsOnly</span>", then no other elements may be contained in the deliverable obligations element
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DeliverableObligations<br><div style="background-color:#d0d0d0">[<span class="element">category</span> eq "<span class="value">ReferenceObligationsOnly</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> No other elements may be contained in the deliverable obligations element</div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-34-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-35" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-35</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CreditEvents (complex type)<br> At least one child element must exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CreditEvents<br><div style="background-color:#d0d0d0;padding:5px">count(<span class="element">//*</span>) ge 1
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-35-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-36" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-36</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: PubliclyAvailableInformation (complex type)<br> Either <span class="element">standardPublicSources</span> or at least one <span class="element">publicSource</span> element must exist. 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: PubliclyAvailableInformation<br><div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">standardPublicSources</span>) or count(<span class="element">publicSource</span>) ge <span class="value">1</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-36-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-37" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-37</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CashSettlementTerms (complex type)<br>If condition <span class="element">quotationAmount</span> is true, and if condition <span class="element">minimumQuotationAmount</span> is true, and if both amounts have the <a href="rules-functions.html#same-currency" target="_blank">same-currency</a>, then <span class="element">quotationAmount/amount</span> must be greater or equal to <span class="element">minimumQuotationAmount/amount</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CashSettlementTerms<br><div style="background-color:#d0d0d0">[<a href="#quotationAmount">quotationAmount</a>] [<a href="#minimumQuotationAmount">minimumQuotationAmount</a>] [<a href="rules-functions.html#same-currency" target="_blank">same-currency</a>((<span class="element">quotationAmount</span>,<span class="element">minimumQuotationAmount</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">quotationAmount/amount</span> ge <span class="element">minimumQuotationAmount/amount</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-37-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-38" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-38</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ReferencePool (complex type)<br>The sum of <span class="element">referencePoolItem/constituentWeight/basketPercentage</span> is equal to <span class="value">1</span> or no <span class="element">referencePoolItem/constituentWeight</span> exists.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: ReferencePool<br><div style="background-color:#d0d0d0;padding:5px">sum(<span class="element">referencePoolItem/constituentWeight/basketPercentage</span>) eq <span class="value">1</span> or not(exists(<span class="element">referencePoolItem/constituentWeight</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-38-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-39" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-39</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BasketReferenceInformation (complex type)<br>If <span class="element">nthToDefault</span> exists, and if <span class="element">mthToDefault</span> exists, then <span class="element">nthToDefault</span> must be less than <span class="element">mthToDefault</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BasketReferenceInformation<br><div style="background-color:#d0d0d0">[exists(<span class="element">nthToDefault</span>)] [exists(<span class="element">mthToDefault</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><span class="element">nthToDefault</span> lt <span class="element">mthToDefault</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-39-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-40" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-40</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Tranche (complex type)<br><span class="element">attachmentPoint</span> must be less or equal to <span class="element">exhaustionPoint</span></div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Tranche<br><div style="background-color:#d0d0d0;padding:5px"><span class="element">attachmentPoint</span> le <span class="element">exhaustionPoint</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-40-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-41" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-41</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: GeneralTerms (complex type)<br>If <span class="element">indexReferenceInformation/tranche</span> does not exist, then <span class="element">modifiedEquityDelivery</span> must not exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: GeneralTerms<br><div style="background-color:#d0d0d0">[not(exists(<span class="element">indexReferenceInformation/tranche</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">modifiedEquityDelivery</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-41-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-42" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-42</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: GeneralTerms (complex type)<br>If <span class="element">basketReferenceInformation</span> does not exist, then <span class="element">substitution</span> must not exist.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: GeneralTerms<br><div style="background-color:#d0d0d0">[not(exists(<span class="element">basketReferenceInformation</span>))] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">not(exists(<span class="element">substitution</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-42-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="cd-44" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-44</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: ReferencePool (complex type)<br>All <span class="element">referencePoolItem/constituentWeight</span> must have the same name of child element
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-cd-44-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <h4 id="d0e2depr">Deprecated rules</h4>
+      <h4 id="d0e2rmvd">Removed rules</h4>
+      <div id="cd-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-3</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Trade; Condition: ISDA1999Credit;
+            			Description: The content of <span class="element">documentation/contractualSupplement</span> must not begin with the string "<span class="value">ISDA2003Credit</span>".
+            			Rationale for removal: the rule has been replaced by the reference rule number 3b (cd-3b).
+            		
+         </div>
+      </div>
+      <div id="cd-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-4</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Trade; Condition: ISDA2003;
+            			Description: Every <span class="element">documentation/contractualSupplement</span> must not begin with the string "<span class="value">ISDA1999Credit</span>".
+            			Rationale for removal: the rule has been replaced by the reference rule number 4b (cd-4b).
+            		
+         </div>
+      </div>
+      <div id="cd-43" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">cd-43</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			If condition <span class="element">SingleName</span> is true, and if <span class="element">feeLeg/initialPayment</span> exists, then <span class="element">feeLeg/initialPayment/payerPartyReference/@href</span> must be equal to <span class="element">generalTerms/sellerPartyReference/@href</span> and <span class="element">feeLeg/initialPayment/receiverPartyReference/@href</span> must be equal to <span class="element">generalTerms/buyerPartyReference/@href</span>.
+            			Rationale for removal:  To support Standard Single Name trades.
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>

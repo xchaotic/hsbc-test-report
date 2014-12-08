@@ -1,0 +1,20 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='group_OptionSettlement.model_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_SettlementTypeEnum'
+  coords='299,36,439,78'
+  href='fpml-enum-5-0.xsd.html_type_SettlementTypeEnum.html#type_SettlementTypeEnum'/>
+
+ <area
+  shape='rect'
+  alt='type_AdjustableOrRelativeDate'
+  coords='299,88,439,130'
+  href='fpml-shared-5-0.xsd.html_type_AdjustableOrRelativeDate.html#type_AdjustableOrRelativeDate'/>
+
+ <area
+  shape='rect'
+  alt='group_SettlementAmountOrCurrency.model'
+  coords='299,140,580,182'
+  href='fpml-shared-5-0.xsd.html_group_SettlementAmountOrCurrency.model.html#group_SettlementAmountOrCurrency.model'/>
+
+</map>

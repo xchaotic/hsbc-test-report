@@ -1,0 +1,44 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_KeyInfo_httpwww.w3.org200009xmldsig'>
+ <area
+  shape='rect'
+  alt='element_KeyName'
+  coords='324,10,451,36'
+  href='xmldsig-core-schema.xsd.html_element_KeyName.html#element_KeyName'/>
+
+ <area
+  shape='rect'
+  alt='element_KeyValue'
+  coords='324,46,448,72'
+  href='xmldsig-core-schema.xsd.html_element_KeyValue.html#element_KeyValue'/>
+
+ <area
+  shape='rect'
+  alt='element_RetrievalMethod'
+  coords='324,82,485,108'
+  href='xmldsig-core-schema.xsd.html_element_RetrievalMethod.html#element_RetrievalMethod'/>
+
+ <area
+  shape='rect'
+  alt='element_X509Data'
+  coords='324,118,451,144'
+  href='xmldsig-core-schema.xsd.html_element_X509Data.html#element_X509Data'/>
+
+ <area
+  shape='rect'
+  alt='element_PGPData'
+  coords='324,154,448,180'
+  href='xmldsig-core-schema.xsd.html_element_PGPData.html#element_PGPData'/>
+
+ <area
+  shape='rect'
+  alt='element_SPKIData'
+  coords='324,190,450,216'
+  href='xmldsig-core-schema.xsd.html_element_SPKIData.html#element_SPKIData'/>
+
+ <area
+  shape='rect'
+  alt='element_MgmtData'
+  coords='324,226,453,252'
+  href='xmldsig-core-schema.xsd.html_element_MgmtData.html#element_MgmtData'/>
+
+</map>

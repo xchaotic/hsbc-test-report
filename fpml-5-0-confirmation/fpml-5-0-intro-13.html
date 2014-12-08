@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s13">13 BOND OPTIONS PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+    
+    
+    
+
+
+         <div>
+            <h3>
+               <a id="s13.1">13.1 Introduction</a>
+            </h3>
+        
+            <p>This section provides an in-depth review of the product architecture of FpML 5.0 regarding Bond and Convertible Bond Options. It also covers the set of shared option constructs that are used by other types of options, not only Bond or CB options.</p>
+        
+    
+            <div>
+               <h4>
+                  <a id="s13.1.1">13.1.1 bondOption</a>
+               </h4>
+            
+               <p>The bondOption product element provides support for Bond and Convertible Bond options. Like all other derivative products supported by FpML, the BondOption type is an extension of Product and the bondOption element belongs to the FpML product substitution group.</p>
+            
+               <p>
+                
+                  <a href="images/bond-options/bondOption.jpg">
+                     <img src="images/bond-options/bondOption.jpg" alt="images/bond-options/bondOption.jpg" class="image"/>
+                  </a>
+            
+               </p>
+        
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s13.2">13.2 Shared Option Components</a>
+               </h3>
+            </div>
+        
+        
+    
+            <div>
+               <h4>
+                  <a id="s13.2.1">13.2.1 OptionBase</a>
+               </h4>
+            
+               <p>
+                
+                  <a href="images/bond-options/OptionBase.jpg">
+                     <img src="images/bond-options/OptionBase.jpg" alt="images/bond-options/OptionBase.jpg" class="image"/>
+                  </a>
+            
+               </p>
+            
+               <p>The OptionBase type defines the schema structure associated with optionType: The type of option transaction. From a usage standpoint, put/call is the default option type, while payer/receiver indicator is used for options index credit default swaps as well as the swaptions. Straddle is used for the case of straddle strategy, which combines a call and a put with the same strike. The optionType is to be used if the underlyer does not carry any mention of the resulting trade direction as well as in the case of a straddle.</p>
+        
+            </div>
+            <div>
+               <h4>
+                  <a id="s13.2.2">13.2.2 OptionBaseExtended</a>
+               </h4>
+            
+               <p>Incorporates features that are not underlyer-specific and cannot be integrated as part of the OptionBase because of backward compatibility reasons with the eqd schema.</p>
+            
+               <p>
+                
+                  <a href="images/bond-options/OptionBaseExtended.jpg">
+                     <img src="images/bond-options/OptionBaseExtended.jpg" alt="images/bond-options/OptionBaseExtended.jpg" class="image"/>
+                  </a>
+            
+               </p>
+            
+            
+            
+            
+            
+        
+               <div>
+                  <h5>
+                     <a id="s13.2.2.1">13.2.2.1 Premium</a>
+                  </h5>
+                
+                  <p>The premium construct has a similar approach than the swaption (i.e. premium based upon a premium construct), but introduces a simplified payment that does not incorporate the settlement features. In order to make this construct forward applicable to the equity options, this new SimplePayment is then extended to incorporate some premium-specific concepts that currently exist as part of the eqd schema.</p>
+                
+                  <p>
+                    
+                     <a href="images/bond-options/premium.jpg">
+                        <img src="images/bond-options/premium.jpg" alt="images/bond-options/premium.jpg" class="image"/>
+                     </a>
+                
+                  </p>
+            
+               </div>
+               <div>
+                  <h5>
+                     <a id="s13.2.2.2">13.2.2.2 Exercise</a>
+                  </h5>
+                
+                  <p>The overall approach is to leverage the swaption constructs, both for the Exercise and the ExerciseProcedure, with a couple of backward compatible extensions to tackle some specific features.</p>
+                
+                  <p>The proposed extension is for the multiple exercise, where the existing Multiple Exercise only support notional amounts, while the template for convertible bonds refers to number of options:</p>
+                
+                  <table class="table">
+                    
+                     <tr>
+                        
+                        <td>Multiple Exercise:</td>
+                        
+                        <td>Applicable</td>
+                    
+                     </tr>
+                    
+                     <tr>
+                        
+                        <td>Minimum Number of Options:</td>
+                        
+                        <td>The lesser of (i) [         ]  and (ii) the unexercised number of Options</td>
+                    
+                     </tr>
+                    
+                     <tr>
+                        
+                        <td>Maximum Number of Options:</td>
+                        
+                        <td>The unexercised number of Options</td>
+                    
+                     </tr>
+                    
+                     <tr>
+                        
+                        <td>Integral Multiple:</td>
+                        
+                        <td>1</td>
+                    
+                     </tr>
+                
+                  </table>
+                
+                  <p>As a result, the new schema introduces choice nodes to provide the ability to express the minimum/maximum levels either in terms of notional amounts (swaptions) or number of options (bond and CB options).</p>
+                
+                  <p>In addition, the notionalReference node is made optional, as this reference is not used in the case of options on securities.</p>
+                
+                  <p>
+                    
+                     <a href="images/bond-options/MultipleExercise.jpg">
+                        <img src="images/bond-options/MultipleExercise.jpg" alt="images/bond-options/MultipleExercise.jpg" class="image"/>
+                     </a>
+                
+                  </p>
+            
+               </div>
+               <div>
+                  <h5>
+                     <a id="s13.2.2.3">13.2.2.3 The ExerciseProcedure construct</a>
+                  </h5>
+                
+                  <p>The extensions to the ExerciseProcedure relate to features that are needed to support the bond and CB options:</p>
+                
+                  <ul class="bulleted">
+                    
+                     <li>
+                        <b>splitTicket</b>.  Schema definition: This element typically applies to bond options.  If Split Ticket is applicable,  the party required to deliver bonds will divide the bonds to be delivered as notifying party desires to facilitate delivery obligations.</li>
+                    
+                     <li>
+                        <b>limitedRightToConfirm</b>. Schema definition: Has the meaning defined as part of the 1997 ISDA Government Bond Option Definitions, section 4.5 Limited Right to Confirm Exercise.  If present, (i) the Seller may request the Buyer to confirm its intent if not done on or before the expiration time on the Expiration date (ii) specific rules will apply in relation to the settlement mode.</li>
+                
+                  </ul>
+                
+                  <p>
+                    
+                     <a href="images/bond-options/ExerciseProcedure.jpg">
+                        <img src="images/bond-options/ExerciseProcedure.jpg" alt="images/bond-options/ExerciseProcedure.jpg" class="image"/>
+                     </a>
+                
+                  </p>
+            
+               </div>
+               <div>
+                  <h5>
+                     <a id="s13.2.2.4">13.2.2.4 The Notional construct</a>
+                  </h5>
+                
+                  <p>This provides the ability to support the notional for CDS option as expressed in the ISDA template, i.e. as a reference to the notional of the underlyer swap or as an explicit amount.</p>
+            
+               </div>
+               <div>
+                  <h5>
+                     <a id="s13.2.2.5">13.2.2.5 The Denomination construct</a>
+                  </h5>
+                
+                  <p>This requirement was identified in the case of bond and CB option.  Not CDS options.  The structure positions an explicit construct as part of the base type, so that it can be applied over time to the equity options.  The currency has been added, as it is present as part of the bond and CB option confirmations.</p>
+                
+                  <p>
+                    
+                     <a href="images/bond-options/OptionBaseExtended2.jpg">
+                        <img src="images/bond-options/OptionBaseExtended2.jpg" alt="images/bond-options/OptionBaseExtended2.jpg" class="image"/>
+                     </a>
+                
+                  </p>
+            
+               </div>
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s13.3">13.3 The Option on Bond and Convertible Bond</a>
+               </h3>
+            </div>
+        
+        
+    
+            <div>
+               <h4>
+                  <a id="s13.3.1">13.3.1 The strike</a>
+               </h4>
+            
+               <p>The market practice consists in pricing convertible bond options based upon a swap curve, while also to include 'standard penalty' (called Make Whole Amount) in the case where the option is exercised early one. Conversely, the bond options are priced using a price reference.</p>
+            
+               <p>As a result, the BondOptionStrike provides a choice between a swap curve reference and a price.</p>
+            
+               <p>
+                
+                  <a href="images/bond-options/strike.jpg">
+                     <img src="images/bond-options/strike.jpg" alt="images/bond-options/strike.jpg" class="image"/>
+                  </a>
+            
+               </p>
+            
+               <p>
+                
+                  <a href="images/bond-options/ReferenceSwapCurve.jpg">
+                     <img src="images/bond-options/ReferenceSwapCurve.jpg" alt="images/bond-options/ReferenceSwapCurve.jpg" class="image"/>
+                  </a>
+            
+               </p>
+            
+               <p>
+                
+                  <a href="images/bond-options/MakeWholeAmount.jpg">
+                     <img src="images/bond-options/MakeWholeAmount.jpg" alt="images/bond-options/MakeWholeAmount.jpg" class="image"/>
+                  </a>
+            
+               </p>
+        
+            </div>
+            <div>
+               <h4>
+                  <a id="s13.3.2">13.3.2 The convertible bond underlyer</a>
+               </h4>
+            
+               <p>Two changes have been added to the convertible bond underlyer in order to support options on convertible bonds:</p>
+            
+               <ul class="bulleted">
+                
+                  <li>Added the redemption date (defined as "Earlier date between put dates and maturity date."), as it is specified as part of the CB option template;</li>
+                
+                  <li>Made the underlyingEquity optional, for consistently with the guideline for underlying assets (internal systems just reference the instrumentId).</li>
+            
+               </ul>
+            
+               <p>
+                
+                  <a href="images/bond-options/convertibleBond.jpg">
+                     <img src="images/bond-options/convertibleBond.jpg" alt="images/bond-options/convertibleBond.jpg" class="image"/>
+                  </a>
+            
+               </p>
+        
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('12',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('13',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('14',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

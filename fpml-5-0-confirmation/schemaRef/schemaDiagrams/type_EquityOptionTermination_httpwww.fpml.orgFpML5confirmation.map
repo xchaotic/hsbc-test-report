@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_EquityOptionTermination_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_AdjustableDate'
+  coords='301,36,531,62'
+  href='fpml-shared-5-0.xsd.html_type_AdjustableDate.html#type_AdjustableDate'/>
+
+ <area
+  shape='rect'
+  alt='type_NonNegativeMoney'
+  coords='301,72,457,98'
+  href='fpml-shared-5-0.xsd.html_type_NonNegativeMoney.html#type_NonNegativeMoney'/>
+
+</map>

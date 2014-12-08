@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='logical_element_KeyValue_httpwww.w3.org200009xmldsig'>
+ <area
+  shape='rect'
+  alt='element_DSAKeyValue'
+  coords='297,0,522,60'
+  href='xmldsig-core-schema.xsd.html_element_DSAKeyValue.html#element_DSAKeyValue'/>
+
+ <area
+  shape='rect'
+  alt='element_RSAKeyValue'
+  coords='297,70,522,130'
+  href='xmldsig-core-schema.xsd.html_element_RSAKeyValue.html#element_RSAKeyValue'/>
+
+</map>

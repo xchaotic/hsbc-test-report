@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <h1>FpML®  Financial product Markup Language Recommendation 07 July 2010</h1>
+      <h2 class="abstractHeader">Version: 5.0</h2>
+      <h4>This version: <i>http://www.fpml.org/spec/fpml-5-0-8-rec-1</i>
+      </h4>
+      <h4>Latest version: <a href="http://www.fpml.org/spec/fpml-5-0-8-rec-1" target="_blank" title="Link opens in new window.">
+            <i>http://www.fpml.org/spec/fpml-5-0-8-rec-1</i>
+         </a>
+      </h4>
+      <h4>Previous version: <a href="http://www.fpml.org/spec/fpml-5-0-7-tr-1/" target="_blank" title="Link opens in new window.">
+            <i>http://www.fpml.org/spec/fpml-5-0-7-tr-1/</i>
+         </a>
+      </h4>
+   	<h4>Errata for this version: <a href="http://www.fpml.org/spec/fpml-5-0-8-rec-1/html/confirmation/fpml-5-0-errata.html">
+   		<i>http://www.fpml.org/spec/fpml-5-0-8-rec-1/html/confirmation/fpml-5-0-errata.html</i>
+         </a>
+      </h4>
+      <p> Build Number: 8; Document built: Tue 07/06/2010 15:56:26.03</p>
+      <p/>
+		
+      <p>Copyright (c) 1999 - 2010 by International Swaps and Derivatives Association, Inc.</p>
+		
+      <p>Financial Products Markup Language is subject to the FpML®  Public License.</p>
+		
+      <p>FpML®  is a registered trademark of the International Swaps and Derivatives Association, Inc.</p>
+	
+      <p> A copy of this license is available at <a href="http://www.fpml.org/license/license.html" target="_blank" title="Link opens in new window.">http://www.fpml.org/license/license.html</a>
+      </p>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <p>The FpML specifications provided are without warranty of any kind, either expressed or implied, including, without limitation, warranties that FpML, or the FpML specifications are free of defects, merchantable, fit for a particular purpose or non-infringing.  The entire risk as to the quality and performance of the specifications is with you.  Should any of the FpML specifications prove defective in any respect, you assume the cost of any necessary servicing or repair.  Under no circumstances and under no legal theory, whether tort (including negligence), contract, or otherwise, shall ISDA, any of its members, or any distributor of documents or software containing any of the FpML specifications, or any supplier of any of such parties, be liable to you or any other person for any indirect, special, incidental, or consequential damages of any character including, without limitation, damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses, even if such party shall have been informed of the possibility of such damages.  </p>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <div>
+         <div>
+            <h2>
+               <a id="s1">1 INTRODUCTION AND OVERVIEW</a>
+            </h2>
+         </div>
+	
+	
+	 
+	
+	
+	 
+ 
+	
+	
+
+         <div>
+            <h3>
+               <a id="s1.1">1.1 STATUS OF THIS DOCUMENT</a>
+            </h3>
+		
+            <p>This is the FpML 5.0 Recommendation for review by the public and by FpML members and working groups.</p>
+		
+            <p>The FpML Working Groups encourage reviewing organizations to provide feedback as early as possible. Comments on this document should be sent by filling in the form at the following link: <a class="web" href="http://www.fpml.org/issues" target="_blank" title="Link opens in new window.">http://www.fpml.org/issues</a>. An archive of the comments is available at <a class="web" href="http://www.fpml.org/issues/" target="_blank" title="Link opens in new window.">http://www.fpml.org/issues/</a>
+		
+            </p>
+		
+            <p>There are also asset class-specific mailing lists; you can join them at the following link:</p>
+		
+            <p>
+			
+               <a class="web" href="http://www.fpml.org/lists/?p=subscribe&id=1" target="_blank" title="Link opens in new window.">Join a Working Group at FpML</a>
+		
+            </p>
+		
+            <p>A list of current FpML Recommendations and other technical documents can be found at </p>
+		
+            <p>
+			
+               <a class="web" href="http://www.fpml.org/spec" target="_blank" title="Link opens in new window.">http://www.fpml.org/spec</a>
+		
+            </p>
+		
+            <p>This document has been produced as part of the FpML 5.0 activity and is part of the Standards Approval Process.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.2">1.2 ORGANIZATION OF THE DOCUMENTATION</a>
+               </h3>
+            </div>
+		
+            <p>The FpML documentation is organized into a number of subsections.</p>
+		
+            <p>This section provides an overview of the specification.</p>
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s1.2.1">1.2.1 Schema Reference</a>
+               </h4>
+			
+               <p>These are automatically generated reference documents detailing the contents of the various sections in the FpML schema.</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Core Definitions:
+					<ul class="bulleted">			
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-main-5-0.xsd.html" target="_blank" title="Link opens in new window.">Main Components</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-doc-5-0.xsd.html" target="_blank" title="Link opens in new window.">Doc Components</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html" target="_blank" title="Link opens in new window.">Shared Components</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-enum-5-0.xsd.html" target="_blank" title="Link opens in new window.">Shared Enumeration definitions</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html" target="_blank" title="Link opens in new window.">Asset Components</a>
+                        </li>
+					
+                     </ul>
+				
+                  </li>
+				
+                  <li>Products:<ul class="bulleted">
+					
+						
+                        <li>IRD<ul class="bulleted">
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-ird-5-0.xsd.html" target="_blank" title="Link opens in new window.">Interest Rate Components</a>
+                              </li>	
+							
+                           </ul>
+						
+                        </li>
+						
+						
+                        <li>CD<ul class="bulleted">
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-cd-5-0.xsd.html" target="_blank" title="Link opens in new window.">Credit Derivative Components</a>
+                              </li>	
+							
+                           </ul>
+						
+                        </li>
+						
+                        <li>EQD<ul class="bulleted">
+					 			
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html" target="_blank" title="Link opens in new window.">Equity Shared Components</a>
+                              </li>
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html" target="_blank" title="Link opens in new window.">Equity Derivative Options Components</a>
+                              </li>
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-return-swaps-5-0.xsd.html" target="_blank" title="Link opens in new window.">Return Swaps Components</a>
+                              </li>
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-variance-swaps-5-0.xsd.html" target="_blank" title="Link opens in new window.">Variance Derivatives Swaps and Options Components</a>
+                              </li>
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-correlation-swaps-5-0.xsd.html" target="_blank" title="Link opens in new window.">Correlation Derivatives Components</a>
+                              </li>
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-dividend-swaps-5-0.xsd.html" target="_blank" title="Link opens in new window.">Dividend Derivatives Components</a>
+                              </li>
+							
+                           </ul>
+						
+                        </li>
+						
+                        <li>Bond Options<ul class="bulleted">
+				 				
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-bond-option-5-0.xsd.html" target="_blank" title="Link opens in new window.">Bond Options Components</a>
+                              </li>
+							
+                           </ul>
+						
+                        </li>
+						
+                        <li>Options shared<ul class="bulleted">
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html" target="_blank" title="Link opens in new window.">Options Shared Components</a>
+                              </li>
+							
+                           </ul>
+						
+                        </li>
+						
+						
+                        <li>Commodity<ul class="bulleted">
+								
+                              <li>
+                                 <a class="web" href="schemaRef/fpml-com-5-0.xsd.html" target="_blank" title="Link opens in new window.">Commodity Derivative Components</a>
+                              </li>
+							
+                           </ul>
+						
+                        </li>
+						
+						
+						
+					
+                     </ul>
+				
+                  </li>
+				
+                  <li>Business Processes:
+					<ul class="bulleted">
+						
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-msg-5-0.xsd.html" target="_blank" title="Link opens in new window.">Messaging Components</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-msg-5-0.xsd.html_type_EventStatus.html" target="_blank" title="Link opens in new window.">Credit Event Notification Components</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-business-events-5-0.xsd.html" target="_blank" title="Link opens in new window.">Business Event Notification Components</a>
+                        </li>
+						
+						
+						
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-confirmation-processes-5-0.xsd.html" target="_blank" title="Link opens in new window.">Trade and Post-Trade Messaging Components</a>
+                        </li>
+						
+						
+						
+                        <!--li>
+                           <a class="web" href="schemaRef/fpml-mktenv-5-0.xsd.html" target="_blank" title="Link opens in new window.">Market Environment Data Components</a>
+                        </li>
+						
+                        <li>
+                           <a class="web" href="schemaRef/fpml-riskdef-5-0.xsd.html" target="_blank" title="Link opens in new window.">Valuation and Sensitivity Results</a>
+                        </li-->
+					
+			
+                     </ul>	
+		
+                  </li>
+		
+                  <li>Reference:<ul class="bulleted">
+				
+                        <li>
+                           <a class="web" href="fpml-5-0-index-frame.html" target="_blank" title="Link opens in new window.">Index and cross-reference of definitions</a>
+                        </li>
+				
+                        <li>
+                        	<a class="web" href="../../xml/confirmation_xml.zip">Schema and Example files</a> - Provides zip file with FpML schemas and examples. </li>				
+			
+                     </ul>
+		
+                  </li>
+		
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.2.2">1.2.2 Other Documents in the Specification</a>
+               </h4>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <a class="web" href="fpml-5-0-examples-frame.html" target="_blank" title="Link opens in new window.">Examples</a> - Provides sample FpML for each section.</li>
+				
+                  <li>
+					
+                     <a class="web" href="http://www.fpml.org/spec/coding-scheme/index.html" target="_blank" title="Link opens in new window.">Scheme Definitions</a> - Describes standard FpML schemes, and the values that they can take.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.2.3">1.2.3 Diagram Notation</a>
+               </h4>
+			
+               <p>Most diagrams in this specification come from TIBCO's XML Turbo application which is used to batch generate the pictures in the documentation. The notation follows the pattern:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>No bubble indicates a mandatory element or attribute</li>
+				
+                  <li>A '<b>?</b>' indicates an optional element or attribute</li>
+				
+                  <li>A '<b>*</b>' indicates an occurrence of zero or many</li>
+				
+                  <li>A '<b>+</b>' indicates an occurrence of one or many</li>
+				
+                  <li>A '<b>..</b>' bubble with numbers above and below indicates specific range</li>
+				
+                  <li>A '<b>1</b>' in a bubble indicates the presence of a nested sequence or choice group</li>
+				
+                  <li>Diagonal lines indicate a choice group (&lt; shape)</li>
+				
+                  <li>Non-diagonal lines indicate a sequence ([ shape)</li>
+				
+                  <li>A '<b>D</b>' in a bubble indicates an attribute with a default value</li>
+			
+               </ul>
+			
+               <p>
+				
+                  <a href="images/main/BaseType.jpg">
+                     <img src="images/main/BaseType.jpg" alt="images/main/BaseType.jpg" class="image"/>
+                  </a>
+			
+               </p>
+			
+               <p>
+				
+                  <a href="images/main/DerivedType.jpg">
+                     <img src="images/main/DerivedType.jpg" alt="images/main/DerivedType.jpg" class="image"/>
+                  </a>
+			
+               </p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.3">1.3 WORKING GROUP MEMBERS AND ACKNOWLEDGEMENTS</a>
+               </h3>
+            </div>
+		
+            <p>This document was produced by the following working groups:</p> 		
+ 
+
+
+  		
+ 
+  			  
+ 
+            <div>
+               <h4>
+                  <a id="s1.3.1">1.3.1 Architecture Working Group</a>
+               </h4>
+			
+               <ul class="bulleted">
+				
+                  <li>Andrew Jacobs (HandCoded Software), chair</li>
+				
+                  <li>Anthony B. Coates (Miley Watts)</li>
+				
+                  <li>Igor Dayen (Object Centric Solutions)</li>
+				
+                  <li>Daniel Dui (University College London)</li>
+				
+                  <li>Marc Gratacos (ISDA)</li>
+				
+                  <li>Simon Heinrich (IONA Technologies)</li>
+				
+                  <li>Lyteck Lynhiavu (ISDA)</li>
+				
+                  <li>Andrew Parry (JP Morgan Chase Bank)</li>
+				
+                  <li>Raj Patel (HSBC)</li>
+				
+                  <li>Henri Pegeron (MarkitSERV)</li>
+				
+                  <li>Matthew Rawlings (JP Morgan Chase Bank)</li>
+				
+                  <li>John Weir (Goldman Sachs)</li>
+				
+                  <li>Irina Yermakova (ISDA)</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.2">1.3.2 Business Process Working Group</a>
+               </h4>
+	
+               <ul class="bulleted">
+		
+                  <li>Marc Gratacos (ISDA), chair</li>
+		
+                  <li>John Booth (Northern Trust)</li>
+		
+                  <li>Marie-Paule Dumont (SWIFT)</li>
+		
+                  <li>Lucio Iida (Barclays Global Investors)</li>
+		
+                  <li>Andrew Jacobs (HandCoded)</li>
+		
+                  <li>Pierre Lamy (Goldman Sachs)</li>
+		
+                  <li>Lyteck Lynhiavu (ISDA)</li>
+		
+                  <li>Brian Lynn (Global Electronic Markets)</li>
+		
+                  <li>Francoise Massin (SWIFT)</li>
+		
+                  <li>Matthew Rawlings</li>
+		
+                  <li>Steve Ross-Talbot (Hattrick Software)</li>
+		
+                  <li>Christian Unger (BBH)</li>
+		
+                  <li>Irina Yermakova (ISDA)</li>
+	
+               </ul>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.3">1.3.3 Validation Working Group</a>
+               </h4>
+	
+               <ul class="bulleted">
+		
+                  <li>Andrew Jacobs (HandCoded Software), co-chair</li>
+		
+                  <li>Daniel Dui (Barclays Capital and UCL), co-chair</li>
+		
+                  <li>Mark Addison (Component Knowledge)</li>
+		
+                  <li>Jim Brous (Metro Solutions)</li>
+		
+                  <li>Andrew Dingwall-Smith (Message Automation)</li>
+		
+                  <li>Ivan Djurkin (BGI)</li>
+		
+                  <li>Marc Gratacos (ISDA)</li>
+		
+                  <li>Lyteck Lynhiavu (ISDA)</li>
+		
+                  <li>Christian Nentwich (Message Automation)</li>
+		
+                  <li>Matthew Rawlings (Standard Bank)</li>
+		
+                  <li>Irina Yermakova (ISDA)</li>
+	
+               </ul>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.4">1.3.4 IRD Products Working Group</a>
+               </h4>
+			
+               <ul class="bulleted">
+				
+                  <li>Harry McAllister (BNP Paribas), chair</li>
+				
+                  <li>John Aldridge (JP Morgan Chase Bank)</li>
+				
+                  <li>Marc Gratacos (ISDA)</li>							
+				
+                  <li>Robert Green (DTCC)</li>
+				
+                  <li>Guy Gurden (Swapswire)</li>
+				
+                  <li>Pierre Lamy (Goldman Sachs)</li>
+				
+                  <li>Philippe Negri (Sungard)</li>
+				
+                  <li>Jamie Orme (Goldman Sachs)</li>
+				
+                  <li>Andrew Parry (JP Morgan Chase Bank)</li>
+				
+                  <li>Marty Ross-Trevor (Bank of Tokyo-Mitsubishi)</li>
+				
+                  <li>Marc Teichman (T-Zero)</li>
+				
+                  <li>Jeff Valentino (Bank of America)</li>
+				
+                  <li>Irina Yermakova (ISDA)</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.5">1.3.5 Credit Derivatives Working Group</a>
+               </h4>
+	
+               <ul class="bulleted">
+		
+                  <li>Ben Lis (ICE), chair</li>
+		
+                  <li>Kathy Andrews (Bank of America)</li>
+		
+                  <li>Milla Bouklieva (Goldman Sachs)</li>
+		
+                  <li>Karel Engelen (ISDA)</li>
+		
+                  <li>Piers Evans (SwapsWire)</li>
+		
+                  <li>Marc Gratacos (ISDA)</li>
+		
+                  <li>Robert Green (DTCC)</li>
+		
+                  <li>Guy Gurden (SwapsWire)</li>
+		
+                  <li>Tony Kao (Goldman Sachs)</li>
+		
+                  <li>Lyteck Lynhiavu (ISDA)</li>
+		
+                  <li>Pierre Lamy (Goldman Sachs)</li>
+		
+                  <li>Anna Lukasiak (Goldman Sachs)</li>
+		
+                  <li>Andrew Parry (JPMorgan Chase Bank)</li>
+		
+                  <li>Henri Pegeron (MarkitSERV)</li>
+		
+                  <li>Mark Perry (Goldman Sachs)</li>
+		
+                  <li>Marc Teichman (T-Zero)</li>
+		
+                  <li>Irina Yermakova (ISDA)</li>
+		
+                  <li>Shel Xu (Goldman Sachs)</li>
+	
+               </ul>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.6">1.3.6 Equity Derivatives Working Group</a>
+               </h4>
+				
+				
+               <p>Voting Members</p>
+				
+               <ul class="bulleted">
+					
+                  <li>Andrew Parry (JP Morgan Chase Bank), Chair</li>
+					
+                  <li>Jasone Brasil (State Street)</li>
+					
+                  <li>James Clark (MarkItSERV)</li>
+					
+                  <li>Piers Evans (MarkIt)</li>
+					
+                  <li>Robert Green (DTCC)</li>
+					
+                  <li>Guy Gurden (MarkIt)</li>
+					
+                  <li>Shabbir Irfani (Goldman Sachs)</li>
+					
+                  <li>Rajan Khorana (Citadel Group)</li>
+					
+                  <li>Robert Masri (DTCC)</li>
+					
+                  <li>Coner Mongey</li>
+					
+                  <li>Bin Shen (Goldman Sachs)</li>
+					
+                  <li>Marc Teichman (T-Zero)</li>
+				
+               </ul>
+				
+				
+               <p>Non-Voting Members</p>
+				
+               <ul class="bulleted">
+					
+                  <li>Takeo Asakura (MarkItSERV)</li>
+					
+                  <li>Oluwasegun Bewaji (University of Essex)</li>
+					
+                  <li>Jim Bonner (ML)</li> 
+					
+                  <li>Tom Brown (Omgeo)</li> 
+					
+                  <li>Jim Brous (Metro Solutions)</li> 
+					
+                  <li>Prashant Choudhary (Cognizant)</li> 
+					
+                  <li>Karel Engelen (ISDA)</li> 
+					
+                  <li>Philip Franz (Bank of America)</li> 
+					
+                  <li>Steve Goswell (Barclays Global)</li> 
+					
+                  <li>Marc Gratacos (ISDA)</li> 
+					
+                  <li>Vinod Jain (Headstrong)</li> 
+					
+                  <li>Lucio Iida (Barclays Global)</li> 
+					
+                  <li>Selma Laidoudi (MarkIt)</li> 
+					
+                  <li>Philip Leach (DTCC)</li> 
+					
+                  <li>Jianan Li (Citadel Group)</li> 
+					
+                  <li>Gaurav Makhija (Citadel Group)</li> 
+					
+                  <li>Mark Parris (UBS)</li> 
+					
+                  <li>Dharmender Rai</li>
+					
+                  <li>Matthew Rawlings</li>
+					
+                  <li>Sreedhar Segu (DTCC)</li>
+					
+                  <li>Alicia Szybillo (DTCC)</li>
+					
+                  <li>Sam Twum (Blue Tawny)</li>
+					
+                  <li>Chise Yamamoto (DTCC)</li>
+					
+                  <li>Irina Yermakova (ISDA)</li>
+				
+               </ul>
+			
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.7">1.3.7 Commodity Derivatives Working Group</a>
+               </h4>
+	
+               <ul class="bulleted">
+		
+                  <li>Owen King (MarkitSERV), chair</li>
+		
+                  <li>Fatima Bentoumi (Barclays Capital)</li>
+		
+                  <li>Hugh Brunswick (EFET Net)</li>
+		
+                  <li>Piers Evans (Markit)</li>
+		
+                  <li>Luis Fierro (Deutsche Bank)</li>
+		
+                  <li>Jared Getz (Glencore)</li>
+		
+                  <li>Marc Gratacos (ISDA)</li> 
+		
+                  <li>Anupam Gupta (JP Morgan)</li>
+		
+                  <li>Raphael Iyageh (Goldman Sachs)</li> 
+		
+                  <li>Kiran Kodali (Citi)</li> 
+		
+                  <li>Lyteck Lynhiavu (ISDA)</li> 
+		
+                  <li>Jeffrey Magnuson (Goldman Sachs)</li>
+		
+                  <li>Peter Stockman (DTCC)</li>
+		
+                  <li>Digby Strong (JP Morgan)</li>
+		
+                  <li>Irina Yermakova (ISDA)</li>
+	
+               </ul>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.3.8">1.3.8 Pricing and Risk Working Group</a>
+               </h4>
+        
+               <ul class="bulleted">
+                
+                  <li>Brian Lynn (Global Electronic Markets), chair</li>
+                
+                  <li>Michael Di Stefano (Integrasoft)</li>
+                
+                  <li>Amod Dixit (Standard Chartered Bank)</li>
+                
+                  <li>Marc Gratacos (ISDA)</li>
+                
+                  <li>Mahmood Hanif (Bank of America)</li>
+                
+                  <li>Pierre Lamy (Goldman Sachs)</li>
+                
+                  <li>Philippe Negri (Sungard)</li>
+                
+                  <li>Henrik Nilsson (TriOptima)</li>
+	 
+                  <li>Robert Stowsky (Progress)</li>
+                
+                  <li>Vlad Efroimson (Bank of America)</li>
+                
+                  <li>Irina Yermakova (ISDA)</li>
+        
+               </ul>
+
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.4">1.4 FpML INTRODUCTION</a>
+               </h3>
+            </div>
+		
+            <p>The Financial Products Markup Language (FpML) is the industry standard enabling e-business activities in the field of financial derivatives and structured products. The development of the standard, controlled by ISDA (the International Swaps and Derivatives Association), will ultimately allow the electronic integration of a range of services, from electronic trading and confirmations to portfolio specification for risk analysis. All types of over-the-counter (OTC) derivatives will, over time, be incorporated into the standard.</p>
+		
+            <p>FpML is an application of XML, an internet standard language for describing data shared between computer applications.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.5">1.5 REQUESTED FEEDBACK</a>
+               </h3>
+            </div>
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s1.5.1">1.5.1 Messaging Framework</a>
+               </h4>
+			
+               <p>The Messaging Task Force has defined a general pattern of messages (Request or Notification, Acknowledgement , Exception,  Retraction and optionally, Response/Status) to insure the consistent processes across trades and post-trade events, observable completion, consistent message correlation and retraction and consistent error reporting. The group has produced a schema representation aiming to cover the notifications in this business process, examples, and documentation. The FpML Standards Committee invites comments on these proposed materials including schemas, examples, and documentation.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.5.2">1.5.2 Revamped reporting view</a>
+               </h4>
+			
+               <p>The Reporting/Regulatory Reporting Working Group has added some new fields to existing Valuation, Cash Flow Matching, Portfolio Reconciliation and Position Reporting reports  (Report level - includes more detail about what the report contains, like party, accounts, products, etc.; Position level - includes status and history information; Product level - asset class. The group also defined new reports such as Position Activity Report (on changes to position over a time period ), Event Activity Report (on new trades and post trade events over a time period), Reset Report (on index settings and the affected positions) and Entity/Party Report (on static reference data for parties) . The FpML Standards Committee invites comments on these proposed materials including schemas, examples, and documentation.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.5.3">1.5.3 Providing Feedback</a>
+               </h4>
+			
+               <p>Comments on this document should be sent by filling in the form at the following link: <a class="web" href="http://www.fpml.org/issues" target="_blank" title="Link opens in new window.">
+			http://www.fpml.org/issues
+			</a>.</p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.6">1.6 CHANGES IN THIS VERSION</a>
+               </h3>
+            </div>
+	
+
+            <div>
+               <h4>
+                  <a id="s1.6.1">1.6.1 Changes compared to FpML 5.0 Last Call Working Draft 2010-03-30</a>
+               </h4>
+		
+               <ul class="bulleted">
+			
+			
+                  <li>All areas:<ul class="bulleted">
+				
+                        <li>Synchronized content with FpML 4.8.</li>
+				
+                     </ul>
+			
+                  </li>
+			
+                  <li>Validation Rules:<ul class="bulleted">
+				
+                        <li>Converted validation rules' test cases for 5.0 Confirmation View.</li>
+			
+                     </ul>
+			
+                  </li>
+			
+			
+                  <li>The following issues have been resolved: <ul class="bulleted">
+					
+                        <li>
+						
+                           <a class="web" href="http://www.fpml.org/issues/view.php?id=1010" target="_blank" title="Link opens in new window.">http://www.fpml.org/issues/view.php?id=1010</a>
+					
+                        </li>
+				
+                     </ul>
+			
+                  </li>
+			
+                  <p>View <a class="web" href="xml/changes.pdf" target="_blank" title="Link opens in new window.">PDF for details on schema changes</a>
+                  </p>
+			
+                  <p>View <a class="web" href="validation-rules/changes.pdf" target="_blank" title="Link opens in new window.">PDF for details on validation rules changes</a>
+                  </p>
+		
+               </ul>
+	
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.7">1.7 SCOPE</a>
+               </h3>
+            </div>
+		
+            <p>The scope of FpML 5.0 includes broadened BusinessProcess/Messaging coverage and additional product support, specifically:</p> 
+ 
+ 
+ 		
+ 
+ 		
+ 
+ 		
+ 		
+ 
+ 
+
+ 
+ 
+		
+	
+            <div>
+               <h4>
+                  <a id="s1.7.1">1.7.1 Architecture Framework</a>
+               </h4>
+	
+               <p>The various Working Groups have developed FpML 5.0 within the <a class="web" href="http://www.fpml.org/spec/fpml-arch-3-0-lcwd-1/">FpML Architecture 3.0 Specification</a> defined by the Architecture Working Group. This document  defines that standards and principles on which the FpML grammatical definitions are based.</p>
+	
+               <p>The FpML Architecture 3.0 builds upon the earlier FpML Architecture specifications and the conventions of FpML 1.02b before that. The refinement of the FpML architecture is an evolutionary process bought about by changes in the XML technology upon which it is based and the requirements of the standard as its scope expands.</p>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.2">1.7.2 Business Process Scope</a>
+               </h4>
+	
+               <p>The FpML Messaging Task Force group was formed to define a new messaging framework that insures consistent processes across trades and post-trade events, observable completion, consistent message correlation, consistent error reporting, consistent correction and retraction.</p>
+	
+               <p>Most of the FpML 5 business processes are “generic” processes that can apply to new trades and/or any post-trade events. This means that the message name indicates the business process (e.g. confirmation, execution notification, etc.) but not the type of event (e.g. trade, amendment, etc.). The payload of the message indicates the type of the event.</p>
+	
+               <p>The business processes currently supported include: </p>
+	
+	
+	
+               <p>To support these business processes, a number of messages have been defined. Please see the "Business Process Architecture" section for more information.</p>
+
+               <div>
+                  <h5>
+                     <a id="s1.7.2.1">1.7.2.1 Generic processes:</a>
+                  </h5>
+		
+		
+		
+	
+                  <div>
+                     <h5>
+                        <a id="s1.7.2.1.1">1.7.2.1.1 Post-trade</a>
+                     </h5>
+			
+                     <ul class="bulleted">
+				
+                        <li>Execution notification (for platforms to report order fills)</li>
+				
+                        <li>Execution advice (to report executions and settlement info to service providers)</li>
+				
+                        <li>Allocation (expanded for version 5)</li>
+				
+                        <li>Confirmation</li>
+				
+                        <li>Consent negotiation</li>
+				
+                        <li>Clearing (new for version 5)</li>
+				
+                        <li>Status reporting</li>
+			
+                     </ul>
+		
+                  </div>
+               </div>
+               <div>
+                  <h5>
+                     <a id="s1.7.2.2">1.7.2.2 Generic (Multi-Event) Flows</a>
+                  </h5>
+		
+                  <p>All the processes described in this section are applied to the following events:</p>
+		
+                  <ul class="bulleted">
+			
+                     <li>trade</li>
+			
+                     <li>novation</li>
+			
+                     <li>increase</li>
+			
+                     <li>termination</li>
+			
+                     <li>amendment</li>
+		
+                  </ul>
+	
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.3">1.7.3 Validation Scope</a>
+               </h4>
+	
+               <p> The Validation Working Group provides semantic, or business-level validation rules for FpML 5.0. These validation rules, which are aimed at normalizing the use of elements within FpML, are issued as part of the FpML Specification in the validation section of this document. </p>
+	
+               <p> The validation working group publishes with its releases: </p>
+	
+               <ul class="bulleted">
+		
+                  <li>A set of rules described in English</li> 
+		
+                  <li>A technical description written in XQuery for each rule</li>
+		
+                  <li>Positive and negative test case documents for each rule</li>
+		
+                  <li>Non-normative reference implementations</li>
+	
+               </ul>
+	
+               <p> The current specification includes a set of rules for Interest Rate Derivatives, Equity Derivatives, Credit Derivatives, Loans, FX, and for shared components. The rules for the different asset classes will be further enhanced in future versions.</p>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.4">1.7.4 IRD Scope</a>
+               </h4>
+			
+               <p>In FpML 5.0 Recommendation the following Interest Rate Derivative products are covered:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Single and Cross-Currency Interest Rate Swap</li>
+				
+                  <li>Forward Rate Agreement</li>
+				
+                  <li>Interest Rate Cap</li>
+				
+                  <li>Interest Rate Floor</li>
+				
+                  <li>Interest Rate Swaption (European, Bermuda and American Styles; Cash and Physical Settlement)</li>
+				
+                  <li>Extendible and Cancelable Interest Rate Swap Provisions</li>
+				
+                  <li>Mandatory and Optional Early Termination Provisions for Interest Rate Swaps</li>
+				
+                  <li>FX Resetable Cross-Currency Swap</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.5">1.7.5 Credit Derivatives Scope</a>
+               </h4>
+	
+               <p>In FpML 5.0 Recommendation the following Credit Derivative products are covered:</p>
+	
+               <ul class="bulleted">
+		
+                  <li>Credit Default Swap</li>
+		
+                  <li>Standard Coupon Credit Default Swap</li>
+		
+                  <li>Credit Default Swap Index</li>
+		
+                  <li>Tranche on Credit Default Swap Index</li>
+		
+                  <li>Credit Default Swap Basket</li>
+		
+                  <li>Credit Default Swap on a Mortgage</li>
+		
+                  <li>Credit Default Swap on a Loan</li>
+		
+                  <li>Option on Credit Default Swap</li>
+		
+                  <li>Credit Event Notice</li>
+	
+               </ul>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.6">1.7.6 Equity Derivative Options and Forwards Scope</a>
+               </h4>
+			
+               <p>The EQD Products Working Group has extended the FpML standard to cover the following Equity Derivative products</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Broker Equity Options;</li> 
+				
+                  <li>Long Form Equity Forwards;</li> 
+				
+                  <li>Long Form Equity Options;</li> 
+				
+                  <li>Short Form Equity Options represented as Transaction Supplements under ISDA Master Confirmation Agreements.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.7">1.7.7 Return Swaps Scope</a>
+               </h4>
+	
+               <p>FpML provides generic Return Swaps support including "long form" Equity Swap representations, as well as Total Return Swaps. A separate product element called equitySwapTransactionSupplement supports "short form" Equity Swap Transaction Supplement.</p>
+	
+               <p>Return-type Swaps have 1-to-many Legs, all of which must be derived from the ReturnSwapLeg type. Instances of Legs are returnLeg, interestLeg. Other Leg types may be derived from ReturnSwapLeg at will, to allow for private extensions to support whatever type of Generic Return Swap is desired.</p>
+	
+               <p>The scope of this FpML representation for return swaps is to capture the following types of swaps that have equity-related underlyers:</p>
+	
+               <ul class="bulleted">
+		
+                  <li>Single stock swaps as well as basket swaps (i.e. swaps with multiple underlyers);</li>
+		
+                  <li>Swaps that have a different types of underlying assets (equity, index, mutual funds, exchange-traded funds, convertible bond, futures), or a combination of these;</li>
+		
+                  <li>2-legged swaps with a combination of an equity leg and a funding leg, as well as swaps that either have only one leg (e.g. fully funded or zero-strike swap) or multiple equity legs (e.g. outperformance swaps);</li>
+		
+                  <li>Total Return Swaps, a type of swap in which one party (total return payer) transfers the total economic performance of a reference obligation to the other party (total return receiver).</li>
+		
+                  <li>Swaps that have specific adjustment conditions, such as execution swaps or portfolio rebalancing swaps;</li>
+		
+                  <li>Swaps that involve the exchange of principal cashflows;</li>
+		
+                  <li>Swaps that have inital and final stubs;</li>
+		
+                  <li>Swaps which can be represented as Transaction Supplements under ISDA Master Agreements;</li>
+	
+               </ul>
+	
+               <p>Extraordinary Events terms have been incorporated, to take into consideration the release of the 2002 ISDA Definitions for Equity Derivatives.</p>
+	
+               <p>Trigger swaps, in which equity risk morphs into a fixed income risk once a certain market level is reached, may be supported in a subsequent release.</p>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.8">1.7.8 Correlation Derivatives Scope</a>
+               </h4>
+			
+               <p>The Equity Derivative Working Group extended FpML to cover:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Correlation Swaps</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.9">1.7.9 Variance Derivatives Scope</a>
+               </h4>
+			
+               <p>The Equity Derivative Working Group extended FpML to cover:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>Variance Swaps, a type of volatility swap where the payout is linear to variance rather than volatility, therefore the payout will rise at a higher rate than volatility;</li>
+				
+                  <li>Short Form Variance Options represented also as Transaction Supplements under ISDA Master Confirmation Agreements.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.10">1.7.10 Dividend Derivatives Scope</a>
+               </h4>
+	
+               <p>The Equity Derivative Working Group extended FpML to cover:</p>
+    
+               <ul class="bulleted">
+        
+                  <li>Dividend Swap Transaction Supplement</li>
+    
+               </ul>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.11">1.7.11 Commodity Derivative Product Scope</a>
+               </h4>
+	
+               <p>The Commodities Working Group will extend the FpML standard to include trade types and products for the OTC commodities markets, following the structure and coverage of the 2005 ISDA Commodity Definitions. The following are included in version 5-0:</p>
+	
+               <ul class="bulleted">
+		
+                  <li>Support for financially settled swaps, options and spreads </li>
+		
+                  <li>Support for physically-settled swaps/forwards, options</li>
+		
+                  <li>Natural Gas, Oil, Electricity, Coal as the underlying Commodity product</li>
+	
+               </ul>
+	
+               <p>Business Process is including Confirmations, Valuations, Reporting</p>
+
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.7.12">1.7.12 Pricing and Risk Scope</a>
+               </h4>
+        
+               <p>The Pricing and Risk scope for FpML 5.0 Recommendation is:</p>
+        
+               <p>Valuation and basic risk on the following products:</p>
+        
+               <ul class="bulleted">
+                
+                  <li>Vanilla IR Swaps (single and dual currency fix/float swaps, non-CMS/CMT) <ul class="bulleted">
+                                
+                        <li>Valuation reporting (trades only)</li>
+                                
+                        <li>Market Data (Yield Curves, FX spot rates) </li>
+                                
+                        <li>Market risk reporting (Delta Risk vs. Curve Inputs, FX
+                                        exposures) for trades</li>
+                        
+                     </ul>
+                
+                  </li>
+                
+                  <li>Credit Default Swaps <ul class="bulleted">
+                                
+                        <li>Valuation reporting for trades</li>
+                                
+                        <li>Market Data (ir curves, credit spread, recovery rate,
+                                        probability of default)</li>
+                                
+                        <li>Market risk reporting (risk with respect to. the above
+                                        variables) for trades</li>
+                        
+                     </ul>
+                
+                  </li>
+                
+                  <li>IR Caps/Floors/ EuropeanSwaptions, and corresponding risk types <ul class="bulleted">
+                                
+                        <li>Valuation reporting for trades</li>
+                                
+                        <li>Market data (volatility surfaces)</li>
+                                
+                        <li>Market risk reporting <ul class="bulleted">
+                                                
+                              <li>Volatility/Vega Risk</li>
+                                                
+                              <li>Convexity/Gamma Risk (applies to all products)</li>
+                                                
+                              <li>Time Decay/Theta (applies to all products)</li>
+                                        
+                           </ul>
+                                
+                        </li>
+                        
+                     </ul>
+                
+                  </li>
+                
+                  <li>Portfolio level valuation and risk <ul class="bulleted">
+                                
+                        <li>Valuation</li>
+                                
+                        <li>Risk reporting</li>
+                        
+                     </ul>
+                
+                  </li>
+        
+               </ul>
+        
+               <p>The Pricing and Risk Working Group has also provided some definitions that might
+                be useful for other types of valuation and risk reporting.</p>
+
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.8">1.8 CHARACTER ENCODING AND CHARACTER REPERTOIRE</a>
+               </h3>
+            </div>
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s1.8.1">1.8.1 Character Encoding</a>
+               </h4>
+			
+               <p>Producers of FpML documents intended for interchange with other parties must encode such documents using either UTF-8 or UTF-16. Consumers of FpML documents must be able to process documents encoded using UTF-8, as well as documents encoded using UTF-16. For more information, see </p>
+			
+               <p>
+				
+                  <a class="web" href="http://www.w3.org/TR/REC-xml#charencoding" target="_blank" title="Link opens in new window.">http://www.w3.org/TR/REC-xml#charencoding</a>
+			
+               </p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s1.8.2">1.8.2 Character Repertoire</a>
+               </h4>
+			
+               <p>Unrestricted FpML elements may use any valid XML characters. For more information, see</p>
+			
+               <p>
+				
+                  <a class="web" href="http://www.w3.org/TR/REC-xml#charsets" target="_blank" title="Link opens in new window.">http://www.w3.org/TR/REC-xml#charsets</a>
+			
+               </p>
+			
+               <p>Certain elements and attributes (such as scheme URIs) are defined with more restrictive types, such as xsd:normalizedString, xsd:token, or xsd:anyURI. For these types, please see the relevant data type definition in the XML Schema datatypes specification:</p>
+			
+               <p>
+				
+                  <a class="web" href="http://www.w3.org/TR/xmlschema-2" target="_blank" title="Link opens in new window.">http://www.w3.org/TR/xmlschema-2/</a>
+			
+               </p>
+		
+            </div>
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s1.9">1.9 TOOLS AND VALIDATION</a>
+               </h3>
+            </div>
+		
+	
+            <div>
+               <h4>
+                  <a id="s1.9.1">1.9.1 Schema and Example Validation</a>
+               </h4>
+			
+               <p>The schema files and examples in this document have been validated with XercesJ (v.2.2.1 and v.2.6.2) and HandCoded's Toolkit for FpML Processing (version Java 1.1 Alpha 2).</p>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('1',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('2',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

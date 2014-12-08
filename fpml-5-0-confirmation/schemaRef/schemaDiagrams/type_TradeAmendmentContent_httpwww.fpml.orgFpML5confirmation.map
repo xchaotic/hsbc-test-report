@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_TradeAmendmentContent_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='group_AgreementAndEffectiveDates.model'
+  coords='308,144,585,170'
+  href='fpml-business-events-5-0.xsd.html_group_AgreementAndEffectiveDates.model.html#group_AgreementAndEffectiveDates.model'/>
+
+ <area
+  shape='rect'
+  alt='group_TradeAlterationPayment.model'
+  coords='308,180,557,206'
+  href='fpml-business-events-5-0.xsd.html_group_TradeAlterationPayment.model.html#group_TradeAlterationPayment.model'/>
+
+</map>

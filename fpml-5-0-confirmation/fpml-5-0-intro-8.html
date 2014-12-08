@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+   <head>
+      <title>FpML 5.0 Recommendation</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="stylesheet" type="text/css" href="fpml.css"/>
+   </head>
+   <body>
+      <div>
+         <div>
+            <h2>
+               <a id="s8">8 EQUITY DERIVATIVE OPTIONS PRODUCT ARCHITECTURE</a>
+            </h2>
+         </div>
+	 		
+ 
+	
+	
+
+         <div>
+            <h3>
+               <a id="s8.1">8.1 Equity Derivative Options and Forwards Scope</a>
+            </h3>
+			
+            <p>The EQD Products Working Group has extended the FpML standard to cover the following Equity Derivative products</p>
+			
+            <ul class="bulleted">
+				
+               <li>Broker Equity Options;</li> 
+				
+               <li>Long Form Equity Forwards;</li> 
+				
+               <li>Long Form Equity Options;</li> 
+				
+               <li>Short Form Equity Options represented as Transaction Supplements under ISDA Master Confirmation Agreements.</li>
+			
+            </ul>
+		
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s8.2">8.2 Overall Architecture</a>
+               </h3>
+            </div>
+		
+            <p>In FpML version 3.0 the equityOption component was defined to describe "vanilla" options with the following characteristics:</p>
+		
+            <ul class="bulleted">
+			
+               <li>put and call options;</li>
+			
+               <li>with American or European exercise styles;</li>
+			
+               <li>on single stocks or indices; and</li>
+			
+               <li>delivery being either cash or physical stock.</li>
+		
+            </ul>
+		
+            <p>FpML 4.0 extended this component to encompass more exotic types of options, including:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Bermudan exercise style;</li>
+			
+               <li>basket underlyings;</li>
+			
+               <li>forward starts;</li>
+			
+               <li>quantos and composites;</li>
+			
+               <li>averaging; and</li>
+			
+               <li>barriers, knock-ins, knock-outs and binary (digital) options.</li>
+		
+            </ul>
+		
+            <p> FpML 4.1 introduced additional components for both "short form" transacation supplement and broker equity option representations, and a "long form" Equity Forward. All long and short form instances are derived by extension from long and short form base types:</p>
+		
+            <ul class="bulleted">
+			
+               <li>brokerEquityOption</li>
+			
+               <li> equityForward</li>
+			
+               <li>equityOption</li>
+			
+               <li>equityOptionTransactionSupplement</li>
+		
+            </ul>
+		
+            <p>
+			
+               <a href="images/equity-options/ClassHierarchy.gif">
+                  <img src="images/equity-options/ClassHierarchy.gif" alt="images/equity-options/ClassHierarchy.gif" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>these components provide support for:</p>
+		
+            <ul class="bulleted">
+			
+               <li>Broker Equity Options;</li>
+			
+               <li>Long Form Equity Forwards;</li>
+			
+               <li>Long Form Equity Options;</li>
+			
+               <li>Short Form Equity Options represented as Transaction Supplements under ISDA Master Agreements.</li>
+		
+            </ul>
+		
+            <p>Many of the above can be combined through the use of a single component architecture that has a number of optional features. Compound options (such as Butterfly and Straddle structures) can be represented by combining two or more <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_element_equityOption.html">equityOption</a> components in a <a class="web" href="schemaRef/fpml-doc-5-0.xsd.html_element_strategy.html">strategy</a> component. Simple strike or calendar spread strategies can be represented using the Strategy Feature component.</p>
+		
+            <p>Through a combination of derivation by extension, and composing the available features, the vast majority of equity option structures that are used between wholesale market counterparties can be represented in FpML.</p>
+		
+            <p>The product architecture draws directly on ISDA's 1996 and 2002 definitions for equity derivatives. Wherever possible the terminology and practice of the ISDA definitions has been adopted to ensure consistency between traditional and FpML contract representations.</p>
+		
+            <p>
+			
+               <a href="images/equity-options/brokerEquityOption.jpg">
+                  <img src="images/equity-options/brokerEquityOption.jpg" alt="images/equity-options/brokerEquityOption.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>brokerEquityOption component implements the work of the ISDA Broker Standardization Subgroup by providing a short form representation suitable for use in broker confirmations. Support for the simple strategies Strike Spread and Calendar Spread is provided by strategyFeature.</p>
+		
+            <p>
+			
+               <a href="images/equity-options/equityForward.jpg">
+                  <img src="images/equity-options/equityForward.jpg" alt="images/equity-options/equityForward.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p>equityForward component implements ISDA 2002 Equity Derivative Long Form Forward.</p>
+		
+            <p>
+			
+               <a href="images/equity-options/EquityOption.jpg">
+                  <img src="images/equity-options/EquityOption.jpg" alt="images/equity-options/EquityOption.jpg" class="image"/>
+               </a>
+		
+            </p>
+		
+            <p> In the <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_element_equityOption.html">equityOption</a> component <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">buyerPartyReference</a> and <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">sellerPartyReference</a> are pointer style references to <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_Party.html">party</a> components that specify the option buyer and seller respectively. The type of the option (call or put) is specified in <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">optionType</a>. The effective date for a forward starting option is specified in <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">equityEffectiveDate</a>
+		
+            </p>		
+		
+            <p>
+			
+               <a href="images/equity-options/equityOptionTransactionSupplement.jpg">
+                  <img src="images/equity-options/equityOptionTransactionSupplement.jpg" alt="images/equity-options/equityOptionTransactionSupplement.jpg" class="image" width="600"/>
+               </a>
+		
+            </p>
+		
+            <p>equityOptionTransactionSupplement implements Equity Derivative Transaction Supplements by providing a short form representation for use in trades governed by a Master Confirmation Agreement.</p>
+		
+            <p>The underlyer of an equity option may be either a single underlyer, or basket, specified using the <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">underlyer</a> component specified below</p>
+		
+            <p>The strike is expressed either as a price (<a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityStrike.html">strikePrice</a>) or as a percentage (<a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityStrike.html">strikePercentage</a>) of the forward starting spot price. An optional <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityStrike.html">currency</a> element caters for the case where the strike price is expressed as a monetary amount, rather than as a level.</p>
+		
+            <p>The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">numberOfOptions</a> element specifies the number of options in the option transaction. The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityOptionTransactionSupplement.html">optionEntitlement</a> element specifies the number of shares per option. The number of options, strike price and notional are linked by the equation:</p>
+		
+            <p>notional amount = number of options x option entitlement x strike price</p>
+		
+            <p>Provided that two of notional amount, number of options and option entitlement are specified, then the third may be omitted.</p>
+		
+            <p>
+			
+            	<a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeShortFormBase.html">spotPrice</a> is the price per share, index or basket observed on the trade or effective date. It is only used for forward starting options.</p>
+		
+            <p>The exercise provisions for the option are specified in the <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityAmericanExercise.html">AmericanExercise</a>, <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">EuropeanrExercise</a> and <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityBermudaExercise.html">BermudExercise</a> style components. The equity exercise components are described in more detail below.</p>
+		
+            <p>Quanto and Composite options are handled using the FxFeature Component.</p>
+		
+            <p>Where necessary many other non-vanilla features are specified in the optional <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_group_Feature.model.html">feature</a> component. This component is described in more detail below.</p>
+		
+            <p>The <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">EquityPremium</a> component specifies the amount and timing of the premium payment that is made for the equity option. It is described in more detail below.</p>
+		
+            <p>Where the underlying is shares; the extraordinaryEvents component specifies marketevents affecting the issuer of those shares that may require the terms of the transaction to be adjusted. The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityOptionTransactionSupplement.html">methodOfAdjustment</a> component specifies how adjustments will be made to the contract should one or more of the extraordinary events occur.</p>
+	
+         </div>
+         <div>
+            <div>
+               <h3>
+                  <a id="s8.3">8.3 Component Descriptions</a>
+               </h3>
+            </div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+            <div>
+               <h4>
+                  <a id="s8.3.1">8.3.1 underlyer</a>
+               </h4>
+			
+               <a href="images/equity-options/Underlyer.jpg">
+                  <img src="images/equity-options/Underlyer.jpg" alt="images/equity-options/Underlyer.jpg" class="image"/>
+               </a>
+			
+               <p>The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">underlyer</a> component specifies the asset(s) on which the option is granted, which can be either on either a <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html_type_SingleUnderlyer.html">singleUnderlyer</a> or <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html_type_Basket.html">basket</a>, and consist of equity, index, or convertible bond components, or some combination of these</p>
+			
+               <p>The <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html_element_underlyingAsset.html">description</a> element is used to provide a free-form text description of the asset, whereas instrumentId contains a short-form, unique identifier (e.g. ISIN, CUSIP) for the asset. At least one instrumentId must be present.</p>
+			
+               <p>The <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html_element_underlyingAsset.html">exchangeId</a> element contains a short form unique identifier for an exchange. If omitted then the exchange shall be the primary exchange on which the underlying is listed. The <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html_type_ExchangeTraded.html">relatedExchangeId</a> element contains a short form unique identifier for a related exchange. If omitted then the exchange shall be the primary exchange on which listed futures and options on the underlying are listed.</p>
+			
+               <p>The <a class="web" href="schemaRef/fpml-asset-5-0.xsd.html_type_UnderlyingAsset.html">clearanceSystem</a> element contains the identity of the clearance system to be used. If omitted, the principal clearance system customarily used for settling trades in the relevant underlying shall be assumed.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.2">8.3.2 Equity Exercise</a>
+               </h4>
+			
+               <a href="images/equity-options/EquityExercise.jpg">
+                  <img src="images/equity-options/EquityExercise.jpg" alt="images/equity-options/EquityExercise.jpg" class="image"/>
+               </a>
+			
+               <p> FpML supports three styles of equity option: European, American and Bermudan. For consistency of representation with interest rate derivatives each of these styles is represented using its own component. Each of these components is described more fully below. The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">automaticExercise</a> element contains a boolean value. If true then each option not previously exercised will be deemed to be exercised at the expiration time on the expiration date without service of notice unless the buyer notifies the seller that it no longer wishes this to occur.</p>
+			
+               <p> The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityExerciseValuationSettlement.html">EquityValuation</a> component specifies the date and time on which the option is valued. The element <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityValuation.html">valuationDate</a> is assumed to have the meaning as defined in the ISDA 2002 Equity Derivatives Definitions. It enables the <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_AdjustableDateOrRelativeDateSequence.html">valuationDate</a> to be expressed in relation to some other date defined in the document (the anchor date), where there is the opportunity to specify a combination of offset rules. This component will typically be used for defining the valuation date in relation to the payment date, as both the currency and the exchange holiday calendars need to be considered. Alternatively, <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_AdjustableDateOrRelativeDateSequence.html">valuationDate</a> is a date that shall be subject to adjustment if it would otherwise fall on a day that is not a business day in the specified business centers, together with the convention for adjusting the date. The element <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityValuation.html">valuationDates</a> specifies the interim equity valuation dates of the swap. The <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_AdjustableRelativeOrPeriodicDates.html">valuationDates</a> can be specified as a series of dates that shall be subject to adjustment if they would otherwise fall on a day that is not a business day in the specified business centers, together with the convention for adjusting the date, otherwise, the <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_AdjustableRelativeOrPeriodicDates.html">valuationDates</a> is a series of dates specified as some offset to other dates (the anchor dates). The element <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityValuation.html">valuationTimeType</a> is the time of day at which the calculation agent values the underlying, for example the official closing time of the exchange. The element <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityValuation.html">valuationTime</a> specifies the time of day at which the calculation agent values the underlying. The <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityValuation.html">futuresPriceValuation</a> element contains a boolean value to indicate whether or not the official settlement price as announced by the related exchange is applicable, in accordance with the ISDA 2002 definitions. The <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityValuation.html">optionsPriceValuation</a> element contains a boolean value to indicate whether or not the the official settlement price as announced by the related exchange is applicable, in accordance with the ISDA 2002 definitions..</p>
+			
+               <p>The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityExerciseValuationSettlement.html">EquitySettlement</a> component specifies equity option contractural settlement information. The settlement date specifies when the option is to be settled relative to the valuation date. If the settlement date is not specified explicitly then settlement will take place on the valuation date. The settlementType component is used to specify whether the option is settled in cash or physically.</p>
+			
+               <p>The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityExerciseValuationSettlement.html">settlementPriceSource</a> element specifies the source from which the settlement price is to be obtained, e.g. a Reuters page, Prezzo di Riferimento, etc.</p>
+			
+               <p>The <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityExerciseValuationSettlement.html">settlementType</a> element shows how the transaction is to be settled when it is exercised. The values comes from list: Cash, Election, Physical.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.3">8.3.3 European Exercise</a>
+               </h4>
+			
+               <a href="images/equity-options/EquityEuroExercise.jpg">
+                  <img src="images/equity-options/EquityEuroExercise.jpg" alt="images/equity-options/EquityEuroExercise.jpg" class="image"/>
+               </a>
+			
+               <p> The sub-components of the <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">EquityEuropeanExercise</a> component specify the date and time when the option will expire. The element <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">expirationDate</a> enables the expiration date to be expressed as adjustable or relative date to some other event, such as the close of business for the exchange. The element <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">expirationTimeType</a> is the time of day at which the equity option expires, for example the official closing time of the exchange. </p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.4">8.3.4 American Exercise</a>
+               </h4>
+			
+               <a href="images/equity-options/EquityAmerExercise.jpg">
+                  <img src="images/equity-options/EquityAmerExercise.jpg" alt="images/equity-options/EquityAmerExercise.jpg" class="image"/>
+               </a>
+			
+               <p> The <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_SharedAmericanExercise.html">commencementDate</a> and <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_SharedAmericanExercise.html">expirationDate</a> are used to specify the period during which the option may be exercised (more than once if permitted by the <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_MultipleExercise.html">multipleExercise</a> component). The option may be exercised on any business day in this period up to the latest time specified for exercise.</p>
+			
+               <p>The element <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityAmericanExercise.html">latestExerciseTimeType</a>  is the latest time of day at which the equity option can be exercised, for example the official closing time of the exchange.</p>
+			
+               <p>The element <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityAmericanExercise.html">expirationTimeType</a> is the time of day at which the equity option expires, for example the official closing time of the exchange.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.5">8.3.5 Bermuda Exercise</a>
+               </h4>
+			
+               <a href="images/equity-options/EquityBermExercise.jpg">
+                  <img src="images/equity-options/EquityBermExercise.jpg" alt="images/equity-options/EquityBermExercise.jpg" class="image"/>
+               </a>
+			
+               <p> The <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_SharedAmericanExercise.html">commencementDate</a> and <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_SharedAmericanExercise.html">expirationDate</a> are used to specify the period during which the option may be exercised (more than once if permitted by the <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_MultipleExercise.html">multipleExercise</a> component). The option may be exercised on any of the days in the list <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityBermudaExercise.html">bermudaExerciseDates</a> up to the <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">latestExerciseTime</a>  specified for exercise.</p>
+			
+               <p>The element <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">latestExerciseTimeType</a> The latest time of day at which the equity option can be exercised, for example the official closing time of the exchange.</p>
+			
+               <p>The element <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityEuropeanExercise.html">equityExpirationTimeType</a> is the time of day at which the equity option expires, for example the official closing time of the exchange.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.6">8.3.6 FxFeature</a>
+               </h4>
+			
+               <a href="images/equity-options/EquityFXFeature.jpg">
+                  <img src="images/equity-options/EquityFXFeature.jpg" alt="images/equity-options/EquityFXFeature.jpg" class="image"/>
+               </a>
+			
+               <p>FxFeature specifies the reference currency, either a Composite or Quanto feature:</p>
+			
+               <ul class="bulleted">
+				
+                  <li>
+					
+                     <b>Composite</b> - where multiple currencies can be involved. An option is struck on a foreign underlying at a value of the underlying in the investor's base currency. The payout is based on the investor's base currency at exercise.</li>
+				
+                  <li>
+					
+                     <b>Quanto</b> - where two currencies are involved. To adjust the investor's base currency protection on an underlying position which varies in value in the non-base currency.</li>
+			
+               </ul>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.7">8.3.7 feature</a>
+               </h4>
+			
+               <a href="images/equity-options/equityFeatures.jpg">
+                  <img src="images/equity-options/equityFeatures.jpg" alt="images/equity-options/equityFeatures.jpg" class="image"/>
+               </a>
+			
+               <p>equityOptionFeatures has been re-named equityFeatures (type OptionFeatures).</p>
+			
+               <p>As part of SOTF remodeling work, equity option <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">feature</a>' s content is accessible in the complex type <a class="web" href="schemaRef/fpml-eqd-5-0.xsd.html_type_EquityDerivativeBase.html">EquityDerivativeBase</a> through the complex type <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_OptionFeature.html">OptionFeature</a> and the model group <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_group_OptionFeature.model.html">OptionFeature.model.</a>
+               </p>
+			
+               <p> Four types of option features are catered for: asians, barriers, knocks, and pass through payments. All of these are path-dependent options. Asian features are described below. Barriers may be caps or floors; knocks may be knock-ins or knock-outs - these share a common architecture that is described below.</p>
+			
+               <p>A binary option (also known as a digital option) is a special case of a barrier where the payout is specified to be a fixed amount rather than a percentage of the value of the underlying on the date that the option is triggered.</p>
+			
+			
+			
+		
+               <div>
+                  <h5>
+                     <a id="s8.3.7.1">8.3.7.1 asian</a>
+                  </h5>
+				
+                  <a href="images/equity-options/Asian.jpg">
+                     <img src="images/equity-options/Asian.jpg" alt="images/equity-options/Asian.jpg" class="image"/>
+                  </a>
+				
+                  <p> An asian option is one in which an average price is used to derive the strike price ("averaging in") or the expiration price ("averaging out") or both. The type of averaging is specified in the <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_Asian.html">averagingInOut</a> element.</p>
+				
+                  <p>The period over which the averaging is calculated is specified in the component <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_Asian.html">averagingPeriodIn</a> or <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_Asian.html">averagingPeriodOut</a> as appropriate. Both components have the same structure. The period is specified either as a calculation, using one or more <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_AveragingPeriod.html">schedule</a> components (which permits specifications such as every Friday from and including 24 May 2002 to and including 22 November 2002), and/or as a list of explicit dates and times, using the <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_AveragingPeriod.html">averagingDateTimes</a> component. It is permissible to use the list of dates and times to specify averaging points that are additional to those derived from the calculation rule specified in <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_AveragingPeriod.html">schedule</a> components. In the event that any of the dates is not a business day then it is assumed that it will be rolled forward to the next business day in accordance with ISDA convention. The <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_AveragingPeriod.html">marketDisruption</a> element specifies the action to be taken if it is not possible to obtain a price on one of the days used for averaging.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s8.3.7.2">8.3.7.2 barrierCap</a>
+                  </h5>
+				
+                  <a href="images/equity-options/BarrierCap.jpg">
+                     <img src="images/equity-options/BarrierCap.jpg" alt="images/equity-options/BarrierCap.jpg" class="image"/>
+                  </a>
+				
+                  <p> A barrier option is one in which, if the option expires in the money, an additional payment will occur. With a barrier cap the additional payment will be made if the trigger level is approached from below, whereas with a barrier floor the additional payment will be made if the trigger level is approached from above.</p>
+				
+                  <p>Knock options are of two types. A knock-in option does not come into effect until the trigger level has been reached, if it is never reached then the option expires worthless. Conversely, a knock-out option expires immediately the trigger level is reached.</p>
+				
+                  <p>A common structure is used to specify barrier caps, barrier floor, knock-ins and knock-outs. The diagram shows the <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_TriggerEvent.html">barrierCap</a> structure.</p>
+				
+                  <p>The dates on which the underlying is valued to test for the occurrence of the trigger event are either expressed in one or more <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_TriggerEvent.html">schedule</a> components and/or as a list of explicit dates, using the <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_TriggerEvent.html">triggerDates</a> component. It is permissible to use the list of dates to specify trigger dates that are additional to those derived from the calculation rule specified in <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_TriggerEvent.html">schedule</a> components. In the event that any of the dates is not a business day then it is assumed that it will be rolled forward to the next business day in accordance with ISDA convention.</p>
+				
+                  <p>The <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_TriggerEvent.html">trigger</a> component specifies that the trigger event either as a <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_Trigger.html">level</a> or as a <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_Trigger.html">levelPercentage</a> (of the strike).</p>
+				
+                  <p>The optional <a class="web" href="schemaRef/fpml-option-shared-5-0.xsd.html_type_TriggerEvent.html">featurePayment</a> component specifies a payment to be made if the trigger event occurs. The payment date can be expressed either as an explicit date or as relative to some other date, such as the trigger date or the contractual expiry date.</p>
+			
+               </div>
+               <div>
+                  <h5>
+                     <a id="s8.3.7.3">8.3.7.3 Pass Through</a>
+                  </h5>
+				
+                  <p>
+				
+                     <a href="images/equity-options/passThrough.jpg">
+                        <img src="images/equity-options/passThrough.jpg" alt="images/equity-options/passThrough.jpg" class="image"/>
+                     </a>
+				
+                  </p>
+				
+                  <p>This structure supports pass through payments from underlyers, such as dividend payments from equity underlyers. The structure is designed to support single options and baskets of options.</p>
+				
+                  <p>Example of pass through feature in a basket</p>
+				
+                  <pre>		
+&lt;passThrough&gt;
+	&lt;passThroughItem&gt;
+		&lt;payerPartyReference href="PartyA"/&gt;
+		&lt;receiverPartyReference href="PartyB"/&gt;
+		&lt;underlyerReference href="AholdEquity"/&gt;
+		&lt;passThroughPercentage&gt;0.80&lt;/passThroughPercentage&gt;
+	&lt;/passThroughItem&gt;
+	&lt;passThroughItem&gt;
+		&lt;payerPartyReference href="PartyA"/&gt;
+		&lt;receiverPartyReference href="PartyB"/&gt;
+		&lt;underlyerReference href="RoyalDutchEquity"/&gt;
+		&lt;passThroughPercentage&gt;1.20&lt;/passThroughPercentage&gt;
+	&lt;/passThroughItem&gt;
+&lt;/passThrough&gt;
+					             </pre>
+				
+			
+                  <div>
+                     <h5>
+                        <a id="s8.3.7.3.1">8.3.7.3.1 Alternate Approaches</a>
+                     </h5>
+					
+                     <p>This feature was also considered as a fully formed hybrid product, which could be characterised as a combination of an equity option, however the consensus opinion was that pass through was a simple feature, which could be added to the existing option feature block.</p>
+				
+                  </div>
+               </div>
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.8">8.3.8 EquityPremium</a>
+               </h4>
+			
+               <a href="images/equity-options/EquityPremium.jpg">
+                  <img src="images/equity-options/EquityPremium.jpg" alt="images/equity-options/EquityPremium.jpg" class="image"/>
+               </a>
+			
+               <p>The <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">EquityPremium</a> component specifies the amount and timing of the premium payment that is made for the equity option. <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">payerPartyReference</a> and <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">receiverPartyReference</a> are pointer style references to <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_Party.html">party</a> components that specify the payer and receiver of the premium respectively.</p>
+			
+               <p>In FpML the premium amount can be expressed in a number of ways: as a monetary amount (<a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">paymentAmount</a>), as a price per option (<a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">pricePerOption</a>) or as a percentage of notional (<a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">percentageOfNotional</a>) - if more than one method is used then they must be mutually consistent. There are circumstances in which no premium would be specified, for example if the trade formed part of a put/call combo structure.</p>
+			
+			
+               <p>The <a class="web" href="schemaRef/fpml-eq-shared-5-0.xsd.html_type_EquityPremium.html">swapPremium</a> element holds a boolean value that, if "true" specifies that the premium is to be paid in the style of payments under an interest rate swap contract.</p>
+		
+            </div>
+            <div>
+               <h4>
+                  <a id="s8.3.9">8.3.9 Adjustment of dates in Equity Options</a>
+               </h4>
+			
+               <p>When a date specified in an equity option contract falls on a non-business day then it may be necessary to adjust it to be a business day. At the time the contract is agreed it is not always possible to determine whether or not a particular date in the future will be a business day.</p>
+			
+               <p>The meaning of "business day" varies according to the context in which it is used. When the context is the payments of monetary amounts then the rules for adjustment according to currency business days apply, and the equity option product architecture uses the same <a class="web" href="schemaRef/fpml-shared-5-0.xsd.html_type_AdjustableOrRelativeDate.html">AdjustableOrRelativeDate</a> component ( or derivations ) as the interest rate and foreign exchange products.</p>
+			
+               <p>However, when the context is the valuation or settlement of equities or equity indices then the term "business day" means "exchange business day". In this case the equity option product architecture specifies the use of unadjusted dates with the adjustment rules being implicitly inherited from the ISDA definitions.</p>
+		
+            </div>
+         </div>
+      </div>
+      <table align="center" width="400">
+         <tr>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('7',0,0)">Previous</a></th>
+            <th width="34%">
+								<a href="javaScript:parent.reDisplay('8',0,0)">Top</a></th>
+            <th width="33%">
+								<a href="javaScript:parent.reDisplay('9',0,0)">Next</a></th>
+         </tr>
+      </table>
+   </body>
+</html>

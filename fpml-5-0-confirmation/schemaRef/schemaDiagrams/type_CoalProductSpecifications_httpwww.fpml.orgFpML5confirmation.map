@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_CoalProductSpecifications_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_CoalStandardQuality'
+  coords='297,36,439,62'
+  href='fpml-com-5-0.xsd.html_type_CoalStandardQuality.html#type_CoalStandardQuality'/>
+
+ <area
+  shape='rect'
+  alt='type_CoalStandardQualitySchedule'
+  coords='297,72,491,98'
+  href='fpml-com-5-0.xsd.html_type_CoalStandardQualitySchedule.html#type_CoalStandardQualitySchedule'/>
+
+</map>

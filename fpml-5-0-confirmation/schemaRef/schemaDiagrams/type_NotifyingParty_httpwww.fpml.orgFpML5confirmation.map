@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_NotifyingParty_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_PartyReference'
+  coords='240,0,410,26'
+  href='fpml-shared-5-0.xsd.html_type_PartyReference.html#type_PartyReference'/>
+
+ <area
+  shape='rect'
+  alt='type_PartyReference'
+  coords='240,36,411,78'
+  href='fpml-shared-5-0.xsd.html_type_PartyReference.html#type_PartyReference'/>
+
+</map>

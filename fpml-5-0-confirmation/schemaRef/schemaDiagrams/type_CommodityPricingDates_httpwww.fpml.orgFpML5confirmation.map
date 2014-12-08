@@ -1,0 +1,26 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_CommodityPricingDates_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='group_CommodityCalculationPeriodsPointer.model'
+  coords='300,36,625,62'
+  href='fpml-com-5-0.xsd.html_group_CommodityCalculationPeriodsPointer.model.html#group_CommodityCalculationPeriodsPointer.model'/>
+
+ <area
+  shape='rect'
+  alt='group_PricingDays.model'
+  coords='616,180,800,206'
+  href='fpml-com-5-0.xsd.html_group_PricingDays.model.html#group_PricingDays.model'/>
+
+ <area
+  shape='rect'
+  alt='type_SettlementPeriods'
+  coords='530,324,687,366'
+  href='fpml-com-5-0.xsd.html_type_SettlementPeriods.html#type_SettlementPeriods'/>
+
+ <area
+  shape='rect'
+  alt='type_SettlementPeriodsReference'
+  coords='530,376,744,418'
+  href='fpml-com-5-0.xsd.html_type_SettlementPeriodsReference.html#type_SettlementPeriodsReference'/>
+
+</map>

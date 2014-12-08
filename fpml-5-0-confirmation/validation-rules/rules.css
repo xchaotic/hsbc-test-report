@@ -1,0 +1,88 @@
+body {
+	background-color: white;
+  	color: black;
+  	font-family: Times, serif;
+  	margin-left: 2em;
+  	margin-top: 2em
+}
+h1 {
+	font-size: 18pt;
+	color: #336699;
+}
+h2 {
+	font-size: 16pt;
+	background-color: #DDDDDD;
+	color: #336699;
+	padding: 3px;
+}
+h3 {
+	font-size: 12pt;
+	background-color: #DDDDDD;
+	color: #336699;
+	padding: 3px;
+}
+h4 {
+	font-size: 10pt;
+	font-weight: bold;
+	margin: 2px;
+	margin-left: 0px;
+}
+div.rule, div.rulewip {
+	background-color:#eeeeee;
+	border:1px solid black;
+	margin-bottom:6px;
+	padding:3px;
+}
+div.rulewip {
+	background-color:#ff6060;
+}
+div.comment {
+	background-color: #ffffff;
+	padding: 3px;
+	border: 1px solid black;
+	margin-top:5px;
+	margin-bottom:2px;
+}
+div.englishDescription {
+	background-color: #ffffff;
+	padding: 3px;
+	border: 1px solid black;
+	margin-top:5px;
+	margin-bottom:2px;
+}
+div.xpathDescription {
+	background-color: #d0d0d0;
+	padding: 3px;
+	border: 1px solid black;
+	margin-top:5px;
+}
+div.testCases {
+	margin-top:5px;
+	padding:3px;
+	border:1px solid black;
+}
+div.termdef {
+	background-color: #eee;
+	margin-bottom: 6pt;
+	padding: 0.5em;
+}
+span.emph {
+	font-weight: bold;
+}
+span.termname {
+	font-style: italic;
+}
+span.element {
+	font-family: Courier New, Courier, monospace;
+	color: #0000d0;
+	font-size: 9pt;
+}
+span.value {
+	font-family: Courier New, Courier, monospace;
+	font-weight: bold;
+}
+span.title {
+	font-family: Times New Roman;
+	font-size: 10pt;
+	text-decoration: underline;
+}

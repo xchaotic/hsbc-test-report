@@ -1,0 +1,44 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='logical_element_KeyInfo_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_KeyName'
+  coords='297,53,522,113'
+  href='fpml-msg-5-0.xsd.html_element_KeyName.html#element_KeyName'/>
+
+ <area
+  shape='rect'
+  alt='element_KeyValue'
+  coords='297,123,522,183'
+  href='fpml-msg-5-0.xsd.html_element_KeyValue.html#element_KeyValue'/>
+
+ <area
+  shape='rect'
+  alt='element_RetrievalMethod'
+  coords='297,193,522,253'
+  href='fpml-msg-5-0.xsd.html_element_RetrievalMethod.html#element_RetrievalMethod'/>
+
+ <area
+  shape='rect'
+  alt='element_X509Data'
+  coords='297,263,522,323'
+  href='fpml-msg-5-0.xsd.html_element_X509Data.html#element_X509Data'/>
+
+ <area
+  shape='rect'
+  alt='element_PGPData'
+  coords='297,333,522,393'
+  href='fpml-msg-5-0.xsd.html_element_PGPData.html#element_PGPData'/>
+
+ <area
+  shape='rect'
+  alt='element_SPKIData'
+  coords='297,403,522,463'
+  href='fpml-msg-5-0.xsd.html_element_SPKIData.html#element_SPKIData'/>
+
+ <area
+  shape='rect'
+  alt='element_MgmtData'
+  coords='297,473,522,533'
+  href='fpml-msg-5-0.xsd.html_element_MgmtData.html#element_MgmtData'/>
+
+</map>

@@ -1,0 +1,32 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='element_fx_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='element_deposit'
+  coords='230,350,347,412'
+  href='fpml-asset-5-0.xsd.html_element_deposit.html#element_deposit'/>
+
+ <area
+  shape='rect'
+  alt='element_rateIndex'
+  coords='230,494,356,556'
+  href='fpml-asset-5-0.xsd.html_element_rateIndex.html#element_rateIndex'/>
+
+ <area
+  shape='rect'
+  alt='element_simpleCreditDefaultSwap'
+  coords='230,566,447,628'
+  href='fpml-asset-5-0.xsd.html_element_simpleCreditDefaultSwap.html#element_simpleCreditDefaultSwap'/>
+
+ <area
+  shape='rect'
+  alt='element_simpleFra'
+  coords='230,638,362,700'
+  href='fpml-asset-5-0.xsd.html_element_simpleFra.html#element_simpleFra'/>
+
+ <area
+  shape='rect'
+  alt='element_simpleIrSwap'
+  coords='230,710,382,772'
+  href='fpml-asset-5-0.xsd.html_element_simpleIrSwap.html#element_simpleIrSwap'/>
+
+</map>

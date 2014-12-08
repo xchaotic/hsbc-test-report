@@ -1,0 +1,14 @@
+<map xmlns='http://www.w3.org/1999/xhtml' name='type_ScheduledTerminationDate_httpwww.fpml.orgFpML5confirmation'>
+ <area
+  shape='rect'
+  alt='type_AdjustableDate2'
+  coords='303,0,443,26'
+  href='fpml-shared-5-0.xsd.html_type_AdjustableDate2.html#type_AdjustableDate2'/>
+
+ <area
+  shape='rect'
+  alt='type_Period'
+  coords='303,36,424,62'
+  href='fpml-shared-5-0.xsd.html_type_Period.html#type_Period'/>
+
+</map>

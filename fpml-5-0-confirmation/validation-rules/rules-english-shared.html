@@ -1,0 +1,423 @@
+<html xmlns:fo="http://www.w3.org/1999/XSL/Format">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <title>Shared rules - FpML 5.0 Validation Rules - 2010-07-07</title>
+      <link rel="stylesheet" type="text/css" href="rules.css">
+   </head>
+   <body>
+      <h1>
+         
+         					FpML 5.0 Validation Rules - Rules for Shared Elements
+      </h1>
+      <div>
+         		
+         <p> This is the shared element part of the validation rule set accompanying the FpML 5.0 Recommendation. The introductory section
+            in the draft contains background information and documentation for this page. 
+         </p>
+         		
+         <p> The rules contained on this page contain links to cut down versions of valid and invalid test cases. These test cases have
+            been analysed using Systemwire's xlinkit rules to highlight relevant document portions accessed by a rule. These cut down
+            test cases are <span class="emph">non-normative</span> and are provided for the purpose of documentation only. 
+         </p>
+         	
+      </div>
+      <h2>Content</h2>
+      <ul>
+         <li><a href="#namespace">Namespace</a></li>
+         <li><a href="#functions">Functions</a></li>
+         <li><a href="#rules">Rules</a></li>
+         <li>
+            
+            					Rules with comments
+            
+            					
+            <ul>
+               <li><a href="#shared-1">shared-1</a></li>
+               <li><a href="#shared-10">shared-10</a></li>
+               <li><a href="#shared-18">shared-18</a></li>
+               <li><a href="#shared-19">shared-19</a></li>
+               <li><a href="#shared-21">shared-21</a></li>
+               <li><a href="#shared-22">shared-22</a></li>
+               <li><a href="#shared-23">shared-23</a></li>
+               <li><a href="#shared-24">shared-24</a></li>
+               <li><a href="#shared-27">shared-27</a></li>
+               <li><a href="#shared-28">shared-28</a></li>
+            </ul>
+         </li>
+      </ul>
+      <h2 id="namespace">Namespace</h2>
+      <p>
+         		
+         <p>default element namespace = http://www.fpml.org/spec/fpml-5-0-8-rec-1</p>
+         		
+         <p>namespace xs = http://www.w3.org/2001/XMLSchema</p>
+         	
+      </p>
+      <h2 id="functions">Functions</h2>
+      <para>The following shared functions are used in the rules.</para>
+      <ul>
+         <li><a href="rules-functions.html#iff" target="_blank">iff</a></li>
+      </ul>
+      <h2 id="rules">Rules</h2>
+      <h4>Unique contexts:</h4>
+      <ul>
+         <li><span class="element">BusinessDayAdjustments</span> (complex type): <a href="#shared-1">shared-1</a> 
+         </li>
+         <li><span class="element">RelativeDateOffset</span> (complex type): <a href="#shared-4">shared-4</a> 
+         </li>
+         <li><span class="element">DirectionalLeg</span> (complex type): <a href="#shared-5">shared-5</a> 
+         </li>
+         <li><span class="element">AmericanExercise</span> (complex type): <a href="#shared-6">shared-6</a> 
+         </li>
+         <li><span class="element">BermudaExercise</span> (complex type): <a href="#shared-7">shared-7</a> 
+         </li>
+         <li><span class="element">DateRange</span> (complex type): <a href="#shared-8">shared-8</a> 
+         </li>
+         <li><span class="element">BusinessDateRange</span> (complex type): <a href="#shared-9">shared-9</a> 
+         </li>
+         <li><span class="element">CalculationAgent</span> (complex type): <a href="#shared-10">shared-10</a> <a href="#shared-22">shared-22</a> 
+         </li>
+         <li><span class="element">Trade</span> (complex type): <a href="#shared-11">shared-11</a> 
+         </li>
+         <li><span class="element">Document</span> (complex type): <a href="#shared-12">shared-12</a> <a href="#shared-13">shared-13</a> <a href="#shared-14">shared-14</a> <a href="#shared-27">shared-27</a> <a href="#shared-28">shared-28</a> 
+         </li>
+         <li><span class="element">Offset</span> (complex type): <a href="#shared-15">shared-15</a> 
+         </li>
+         <li><span class="element">Acknowledgement</span> (complex type): <a href="#shared-18">shared-18</a> <a href="#shared-19">shared-19</a> 
+         </li>
+         <li><span class="element">AdjustableDates</span> (complex type): <a href="#shared-20">shared-20</a> 
+         </li>
+         <li><span class="element">BusinessCenters</span> (complex type): <a href="#shared-21">shared-21</a> 
+         </li>
+         <li><span class="element">CashSettlementReferenceBanks</span> (complex type): <a href="#shared-23">shared-23</a> 
+         </li>
+         <li><span class="element">RoutingIds</span> (complex type): <a href="#shared-24">shared-24</a> 
+         </li>
+         <li><span class="element">Schedule</span> (complex type): <a href="#shared-25">shared-25</a> 
+         </li>
+         <li><span class="element">Bond</span> (complex type): <a href="#shared-26">shared-26</a> 
+         </li>
+         <li><a href="#d0e3depr">Deprecated rules</a></li>
+         <li><a href="#d0e3rmvd">Removed rules</a></li>
+      </ul>
+      <div id="shared-1" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-1</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BusinessDayAdjustments (complex type)<br><span class="element">businessCentersReference</span> or <span class="element">businessCenters</span> must exist if and only if the value of <span class="element">businessDayConvention</span> is not equal to "<span class="value">NONE</span>" or "<span class="value">NotApplicable</span>". 
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BusinessDayAdjustments<br><div style="background-color:#d0d0d0;padding:5px"><a href="rules-functions.html#iff" target="_blank">iff</a>(exists(<span class="element">businessCentersReference</span> | <span class="element">businessCenters</span>), not(<span class="element">businessDayConvention</span> = ("<span class="value">NONE</span>", "<span class="value">NotApplicable</span>")))
+            </div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>You only have business centres for business day calculations when there is a business day convention.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-1-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-03.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-04.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-05.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-06.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-07.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-1-08.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-4" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-4</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: RelativeDateOffset (complex type)<br>If <span class="element">dayType</span> equals to "<span class="value">Business</span>", then the <span class="element">businessDayConvention</span> must be equal to "<span class="value">NONE</span>".
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: RelativeDateOffset<br><div style="background-color:#d0d0d0">[<span class="element">dayType</span> eq "<span class="value">Business</span>"] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"> <span class="element">businessDayConvention</span> eq "<span class="value">NONE</span>"
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-4-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-5" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-5</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DirectionalLeg (complex type)<br>EquityPremium (complex type)<br>ExerciseFee (complex type)<br>ExerciseFeeSchedule (complex type)<br>FeaturePayment (complex type)<br>FixedPriceLeg (complex type)<br>FloatingPriceLeg (complex type)<br>FxOptionPremium (complex type)<br>GrossCashflow (complex type)<br>IndependentAmount (complex type)<br>InitialPayment (complex type)<br>InterestRateStream (complex type)<br>NonPeriodicFixedPriceLeg (complex type)<br>PassThroughItem (complex type)<br>Payment (complex type)<br>PaymentBase (complex type)<br>PaymentMatching (complex type)<br>PhysicalLeg (complex type)<br>PrePayment (complex type)<br>PrincipalExchangeDescriptions (complex type)<br>QuotablePayment (complex type)<br>ReturnSwapAdditionalPayment (complex type)<br>SimplePayment (complex type)<br><span class="element">payerPartyReference/@href</span> must not be equal to <span class="element">receiverPartyReference/@href</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DirectionalLeg<br>EquityPremium<br>ExerciseFee<br>ExerciseFeeSchedule<br>FeaturePayment<br>FixedPriceLeg<br>FloatingPriceLeg<br>FxOptionPremium<br>GrossCashflow<br>IndependentAmount<br>InitialPayment<br>InterestRateStream<br>NonPeriodicFixedPriceLeg<br>PassThroughItem<br>Payment<br>PaymentBase<br>PaymentMatching<br>PhysicalLeg<br>PrePayment<br>PrincipalExchangeDescriptions<br>QuotablePayment<br>ReturnSwapAdditionalPayment<br>SimplePayment<br><div style="background-color:#d0d0d0;padding:5px"> <span class="element">payerPartyReference/@href</span> ne <span class="element">receiverPartyReference/@href</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-5-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-6" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-6</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: AmericanExercise (complex type)<br>If <span class="element">latestExerciseTime</span> exists, the <span class="element">earliestExerciseTime/hourMinuteTime</span> must be before the <span class="element">latestExerciseTime/hourMinuteTime</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: AmericanExercise<br><div style="background-color:#d0d0d0">[exists(<span class="element">latestExerciseTime</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">earliestExerciseTime/hourMinuteTime</span> lt <span class="element">latestExerciseTime/hourMinuteTime</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-6-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-6-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-7" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-7</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BermudaExercise (complex type)<br>If <span class="element">latestExerciseTime</span> exists, the <span class="element">earliestExerciseTime/hourMinuteTime</span> must be before the <span class="element">latestExerciseTime/hourMinuteTime</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BermudaExercise<br><div style="background-color:#d0d0d0">[exists(<span class="element">latestExerciseTime</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">earliestExerciseTime/hourMinuteTime</span> lt <span class="element">latestExerciseTime/hourMinuteTime</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-7-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-8" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-8</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: DateRange (complex type)<br><span class="element">unadjustedFirstDate</span> must be before <span class="element">unadjustedLastDate</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: DateRange<br><div style="background-color:#d0d0d0;padding:5px">
+               			<span class="element">unadjustedFirstDate</span> lt <span class="element">unadjustedLastDate</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-8-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-8-02.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-8-03.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-9" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-9</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BusinessDateRange (complex type)<br>If and only if neither <span class="element">businessCentersReference</span> nor <span class="element">businessCenters</span> exists, <span class="element">businessDayConvention</span> must be equal to "<span class="value">NONE</span>" or "<span class="value">NotApplicable</span>".
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: BusinessDateRange<br><div style="background-color:#d0d0d0;padding:5px"><a href="rules-functions.html#iff" target="_blank">iff</a>(not(exists(<span class="element">businessCentersReference</span> | <span class="element">businessCenters</span>)), <span class="element">businessDayConvention</span> = ("<span class="value">NONE</span>", "<span class="value">NotApplicable</span>"))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-9-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-10" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-10</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationAgent (complex type)<br> The values of <span class="element">calculationAgentPartyReference/@href</span> attributes shall be unique.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: CalculationAgent<br><div style="background-color:#d0d0d0;padding:5px">count(distinct-values(calculationAgentPartyReference/@href)) eq count(calculationAgentPartyReference/@href)</div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>It does not make sense for a party to be listed more than once as calculation agent to a trade.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-10-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-11" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-11</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Trade (complex type)<br>If <span class="element">businessDateRange</span> exists within any descendant element of the <span class="element">trade</span>, then <span class="element">businessCentersReference/@href</span>, if present in any descendant element of the trade, must match some <span class="element">businessCenters/@id</span> within any descendant of the same <span class="element">trade</span>.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Trade<br><div style="background-color:#d0d0d0">[exists(//businessDateRange)] </div>
+            <div style="background-color:#d0d0d0;padding:5px">every <span class="element">$businessCentersReference</span> in <span class="element">//businessCentersReference</span> satisfies <span class="element">$businessCentersReference/@href</span> = <span class="element">//businessCenters/@id</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-11-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-12" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-12</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Document (complex type)<br>Every descendent <span class="element">buyerPartyReference/@href</span> equals at least one of the <span class="element">trade/@id</span> or the <span class="element">tradeSide/@id</span> attributes
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Document<br><div style="background-color:#d0d0d0;padding:5px">every <span class="element">$buyerPartyReference</span> in <span class="element">//buyerPartyReference</span> satisfies <span class="element">$buyerPartyReference/@href</span> = <span class="element">(trade/tradeSide/@id, party/@id)</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-12-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-13" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-13</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Document (complex type)<br> For <span class="element">sellerPartyReference</span> anywhere in the document, <span class="element">@href</span> shall match the <span class="element">@id</span> attribute of a <span class="element">party</span> element.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Document<br><div style="background-color:#d0d0d0;padding:5px">every <span class="element">$sellerPartyReference</span> in <span class="element">//sellerPartyReference</span> satisfies <span class="element">$sellerPartyReference/@href</span> = <span class="element">party/@id</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-13-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-14" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-14</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Document (complex type)<br>For <span class="element">calculationAgentPartyReference/@href</span> anywhere in the document, <span class="element">@href</span> shall match the <span class="element">@id</span> attribute of a party element.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Document<br><div style="background-color:#d0d0d0;padding:5px">every <span class="element">$calculationAgentPartyReference</span> in <span class="element">//calculationAgentPartyReference</span> satisfies <span class="element">$calculationAgentPartyReference/@href </span> = <span class="element">party/@id</span></div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-14-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-15" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-15</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Offset (complex type)<br><span class="element">dayType</span> must only exist if and only if <span class="element">period</span> is "<span class="value">D</span>" and <span class="element">periodMultiplier</span> is non-zero.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Offset<br><div style="background-color:#d0d0d0">[exists(<span class="element">dayType</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px"><a href="rules-functions.html#iff" target="_blank">iff</a>((<span class="element">period</span> eq "<span class="value">D</span>"), (<span class="element">periodMultiplier</span> ne <span class="value">0</span>))
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-15-01.xml" target="_blank">[Invalid]</a> <a href="../xml/validation/invalid-testcases/invalid-shared-15-02.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-18" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-18</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Acknowledgement (complex type)<br>DataDocument (complex type)<br>Exception (complex type)<br>ExecutionNotification (complex type)<br>ExecutionRetracted (complex type)<br>ExecutionAdvice (complex type)<br>ExecutionAdviceRetracted (complex type)<br>TradeChangeAdvice (complex type)<br>TradeChangeAdviceRetracted (complex type)<br>RequestConsent (complex type)<br>RequestConsentRetracted (complex type)<br>ConsentGranted (complex type)<br>ConsentRefused (complex type)<br>RequestConfirmation (complex type)<br>ConfirmationRetracted (complex type)<br>ConfirmationStatus (complex type)<br>ConfirmationAgreed (complex type)<br>ConfirmationDisputed (complex type)<br>RequestClearing (complex type)<br>RequestClearingRetracted (complex type)<br>ClearingRefused (complex type)<br>ClearingConfirmed (complex type)<br>RequestAllocation (complex type)<br>RequestAllocationRetracted (complex type)<br>AllocationRefused (complex type)<br>AllocationApproved (complex type)<br>Each <span class="element">party/partyId</span> must be unique. Each <span class="element">party/partyName</span> must be unique.
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Both a party's name and party Id must be unique. The partyIdScheme is part of the partyId uniqueness check.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-18-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-19" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-19</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Acknowledgement (complex type)<br>DataDocument (complex type)<br>Exception (complex type)<br>ExecutionNotification (complex type)<br>ExecutionRetracted (complex type)<br>ExecutionAdvice (complex type)<br>ExecutionAdviceRetracted (complex type)<br>TradeChangeAdvice (complex type)<br>TradeChangeAdviceRetracted (complex type)<br>RequestConsent (complex type)<br>RequestConsentRetracted (complex type)<br>ConsentGranted (complex type)<br>ConsentRefused (complex type)<br>RequestConfirmation (complex type)<br>ConfirmationRetracted (complex type)<br>ConfirmationStatus (complex type)<br>ConfirmationAgreed (complex type)<br>ConfirmationDisputed (complex type)<br>RequestClearing (complex type)<br>RequestClearingRetracted (complex type)<br>ClearingRefused (complex type)<br>ClearingConfirmed (complex type)<br>RequestAllocation (complex type)<br>RequestAllocationRetracted (complex type)<br>AllocationRefused (complex type)<br>AllocationApproved (complex type)<br> Each <span class="element">party/account/accountId</span> must be unique. An account is identified by <span class="element">party/account/accountId</span> or by <span class="element">party/account/accountName</span></div>
+         <div class="comment"><span class="emph">Comment: </span>Both an account's name and account Id must be unique. The accountIdScheme is part of the accountId uniqueness check.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-19-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-20" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-20</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: AdjustableDates (complex type)<br> Each <span class="element">unadjustedDate</span> must be distinct.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-20-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-21" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-21</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: BusinessCenters (complex type)<br>Each <span class="element">businessCenter</span> must be unique. A business center is identified by <span class="element">businessCenter</span>.
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Each business centre must be uniquely identified. The businessCenterScheme is part of the businessCenter uniqueness check.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-21-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-22" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-22</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CalculationAgent (complex type)<br> Each <span class="element">calculationAgentPartyReference/@href</span> must be unique
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Each party needs only be referenced once as a calculation agent.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-22-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-23" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-23</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: CashSettlementReferenceBanks (complex type)<br> Each <span class="element">referenceBank</span> must be unique. A <span class="element">referenceBank</span> is identified by <span class="element">referenceBank/referenceBankId</span> or by <span class="element">referenceBank/referenceBankName</span></div>
+         <div class="comment"><span class="emph">Comment: </span>Both a reference bank's name and reference bank Id must be unique. The referenceBankIdScheme is part of the referenceBankId
+            uniqueness check.
+         </div>
+      </div>
+      <div id="shared-24" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-24</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: RoutingIds (complex type)<br>Each <span class="element">routingId</span> must be unique
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>Each routing Id must be unique. The routingIdCodeScheme is part of the RoutingId uniqueness check.
+         </div>
+      </div>
+      <div id="shared-25" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-25</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Schedule (complex type)<br>If there is more than one <span class="element">step</span>, <span class="element">step/stepDate</span> must be unique.
+         </div>
+      </div>
+      <div id="shared-26" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-26</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Bond (complex type)<br>The currency of the <span class="element">parValue</span> is the <span class="element">currency</span> element. When the <span class="element">parValue</span> exists therefore the <span class="element">currency</span> must also exist. This is a workaround because <span class="element">parValue</span> is not defined as a <span class="element">Money</span> type.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Bond<br><div style="background-color:#d0d0d0">[exists(<span class="element">parValue</span>)] 
+            </div>
+            <div style="background-color:#d0d0d0;padding:5px">exists(<span class="element">currency</span>)
+            </div>
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-26-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-27" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-27</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Document (complex type)<br>All timezones must be the same. +00:00, -00:00, and Z are considered equivalent.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Document<br><div style="background-color:#d0d0d0;padding:5px">count(distinct-values(//((element(*, <span class="element">xs:date</span>)|attribute(*, <span class="element">xs:date</span>))/timezone-from-date(.),(element(*, <span class="element">xs:dateTime</span>)|attribute(*, <span class="element">xs:dateTime</span>))/timezone-from-dateTime(.)))) eq <span class="value">1</span></div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>This rule ensures that date and datetime comparisons behave as expected because they're expressed in the same timezone. NB
+            That the XSD specification uses the term "timezone", but that they are not really timezones as they are fixed durations to
+            represent time offsets. Subsequent to publishing XSD the W3C changed its position to clarify this: http://www.w3.org/TR/2005/NOTE-timezone-20051013/#d2e226.
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-27-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <div id="shared-28" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-28</span> (Mandatory)
+         </div>
+         <div class="englishDescription"><span class="title">English Description:</span><br>
+            								Context: Document (complex type)<br>All dates and times must have a timezone or none of them must.
+         </div>
+         <div class="xpathDescription"><span class="title">XPath Description:</span><br>
+            								Context: Document<br><div style="background-color:#d0d0d0;padding:5px">count(//((element(*, <span class="element">xs:date</span>)|attribute(*, <span class="element">xs:date</span>))/timezone-from-date(.),(element(*, <span class="element">xs:dateTime</span>)|attribute(*, <span class="element">xs:dateTime</span>))/timezone-from-dateTime(.))) eq count(//(element(*, <span class="element">xs:date</span>)|attribute(*, <span class="element">xs:date</span>),element(*, <span class="element">xs:dateTime</span>)|attribute(*, <span class="element">xs:dateTime</span>)))
+            </div>
+         </div>
+         <div class="comment"><span class="emph">Comment: </span>This rule requires all dates and datetimes to have timezones or none of them must. This is to ensure the comparison of these
+            fields behaves as expected. NB That the XSD specification uses the term "timezone", but that they are not really timezones
+            as they are fixed durations to represent time offsets. Subsequent to publishing XSD the W3C changed its position to clarify
+            this: http://www.w3.org/TR/2005/NOTE-timezone-20051013/#d2e226. 
+         </div>
+         <div class="testCases">Test cases:  <a href="../xml/validation/invalid-testcases/invalid-shared-28-01.xml" target="_blank">[Invalid]</a></div>
+      </div>
+      <h4 id="d0e3depr">Deprecated rules</h4>
+      <h4 id="d0e3rmvd">Removed rules</h4>
+      <div id="shared-2" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-2</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Offset; Description: If the <span class="element">dayType</span> element exists then the <span class="element">period</span> must be "<span class="value">D</span>".
+            			
+            		
+         </div>
+      </div>
+      <div id="shared-3" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-3</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Offset; Description: If the <span class="element">dayType</span> is "<span class="value">Business</span>" then the <span class="element">periodMultiplier</span> must be non-zero.
+            			
+            		
+         </div>
+      </div>
+      <div id="shared-16" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-16</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Document; Description: If <span class="element">trade</span> exists, for <span class="element">party/@href</span> anywhere within the <span class="element">tradeSide</span> element, <span class="element">@href</span> shall match the <span class="element">@id</span> attribute of an <span class="element">/FpML/party</span> element.
+            		
+         </div>
+      </div>
+      <div id="shared-17" class="rule" style="padding:3px;margin-bottom:2em;margin-top:2em;">
+         <div style="padding:2px"><span class="emph">shared-17</span> (Mandatory)
+         </div>
+         <div style="padding:2px"><span class="emph">REMOVED: </span>
+            			Context: Document; Description: If <span class="element">trade</span> exists, for <span class="element">account/@href</span> anywhere within the <span class="element">tradeSide</span> element, <span class="element">@href</span> shall match the <span class="element">@id</span> attribute of an <span class="element">/FpML/party/account</span> element.
+            		
+         </div>
+      </div>
+      <hr>
+   </body>
+</html>
