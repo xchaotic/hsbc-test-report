@@ -8,7 +8,12 @@
     exclude-result-prefixes="xs math xd"
     version="2.0">
     
-    
+    <xd:doc>
+        <xd:desc>
+            <xd:p>Author: Lech Rzedzicki</xd:p>
+            <xd:p>Purpose: A stylesheet to generate a simple HTML from a simple FpML 4.4 FX trade.</xd:p>
+        </xd:desc>
+    </xd:doc>
     <xsl:template match="node()|@*"/>
         
     
